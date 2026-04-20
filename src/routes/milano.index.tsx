@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { CityInfoBlock } from "@/components/city-info-block";
+import { CityLatest } from "@/components/city-latest";
+import { InstagramFeed } from "@/components/instagram-feed";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
