@@ -1,0 +1,121 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHero } from "@/components/page-hero";
+import { CityInfoBlock } from "@/components/city-info-block";
+import heroBologna from "@/assets/hero-bologna.jpg";
+import worship from "@/assets/worship.jpg";
+import bibleStudy from "@/assets/bible-study.jpg";
+
+export const Route = createFileRoute("/bologna/")({
+  head: () => ({
+    meta: [
+      { title: "Chiesa di Cristo di Bologna — Funzione domenicale e comunità" },
+      {
+        name: "description",
+        content:
+          "La Chiesa di Cristo di Bologna è una comunità accogliente nel centro storico. Funzione domenicale alle 11:00. Vieni a trovarci questa domenica.",
+      },
+      { property: "og:title", content: "Chiesa di Cristo di Bologna" },
+      {
+        property: "og:description",
+        content:
+          "Comunità cristiana nel cuore di Bologna. Domenica 11:00. Tutti sono benvenuti.",
+      },
+      { property: "og:image", content: heroBologna },
+      { name: "twitter:image", content: heroBologna },
+    ],
+  }),
+  component: BolognaHome,
+});
+
+function BolognaHome() {
+  return (
+    <>
+      <PageHero
+        image={heroBologna}
+        eyebrow="Chiesa di Cristo"
+        title={<>Bologna.</>}
+        subtitle="Sotto i portici della dotta — una comunità accogliente che cammina con Dio e con te."
+        primaryCta={{ to: "/bologna/visita", label: "Vieni a trovarci" }}
+        secondaryCta={{ to: "/bologna/contatti", label: "Scrivici" }}
+        align="left"
+      />
+
+      <CityInfoBlock
+        city="Bologna"
+        address="Via dell'Indipendenza 67"
+        cap="40121"
+        serviceTime="Domenica · 11:00"
+        mapsUrl="https://maps.google.com/?q=Bologna+Italy"
+      />
+
+      <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
+        <img
+          src={worship}
+          alt="Comunità in adorazione a Bologna"
+          loading="lazy"
+          className="rounded-3xl object-cover aspect-[4/5] w-full md:order-last"
+        />
+        <div>
+          <p className="eyebrow mb-5">Benvenuti</p>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight">
+            Una chiesa per la dotta — e per chiunque cerca.
+          </h2>
+          <p className="mt-6 text-foreground/80 leading-relaxed">
+            La Chiesa di Cristo di Bologna è una comunità di studenti,
+            professionisti e famiglie che desidera vivere la fede in modo
+            autentico. Studiamo la Bibbia insieme, condividiamo la vita e
+            cerchiamo di portare luce nella nostra città.
+          </p>
+          <div className="mt-8 flex gap-3">
+            <Link to="/bologna/chi-siamo" className="btn-primary">Chi siamo</Link>
+            <Link to="/bologna/cosa-crediamo" className="btn-outline">Cosa crediamo</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-prose py-16 md:py-24">
+        <div className="grid gap-8 md:grid-cols-3">
+          <Pillar
+            title="Funzione domenicale"
+            text="Ogni domenica alle 11:00. Adorazione, comunione e un messaggio dalla Parola di Dio."
+            cta={{ to: "/bologna/visita", label: "Cosa aspettarsi" }}
+          />
+          <Pillar
+            title="Studi biblici"
+            text="Studi su misura per te, in italiano o in inglese. Senza giudizio, con tante domande benvenute."
+            cta={{ to: "/bologna/contatti", label: "Inizia uno studio" }}
+          />
+          <Pillar
+            title="Vita di comunità"
+            text="Cene, gite, eventi per studenti universitari e famiglie. La fede vissuta insieme."
+            cta={{ to: "/bologna/eventi", label: "Prossimi eventi" }}
+          />
+        </div>
+      </section>
+
+      <section className="relative h-[60vh] overflow-hidden">
+        <img src={bibleStudy} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-primary/75" />
+        <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
+          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
+          <h2 className="font-display text-4xl md:text-6xl max-w-3xl mx-auto leading-tight">
+            "Cercate prima il regno di Dio e la Sua giustizia."
+          </h2>
+          <p className="mt-6 text-white/80">— Matteo 6:33</p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function Pillar({ title, text, cta }: { title: string; text: string; cta: { to: string; label: string } }) {
+  return (
+    <div className="border-t border-border pt-8">
+      <h3 className="font-display text-2xl text-primary">{title}</h3>
+      <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
+      <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
+        {cta.label} →
+      </Link>
+    </div>
+  );
+}
