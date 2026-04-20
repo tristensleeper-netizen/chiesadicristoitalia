@@ -31,7 +31,7 @@ export function SiteHeader() {
 
   const isNapoli = path.startsWith("/napoli");
   const isSicilia = path.startsWith("/sicilia");
-  const cityBase = isMilano ? "/milano" : isBologna ? "/bologna" : "";
+  const cityBase = (isMilano ? "/milano" : "/bologna") as "/milano" | "/bologna";
   const cityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
   const logoTo = isMilano
     ? "/milano"
