@@ -43,7 +43,9 @@ export function PageHero({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, color-mix(in oklab, var(--primary) 35%, transparent) 0%, color-mix(in oklab, var(--primary) 78%, transparent) 100%)",
+            align === "left"
+              ? "linear-gradient(180deg, color-mix(in oklab, var(--primary) 10%, transparent) 0%, color-mix(in oklab, var(--primary) 55%, transparent) 100%)"
+              : "linear-gradient(180deg, color-mix(in oklab, var(--primary) 35%, transparent) 0%, color-mix(in oklab, var(--primary) 78%, transparent) 100%)",
         }}
       />
       <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-20 pt-40 ${alignClass}`}>
