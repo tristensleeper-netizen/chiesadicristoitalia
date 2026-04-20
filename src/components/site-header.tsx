@@ -29,8 +29,28 @@ export function SiteHeader() {
     setOpen(false);
   }, [path]);
 
+  const isNapoli = path.startsWith("/napoli");
+  const isSicilia = path.startsWith("/sicilia");
   const cityBase = isMilano ? "/milano" : isBologna ? "/bologna" : "";
   const cityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
+  const logoTo = isMilano
+    ? "/milano"
+    : isBologna
+      ? "/bologna"
+      : isNapoli
+        ? "/napoli"
+        : isSicilia
+          ? "/sicilia"
+          : "/";
+  const logoCityLabel = isMilano
+    ? "Milano"
+    : isBologna
+      ? "Bologna"
+      : isNapoli
+        ? "Napoli"
+        : isSicilia
+          ? "Sicilia"
+          : "";
 
   const cityNav = inCity
     ? [
