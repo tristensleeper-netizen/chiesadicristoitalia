@@ -8,6 +8,11 @@ const cities = [
   { to: "/sicilia", label: "Sicilia" },
 ] as const;
 
+const sharedLinks = [
+  { to: "/risorse", label: "Risorse" },
+  { to: "/devozionale", label: "Devozionale" },
+] as const;
+
 export function SiteHeader() {
   const location = useLocation();
   const path = location.pathname;
