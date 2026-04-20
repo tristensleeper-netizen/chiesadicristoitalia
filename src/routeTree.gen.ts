@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiciliaRouteImport } from './routes/sicilia'
 import { Route as NapoliRouteImport } from './routes/napoli'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
 import { Route as MilanoIndexRouteImport } from './routes/milano.index'
+import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
 import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
+import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
 import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
 import { Route as MilanoSermoniRouteImport } from './routes/milano.sermoni'
 import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
@@ -42,14 +45,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RisorseIndexRoute = RisorseIndexRouteImport.update({
+  id: '/risorse/',
+  path: '/risorse/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MilanoIndexRoute = MilanoIndexRouteImport.update({
   id: '/milano/',
   path: '/milano/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevozionaleIndexRoute = DevozionaleIndexRouteImport.update({
+  id: '/devozionale/',
+  path: '/devozionale/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BolognaIndexRoute = BolognaIndexRouteImport.update({
   id: '/bologna/',
   path: '/bologna/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RisorseSlugRoute = RisorseSlugRouteImport.update({
+  id: '/risorse/$slug',
+  path: '/risorse/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
@@ -129,8 +147,11 @@ export interface FileRoutesByFullPath {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
   '/bologna/': typeof BolognaIndexRoute
+  '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
+  '/risorse/': typeof RisorseIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -148,8 +169,11 @@ export interface FileRoutesByTo {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
   '/bologna': typeof BolognaIndexRoute
+  '/devozionale': typeof DevozionaleIndexRoute
   '/milano': typeof MilanoIndexRoute
+  '/risorse': typeof RisorseIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -168,8 +192,11 @@ export interface FileRoutesById {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
   '/bologna/': typeof BolognaIndexRoute
+  '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
+  '/risorse/': typeof RisorseIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -189,8 +216,11 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
     | '/bologna/'
+    | '/devozionale/'
     | '/milano/'
+    | '/risorse/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,8 +238,11 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
     | '/bologna'
+    | '/devozionale'
     | '/milano'
+    | '/risorse'
   id:
     | '__root__'
     | '/'
@@ -227,8 +260,11 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
     | '/bologna/'
+    | '/devozionale/'
     | '/milano/'
+    | '/risorse/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -247,8 +283,11 @@ export interface RootRouteChildren {
   MilanoEventiRoute: typeof MilanoEventiRoute
   MilanoSermoniRoute: typeof MilanoSermoniRoute
   MilanoVisitaRoute: typeof MilanoVisitaRoute
+  RisorseSlugRoute: typeof RisorseSlugRoute
   BolognaIndexRoute: typeof BolognaIndexRoute
+  DevozionaleIndexRoute: typeof DevozionaleIndexRoute
   MilanoIndexRoute: typeof MilanoIndexRoute
+  RisorseIndexRoute: typeof RisorseIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -274,6 +313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/risorse/': {
+      id: '/risorse/'
+      path: '/risorse'
+      fullPath: '/risorse/'
+      preLoaderRoute: typeof RisorseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/milano/': {
       id: '/milano/'
       path: '/milano'
@@ -281,11 +327,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MilanoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/devozionale/': {
+      id: '/devozionale/'
+      path: '/devozionale'
+      fullPath: '/devozionale/'
+      preLoaderRoute: typeof DevozionaleIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bologna/': {
       id: '/bologna/'
       path: '/bologna'
       fullPath: '/bologna/'
       preLoaderRoute: typeof BolognaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risorse/$slug': {
+      id: '/risorse/$slug'
+      path: '/risorse/$slug'
+      fullPath: '/risorse/$slug'
+      preLoaderRoute: typeof RisorseSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/milano/visita': {
@@ -391,8 +451,11 @@ const rootRouteChildren: RootRouteChildren = {
   MilanoEventiRoute: MilanoEventiRoute,
   MilanoSermoniRoute: MilanoSermoniRoute,
   MilanoVisitaRoute: MilanoVisitaRoute,
+  RisorseSlugRoute: RisorseSlugRoute,
   BolognaIndexRoute: BolognaIndexRoute,
+  DevozionaleIndexRoute: DevozionaleIndexRoute,
   MilanoIndexRoute: MilanoIndexRoute,
+  RisorseIndexRoute: RisorseIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
