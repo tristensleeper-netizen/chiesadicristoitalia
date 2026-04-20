@@ -74,7 +74,7 @@ export function SiteHeader() {
       }
     >
       <div className="container-prose flex items-center justify-between py-4">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to={logoTo} className="flex items-center gap-3 group">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground font-display text-lg">
             ✝
           </span>
@@ -82,9 +82,9 @@ export function SiteHeader() {
             <span className="font-display text-base md:text-lg text-foreground">
               Chiesa di Cristo
             </span>
-            {inCity && (
+            {logoCityLabel && (
               <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
-                {cityLabel}
+                {logoCityLabel}
               </span>
             )}
           </span>
