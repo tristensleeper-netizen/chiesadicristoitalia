@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { CityInfoBlock } from "@/components/city-info-block";
+import { CityLatest } from "@/components/city-latest";
+import { InstagramFeed } from "@/components/instagram-feed";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -105,6 +108,21 @@ function MilanoHome() {
             "Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo."
           </h2>
           <p className="mt-6 text-white/80">— Matteo 11:28</p>
+        </div>
+      </section>
+
+      <CityLatest cityTag="milano" cityName="Milano" />
+
+      <InstagramFeed handle="chiesadicristomilano" city="Milano" />
+
+      <section className="bg-card border-y border-border">
+        <div className="container-narrow py-20 text-center">
+          <p className="eyebrow mb-4">Resta in contatto</p>
+          <h2 className="font-display text-3xl md:text-4xl mb-4">Una Parola alla settimana, nella tua casella.</h2>
+          <p className="text-foreground/70 mb-8">
+            Devozionale settimanale, eventi e nuove risorse — niente spam.
+          </p>
+          <NewsletterSignup cityTag="milano" source="milano-home" />
         </div>
       </section>
     </>

@@ -11,9 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiciliaRouteImport } from './routes/sicilia'
 import { Route as NapoliRouteImport } from './routes/napoli'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
 import { Route as MilanoIndexRouteImport } from './routes/milano.index'
+import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
 import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
 import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
 import { Route as MilanoSermoniRouteImport } from './routes/milano.sermoni'
 import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
@@ -26,6 +31,10 @@ import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
 import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
 import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminDevozionaliIndexRouteImport } from './routes/admin.devozionali.index'
+import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
+import { Route as AdminDevozionaliIdRouteImport } from './routes/admin.devozionali.$id'
 
 const SiciliaRoute = SiciliaRouteImport.update({
   id: '/sicilia',
@@ -37,9 +46,19 @@ const NapoliRoute = NapoliRouteImport.update({
   path: '/napoli',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RisorseIndexRoute = RisorseIndexRouteImport.update({
+  id: '/risorse/',
+  path: '/risorse/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MilanoIndexRoute = MilanoIndexRouteImport.update({
@@ -47,9 +66,24 @@ const MilanoIndexRoute = MilanoIndexRouteImport.update({
   path: '/milano/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevozionaleIndexRoute = DevozionaleIndexRouteImport.update({
+  id: '/devozionale/',
+  path: '/devozionale/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BolognaIndexRoute = BolognaIndexRouteImport.update({
   id: '/bologna/',
   path: '/bologna/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const RisorseSlugRoute = RisorseSlugRouteImport.update({
+  id: '/risorse/$slug',
+  path: '/risorse/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
@@ -112,11 +146,33 @@ const BolognaChiSiamoRoute = BolognaChiSiamoRouteImport.update({
   path: '/bologna/chi-siamo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDevozionaliIndexRoute = AdminDevozionaliIndexRouteImport.update({
+  id: '/devozionali/',
+  path: '/devozionali/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRisorseIdRoute = AdminRisorseIdRouteImport.update({
+  id: '/risorse/$id',
+  path: '/risorse/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDevozionaliIdRoute = AdminDevozionaliIdRouteImport.update({
+  id: '/devozionali/$id',
+  path: '/devozionali/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -129,13 +185,21 @@ export interface FileRoutesByFullPath {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/bologna/': typeof BolognaIndexRoute
+  '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
+  '/risorse/': typeof RisorseIndexRoute
+  '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
+  '/admin/risorse/$id': typeof AdminRisorseIdRoute
+  '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -148,14 +212,23 @@ export interface FileRoutesByTo {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/bologna': typeof BolognaIndexRoute
+  '/devozionale': typeof DevozionaleIndexRoute
   '/milano': typeof MilanoIndexRoute
+  '/risorse': typeof RisorseIndexRoute
+  '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
+  '/admin/risorse/$id': typeof AdminRisorseIdRoute
+  '/admin/devozionali': typeof AdminDevozionaliIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -168,15 +241,24 @@ export interface FileRoutesById {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
+  '/risorse/$slug': typeof RisorseSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/bologna/': typeof BolognaIndexRoute
+  '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
+  '/risorse/': typeof RisorseIndexRoute
+  '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
+  '/admin/risorse/$id': typeof AdminRisorseIdRoute
+  '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/napoli'
     | '/sicilia'
+    | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -189,13 +271,21 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
+    | '/admin/'
     | '/bologna/'
+    | '/devozionale/'
     | '/milano/'
+    | '/risorse/'
+    | '/admin/devozionali/$id'
+    | '/admin/risorse/$id'
+    | '/admin/devozionali/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/napoli'
     | '/sicilia'
+    | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -208,13 +298,22 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
+    | '/admin'
     | '/bologna'
+    | '/devozionale'
     | '/milano'
+    | '/risorse'
+    | '/admin/devozionali/$id'
+    | '/admin/risorse/$id'
+    | '/admin/devozionali'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/napoli'
     | '/sicilia'
+    | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -227,12 +326,20 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/sermoni'
     | '/milano/visita'
+    | '/risorse/$slug'
+    | '/admin/'
     | '/bologna/'
+    | '/devozionale/'
     | '/milano/'
+    | '/risorse/'
+    | '/admin/devozionali/$id'
+    | '/admin/risorse/$id'
+    | '/admin/devozionali/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   NapoliRoute: typeof NapoliRoute
   SiciliaRoute: typeof SiciliaRoute
   BolognaChiSiamoRoute: typeof BolognaChiSiamoRoute
@@ -247,8 +354,11 @@ export interface RootRouteChildren {
   MilanoEventiRoute: typeof MilanoEventiRoute
   MilanoSermoniRoute: typeof MilanoSermoniRoute
   MilanoVisitaRoute: typeof MilanoVisitaRoute
+  RisorseSlugRoute: typeof RisorseSlugRoute
   BolognaIndexRoute: typeof BolognaIndexRoute
+  DevozionaleIndexRoute: typeof DevozionaleIndexRoute
   MilanoIndexRoute: typeof MilanoIndexRoute
+  RisorseIndexRoute: typeof RisorseIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -267,11 +377,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NapoliRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risorse/': {
+      id: '/risorse/'
+      path: '/risorse'
+      fullPath: '/risorse/'
+      preLoaderRoute: typeof RisorseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/milano/': {
@@ -281,11 +405,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MilanoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/devozionale/': {
+      id: '/devozionale/'
+      path: '/devozionale'
+      fullPath: '/devozionale/'
+      preLoaderRoute: typeof DevozionaleIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bologna/': {
       id: '/bologna/'
       path: '/bologna'
       fullPath: '/bologna/'
       preLoaderRoute: typeof BolognaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/risorse/$slug': {
+      id: '/risorse/$slug'
+      path: '/risorse/$slug'
+      fullPath: '/risorse/$slug'
+      preLoaderRoute: typeof RisorseSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/milano/visita': {
@@ -372,11 +517,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BolognaChiSiamoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/devozionali/': {
+      id: '/admin/devozionali/'
+      path: '/devozionali'
+      fullPath: '/admin/devozionali/'
+      preLoaderRoute: typeof AdminDevozionaliIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/risorse/$id': {
+      id: '/admin/risorse/$id'
+      path: '/risorse/$id'
+      fullPath: '/admin/risorse/$id'
+      preLoaderRoute: typeof AdminRisorseIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/devozionali/$id': {
+      id: '/admin/devozionali/$id'
+      path: '/devozionali/$id'
+      fullPath: '/admin/devozionali/$id'
+      preLoaderRoute: typeof AdminDevozionaliIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminDevozionaliIdRoute: typeof AdminDevozionaliIdRoute
+  AdminRisorseIdRoute: typeof AdminRisorseIdRoute
+  AdminDevozionaliIndexRoute: typeof AdminDevozionaliIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminDevozionaliIdRoute: AdminDevozionaliIdRoute,
+  AdminRisorseIdRoute: AdminRisorseIdRoute,
+  AdminDevozionaliIndexRoute: AdminDevozionaliIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   NapoliRoute: NapoliRoute,
   SiciliaRoute: SiciliaRoute,
   BolognaChiSiamoRoute: BolognaChiSiamoRoute,
@@ -391,8 +583,11 @@ const rootRouteChildren: RootRouteChildren = {
   MilanoEventiRoute: MilanoEventiRoute,
   MilanoSermoniRoute: MilanoSermoniRoute,
   MilanoVisitaRoute: MilanoVisitaRoute,
+  RisorseSlugRoute: RisorseSlugRoute,
   BolognaIndexRoute: BolognaIndexRoute,
+  DevozionaleIndexRoute: DevozionaleIndexRoute,
   MilanoIndexRoute: MilanoIndexRoute,
+  RisorseIndexRoute: RisorseIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

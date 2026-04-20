@@ -8,6 +8,11 @@ const cities = [
   { to: "/sicilia", label: "Sicilia" },
 ] as const;
 
+const sharedLinks = [
+  { to: "/risorse", label: "Risorse" },
+  { to: "/devozionale", label: "Devozionale" },
+] as const;
+
 export function SiteHeader() {
   const location = useLocation();
   const path = location.pathname;
@@ -105,6 +110,17 @@ export function SiteHeader() {
                   {item.label}
                 </Link>
               ))}
+              <span className="mx-2 h-4 w-px bg-border" />
+              {sharedLinks.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  activeProps={{ className: "text-primary" }}
+                  className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
               <Link
                 to="/"
                 className="ml-3 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
@@ -113,16 +129,29 @@ export function SiteHeader() {
               </Link>
             </>
           ) : (
-            cities.map((c) => (
-              <Link
-                key={c.to}
-                to={c.to}
-                activeProps={{ className: "text-primary" }}
-                className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
-              >
-                {c.label}
-              </Link>
-            ))
+            <>
+              {cities.map((c) => (
+                <Link
+                  key={c.to}
+                  to={c.to}
+                  activeProps={{ className: "text-primary" }}
+                  className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
+                >
+                  {c.label}
+                </Link>
+              ))}
+              <span className="mx-2 h-4 w-px bg-border" />
+              {sharedLinks.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  activeProps={{ className: "text-primary" }}
+                  className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </>
           )}
         </nav>
 
@@ -145,7 +174,7 @@ export function SiteHeader() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container-prose flex flex-col py-4">
-            {(inCity ? cityNav : cities).map((item) => (
+            {[...(inCity ? cityNav : cities), ...sharedLinks].map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
