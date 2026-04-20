@@ -118,16 +118,29 @@ export function SiteHeader() {
               </Link>
             </>
           ) : (
-            cities.map((c) => (
-              <Link
-                key={c.to}
-                to={c.to}
-                activeProps={{ className: "text-primary" }}
-                className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
-              >
-                {c.label}
-              </Link>
-            ))
+            <>
+              {cities.map((c) => (
+                <Link
+                  key={c.to}
+                  to={c.to}
+                  activeProps={{ className: "text-primary" }}
+                  className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
+                >
+                  {c.label}
+                </Link>
+              ))}
+              <span className="mx-2 h-4 w-px bg-border" />
+              {sharedLinks.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  activeProps={{ className: "text-primary" }}
+                  className="px-3 py-2 text-sm text-foreground/75 hover:text-primary transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </>
           )}
         </nav>
 
