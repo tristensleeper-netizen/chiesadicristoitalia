@@ -14,16 +14,164 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      devotionals: {
+        Row: {
+          author: string | null
+          body: string
+          created_at: string
+          id: string
+          published: boolean
+          scripture_ref: string | null
+          slug: string
+          title: string
+          updated_at: string
+          week_of: string
+        }
+        Insert: {
+          author?: string | null
+          body: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          scripture_ref?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+          week_of: string
+        }
+        Update: {
+          author?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          scripture_ref?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+          week_of?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          city_tag: Database["public"]["Enums"]["city_tag"] | null
+          email: string
+          id: string
+          source: string | null
+          subscribed_at: string
+        }
+        Insert: {
+          city_tag?: Database["public"]["Enums"]["city_tag"] | null
+          email: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string
+        }
+        Update: {
+          city_tag?: Database["public"]["Enums"]["city_tag"] | null
+          email?: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          body: string | null
+          city_tag: Database["public"]["Enums"]["city_tag"]
+          created_at: string
+          description: string | null
+          featured: boolean
+          id: string
+          media_url: string | null
+          published: boolean
+          published_at: string
+          scripture_ref: string | null
+          slug: string
+          speaker_or_author: string | null
+          thumbnail_url: string | null
+          title: string
+          type: Database["public"]["Enums"]["resource_type"]
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          city_tag?: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          id?: string
+          media_url?: string | null
+          published?: boolean
+          published_at?: string
+          scripture_ref?: string | null
+          slug: string
+          speaker_or_author?: string | null
+          thumbnail_url?: string | null
+          title: string
+          type: Database["public"]["Enums"]["resource_type"]
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          city_tag?: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          id?: string
+          media_url?: string | null
+          published?: boolean
+          published_at?: string
+          scripture_ref?: string | null
+          slug?: string
+          speaker_or_author?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          type?: Database["public"]["Enums"]["resource_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "editor"
+      city_tag: "milano" | "bologna" | "napoli" | "sicilia" | "national"
+      resource_type: "sermon" | "article" | "video" | "podcast" | "pdf"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +298,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "editor"],
+      city_tag: ["milano", "bologna", "napoli", "sicilia", "national"],
+      resource_type: ["sermon", "article", "video", "podcast", "pdf"],
+    },
   },
 } as const
