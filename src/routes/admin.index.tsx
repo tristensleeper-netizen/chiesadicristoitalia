@@ -40,7 +40,7 @@ function AdminResourcesList() {
     <div className="container-prose py-12">
       <div className="flex justify-between items-center mb-8">
         <h2 className="font-display text-2xl">Risorse ({items.length})</h2>
-        <Link to="/admin/risorse/nuovo" className="btn-primary">+ Nuova risorsa</Link>
+        <Link to="/admin/risorse/$id" params={{ id: "nuovo" }} className="btn-primary">+ Nuova risorsa</Link>
       </div>
       {loading ? (
         <p className="text-muted-foreground">Caricamento…</p>
