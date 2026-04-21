@@ -35,7 +35,7 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  --font-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Cormorant Garamond", "Fraunces", Georgia, serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -167,7 +167,7 @@
   h1, h2, h3, h4, .font-display {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.005em;
   }
 }
 
