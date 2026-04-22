@@ -7,6 +7,7 @@ import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
+import { EventsPopup } from "@/components/events-popup";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -78,22 +79,6 @@ function BolognaHome() {
         align="left"
       />
 
-      {/* Animated events rotator — peeks above the fold */}
-      <section className="container-prose -mt-12 md:-mt-16 relative z-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-2 text-white/90 md:text-foreground/60">Cosa succede</p>
-            <h2 className="font-display text-2xl md:text-4xl text-white md:text-foreground drop-shadow md:drop-shadow-none">
-              Questa settimana a Bologna
-            </h2>
-          </div>
-          <Link to="/bologna/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
-            Calendario completo →
-          </Link>
-        </div>
-        <EventsRotator events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" />
-      </section>
-
       <CityInfoBlock
         city="Bologna"
         address="Via dell'Indipendenza 67"
@@ -101,6 +86,23 @@ function BolognaHome() {
         serviceTime="Domenica · 11:00"
         mapsUrl="https://maps.google.com/?q=Bologna+Italy"
       />
+
+      {/* Floating bottom-right popup */}
+      <EventsPopup events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" cityName="Bologna" />
+
+      {/* Animated events rotator */}
+      <section className="container-prose pt-4 md:pt-8">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2">Cosa succede</p>
+            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Bologna</h2>
+          </div>
+          <Link to="/bologna/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+            Calendario completo →
+          </Link>
+        </div>
+        <EventsRotator events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" />
+      </section>
 
       <div className="mt-16">
         <ScriptureMarquee reverse />

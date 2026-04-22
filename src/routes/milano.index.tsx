@@ -7,6 +7,7 @@ import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
+import { EventsPopup } from "@/components/events-popup";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -78,22 +79,6 @@ function MilanoHome() {
         align="left"
       />
 
-      {/* Animated events rotator — peeks above the fold */}
-      <section className="container-prose -mt-12 md:-mt-16 relative z-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-2 text-white/90 md:text-foreground/60">Cosa succede</p>
-            <h2 className="font-display text-2xl md:text-4xl text-white md:text-foreground drop-shadow md:drop-shadow-none">
-              Questa settimana a Milano
-            </h2>
-          </div>
-          <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
-            Calendario completo →
-          </Link>
-        </div>
-        <EventsRotator events={MILANO_EVENTS} cityHref="/milano/eventi" />
-      </section>
-
       <CityInfoBlock
         city="Milano"
         address="Corso di Porta Vigentina 15a"
@@ -101,6 +86,23 @@ function MilanoHome() {
         serviceTime="Domenica · 10:30"
         mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
       />
+
+      {/* Floating bottom-right popup */}
+      <EventsPopup events={MILANO_EVENTS} cityHref="/milano/eventi" cityName="Milano" />
+
+      {/* Animated events rotator */}
+      <section className="container-prose pt-4 md:pt-8">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2">Cosa succede</p>
+            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+          </div>
+          <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+            Calendario completo →
+          </Link>
+        </div>
+        <EventsRotator events={MILANO_EVENTS} cityHref="/milano/eventi" />
+      </section>
 
       <div className="mt-16">
         <ScriptureMarquee />

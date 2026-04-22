@@ -24,9 +24,9 @@ export function PageHero({
 }: PageHeroProps) {
   const heightClass =
     height === "tall"
-      ? "min-h-[72vh] md:min-h-[78vh]"
+      ? "min-h-[88vh]"
       : height === "medium"
-        ? "min-h-[56vh]"
+        ? "min-h-[60vh]"
         : "min-h-[42vh]";
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
 
