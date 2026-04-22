@@ -59,8 +59,8 @@ export function PageHero({
         style={{
           background:
             align === "left"
-              ? "linear-gradient(180deg, color-mix(in oklab, var(--primary) 10%, transparent) 0%, color-mix(in oklab, var(--primary) 55%, transparent) 100%)"
-              : "linear-gradient(180deg, color-mix(in oklab, var(--primary) 35%, transparent) 0%, color-mix(in oklab, var(--primary) 78%, transparent) 100%)",
+              ? "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)"
+              : "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%)",
         }}
       />
       <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 ${alignClass}`}>
