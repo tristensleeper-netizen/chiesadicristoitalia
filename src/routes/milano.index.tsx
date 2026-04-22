@@ -4,9 +4,44 @@ import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { InstagramFeed } from "@/components/instagram-feed";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ScriptureMarquee } from "@/components/scripture-marquee";
+import { PhotoMarquee } from "@/components/photo-marquee";
+import { EventsRotator } from "@/components/events-rotator";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import heroItalia from "@/assets/hero-italia.jpg";
+
+const MILANO_EVENTS = [
+  {
+    date: "Dom 27",
+    time: "10:30",
+    title: "Funzione domenicale",
+    blurb: "Adorazione, comunione e un messaggio dalla Bibbia. Tutti benvenuti — vieni come sei.",
+    tag: "Settimanale",
+  },
+  {
+    date: "Mer 30",
+    time: "20:00",
+    title: "Gruppo di quartiere — Porta Romana",
+    blurb: "Cena condivisa e una discussione sul Vangelo di Marco. Famiglie e single benvenuti.",
+    tag: "Piccolo gruppo",
+  },
+  {
+    date: "Sab 03",
+    time: "18:30",
+    title: "Serata per giovani professionisti",
+    blurb: "Aperitivo, riflessione e amicizia. Per chi vive e lavora a Milano sotto i 35.",
+    tag: "Speciale",
+  },
+];
+
+const MILANO_PHOTOS = [
+  { src: worship, alt: "Adorazione domenicale" },
+  { src: bibleStudy, alt: "Studio biblico" },
+  { src: heroMilano, alt: "Milano" },
+  { src: heroItalia, alt: "Comunità italiana" },
+];
 
 export const Route = createFileRoute("/milano/")({
   head: () => ({

@@ -4,9 +4,44 @@ import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { InstagramFeed } from "@/components/instagram-feed";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ScriptureMarquee } from "@/components/scripture-marquee";
+import { PhotoMarquee } from "@/components/photo-marquee";
+import { EventsRotator } from "@/components/events-rotator";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import heroItalia from "@/assets/hero-italia.jpg";
+
+const BOLOGNA_EVENTS = [
+  {
+    date: "Dom 27",
+    time: "11:00",
+    title: "Funzione domenicale",
+    blurb: "Sotto i portici di Via dell'Indipendenza — adorazione, comunione e una Parola viva per la settimana.",
+    tag: "Settimanale",
+  },
+  {
+    date: "Gio 01",
+    time: "19:30",
+    title: "Studio biblico universitari",
+    blurb: "Per studenti dell'Alma Mater. Pizza, domande, e il Vangelo di Giovanni capitolo per capitolo.",
+    tag: "Studenti",
+  },
+  {
+    date: "Sab 03",
+    time: "16:00",
+    title: "Pomeriggio di servizio in città",
+    blurb: "Distribuzione di pasti caldi e ascolto, in collaborazione con realtà locali. Iscriviti via email.",
+    tag: "Servizio",
+  },
+];
+
+const BOLOGNA_PHOTOS = [
+  { src: heroBologna, alt: "Bologna sotto i portici" },
+  { src: worship, alt: "Comunità in adorazione" },
+  { src: bibleStudy, alt: "Studio biblico" },
+  { src: heroItalia, alt: "Comunità italiana" },
+];
 
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
