@@ -85,7 +85,7 @@ export function SiteHeader() {
           </span>
           <span className="flex flex-col leading-tight">
             <span className="font-display text-base md:text-lg text-foreground">
-              Chiesa di Cristo
+              {logoCityLabel ? "Chiesa di Cristo" : "Chiesa di Cristo Italia"}
             </span>
             {logoCityLabel && (
               <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
