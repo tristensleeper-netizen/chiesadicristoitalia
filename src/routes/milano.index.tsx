@@ -4,9 +4,44 @@ import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { InstagramFeed } from "@/components/instagram-feed";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ScriptureMarquee } from "@/components/scripture-marquee";
+import { PhotoMarquee } from "@/components/photo-marquee";
+import { EventsRotator } from "@/components/events-rotator";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import heroItalia from "@/assets/hero-italia.jpg";
+
+const MILANO_EVENTS = [
+  {
+    date: "Dom 27",
+    time: "10:30",
+    title: "Funzione domenicale",
+    blurb: "Adorazione, comunione e un messaggio dalla Bibbia. Tutti benvenuti — vieni come sei.",
+    tag: "Settimanale",
+  },
+  {
+    date: "Mer 30",
+    time: "20:00",
+    title: "Gruppo di quartiere — Porta Romana",
+    blurb: "Cena condivisa e una discussione sul Vangelo di Marco. Famiglie e single benvenuti.",
+    tag: "Piccolo gruppo",
+  },
+  {
+    date: "Sab 03",
+    time: "18:30",
+    title: "Serata per giovani professionisti",
+    blurb: "Aperitivo, riflessione e amicizia. Per chi vive e lavora a Milano sotto i 35.",
+    tag: "Speciale",
+  },
+];
+
+const MILANO_PHOTOS = [
+  { src: worship, alt: "Adorazione domenicale" },
+  { src: bibleStudy, alt: "Studio biblico" },
+  { src: heroMilano, alt: "Milano" },
+  { src: heroItalia, alt: "Comunità italiana" },
+];
 
 export const Route = createFileRoute("/milano/")({
   head: () => ({
@@ -50,6 +85,24 @@ function MilanoHome() {
         serviceTime="Domenica · 10:30"
         mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
       />
+
+      {/* Animated events rotator */}
+      <section className="container-prose pt-16 md:pt-20">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2">Cosa succede</p>
+            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+          </div>
+          <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+            Calendario completo →
+          </Link>
+        </div>
+        <EventsRotator events={MILANO_EVENTS} cityHref="/milano/eventi" />
+      </section>
+
+      <div className="mt-16">
+        <ScriptureMarquee />
+      </div>
 
       {/* Welcome */}
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
@@ -96,6 +149,16 @@ function MilanoHome() {
             cta={{ to: "/milano/eventi", label: "Trova un gruppo" }}
           />
         </div>
+      </section>
+
+      {/* Photo galleries — moving */}
+      <section className="py-16 md:py-20 space-y-6">
+        <div className="container-prose mb-2">
+          <p className="eyebrow mb-2">La nostra famiglia</p>
+          <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
+        </div>
+        <PhotoMarquee images={MILANO_PHOTOS} />
+        <PhotoMarquee images={[...MILANO_PHOTOS].reverse()} reverse speed="slow" />
       </section>
 
       {/* Bible study image band */}

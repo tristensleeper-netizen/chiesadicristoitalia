@@ -4,9 +4,44 @@ import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { InstagramFeed } from "@/components/instagram-feed";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ScriptureMarquee } from "@/components/scripture-marquee";
+import { PhotoMarquee } from "@/components/photo-marquee";
+import { EventsRotator } from "@/components/events-rotator";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import heroItalia from "@/assets/hero-italia.jpg";
+
+const BOLOGNA_EVENTS = [
+  {
+    date: "Dom 27",
+    time: "11:00",
+    title: "Funzione domenicale",
+    blurb: "Sotto i portici di Via dell'Indipendenza — adorazione, comunione e una Parola viva per la settimana.",
+    tag: "Settimanale",
+  },
+  {
+    date: "Gio 01",
+    time: "19:30",
+    title: "Studio biblico universitari",
+    blurb: "Per studenti dell'Alma Mater. Pizza, domande, e il Vangelo di Giovanni capitolo per capitolo.",
+    tag: "Studenti",
+  },
+  {
+    date: "Sab 03",
+    time: "16:00",
+    title: "Pomeriggio di servizio in città",
+    blurb: "Distribuzione di pasti caldi e ascolto, in collaborazione con realtà locali. Iscriviti via email.",
+    tag: "Servizio",
+  },
+];
+
+const BOLOGNA_PHOTOS = [
+  { src: heroBologna, alt: "Bologna sotto i portici" },
+  { src: worship, alt: "Comunità in adorazione" },
+  { src: bibleStudy, alt: "Studio biblico" },
+  { src: heroItalia, alt: "Comunità italiana" },
+];
 
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
@@ -51,6 +86,24 @@ function BolognaHome() {
         mapsUrl="https://maps.google.com/?q=Bologna+Italy"
       />
 
+      {/* Animated events rotator */}
+      <section className="container-prose pt-16 md:pt-20">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2">Cosa succede</p>
+            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Bologna</h2>
+          </div>
+          <Link to="/bologna/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+            Calendario completo →
+          </Link>
+        </div>
+        <EventsRotator events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" />
+      </section>
+
+      <div className="mt-16">
+        <ScriptureMarquee reverse />
+      </div>
+
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <img
           src={worship}
@@ -94,6 +147,16 @@ function BolognaHome() {
             cta={{ to: "/bologna/eventi", label: "Prossimi eventi" }}
           />
         </div>
+      </section>
+
+      {/* Photo galleries — moving */}
+      <section className="py-16 md:py-20 space-y-6">
+        <div className="container-prose mb-2">
+          <p className="eyebrow mb-2">La nostra famiglia</p>
+          <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
+        </div>
+        <PhotoMarquee images={BOLOGNA_PHOTOS} />
+        <PhotoMarquee images={[...BOLOGNA_PHOTOS].reverse()} reverse speed="slow" />
       </section>
 
       <section className="relative h-[60vh] overflow-hidden">
