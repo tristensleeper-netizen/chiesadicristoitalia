@@ -92,19 +92,91 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Beliefs strip */}
-      <section className="bg-primary-soft mt-16">
-        <div className="container-prose py-24 grid gap-12 md:grid-cols-3 text-center">
-          {[
-            { t: "Bibbia", d: "La Parola di Dio guida ogni cosa che facciamo." },
-            { t: "Comunità", d: "Amicizie profonde, sincere e quotidiane." },
-            { t: "Missione", d: "Portare speranza a chi ancora non la conosce." },
-          ].map((item) => (
-            <div key={item.t}>
-              <h3 className="font-display text-3xl text-primary">{item.t}</h3>
-              <p className="mt-3 text-foreground/75 leading-relaxed">{item.d}</p>
-            </div>
-          ))}
+      {/* Beliefs — interactive pillars */}
+      <section className="relative mt-16 overflow-hidden bg-primary-soft">
+        {/* Floating scripture marquee */}
+        <div className="marquee-mask overflow-hidden border-y border-primary/10 bg-primary/5 py-4">
+          <div className="animate-marquee flex gap-12 whitespace-nowrap font-display text-2xl md:text-3xl text-primary/70">
+            {Array.from({ length: 2 }).map((_, k) => (
+              <div key={k} className="flex gap-12">
+                <span>· Amati così come sei ·</span>
+                <span>· Una famiglia in Cristo ·</span>
+                <span>· La Parola che trasforma ·</span>
+                <span>· Speranza per ogni città ·</span>
+                <span>· Vieni come sei ·</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="container-prose py-24 md:py-28">
+          <div className="text-center mb-16">
+            <p className="eyebrow mb-4">Tre pilastri</p>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground">
+              Cosa ci tiene <em className="not-italic text-primary">insieme</em>.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                t: "Bibbia",
+                d: "La Parola di Dio guida ogni cosa che facciamo.",
+                icon: "📖",
+                verse: "«La tua parola è una lampada al mio piede.» — Salmo 119:105",
+              },
+              {
+                t: "Comunità",
+                d: "Amicizie profonde, sincere e quotidiane.",
+                icon: "✦",
+                verse: "«Perseveravano nella comunione fraterna.» — Atti 2:42",
+              },
+              {
+                t: "Missione",
+                d: "Portare speranza a chi ancora non la conosce.",
+                icon: "→",
+                verse: "«Andate e fate discepoli.» — Matteo 28:19",
+              },
+            ].map((item, i) => (
+              <div
+                key={item.t}
+                className="group relative overflow-hidden rounded-3xl bg-card p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-border/50"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                {/* Animated gradient orb on hover */}
+                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
+                <div className="relative">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
+                  <p className="text-foreground/75 leading-relaxed mb-5">{item.d}</p>
+
+                  {/* Verse — slides in on hover */}
+                  <div className="overflow-hidden">
+                    <p className="text-sm italic text-muted-foreground translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                      {item.verse}
+                    </p>
+                  </div>
+
+                  {/* Animated underline accent */}
+                  <div className="mt-6 h-0.5 w-10 bg-primary transition-all duration-500 group-hover:w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA strip */}
+          <div className="mt-16 text-center">
+            <Link
+              to="/milano"
+              className="inline-flex items-center gap-2 font-display text-xl md:text-2xl text-primary hover:gap-4 transition-all"
+            >
+              Vieni a trovarci questa domenica
+              <span className="inline-block animate-float">→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>
