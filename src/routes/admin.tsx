@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate, useLocation } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin")({
@@ -14,8 +14,15 @@ export const Route = createFileRoute("/admin")({
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLoginRoute = location.pathname.startsWith("/admin/login");
   const [state, setState] = useState<"loading" | "unauth" | "no-role" | "ok">("loading");
   const [email, setEmail] = useState<string>("");
+
+  // Skip auth gate entirely on the login page — it manages its own state.
+  if (isLoginRoute) {
+    return <Outlet />;
+  }
 
   useEffect(() => {
     let active = true;
