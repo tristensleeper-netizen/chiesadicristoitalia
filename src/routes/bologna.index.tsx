@@ -7,6 +7,7 @@ import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
+import { EventsPopup } from "@/components/events-popup";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
