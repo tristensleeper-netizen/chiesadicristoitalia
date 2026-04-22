@@ -19,12 +19,8 @@ function AdminLayout() {
   const [state, setState] = useState<"loading" | "unauth" | "no-role" | "ok">("loading");
   const [email, setEmail] = useState<string>("");
 
-  // Skip auth gate entirely on the login page — it manages its own state.
-  if (isLoginRoute) {
-    return <Outlet />;
-  }
-
   useEffect(() => {
+    if (isLoginRoute) return;
     let active = true;
 
     const check = async () => {
@@ -58,11 +54,17 @@ function AdminLayout() {
       active = false;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [isLoginRoute]);
 
   useEffect(() => {
+    if (isLoginRoute) return;
     if (state === "unauth") navigate({ to: "/admin/login" });
-  }, [state, navigate]);
+  }, [state, navigate, isLoginRoute]);
+
+  // Render login page without the admin gate/chrome.
+  if (isLoginRoute) {
+    return <Outlet />;
+  }
 
   if (state === "loading" || state === "unauth") {
     return (
