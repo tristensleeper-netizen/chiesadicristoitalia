@@ -35,6 +35,13 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Sicilia" },
+      { name: "twitter:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Sicilia" },
+      { name: "description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
+      { property: "og:description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
+      { name: "twitter:description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/450c659a-0cc2-4106-b5e2-6ac1734c5b60/id-preview-e589e7ae--91e62dbb-079b-4061-b270-1afff4048b17.lovable.app-1776867721056.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/450c659a-0cc2-4106-b5e2-6ac1734c5b60/id-preview-e589e7ae--91e62dbb-079b-4061-b270-1afff4048b17.lovable.app-1776867721056.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
