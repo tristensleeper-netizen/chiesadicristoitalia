@@ -78,20 +78,14 @@ function MilanoHome() {
         align="left"
       />
 
-      <CityInfoBlock
-        city="Milano"
-        address="Corso di Porta Vigentina 15a"
-        cap="20122"
-        serviceTime="Domenica · 10:30"
-        mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
-      />
-
-      {/* Animated events rotator */}
-      <section className="container-prose pt-16 md:pt-20">
-        <div className="mb-8 flex items-end justify-between gap-4">
+      {/* Animated events rotator — peeks above the fold */}
+      <section className="container-prose -mt-12 md:-mt-16 relative z-20">
+        <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-2">Cosa succede</p>
-            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+            <p className="eyebrow mb-2 text-white/90 md:text-foreground/60">Cosa succede</p>
+            <h2 className="font-display text-2xl md:text-4xl text-white md:text-foreground drop-shadow md:drop-shadow-none">
+              Questa settimana a Milano
+            </h2>
           </div>
           <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
             Calendario completo →
@@ -99,6 +93,14 @@ function MilanoHome() {
         </div>
         <EventsRotator events={MILANO_EVENTS} cityHref="/milano/eventi" />
       </section>
+
+      <CityInfoBlock
+        city="Milano"
+        address="Corso di Porta Vigentina 15a"
+        cap="20122"
+        serviceTime="Domenica · 10:30"
+        mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
+      />
 
       <div className="mt-16">
         <ScriptureMarquee />
