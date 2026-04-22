@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 interface PageHeroProps {
   image: string;
+  videoSrc?: string;
   eyebrow?: string;
   title: ReactNode;
   subtitle?: ReactNode;
@@ -14,6 +15,7 @@ interface PageHeroProps {
 
 export function PageHero({
   image,
+  videoSrc,
   eyebrow,
   title,
   subtitle,
@@ -32,13 +34,26 @@ export function PageHero({
 
   return (
     <section className={`relative -mt-[72px] flex ${heightClass} w-full overflow-hidden`}>
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover"
-        width={1920}
-        height={1280}
-      />
+      {videoSrc ? (
+        <video
+          src={videoSrc}
+          poster={image}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <img
+          src={image}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          width={1920}
+          height={1280}
+        />
+      )}
       <div
         className="absolute inset-0"
         style={{

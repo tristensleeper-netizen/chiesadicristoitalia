@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate, useLocation } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin")({
@@ -14,10 +14,13 @@ export const Route = createFileRoute("/admin")({
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLoginRoute = location.pathname.startsWith("/admin/login");
   const [state, setState] = useState<"loading" | "unauth" | "no-role" | "ok">("loading");
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
+    if (isLoginRoute) return;
     let active = true;
 
     const check = async () => {
@@ -51,11 +54,17 @@ function AdminLayout() {
       active = false;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [isLoginRoute]);
 
   useEffect(() => {
+    if (isLoginRoute) return;
     if (state === "unauth") navigate({ to: "/admin/login" });
-  }, [state, navigate]);
+  }, [state, navigate, isLoginRoute]);
+
+  // Render login page without the admin gate/chrome.
+  if (isLoginRoute) {
+    return <Outlet />;
+  }
 
   if (state === "loading" || state === "unauth") {
     return (
