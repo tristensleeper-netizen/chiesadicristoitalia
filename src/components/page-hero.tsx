@@ -24,9 +24,9 @@ export function PageHero({
 }: PageHeroProps) {
   const heightClass =
     height === "tall"
-      ? "min-h-[88vh]"
+      ? "min-h-[72vh] md:min-h-[78vh]"
       : height === "medium"
-        ? "min-h-[60vh]"
+        ? "min-h-[56vh]"
         : "min-h-[42vh]";
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
 
@@ -48,7 +48,7 @@ export function PageHero({
               : "linear-gradient(180deg, color-mix(in oklab, var(--primary) 35%, transparent) 0%, color-mix(in oklab, var(--primary) 78%, transparent) 100%)",
         }}
       />
-      <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-20 pt-40 ${alignClass}`}>
+      <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 ${alignClass}`}>
         {eyebrow && (
           <p className="eyebrow text-white/80 mb-5">{eyebrow}</p>
         )}
