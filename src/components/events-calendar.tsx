@@ -29,6 +29,15 @@ export function EventsCalendar({ city }: Props) {
 
   const { occurrences, loading } = useEventOccurrences(city, rangeFrom, rangeTo);
 
+  // Separate range for the "upcoming" list (next ~3 months from today)
+  const upcomingFrom = useMemo(() => new Date(), []);
+  const upcomingTo = useMemo(() => addMonths(upcomingFrom, 3), [upcomingFrom]);
+  const { occurrences: upcoming } = useEventOccurrences(city, upcomingFrom, upcomingTo);
+  const upcomingList = useMemo(
+    () => upcoming.filter((o) => isAfter(o.end ?? o.date, new Date())).slice(0, 8),
+    [upcoming],
+  );
+
   const byDay = useMemo(() => {
     const m = new Map<string, EventOccurrence[]>();
     for (const occ of occurrences) {
