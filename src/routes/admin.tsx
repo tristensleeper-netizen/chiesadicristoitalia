@@ -128,7 +128,8 @@ function AdminLayout() {
           <AdminTab to="/admin" exact label="Risorse" icon="📚" />
           <AdminTab to="/admin/devozionali" label="Devozionali" icon="✦" />
           <AdminTab to="/admin/eventi" label="Eventi" icon="📅" />
-          <AdminTab to="/admin/hero" label="Immagini hero" icon="🖼" />
+          <AdminTab to="/admin/hero" label="Hero città" icon="🏙" />
+          <AdminTab to="/admin/media" label="Foto del sito" icon="🖼" />
         </div>
       </div>
 
