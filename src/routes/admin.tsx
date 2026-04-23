@@ -127,6 +127,8 @@ function AdminLayout() {
         <div className="container-prose flex gap-1 text-sm overflow-x-auto">
           <AdminTab to="/admin" exact label="Risorse" icon="📚" />
           <AdminTab to="/admin/devozionali" label="Devozionali" icon="✦" />
+          <AdminTab to="/admin/eventi" label="Eventi" icon="📅" />
+          <AdminTab to="/admin/hero" label="Immagini hero" icon="🖼" />
         </div>
       </div>
 
