@@ -4,7 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
+  fetchOEmbedThumbnail,
   formatItalianDate,
+  getInstantThumbnail,
   type CityTag,
   type Resource,
   type ResourceType,
