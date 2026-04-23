@@ -12,6 +12,7 @@ export const MEDIA_SLOTS = {
   "home.sicilia": "Home — Tile Sicilia",
 
   // Milano
+  "milano.hero": "Milano — Hero principale",
   "milano.welcome": "Milano — Foto sezione benvenuto",
   "milano.bibleband": "Milano — Banda 'Venite a me'",
   "milano.photo1": "Milano — Galleria 1",
@@ -20,6 +21,7 @@ export const MEDIA_SLOTS = {
   "milano.photo4": "Milano — Galleria 4",
 
   // Bologna
+  "bologna.hero": "Bologna — Hero principale",
   "bologna.welcome": "Bologna — Foto sezione benvenuto",
   "bologna.bibleband": "Bologna — Banda scrittura",
   "bologna.photo1": "Bologna — Galleria 1",

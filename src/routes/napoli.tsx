@@ -22,6 +22,7 @@ function NapoliPage() {
   return (
     <>
       <PageHero
+        slot="napoli.hero"
         image={hero}
         eyebrow="Chiesa di Cristo"
         title={<>Napoli.</>}

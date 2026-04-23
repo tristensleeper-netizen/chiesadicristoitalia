@@ -51,6 +51,7 @@ function DevotionalIndex() {
   return (
     <>
       <PageHero
+        slot="devozionale.hero"
         image={heroImg}
         eyebrow="Devozionale"
         title={<>Una Parola<br />per la settimana.</>}

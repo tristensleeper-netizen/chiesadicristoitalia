@@ -22,6 +22,7 @@ function SiciliaPage() {
   return (
     <>
       <PageHero
+        slot="sicilia.hero"
         image={hero}
         eyebrow="Chiesa di Cristo"
         title={<>Sicilia.</>}

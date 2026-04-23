@@ -36,8 +36,8 @@ function HomePage() {
   return (
     <>
       <PageHero
+        slot="home.hero"
         image={homeHero}
-        videoSrc="https://cdn.coverr.co/videos/coverr-aerial-view-of-an-italian-village-7234/1080p.mp4"
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una famiglia<br />che ti aspetta.</>}
         subtitle="Da Milano a Bologna, da Napoli alla Sicilia — comunità di persone normali che cercano insieme di vivere come Gesù."

@@ -98,6 +98,7 @@ function ResourcesIndex() {
   return (
     <>
       <PageHero
+        slot="risorse.hero"
         image={heroImg}
         eyebrow="Risorse"
         title={<>Esplora. Ascolta.<br />Cresci.</>}
