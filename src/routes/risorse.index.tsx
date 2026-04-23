@@ -142,6 +142,25 @@ function ResourcesIndex() {
               ))}
             </div>
           </div>
+          <div>
+            <p className="eyebrow mb-3">Ordina per data</p>
+            <div className="flex flex-wrap gap-2">
+              {(["newest", "oldest"] as const).map((o) => (
+                <button
+                  key={o}
+                  onClick={() => setSortOrder(o)}
+                  className={
+                    "rounded-full px-4 py-2 text-sm transition-all " +
+                    (sortOrder === o
+                      ? "bg-primary text-primary-foreground"
+                      : "border border-border text-foreground/70 hover:border-primary hover:text-primary")
+                  }
+                >
+                  {o === "newest" ? "Più recenti" : "Meno recenti"}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {loading ? (
