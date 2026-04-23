@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { RotatorEvent } from "@/components/events-rotator";
 
@@ -13,11 +13,45 @@ export type CityEventRow = {
   date_label: string | null;
   time_label: string | null;
   event_date: string | null;
+  start_at: string | null;
+  end_at: string | null;
+  recurrence: "none" | "weekly";
+  weekday: number | null;
+  recurrence_end: string | null;
+  location: string | null;
   sort_order: number;
   active: boolean;
 };
 
+/** A single concrete occurrence of an event on the calendar. */
+export type EventOccurrence = {
+  id: string; // unique per occurrence (event id + date)
+  source: CityEventRow;
+  date: Date;
+  end?: Date;
+  title: string;
+  blurb: string;
+  tag?: string;
+  location?: string;
+};
+
+const ITALIAN_DAYS = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+
 export function rowToRotator(r: CityEventRow): RotatorEvent {
+  // Prefer real date if present
+  if (r.start_at) {
+    const d = new Date(r.start_at);
+    const day = ITALIAN_DAYS[d.getDay()];
+    const dayNum = d.getDate();
+    const time = d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+    return {
+      date: `${day} ${dayNum}`,
+      time,
+      title: r.title,
+      blurb: r.blurb || "",
+      tag: r.tag || undefined,
+    };
+  }
   const day = r.day_label?.trim() || "";
   const datePart = r.date_label?.trim() || "";
   return {
@@ -27,6 +61,46 @@ export function rowToRotator(r: CityEventRow): RotatorEvent {
     blurb: r.blurb || "",
     tag: r.tag || undefined,
   };
+}
+
+/** Expand a row into occurrences inside [from, to]. */
+export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrence[] {
+  const out: EventOccurrence[] = [];
+  const make = (date: Date): EventOccurrence => ({
+    id: `${r.id}-${date.toISOString().slice(0, 10)}`,
+    source: r,
+    date,
+    end: r.end_at ? new Date(r.end_at) : undefined,
+    title: r.title,
+    blurb: r.blurb || "",
+    tag: r.tag || undefined,
+    location: r.location || undefined,
+  });
+
+  if (r.recurrence === "weekly" && r.weekday !== null && r.start_at) {
+    const start = new Date(r.start_at);
+    const recEnd = r.recurrence_end ? new Date(r.recurrence_end + "T23:59:59") : null;
+    // Walk from max(start, from) through to
+    const cursor = new Date(Math.max(from.getTime(), start.getTime()));
+    cursor.setHours(start.getHours(), start.getMinutes(), 0, 0);
+    // Move cursor forward to the next matching weekday
+    while (cursor.getDay() !== r.weekday) {
+      cursor.setDate(cursor.getDate() + 1);
+    }
+    while (cursor <= to) {
+      if (recEnd && cursor > recEnd) break;
+      out.push(make(new Date(cursor)));
+      cursor.setDate(cursor.getDate() + 7);
+    }
+    return out;
+  }
+
+  if (r.start_at) {
+    const d = new Date(r.start_at);
+    if (d >= from && d <= to) out.push(make(d));
+    return out;
+  }
+  return out;
 }
 
 export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent[]) {
@@ -41,6 +115,7 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
         .eq("city", city)
         .eq("active", true)
         .order("sort_order", { ascending: true })
+        .order("start_at", { ascending: true, nullsFirst: false })
         .order("event_date", { ascending: true, nullsFirst: false });
       if (error || !active) return;
       if (data && data.length > 0) {
@@ -53,6 +128,44 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
   }, [city]);
 
   return events;
+}
+
+/** Fetches raw city events (used by the calendar view). */
+export function useCityEventRows(city: "milano" | "bologna") {
+  const [rows, setRows] = useState<CityEventRow[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      setLoading(true);
+      const { data } = await supabase
+        .from("city_events")
+        .select("*")
+        .eq("city", city)
+        .eq("active", true);
+      if (!active) return;
+      setRows((data as CityEventRow[]) ?? []);
+      setLoading(false);
+    })();
+    return () => {
+      active = false;
+    };
+  }, [city]);
+
+  return { rows, loading };
+}
+
+/** Returns occurrences expanded across the given range. */
+export function useEventOccurrences(city: "milano" | "bologna", from: Date, to: Date) {
+  const { rows, loading } = useCityEventRows(city);
+  const occurrences = useMemo(() => {
+    const all: EventOccurrence[] = [];
+    for (const r of rows) all.push(...expandRow(r, from, to));
+    all.sort((a, b) => a.date.getTime() - b.date.getTime());
+    return all;
+  }, [rows, from, to]);
+  return { occurrences, loading };
 }
 
 export function useActiveHero(city: "milano" | "bologna", fallback: string) {

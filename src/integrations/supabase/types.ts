@@ -22,14 +22,20 @@ export type Database = {
           created_at: string
           date_label: string | null
           day_label: string | null
+          end_at: string | null
           event_date: string | null
           id: string
           kind: string
+          location: string | null
+          recurrence: string
+          recurrence_end: string | null
           sort_order: number
+          start_at: string | null
           tag: string | null
           time_label: string | null
           title: string
           updated_at: string
+          weekday: number | null
         }
         Insert: {
           active?: boolean
@@ -38,14 +44,20 @@ export type Database = {
           created_at?: string
           date_label?: string | null
           day_label?: string | null
+          end_at?: string | null
           event_date?: string | null
           id?: string
           kind: string
+          location?: string | null
+          recurrence?: string
+          recurrence_end?: string | null
           sort_order?: number
+          start_at?: string | null
           tag?: string | null
           time_label?: string | null
           title: string
           updated_at?: string
+          weekday?: number | null
         }
         Update: {
           active?: boolean
@@ -54,14 +66,20 @@ export type Database = {
           created_at?: string
           date_label?: string | null
           day_label?: string | null
+          end_at?: string | null
           event_date?: string | null
           id?: string
           kind?: string
+          location?: string | null
+          recurrence?: string
+          recurrence_end?: string | null
           sort_order?: number
+          start_at?: string | null
           tag?: string | null
           time_label?: string | null
           title?: string
           updated_at?: string
+          weekday?: number | null
         }
         Relationships: []
       }
@@ -140,31 +158,43 @@ export type Database = {
       media_assets: {
         Row: {
           created_at: string
+          external_url: string | null
           height: number | null
           id: string
+          kind: string
           label: string | null
+          mime_type: string | null
           public_url: string
-          storage_path: string
+          storage_path: string | null
+          thumbnail_url: string | null
           updated_at: string
           width: number | null
         }
         Insert: {
           created_at?: string
+          external_url?: string | null
           height?: number | null
           id?: string
+          kind?: string
           label?: string | null
+          mime_type?: string | null
           public_url: string
-          storage_path: string
+          storage_path?: string | null
+          thumbnail_url?: string | null
           updated_at?: string
           width?: number | null
         }
         Update: {
           created_at?: string
+          external_url?: string | null
           height?: number | null
           id?: string
+          kind?: string
           label?: string | null
+          mime_type?: string | null
           public_url?: string
-          storage_path?: string
+          storage_path?: string | null
+          thumbnail_url?: string | null
           updated_at?: string
           width?: number | null
         }
