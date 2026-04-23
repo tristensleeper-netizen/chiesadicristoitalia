@@ -1,8 +1,9 @@
 import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
 import { Link } from "@tanstack/react-router";
-import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
+import { EventsCalendar } from "@/components/events-calendar";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 
@@ -185,10 +186,6 @@ export function SermonsSection({ city }: { city: CityConfig }) {
 export function EventsSection({ city }: { city: CityConfig }) {
   const cityKey = city.name.toLowerCase() as "milano" | "bologna";
   const heroImage = useActiveHero(cityKey, city.hero);
-  const fallback = [
-    { date: "Ogni domenica", time: city.serviceTime, title: "Funzione domenicale", blurb: "", tag: "Settimanale" },
-  ];
-  const dynamic = useCityEvents(cityKey, fallback);
   return (
     <>
       <PageHero
@@ -198,16 +195,8 @@ export function EventsSection({ city }: { city: CityConfig }) {
         subtitle="Funzioni, studi biblici, cene e progetti — c'è sempre qualcosa che succede."
         height="short"
       />
-      <section className="container-prose py-20">
-        <ul className="divide-y divide-border border-y border-border">
-          {dynamic.map((e, i) => (
-            <li key={`${e.title}-${i}`} className="py-6 grid gap-2 md:grid-cols-[180px_1fr_auto] items-baseline">
-              <p className="eyebrow">{e.date || "—"}</p>
-              <p className="font-display text-2xl text-foreground">{e.title}</p>
-              <p className="text-muted-foreground">{[e.time, e.blurb].filter(Boolean).join(" · ")}</p>
-            </li>
-          ))}
-        </ul>
+      <section className="container-prose py-16 md:py-20">
+        <EventsCalendar city={cityKey} />
         <div className="mt-12 text-center">
           <Link to={`${city.basePath}/contatti`} className="btn-primary">
             Voglio partecipare
