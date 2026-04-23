@@ -61,7 +61,6 @@ function AdminLayout() {
     if (state === "unauth") navigate({ to: "/admin/login" });
   }, [state, navigate, isLoginRoute]);
 
-  // Render login page without the admin gate/chrome.
   if (isLoginRoute) {
     return <Outlet />;
   }
@@ -83,7 +82,7 @@ function AdminLayout() {
             Sei autenticato come <strong>{email}</strong>, ma non hai ancora il ruolo di amministratore.
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Chiedi a chi gestisce il sito di promuovere il tuo account in Lovable Cloud (tabella user_roles).
+            Chiedi a chi gestisce il sito di promuovere il tuo account.
           </p>
           <button
             onClick={async () => { await supabase.auth.signOut(); navigate({ to: "/admin/login" }); }}
@@ -97,33 +96,60 @@ function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen pt-20">
-      <div className="border-b border-border bg-card/50">
-        <div className="container-prose py-6 flex justify-between items-center flex-wrap gap-4">
-          <div>
-            <p className="eyebrow">Admin</p>
-            <h1 className="font-display text-2xl">Gestione contenuti</h1>
+    <div className="min-h-screen pt-20 bg-muted/30">
+      {/* Sticky admin chrome */}
+      <div className="sticky top-20 z-30 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <div className="container-prose py-5 flex justify-between items-center flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-semibold">
+              ⚙
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+                Centro amministrazione
+              </p>
+              <h1 className="font-display text-xl leading-tight">Gestione contenuti</h1>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-xs text-muted-foreground">{email}</span>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex flex-col items-end leading-tight">
+              <span className="text-xs text-muted-foreground">Connesso come</span>
+              <span className="text-sm font-medium">{email}</span>
+            </div>
             <button
               onClick={async () => { await supabase.auth.signOut(); navigate({ to: "/admin/login" }); }}
-              className="text-sm text-muted-foreground hover:text-primary"
+              className="text-sm rounded-full border border-border px-4 py-2 hover:bg-muted transition"
             >
               Esci
             </button>
           </div>
         </div>
-        <div className="container-prose pb-4 flex gap-4 text-sm">
-          <Link to="/admin" activeOptions={{ exact: true }} activeProps={{ className: "text-primary font-medium" }} className="text-foreground/70 hover:text-primary">
-            Risorse
-          </Link>
-          <Link to="/admin/devozionali" activeProps={{ className: "text-primary font-medium" }} className="text-foreground/70 hover:text-primary">
-            Devozionali
-          </Link>
+        <div className="container-prose flex gap-1 text-sm overflow-x-auto">
+          <AdminTab to="/admin" exact label="Risorse" icon="📚" />
+          <AdminTab to="/admin/devozionali" label="Devozionali" icon="✦" />
         </div>
       </div>
+
       <Outlet />
     </div>
+  );
+}
+
+function AdminTab({ to, label, icon, exact }: { to: string; label: string; icon: string; exact?: boolean }) {
+  return (
+    <Link
+      to={to}
+      activeOptions={exact ? { exact: true } : undefined}
+      activeProps={{
+        className: "border-primary text-primary",
+      }}
+      inactiveProps={{
+        className: "border-transparent text-foreground/60 hover:text-foreground",
+      }}
+      className="flex items-center gap-2 px-4 py-3 border-b-2 -mb-px font-medium whitespace-nowrap transition"
+    >
+      <span aria-hidden>{icon}</span>
+      {label}
+    </Link>
   );
 }
