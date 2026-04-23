@@ -55,3 +55,56 @@ export function toEmbedUrl(url: string): string {
   }
   return url;
 }
+
+export function getYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+export function getVimeoId(url: string): string | null {
+  const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  return m ? m[1] : null;
+}
+
+/**
+ * Returns a preview image URL synchronously when possible (YouTube).
+ * For Vimeo/Spotify, returns null — use fetchOEmbedThumbnail().
+ */
+export function getInstantThumbnail(mediaUrl: string | null | undefined): string | null {
+  if (!mediaUrl) return null;
+  const ytId = getYouTubeId(mediaUrl);
+  if (ytId) return `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
+  return null;
+}
+
+const oembedCache = new Map<string, string | null>();
+
+/**
+ * Fetches a preview thumbnail via oEmbed for Vimeo/Spotify.
+ * Cached in-memory per session.
+ */
+export async function fetchOEmbedThumbnail(mediaUrl: string): Promise<string | null> {
+  if (oembedCache.has(mediaUrl)) return oembedCache.get(mediaUrl)!;
+
+  let endpoint: string | null = null;
+  if (isVimeoUrl(mediaUrl)) {
+    endpoint = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(mediaUrl)}`;
+  } else if (isSpotifyUrl(mediaUrl)) {
+    endpoint = `https://open.spotify.com/oembed?url=${encodeURIComponent(mediaUrl)}`;
+  }
+  if (!endpoint) {
+    oembedCache.set(mediaUrl, null);
+    return null;
+  }
+  try {
+    const res = await fetch(endpoint);
+    if (!res.ok) throw new Error(String(res.status));
+    const data = (await res.json()) as { thumbnail_url?: string };
+    const thumb = data.thumbnail_url ?? null;
+    oembedCache.set(mediaUrl, thumb);
+    return thumb;
+  } catch {
+    oembedCache.set(mediaUrl, null);
+    return null;
+  }
+}
