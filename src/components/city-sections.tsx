@@ -22,6 +22,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
         eyebrow={`Chi siamo · ${city.name}`}
         title={<>Una famiglia<br />spirituale.</>}
@@ -68,6 +69,7 @@ export function BeliefsSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot="beliefs.hero"
         image={heroImg}
         eyebrow={`Cosa crediamo · ${city.name}`}
         title={<>Una fede semplice,<br />biblica, viva.</>}
@@ -105,6 +107,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
         eyebrow={`Visita · ${city.name}`}
         title={<>Vieni a trovarci<br />questa domenica.</>}
@@ -155,6 +158,7 @@ export function SermonsSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot="sermons.hero"
         image={heroImg}
         eyebrow={`Sermoni · ${city.name}`}
         title={<>Ascolta. Leggi.<br />Cresci.</>}
@@ -189,6 +193,7 @@ export function EventsSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot={`${cityKey}.hero` as never}
         image={heroImage}
         eyebrow={`Eventi · ${city.name}`}
         title={<>La vita della<br />comunità.</>}
@@ -212,6 +217,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
+        slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
         eyebrow={`Contatti · ${city.name}`}
         title={<>Facci sapere<br />se verrai.</>}
