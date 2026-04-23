@@ -4,7 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
+  fetchOEmbedThumbnail,
   formatItalianDate,
+  getInstantThumbnail,
   type CityTag,
   type Resource,
   type ResourceType,
@@ -155,28 +157,14 @@ function ResourcesIndex() {
 }
 
 export function ResourceCard({ r }: { r: Resource }) {
+  const isPlayable = r.type === "video" || r.type === "sermon" || r.type === "podcast";
   return (
     <Link
       to="/risorse/$slug"
       params={{ slug: r.slug }}
       className="group rounded-2xl border border-border bg-card overflow-hidden transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
     >
-      {r.thumbnail_url ? (
-        <div className="aspect-video overflow-hidden bg-muted">
-          <img
-            src={r.thumbnail_url}
-            alt=""
-            loading="lazy"
-            className="h-full w-full object-cover transition group-hover:scale-105"
-          />
-        </div>
-      ) : (
-        <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center">
-          <span className="font-display text-5xl text-primary/40">
-            {r.type === "sermon" ? "✝" : r.type === "video" ? "▶" : r.type === "podcast" ? "♪" : r.type === "pdf" ? "↓" : "✎"}
-          </span>
-        </div>
-      )}
+      <ResourceCardPreview r={r} showPlay={isPlayable} />
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
@@ -198,5 +186,54 @@ export function ResourceCard({ r }: { r: Resource }) {
         </p>
       </div>
     </Link>
+  );
+}
+
+function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }) {
+  const instant = r.thumbnail_url ?? getInstantThumbnail(r.media_url);
+  const [thumb, setThumb] = useState<string | null>(instant);
+
+  useEffect(() => {
+    if (thumb || !r.media_url) return;
+    let active = true;
+    fetchOEmbedThumbnail(r.media_url).then((t) => {
+      if (active && t) setThumb(t);
+    });
+    return () => {
+      active = false;
+    };
+  }, [r.media_url, thumb]);
+
+  if (thumb) {
+    return (
+      <div className="relative aspect-video overflow-hidden bg-muted">
+        <img
+          src={thumb}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover transition group-hover:scale-105"
+        />
+        {showPlay && (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center">
+      <span className="font-display text-5xl text-primary/40">
+        {r.type === "sermon" ? "✝" : r.type === "video" ? "▶" : r.type === "podcast" ? "♪" : r.type === "pdf" ? "↓" : "✎"}
+      </span>
+    </div>
   );
 }
