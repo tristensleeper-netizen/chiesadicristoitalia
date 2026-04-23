@@ -31,6 +31,7 @@ import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
 import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
 import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminHeroRouteImport } from './routes/admin.hero'
 import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
@@ -148,6 +149,11 @@ const BolognaChiSiamoRoute = BolognaChiSiamoRouteImport.update({
   path: '/bologna/chi-siamo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -187,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -279,6 +288,7 @@ export interface FileRouteTypes {
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
+    | '/admin/media'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -308,6 +318,7 @@ export interface FileRouteTypes {
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
+    | '/admin/media'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -338,6 +349,7 @@ export interface FileRouteTypes {
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
+    | '/admin/media'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -541,6 +553,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BolognaChiSiamoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -590,6 +609,7 @@ interface AdminRouteChildren {
   AdminEventiRoute: typeof AdminEventiRoute
   AdminHeroRoute: typeof AdminHeroRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminMediaRoute: typeof AdminMediaRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminDevozionaliIdRoute: typeof AdminDevozionaliIdRoute
   AdminRisorseIdRoute: typeof AdminRisorseIdRoute
@@ -600,6 +620,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminEventiRoute: AdminEventiRoute,
   AdminHeroRoute: AdminHeroRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminMediaRoute: AdminMediaRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminDevozionaliIdRoute: AdminDevozionaliIdRoute,
   AdminRisorseIdRoute: AdminRisorseIdRoute,
