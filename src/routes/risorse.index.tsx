@@ -12,6 +12,7 @@ import {
   type ResourceType,
 } from "@/lib/resource-helpers";
 import { PageHero } from "@/components/page-hero";
+import { useSlotImage } from "@/lib/use-slot-image";
 import bibleStudy from "@/assets/bible-study.jpg";
 
 export const Route = createFileRoute("/risorse/")({
@@ -92,10 +93,12 @@ function ResourcesIndex() {
     });
   }, [resources, typeFilter, cityFilter, sortOrder]);
 
+  const heroImg = useSlotImage("risorse.hero", bibleStudy);
+
   return (
     <>
       <PageHero
-        image={bibleStudy}
+        image={heroImg}
         eyebrow="Risorse"
         title={<>Esplora. Ascolta.<br />Cresci.</>}
         subtitle="Una biblioteca viva di sermoni, articoli, video e podcast dalla nostra famiglia di chiese in Italia."

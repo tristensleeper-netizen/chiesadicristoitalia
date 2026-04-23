@@ -137,6 +137,65 @@ export type Database = {
         }
         Relationships: []
       }
+      media_assets: {
+        Row: {
+          created_at: string
+          height: number | null
+          id: string
+          label: string | null
+          public_url: string
+          storage_path: string
+          updated_at: string
+          width: number | null
+        }
+        Insert: {
+          created_at?: string
+          height?: number | null
+          id?: string
+          label?: string | null
+          public_url: string
+          storage_path: string
+          updated_at?: string
+          width?: number | null
+        }
+        Update: {
+          created_at?: string
+          height?: number | null
+          id?: string
+          label?: string | null
+          public_url?: string
+          storage_path?: string
+          updated_at?: string
+          width?: number | null
+        }
+        Relationships: []
+      }
+      media_slots: {
+        Row: {
+          asset_id: string | null
+          slot_key: string
+          updated_at: string
+        }
+        Insert: {
+          asset_id?: string | null
+          slot_key: string
+          updated_at?: string
+        }
+        Update: {
+          asset_id?: string | null
+          slot_key?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_slots_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "media_assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       newsletter_subscribers: {
         Row: {
           city_tag: Database["public"]["Enums"]["city_tag"] | null

@@ -2,6 +2,7 @@ import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
 import { Link } from "@tanstack/react-router";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useSlotImage } from "@/lib/use-slot-image";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 
@@ -54,6 +55,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
 }
 
 export function BeliefsSection({ city }: { city: CityConfig }) {
+  const heroImg = useSlotImage("beliefs.hero", bibleStudy);
   const beliefs = [
     { t: "La Bibbia", d: "La Parola di Dio è la nostra autorità in materia di fede e di vita." },
     { t: "Gesù", d: "Crediamo che Gesù è il Figlio di Dio, morto e risorto per salvarci." },
@@ -65,7 +67,7 @@ export function BeliefsSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
-        image={bibleStudy}
+        image={heroImg}
         eyebrow={`Cosa crediamo · ${city.name}`}
         title={<>Una fede semplice,<br />biblica, viva.</>}
         subtitle="Ciò che crediamo nasce dalle Scritture e dà forma a come viviamo, ogni giorno."
@@ -142,6 +144,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
 }
 
 export function SermonsSection({ city }: { city: CityConfig }) {
+  const heroImg = useSlotImage("sermons.hero", bibleStudy);
   const sermons = [
     { t: "L'amore che non delude", d: "Una serie su 1 Corinzi 13", date: "Gennaio 2025" },
     { t: "Camminare nella luce", d: "Studio su 1 Giovanni", date: "Dicembre 2024" },
@@ -151,7 +154,7 @@ export function SermonsSection({ city }: { city: CityConfig }) {
   return (
     <>
       <PageHero
-        image={bibleStudy}
+        image={heroImg}
         eyebrow={`Sermoni · ${city.name}`}
         title={<>Ascolta. Leggi.<br />Cresci.</>}
         subtitle="Predicazioni recenti dalla Chiesa di Cristo. Esplora la Bibbia al tuo ritmo."

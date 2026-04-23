@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
+import { useSlotImage } from "@/lib/use-slot-image";
 import heroSicilia from "@/assets/hero-sicilia.jpg";
 
 export const Route = createFileRoute("/sicilia")({
@@ -17,10 +18,11 @@ export const Route = createFileRoute("/sicilia")({
 });
 
 function SiciliaPage() {
+  const hero = useSlotImage("sicilia.hero", heroSicilia);
   return (
     <>
       <PageHero
-        image={heroSicilia}
+        image={hero}
         eyebrow="Chiesa di Cristo"
         title={<>Sicilia.</>}
         subtitle="Una piccola comunità che si incontra in casa. Tanto calore mediterraneo, tanta voglia di conoscerti."
