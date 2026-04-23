@@ -46,11 +46,12 @@ function DevotionalIndex() {
 
   const current = items[0];
   const archive = items.slice(1);
+  const heroImg = useSlotImage("devozionale.hero", worship);
 
   return (
     <>
       <PageHero
-        image={worship}
+        image={heroImg}
         eyebrow="Devozionale"
         title={<>Una Parola<br />per la settimana.</>}
         subtitle="Ogni settimana, una breve riflessione dalle Scritture per nutrire la tua fede ovunque tu sia."

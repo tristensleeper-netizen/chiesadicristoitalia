@@ -93,10 +93,12 @@ function ResourcesIndex() {
     });
   }, [resources, typeFilter, cityFilter, sortOrder]);
 
+  const heroImg = useSlotImage("risorse.hero", bibleStudy);
+
   return (
     <>
       <PageHero
-        image={bibleStudy}
+        image={heroImg}
         eyebrow="Risorse"
         title={<>Esplora. Ascolta.<br />Cresci.</>}
         subtitle="Una biblioteca viva di sermoni, articoli, video e podcast dalla nostra famiglia di chiese in Italia."

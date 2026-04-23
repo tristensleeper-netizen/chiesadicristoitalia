@@ -9,6 +9,7 @@ import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
 import { EventsPopup } from "@/components/events-popup";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useSlotImage } from "@/lib/use-slot-image";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -70,6 +71,18 @@ export const Route = createFileRoute("/milano/")({
 function MilanoHome() {
   const events = useCityEvents("milano", MILANO_EVENTS);
   const heroImage = useActiveHero("milano", heroMilano);
+  const welcomeImg = useSlotImage("milano.welcome", worship);
+  const bibleBandImg = useSlotImage("milano.bibleband", bibleStudy);
+  const photo1 = useSlotImage("milano.photo1", worship);
+  const photo2 = useSlotImage("milano.photo2", bibleStudy);
+  const photo3 = useSlotImage("milano.photo3", heroMilano);
+  const photo4 = useSlotImage("milano.photo4", heroItalia);
+  const cityPhotos = [
+    { src: photo1, alt: "Adorazione domenicale" },
+    { src: photo2, alt: "Studio biblico" },
+    { src: photo3, alt: "Milano" },
+    { src: photo4, alt: "Comunità italiana" },
+  ];
   return (
     <>
       <PageHero
