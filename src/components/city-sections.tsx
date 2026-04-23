@@ -16,10 +16,11 @@ export interface CityConfig {
 }
 
 export function AboutSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Chi siamo · ${city.name}`}
         title={<>Una famiglia<br />spirituale.</>}
         subtitle={`Conosci la Chiesa di Cristo di ${city.name} — chi siamo, cosa ci muove e perché ci ritroviamo ogni domenica.`}
@@ -97,10 +98,11 @@ export function BeliefsSection({ city }: { city: CityConfig }) {
 }
 
 export function VisitSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Visita · ${city.name}`}
         title={<>Vieni a trovarci<br />questa domenica.</>}
         subtitle={`${city.serviceTime} · ${city.address}, ${city.cap} ${city.name}`}
