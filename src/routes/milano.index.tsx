@@ -86,6 +86,7 @@ function MilanoHome() {
   return (
     <>
       <PageHero
+        slot="milano.hero"
         image={heroImage}
         eyebrow="Chiesa di Cristo"
         title={<>Milano.</>}
