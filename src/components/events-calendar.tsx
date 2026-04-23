@@ -9,7 +9,6 @@ import {
   startOfMonth,
   startOfWeek,
   isAfter,
-  isSameMonth as _sm,
 } from "date-fns";
 import { it } from "date-fns/locale";
 import { ChevronLeft, ChevronRight, MapPin, Clock } from "lucide-react";
