@@ -2,6 +2,7 @@ import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
 import { Link } from "@tanstack/react-router";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useSlotImage } from "@/lib/use-slot-image";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 

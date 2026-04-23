@@ -9,6 +9,7 @@ import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
 import { EventsPopup } from "@/components/events-popup";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useSlotImage } from "@/lib/use-slot-image";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -70,6 +71,18 @@ export const Route = createFileRoute("/bologna/")({
 function BolognaHome() {
   const events = useCityEvents("bologna", BOLOGNA_EVENTS);
   const heroImage = useActiveHero("bologna", heroBologna);
+  const welcomeImg = useSlotImage("bologna.welcome", worship);
+  const bibleBandImg = useSlotImage("bologna.bibleband", bibleStudy);
+  const photo1 = useSlotImage("bologna.photo1", heroBologna);
+  const photo2 = useSlotImage("bologna.photo2", worship);
+  const photo3 = useSlotImage("bologna.photo3", bibleStudy);
+  const photo4 = useSlotImage("bologna.photo4", heroItalia);
+  const cityPhotos = [
+    { src: photo1, alt: "Bologna sotto i portici" },
+    { src: photo2, alt: "Comunità in adorazione" },
+    { src: photo3, alt: "Studio biblico" },
+    { src: photo4, alt: "Comunità italiana" },
+  ];
   return (
     <>
       <PageHero
@@ -113,7 +126,7 @@ function BolognaHome() {
 
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <img
-          src={worship}
+          src={welcomeImg}
           alt="Comunità in adorazione a Bologna"
           loading="lazy"
           className="rounded-3xl object-cover aspect-[4/5] w-full md:order-last"
@@ -162,12 +175,12 @@ function BolognaHome() {
           <p className="eyebrow mb-2">La nostra famiglia</p>
           <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
         </div>
-        <PhotoMarquee images={BOLOGNA_PHOTOS} />
-        <PhotoMarquee images={[...BOLOGNA_PHOTOS].reverse()} reverse speed="slow" />
+        <PhotoMarquee images={cityPhotos} />
+        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
       </section>
 
       <section className="relative h-[60vh] overflow-hidden">
-        <img src={bibleStudy} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-primary/75" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
           <p className="eyebrow text-white/80 mb-4">Una promessa</p>
