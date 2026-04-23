@@ -27,8 +27,8 @@ type SlotRow = { slot_key: string; asset_id: string | null };
 
 const SLOT_GROUPS: { title: string; keys: SlotKey[] }[] = [
   { title: "Home (Italia)", keys: ["home.hero", "home.milano", "home.bologna", "home.napoli", "home.sicilia"] },
-  { title: "Milano", keys: ["milano.welcome", "milano.bibleband", "milano.photo1", "milano.photo2", "milano.photo3", "milano.photo4"] },
-  { title: "Bologna", keys: ["bologna.welcome", "bologna.bibleband", "bologna.photo1", "bologna.photo2", "bologna.photo3", "bologna.photo4"] },
+  { title: "Milano", keys: ["milano.hero", "milano.welcome", "milano.bibleband", "milano.photo1", "milano.photo2", "milano.photo3", "milano.photo4"] },
+  { title: "Bologna", keys: ["bologna.hero", "bologna.welcome", "bologna.bibleband", "bologna.photo1", "bologna.photo2", "bologna.photo3", "bologna.photo4"] },
   { title: "Napoli & Sicilia", keys: ["napoli.hero", "sicilia.hero"] },
   { title: "Pagine condivise", keys: ["risorse.hero", "devozionale.hero", "beliefs.hero", "sermons.hero"] },
 ];
