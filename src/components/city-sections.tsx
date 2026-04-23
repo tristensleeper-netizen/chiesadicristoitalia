@@ -216,10 +216,11 @@ export function EventsSection({ city }: { city: CityConfig }) {
 }
 
 export function ContactSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Contatti · ${city.name}`}
         title={<>Facci sapere<br />se verrai.</>}
         subtitle="Compila il modulo. Non vediamo l'ora di conoscerti."
