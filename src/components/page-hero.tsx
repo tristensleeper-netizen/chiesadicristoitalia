@@ -1,9 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useSlotMedia, type SlotKey } from "@/lib/use-slot-image";
 
 interface PageHeroProps {
   image: string;
   videoSrc?: string;
+  /** Optional slot key — when set, renders the assigned image or video for that slot. */
+  slot?: SlotKey;
   eyebrow?: string;
   title: ReactNode;
   subtitle?: ReactNode;
@@ -16,6 +19,7 @@ interface PageHeroProps {
 export function PageHero({
   image,
   videoSrc,
+  slot,
   eyebrow,
   title,
   subtitle,
@@ -24,6 +28,22 @@ export function PageHero({
   align = "center",
   height = "tall",
 }: PageHeroProps) {
+  const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
+  const useSlot = slot != null && slotMedia != null;
+
+  // Resolve final media source
+  const resolvedVideo =
+    videoSrc ??
+    (useSlot && slotMedia.kind === "video" && !slotMedia.external_url
+      ? slotMedia.url
+      : undefined);
+  const resolvedImage =
+    useSlot && slotMedia.kind === "image"
+      ? slotMedia.url
+      : useSlot && slotMedia.thumbnail_url
+        ? slotMedia.thumbnail_url
+        : image;
+
   const heightClass =
     height === "tall"
       ? "min-h-[88vh]"
@@ -34,10 +54,10 @@ export function PageHero({
 
   return (
     <section className={`relative -mt-[72px] flex ${heightClass} w-full overflow-hidden`}>
-      {videoSrc ? (
+      {resolvedVideo ? (
         <video
-          src={videoSrc}
-          poster={image}
+          src={resolvedVideo}
+          poster={resolvedImage}
           autoPlay
           muted
           loop
@@ -47,7 +67,7 @@ export function PageHero({
         />
       ) : (
         <img
-          src={image}
+          src={resolvedImage}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           width={1920}
