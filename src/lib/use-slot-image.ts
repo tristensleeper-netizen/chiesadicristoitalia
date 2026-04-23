@@ -38,24 +38,53 @@ export const MEDIA_SLOTS = {
 
 export type SlotKey = keyof typeof MEDIA_SLOTS;
 
-// ---- In-memory cache so repeated lookups don't refetch on every mount ----
-let cachePromise: Promise<Record<string, string>> | null = null;
-let cache: Record<string, string> | null = null;
+export type SlotMedia = {
+  kind: "image" | "video";
+  url: string;
+  /** Embed url (YouTube/Vimeo) when external; same as url for uploaded videos. */
+  external_url?: string | null;
+  mime_type?: string | null;
+  thumbnail_url?: string | null;
+};
 
-async function loadAll(): Promise<Record<string, string>> {
+// ---- In-memory cache so repeated lookups don't refetch on every mount ----
+let cachePromise: Promise<Record<string, SlotMedia>> | null = null;
+let cache: Record<string, SlotMedia> | null = null;
+
+async function loadAll(): Promise<Record<string, SlotMedia>> {
   if (cache) return cache;
   if (cachePromise) return cachePromise;
   cachePromise = (async () => {
     const { data, error } = await supabase
       .from("media_slots")
-      .select("slot_key, asset:asset_id(public_url)");
+      .select("slot_key, asset:asset_id(public_url, kind, external_url, mime_type, thumbnail_url)");
     if (error || !data) {
       cache = {};
       return cache;
     }
-    const map: Record<string, string> = {};
-    for (const row of data as Array<{ slot_key: string; asset: { public_url: string } | null }>) {
-      if (row.asset?.public_url) map[row.slot_key] = row.asset.public_url;
+    const map: Record<string, SlotMedia> = {};
+    for (const row of data as Array<{
+      slot_key: string;
+      asset: {
+        public_url: string;
+        kind: string;
+        external_url: string | null;
+        mime_type: string | null;
+        thumbnail_url: string | null;
+      } | null;
+    }>) {
+      if (!row.asset) continue;
+      const a = row.asset;
+      const kind = (a.kind === "video" ? "video" : "image") as "image" | "video";
+      const url = a.external_url || a.public_url;
+      if (!url) continue;
+      map[row.slot_key] = {
+        kind,
+        url,
+        external_url: a.external_url,
+        mime_type: a.mime_type,
+        thumbnail_url: a.thumbnail_url,
+      };
     }
     cache = map;
     return cache;
@@ -68,15 +97,19 @@ export function invalidateMediaSlotsCache() {
   cachePromise = null;
 }
 
-/** Returns the override URL for a slot, or the fallback while loading / when no override is set. */
+/** Returns image URL for a slot, or fallback. Videos are skipped (use useSlotMedia for those). */
 export function useSlotImage(slot: SlotKey, fallback: string): string {
-  const [src, setSrc] = useState<string>(() => cache?.[slot] ?? fallback);
+  const initial = cache?.[slot];
+  const [src, setSrc] = useState<string>(() =>
+    initial && initial.kind === "image" ? initial.url : fallback,
+  );
 
   useEffect(() => {
     let active = true;
     loadAll().then((map) => {
       if (!active) return;
-      if (map[slot]) setSrc(map[slot]);
+      const m = map[slot];
+      if (m && m.kind === "image") setSrc(m.url);
     });
     return () => {
       active = false;
@@ -84,4 +117,22 @@ export function useSlotImage(slot: SlotKey, fallback: string): string {
   }, [slot]);
 
   return src;
+}
+
+/** Returns full media (image or video) for a slot, or null when unset. */
+export function useSlotMedia(slot: SlotKey): SlotMedia | null {
+  const [media, setMedia] = useState<SlotMedia | null>(() => cache?.[slot] ?? null);
+
+  useEffect(() => {
+    let active = true;
+    loadAll().then((map) => {
+      if (!active) return;
+      setMedia(map[slot] ?? null);
+    });
+    return () => {
+      active = false;
+    };
+  }, [slot]);
+
+  return media;
 }
