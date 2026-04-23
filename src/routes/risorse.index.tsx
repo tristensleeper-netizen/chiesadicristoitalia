@@ -52,11 +52,14 @@ const CITY_FILTERS: Array<{ value: CityTag | "all"; label: string }> = [
   { value: "national", label: "Nazionale" },
 ];
 
+type SortOrder = "newest" | "oldest";
+
 function ResourcesIndex() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [typeFilter, setTypeFilter] = useState<ResourceType | "all">("all");
   const [cityFilter, setCityFilter] = useState<CityTag | "all">("all");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
 
   useEffect(() => {
     let active = true;
@@ -76,15 +79,18 @@ function ResourcesIndex() {
     };
   }, []);
 
-  const filtered = useMemo(
-    () =>
-      resources.filter(
-        (r) =>
-          (typeFilter === "all" || r.type === typeFilter) &&
-          (cityFilter === "all" || r.city_tag === cityFilter),
-      ),
-    [resources, typeFilter, cityFilter],
-  );
+  const filtered = useMemo(() => {
+    const list = resources.filter(
+      (r) =>
+        (typeFilter === "all" || r.type === typeFilter) &&
+        (cityFilter === "all" || r.city_tag === cityFilter),
+    );
+    return [...list].sort((a, b) => {
+      const ta = new Date(a.published_at).getTime();
+      const tb = new Date(b.published_at).getTime();
+      return sortOrder === "newest" ? tb - ta : ta - tb;
+    });
+  }, [resources, typeFilter, cityFilter, sortOrder]);
 
   return (
     <>
