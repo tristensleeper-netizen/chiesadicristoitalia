@@ -200,5 +200,69 @@ export function EventsCalendar({ city }: Props) {
         )}
       </aside>
     </div>
+
+    {/* Upcoming events */}
+    <div>
+      <div className="flex items-end justify-between mb-6">
+        <div>
+          <p className="eyebrow mb-2">In arrivo</p>
+          <h3 className="font-display text-2xl">Prossimi eventi</h3>
+        </div>
+        <p className="text-xs text-muted-foreground">Prossimi 3 mesi</p>
+      </div>
+      {upcomingList.length === 0 ? (
+        <p className="text-sm text-muted-foreground">Nessun evento in programma al momento.</p>
+      ) : (
+        <ul className="grid gap-4 md:grid-cols-2">
+          {upcomingList.map((e) => (
+            <li
+              key={e.id}
+              className="group rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)] cursor-pointer"
+              onClick={() => {
+                setCursor(startOfMonth(e.date));
+                setSelected(e.date);
+              }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 text-center w-14">
+                  <p className="font-display text-3xl leading-none text-primary">
+                    {format(e.date, "d")}
+                  </p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">
+                    {format(e.date, "LLL", { locale: it })}
+                  </p>
+                </div>
+                <div className="min-w-0 flex-1">
+                  {e.tag && (
+                    <span className="inline-block px-2 py-0.5 mb-1.5 text-[10px] uppercase tracking-[0.2em] rounded-full bg-primary/10 text-primary">
+                      {e.tag}
+                    </span>
+                  )}
+                  <h4 className="font-display text-lg leading-snug truncate">{e.title}</h4>
+                  <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1 capitalize">
+                      <Clock className="h-3 w-3" />
+                      {format(e.date, "EEE HH:mm", { locale: it })}
+                    </span>
+                    {e.location && (
+                      <span className="inline-flex items-center gap-1 truncate">
+                        <MapPin className="h-3 w-3" />
+                        {e.location}
+                      </span>
+                    )}
+                  </div>
+                  {e.blurb && (
+                    <p className="mt-2 text-sm text-foreground/70 leading-snug line-clamp-2">
+                      {e.blurb}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+    </div>
   );
 }
