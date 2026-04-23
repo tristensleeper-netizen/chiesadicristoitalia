@@ -66,6 +66,7 @@ export function EventsCalendar({ city }: Props) {
   const weekdayLabels = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
 
   return (
+    <div className="space-y-12">
     <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
       {/* Calendar */}
       <div className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-[var(--shadow-soft)]">
