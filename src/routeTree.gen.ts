@@ -32,6 +32,8 @@ import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-c
 import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
 import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminHeroRouteImport } from './routes/admin.hero'
+import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
 import { Route as AdminDevozionaliIndexRouteImport } from './routes/admin.devozionali.index'
 import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
 import { Route as AdminDevozionaliIdRouteImport } from './routes/admin.devozionali.$id'
@@ -151,6 +153,16 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminHeroRoute = AdminHeroRouteImport.update({
+  id: '/hero',
+  path: '/hero',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventiRoute = AdminEventiRouteImport.update({
+  id: '/eventi',
+  path: '/eventi',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDevozionaliIndexRoute = AdminDevozionaliIndexRouteImport.update({
   id: '/devozionali/',
   path: '/devozionali/',
@@ -172,6 +184,8 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/eventi': typeof AdminEventiRoute
+  '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
@@ -199,6 +213,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/eventi': typeof AdminEventiRoute
+  '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
@@ -228,6 +244,8 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/eventi': typeof AdminEventiRoute
+  '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
@@ -258,6 +276,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/napoli'
     | '/sicilia'
+    | '/admin/eventi'
+    | '/admin/hero'
     | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
@@ -285,6 +305,8 @@ export interface FileRouteTypes {
     | '/'
     | '/napoli'
     | '/sicilia'
+    | '/admin/eventi'
+    | '/admin/hero'
     | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
@@ -313,6 +335,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/napoli'
     | '/sicilia'
+    | '/admin/eventi'
+    | '/admin/hero'
     | '/admin/login'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
@@ -524,6 +548,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/hero': {
+      id: '/admin/hero'
+      path: '/hero'
+      fullPath: '/admin/hero'
+      preLoaderRoute: typeof AdminHeroRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eventi': {
+      id: '/admin/eventi'
+      path: '/eventi'
+      fullPath: '/admin/eventi'
+      preLoaderRoute: typeof AdminEventiRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/devozionali/': {
       id: '/admin/devozionali/'
       path: '/devozionali'
@@ -549,6 +587,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminEventiRoute: typeof AdminEventiRoute
+  AdminHeroRoute: typeof AdminHeroRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminDevozionaliIdRoute: typeof AdminDevozionaliIdRoute
@@ -557,6 +597,8 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminEventiRoute: AdminEventiRoute,
+  AdminHeroRoute: AdminHeroRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminDevozionaliIdRoute: AdminDevozionaliIdRoute,

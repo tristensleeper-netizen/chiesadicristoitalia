@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      city_events: {
+        Row: {
+          active: boolean
+          blurb: string | null
+          city: Database["public"]["Enums"]["city_tag"]
+          created_at: string
+          date_label: string | null
+          day_label: string | null
+          event_date: string | null
+          id: string
+          kind: string
+          sort_order: number
+          tag: string | null
+          time_label: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          blurb?: string | null
+          city: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          date_label?: string | null
+          day_label?: string | null
+          event_date?: string | null
+          id?: string
+          kind: string
+          sort_order?: number
+          tag?: string | null
+          time_label?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          blurb?: string | null
+          city?: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          date_label?: string | null
+          day_label?: string | null
+          event_date?: string | null
+          id?: string
+          kind?: string
+          sort_order?: number
+          tag?: string | null
+          time_label?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       devotionals: {
         Row: {
           author: string | null
@@ -50,6 +101,39 @@ export type Database = {
           title?: string
           updated_at?: string
           week_of?: string
+        }
+        Relationships: []
+      }
+      hero_images: {
+        Row: {
+          city: Database["public"]["Enums"]["city_tag"]
+          created_at: string
+          id: string
+          is_active: boolean
+          label: string | null
+          public_url: string
+          storage_path: string
+          updated_at: string
+        }
+        Insert: {
+          city: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          public_url: string
+          storage_path: string
+          updated_at?: string
+        }
+        Update: {
+          city?: Database["public"]["Enums"]["city_tag"]
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          public_url?: string
+          storage_path?: string
+          updated_at?: string
         }
         Relationships: []
       }

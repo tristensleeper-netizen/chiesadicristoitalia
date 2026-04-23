@@ -8,6 +8,7 @@ import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
 import { EventsPopup } from "@/components/events-popup";
+import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -67,10 +68,12 @@ export const Route = createFileRoute("/milano/")({
 });
 
 function MilanoHome() {
+  const events = useCityEvents("milano", MILANO_EVENTS);
+  const heroImage = useActiveHero("milano", heroMilano);
   return (
     <>
       <PageHero
-        image={heroMilano}
+        image={heroImage}
         eyebrow="Chiesa di Cristo"
         title={<>Milano.</>}
         subtitle="Una chiesa nel cuore della città. Persone normali, amicizie vere, una fede che cambia la vita."
@@ -88,7 +91,7 @@ function MilanoHome() {
       />
 
       {/* Floating bottom-right popup */}
-      <EventsPopup events={MILANO_EVENTS} cityHref="/milano/eventi" cityName="Milano" />
+      <EventsPopup events={events} cityHref="/milano/eventi" cityName="Milano" />
 
       {/* Animated events rotator */}
       <section className="container-prose pt-4 md:pt-8">
@@ -101,7 +104,7 @@ function MilanoHome() {
             Calendario completo →
           </Link>
         </div>
-        <EventsRotator events={MILANO_EVENTS} cityHref="/milano/eventi" />
+        <EventsRotator events={events} cityHref="/milano/eventi" />
       </section>
 
       <div className="mt-16">

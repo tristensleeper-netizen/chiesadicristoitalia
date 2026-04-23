@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
 import { Link } from "@tanstack/react-router";
+import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 
@@ -15,10 +16,11 @@ export interface CityConfig {
 }
 
 export function AboutSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Chi siamo · ${city.name}`}
         title={<>Una famiglia<br />spirituale.</>}
         subtitle={`Conosci la Chiesa di Cristo di ${city.name} — chi siamo, cosa ci muove e perché ci ritroviamo ogni domenica.`}
@@ -96,10 +98,11 @@ export function BeliefsSection({ city }: { city: CityConfig }) {
 }
 
 export function VisitSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Visita · ${city.name}`}
         title={<>Vieni a trovarci<br />questa domenica.</>}
         subtitle={`${city.serviceTime} · ${city.address}, ${city.cap} ${city.name}`}
@@ -177,16 +180,16 @@ export function SermonsSection({ city }: { city: CityConfig }) {
 }
 
 export function EventsSection({ city }: { city: CityConfig }) {
-  const events = [
-    { d: "Ogni domenica", t: "Funzione domenicale", l: city.serviceTime },
-    { d: "Mercoledì sera", t: "Studio biblico in casa", l: "Gruppi di quartiere · 20:30" },
-    { d: "Primo sabato del mese", t: "Cena della comunità", l: "Cena condivisa, tutti invitati" },
-    { d: "Una volta al mese", t: "Servizio alla città", l: "Volontariato e progetti sociali" },
+  const cityKey = city.name.toLowerCase() as "milano" | "bologna";
+  const heroImage = useActiveHero(cityKey, city.hero);
+  const fallback = [
+    { date: "Ogni domenica", time: city.serviceTime, title: "Funzione domenicale", blurb: "", tag: "Settimanale" },
   ];
+  const dynamic = useCityEvents(cityKey, fallback);
   return (
     <>
       <PageHero
-        image={worship}
+        image={heroImage}
         eyebrow={`Eventi · ${city.name}`}
         title={<>La vita della<br />comunità.</>}
         subtitle="Funzioni, studi biblici, cene e progetti — c'è sempre qualcosa che succede."
@@ -194,11 +197,11 @@ export function EventsSection({ city }: { city: CityConfig }) {
       />
       <section className="container-prose py-20">
         <ul className="divide-y divide-border border-y border-border">
-          {events.map((e) => (
-            <li key={e.t} className="py-6 grid gap-2 md:grid-cols-[180px_1fr_auto] items-baseline">
-              <p className="eyebrow">{e.d}</p>
-              <p className="font-display text-2xl text-foreground">{e.t}</p>
-              <p className="text-muted-foreground">{e.l}</p>
+          {dynamic.map((e, i) => (
+            <li key={`${e.title}-${i}`} className="py-6 grid gap-2 md:grid-cols-[180px_1fr_auto] items-baseline">
+              <p className="eyebrow">{e.date || "—"}</p>
+              <p className="font-display text-2xl text-foreground">{e.title}</p>
+              <p className="text-muted-foreground">{[e.time, e.blurb].filter(Boolean).join(" · ")}</p>
             </li>
           ))}
         </ul>
@@ -213,10 +216,11 @@ export function EventsSection({ city }: { city: CityConfig }) {
 }
 
 export function ContactSection({ city }: { city: CityConfig }) {
+  const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   return (
     <>
       <PageHero
-        image={city.hero}
+        image={heroImage}
         eyebrow={`Contatti · ${city.name}`}
         title={<>Facci sapere<br />se verrai.</>}
         subtitle="Compila il modulo. Non vediamo l'ora di conoscerti."
