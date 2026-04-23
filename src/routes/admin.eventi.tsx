@@ -2,30 +2,82 @@ import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import type { CityEventRow } from "@/lib/use-city-events";
+import { format } from "date-fns";
+import { it } from "date-fns/locale";
 
 export const Route = createFileRoute("/admin/eventi")({
   component: AdminEvents,
 });
 
-const EMPTY: Partial<CityEventRow> = {
+const WEEKDAYS = [
+  { v: 0, label: "Domenica" },
+  { v: 1, label: "Lunedì" },
+  { v: 2, label: "Martedì" },
+  { v: 3, label: "Mercoledì" },
+  { v: 4, label: "Giovedì" },
+  { v: 5, label: "Venerdì" },
+  { v: 6, label: "Sabato" },
+];
+
+type EditState = Partial<CityEventRow> & {
+  // Local-form helpers (separate date + time inputs)
+  _start_date?: string;
+  _start_time?: string;
+  _end_time?: string;
+};
+
+const EMPTY: EditState = {
   city: "milano",
-  kind: "recurring",
+  kind: "special",
   title: "",
   blurb: "",
   tag: "",
-  day_label: "",
-  date_label: "",
-  time_label: "",
-  event_date: null,
+  recurrence: "none",
+  weekday: null,
+  recurrence_end: null,
+  location: "",
   sort_order: 0,
   active: true,
+  _start_date: "",
+  _start_time: "",
+  _end_time: "",
 };
+
+function toLocalParts(iso: string | null | undefined) {
+  if (!iso) return { d: "", t: "" };
+  const dt = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return {
+    d: `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`,
+    t: `${pad(dt.getHours())}:${pad(dt.getMinutes())}`,
+  };
+}
+
+function combineDateTime(date: string, time: string): string | null {
+  if (!date) return null;
+  const t = time || "00:00";
+  // Build a local date and let JS produce ISO string
+  const dt = new Date(`${date}T${t}:00`);
+  if (Number.isNaN(dt.getTime())) return null;
+  return dt.toISOString();
+}
+
+function rowToEdit(r: CityEventRow): EditState {
+  const start = toLocalParts(r.start_at);
+  const end = toLocalParts(r.end_at);
+  return {
+    ...r,
+    _start_date: start.d,
+    _start_time: start.t,
+    _end_time: end.t,
+  };
+}
 
 function AdminEvents() {
   const [items, setItems] = useState<CityEventRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [cityFilter, setCityFilter] = useState<"all" | "milano" | "bologna">("all");
-  const [editing, setEditing] = useState<Partial<CityEventRow> | null>(null);
+  const [editing, setEditing] = useState<EditState | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -34,8 +86,8 @@ function AdminEvents() {
       .select("*")
       .in("city", ["milano", "bologna"])
       .order("city", { ascending: true })
-      .order("kind", { ascending: true })
-      .order("sort_order", { ascending: true });
+      .order("recurrence", { ascending: false })
+      .order("start_at", { ascending: true, nullsFirst: false });
     if (error) console.error(error);
     setItems((data as CityEventRow[]) ?? []);
     setLoading(false);
@@ -49,23 +101,47 @@ function AdminEvents() {
   );
 
   const save = async () => {
-    if (!editing || !editing.title || !editing.city || !editing.kind) {
-      alert("Città, tipo e titolo sono obbligatori.");
+    if (!editing || !editing.title || !editing.city) {
+      alert("Città e titolo sono obbligatori.");
       return;
     }
+    const isWeekly = editing.recurrence === "weekly";
+    if (!isWeekly && !editing._start_date) {
+      alert("Indica la data dell'evento.");
+      return;
+    }
+    if (isWeekly && (editing.weekday === null || editing.weekday === undefined)) {
+      alert("Scegli il giorno della settimana per gli eventi ricorrenti.");
+      return;
+    }
+
+    const start = combineDateTime(editing._start_date || "", editing._start_time || "");
+    const end =
+      editing._start_date && editing._end_time
+        ? combineDateTime(editing._start_date, editing._end_time)
+        : null;
+
     const payload = {
       city: editing.city,
-      kind: editing.kind,
+      kind: isWeekly ? "recurring" : "special",
       title: editing.title,
       blurb: editing.blurb ?? null,
       tag: editing.tag ?? null,
-      day_label: editing.day_label ?? null,
-      date_label: editing.date_label ?? null,
-      time_label: editing.time_label ?? null,
-      event_date: editing.event_date || null,
+      location: editing.location ?? null,
+      recurrence: editing.recurrence ?? "none",
+      weekday: isWeekly ? editing.weekday ?? null : null,
+      recurrence_end: isWeekly ? editing.recurrence_end || null : null,
+      start_at: start,
+      end_at: end,
+      // Keep legacy fields in sync for older code paths
+      day_label: null,
+      date_label: null,
+      time_label: null,
+      event_date: !isWeekly && editing._start_date ? editing._start_date : null,
       sort_order: editing.sort_order ?? 0,
       active: editing.active ?? true,
     };
+
     const res = editing.id
       ? await supabase.from("city_events").update(payload).eq("id", editing.id)
       : await supabase.from("city_events").insert(payload);
@@ -90,13 +166,26 @@ function AdminEvents() {
     load();
   };
 
+  const formatWhen = (r: CityEventRow): string => {
+    if (r.recurrence === "weekly" && r.weekday !== null) {
+      const wd = WEEKDAYS.find((w) => w.v === r.weekday)?.label ?? "";
+      const time = r.start_at ? format(new Date(r.start_at), "HH:mm") : "";
+      return `Ogni ${wd}${time ? ` · ${time}` : ""}`;
+    }
+    if (r.start_at) {
+      return format(new Date(r.start_at), "EEE d LLL yyyy · HH:mm", { locale: it });
+    }
+    // Legacy fallback
+    return [r.day_label, r.date_label].filter(Boolean).join(" ") + (r.time_label ? ` · ${r.time_label}` : "");
+  };
+
   return (
     <div className="container-prose py-8 md:py-12">
       <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
         <div>
           <h2 className="font-display text-3xl">Calendario eventi</h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Eventi ricorrenti (settimana tipo) ed eventi speciali per Milano e Bologna.
+            Eventi singoli (con data) o ricorrenti settimanali per Milano e Bologna.
           </p>
         </div>
         <button
@@ -136,7 +225,6 @@ function AdminEvents() {
                   <th className="text-left px-4 py-3 font-medium">Tipo</th>
                   <th className="text-left px-4 py-3 font-medium">Titolo</th>
                   <th className="text-left px-4 py-3 font-medium">Quando</th>
-                  <th className="text-left px-4 py-3 font-medium">Ord.</th>
                   <th className="text-left px-4 py-3 font-medium">Stato</th>
                   <th className="text-right px-4 py-3 font-medium">Azioni</th>
                 </tr>
@@ -146,8 +234,8 @@ function AdminEvents() {
                   <tr key={r.id} className="hover:bg-muted/30 transition">
                     <td className="px-4 py-3 capitalize">{r.city}</td>
                     <td className="px-4 py-3">
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${r.kind === "recurring" ? "bg-blue-100 text-blue-700" : "bg-purple-100 text-purple-700"}`}>
-                        {r.kind === "recurring" ? "Ricorrente" : "Speciale"}
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${r.recurrence === "weekly" ? "bg-blue-100 text-blue-700" : "bg-purple-100 text-purple-700"}`}>
+                        {r.recurrence === "weekly" ? "Settimanale" : "Singolo"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
@@ -155,10 +243,8 @@ function AdminEvents() {
                       {r.tag && <p className="text-xs text-muted-foreground mt-0.5">{r.tag}</p>}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
-                      {[r.day_label, r.date_label].filter(Boolean).join(" ")}
-                      {r.time_label ? ` · ${r.time_label}` : ""}
+                      {formatWhen(r)}
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">{r.sort_order}</td>
                     <td className="px-4 py-3">
                       <button
                         onClick={() => toggleActive(r)}
@@ -173,7 +259,7 @@ function AdminEvents() {
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <button
-                        onClick={() => setEditing(r)}
+                        onClick={() => setEditing(rowToEdit(r))}
                         className="text-sm text-primary hover:underline mr-4"
                       >
                         Modifica
@@ -212,17 +298,18 @@ function AdminEvents() {
                     <option value="bologna">Bologna</option>
                   </select>
                 </Field>
-                <Field label="Tipo">
+                <Field label="Frequenza">
                   <select
-                    value={editing.kind}
-                    onChange={(e) => setEditing({ ...editing, kind: e.target.value as CityEventRow["kind"] })}
+                    value={editing.recurrence ?? "none"}
+                    onChange={(e) => setEditing({ ...editing, recurrence: e.target.value as "none" | "weekly" })}
                     className="input"
                   >
-                    <option value="recurring">Ricorrente (settimana tipo)</option>
-                    <option value="special">Speciale (data una tantum)</option>
+                    <option value="none">Singolo (data fissa)</option>
+                    <option value="weekly">Settimanale</option>
                   </select>
                 </Field>
               </div>
+
               <Field label="Titolo">
                 <input
                   value={editing.title ?? ""}
@@ -231,6 +318,7 @@ function AdminEvents() {
                   placeholder="Es. Funzione domenicale"
                 />
               </Field>
+
               <Field label="Descrizione breve">
                 <textarea
                   value={editing.blurb ?? ""}
@@ -240,59 +328,90 @@ function AdminEvents() {
                   placeholder="Una frase invitante"
                 />
               </Field>
-              <div className="grid grid-cols-3 gap-4">
-                <Field label="Giorno (es. Dom)">
-                  <input
-                    value={editing.day_label ?? ""}
-                    onChange={(e) => setEditing({ ...editing, day_label: e.target.value })}
-                    className="input"
-                    placeholder="Dom"
-                  />
-                </Field>
-                <Field label="Data (es. 27)">
-                  <input
-                    value={editing.date_label ?? ""}
-                    onChange={(e) => setEditing({ ...editing, date_label: e.target.value })}
-                    className="input"
-                    placeholder="27"
-                  />
-                </Field>
-                <Field label="Orario">
-                  <input
-                    value={editing.time_label ?? ""}
-                    onChange={(e) => setEditing({ ...editing, time_label: e.target.value })}
-                    className="input"
-                    placeholder="10:30"
-                  />
-                </Field>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Field label="Etichetta (es. Settimanale)">
-                  <input
-                    value={editing.tag ?? ""}
-                    onChange={(e) => setEditing({ ...editing, tag: e.target.value })}
-                    className="input"
-                  />
-                </Field>
-                <Field label="Ordinamento">
-                  <input
-                    type="number"
-                    value={editing.sort_order ?? 0}
-                    onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })}
-                    className="input"
-                  />
-                </Field>
-              </div>
-              {editing.kind === "special" && (
-                <Field label="Data calendario (opzionale, per ordinamento)">
+
+              {editing.recurrence === "weekly" ? (
+                <div className="grid grid-cols-2 gap-4">
+                  <Field label="Giorno della settimana">
+                    <select
+                      value={editing.weekday ?? ""}
+                      onChange={(e) => setEditing({ ...editing, weekday: e.target.value === "" ? null : Number(e.target.value) })}
+                      className="input"
+                    >
+                      <option value="">— Scegli —</option>
+                      {WEEKDAYS.map((w) => (
+                        <option key={w.v} value={w.v}>{w.label}</option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field label="A partire dal">
+                    <input
+                      type="date"
+                      value={editing._start_date ?? ""}
+                      onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
+                      className="input"
+                    />
+                  </Field>
+                </div>
+              ) : (
+                <Field label="Data">
                   <input
                     type="date"
-                    value={editing.event_date ?? ""}
-                    onChange={(e) => setEditing({ ...editing, event_date: e.target.value })}
+                    value={editing._start_date ?? ""}
+                    onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
                     className="input"
                   />
                 </Field>
               )}
+
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="Ora inizio">
+                  <input
+                    type="time"
+                    value={editing._start_time ?? ""}
+                    onChange={(e) => setEditing({ ...editing, _start_time: e.target.value })}
+                    className="input"
+                  />
+                </Field>
+                <Field label="Ora fine (opzionale)">
+                  <input
+                    type="time"
+                    value={editing._end_time ?? ""}
+                    onChange={(e) => setEditing({ ...editing, _end_time: e.target.value })}
+                    className="input"
+                  />
+                </Field>
+              </div>
+
+              {editing.recurrence === "weekly" && (
+                <Field label="Termina il (opzionale)">
+                  <input
+                    type="date"
+                    value={editing.recurrence_end ?? ""}
+                    onChange={(e) => setEditing({ ...editing, recurrence_end: e.target.value || null })}
+                    className="input"
+                  />
+                </Field>
+              )}
+
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="Luogo (opzionale)">
+                  <input
+                    value={editing.location ?? ""}
+                    onChange={(e) => setEditing({ ...editing, location: e.target.value })}
+                    className="input"
+                    placeholder="Es. Sala principale"
+                  />
+                </Field>
+                <Field label="Etichetta (opzionale)">
+                  <input
+                    value={editing.tag ?? ""}
+                    onChange={(e) => setEditing({ ...editing, tag: e.target.value })}
+                    className="input"
+                    placeholder="Es. Speciale"
+                  />
+                </Field>
+              </div>
+
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
