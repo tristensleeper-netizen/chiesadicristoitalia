@@ -8,6 +8,7 @@ import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsRotator } from "@/components/events-rotator";
 import { EventsPopup } from "@/components/events-popup";
+import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -67,10 +68,12 @@ export const Route = createFileRoute("/bologna/")({
 });
 
 function BolognaHome() {
+  const events = useCityEvents("bologna", BOLOGNA_EVENTS);
+  const heroImage = useActiveHero("bologna", heroBologna);
   return (
     <>
       <PageHero
-        image={heroBologna}
+        image={heroImage}
         eyebrow="Chiesa di Cristo"
         title={<>Bologna.</>}
         subtitle="Sotto i portici della dotta — una comunità accogliente che cammina con Dio e con te."
@@ -88,7 +91,7 @@ function BolognaHome() {
       />
 
       {/* Floating bottom-right popup */}
-      <EventsPopup events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" cityName="Bologna" />
+      <EventsPopup events={events} cityHref="/bologna/eventi" cityName="Bologna" />
 
       {/* Animated events rotator */}
       <section className="container-prose pt-4 md:pt-8">
@@ -101,7 +104,7 @@ function BolognaHome() {
             Calendario completo →
           </Link>
         </div>
-        <EventsRotator events={BOLOGNA_EVENTS} cityHref="/bologna/eventi" />
+        <EventsRotator events={events} cityHref="/bologna/eventi" />
       </section>
 
       <div className="mt-16">
