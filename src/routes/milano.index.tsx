@@ -143,7 +143,7 @@ function MilanoHome() {
           </div>
         </div>
         <img
-          src={worship}
+          src={welcomeImg}
           alt="Comunità in adorazione"
           loading="lazy"
           className="rounded-3xl object-cover aspect-[4/5] w-full"
@@ -177,13 +177,13 @@ function MilanoHome() {
           <p className="eyebrow mb-2">La nostra famiglia</p>
           <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
         </div>
-        <PhotoMarquee images={MILANO_PHOTOS} />
-        <PhotoMarquee images={[...MILANO_PHOTOS].reverse()} reverse speed="slow" />
+        <PhotoMarquee images={cityPhotos} />
+        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
       </section>
 
       {/* Bible study image band */}
       <section className="relative h-[60vh] overflow-hidden">
-        <img src={bibleStudy} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-primary/70" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
           <p className="eyebrow text-white/80 mb-4">Una promessa</p>
