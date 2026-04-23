@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { formatItalianDate, type Devotional } from "@/lib/resource-helpers";
 import { PageHero } from "@/components/page-hero";
+import { useSlotImage } from "@/lib/use-slot-image";
 import worship from "@/assets/worship.jpg";
 
 export const Route = createFileRoute("/devozionale/")({

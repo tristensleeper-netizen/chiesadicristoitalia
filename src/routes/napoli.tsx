@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
+import { useSlotImage } from "@/lib/use-slot-image";
 import heroNapoli from "@/assets/hero-napoli.jpg";
 
 export const Route = createFileRoute("/napoli")({
@@ -17,10 +18,11 @@ export const Route = createFileRoute("/napoli")({
 });
 
 function NapoliPage() {
+  const hero = useSlotImage("napoli.hero", heroNapoli);
   return (
     <>
       <PageHero
-        image={heroNapoli}
+        image={hero}
         eyebrow="Chiesa di Cristo"
         title={<>Napoli.</>}
         subtitle="Una piccola comunità che si incontra in casa. Pochi numeri, tanto cuore — saremmo felici di conoscerti."

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
@@ -27,10 +28,15 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const homeHero = useSlotImage("home.hero", heroItalia);
+  const milanoImg = useSlotImage("home.milano", heroMilano);
+  const bolognaImg = useSlotImage("home.bologna", heroBologna);
+  const napoliImg = useSlotImage("home.napoli", heroNapoli);
+  const siciliaImg = useSlotImage("home.sicilia", heroSicilia);
   return (
     <>
       <PageHero
-        image={heroItalia}
+        image={homeHero}
         videoSrc="https://cdn.coverr.co/videos/coverr-aerial-view-of-an-italian-village-7234/1080p.mp4"
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una famiglia<br />che ti aspetta.</>}
@@ -60,7 +66,7 @@ function HomePage() {
         <div className="grid gap-6 md:grid-cols-2">
           <CityCard
             to="/milano"
-            image={heroMilano}
+            image={milanoImg}
             name="Milano"
             tagline="Chiesa di Cristo di Milano"
             description="Ci troviamo nel cuore di Milano. Funzione la domenica alle 10:30."
@@ -68,7 +74,7 @@ function HomePage() {
           />
           <CityCard
             to="/bologna"
-            image={heroBologna}
+            image={bolognaImg}
             name="Bologna"
             tagline="Chiesa di Cristo di Bologna"
             description="Sotto i portici della dotta. Funzione la domenica alle 11:00."
@@ -79,13 +85,13 @@ function HomePage() {
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <SmallCityCard
             to="/napoli"
-            image={heroNapoli}
+            image={napoliImg}
             name="Napoli"
             description="Una piccola comunità che si incontra in casa. Scrivici per visitarci."
           />
           <SmallCityCard
             to="/sicilia"
-            image={heroSicilia}
+            image={siciliaImg}
             name="Sicilia"
             description="Una piccola comunità in casa. Saremmo felici di conoscerti."
           />
