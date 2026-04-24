@@ -128,13 +128,13 @@ function HomePage() {
               {
                 t: "Bibbia",
                 d: "La Parola di Dio guida ogni cosa che facciamo.",
-                icon: "📖",
+                icon: "book",
                 verse: "«La tua parola è una lampada al mio piede.» — Salmo 119:105",
               },
               {
                 t: "Comunità",
                 d: "Amicizie profonde, sincere e quotidiane.",
-                icon: "✦",
+                icon: "👥",
                 verse: "«Perseveravano nella comunione fraterna.» — Atti 2:42",
               },
               {
@@ -154,7 +154,25 @@ function HomePage() {
 
                 <div className="relative">
                   <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    {item.icon}
+                    {item.icon === "book" ? (
+                      <svg
+                        aria-hidden="true"
+                        className="h-7 w-7"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+                        <path d="M8 7h7" />
+                        <path d="M8 11h5" />
+                      </svg>
+                    ) : (
+                      item.icon
+                    )}
                   </div>
                   <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
                   <p className="text-foreground/75 leading-relaxed mb-5">{item.d}</p>
