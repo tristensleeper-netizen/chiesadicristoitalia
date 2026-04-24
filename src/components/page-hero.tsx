@@ -30,6 +30,9 @@ export function PageHero({
 }: PageHeroProps) {
   const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
   const useSlot = slot != null && slotMedia != null;
+  const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
+    ? slotMedia.height > slotMedia.width
+    : false;
 
   // Resolve final media source
   const resolvedVideo =
@@ -53,7 +56,33 @@ export function PageHero({
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
 
   return (
-    <section className={`relative -mt-[72px] flex ${heightClass} w-full overflow-hidden`}>
+    <section className={`relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}>
+      {hasVerticalMedia && (
+        <>
+          {resolvedVideo ? (
+            <video
+              src={resolvedVideo}
+              poster={resolvedImage}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full scale-110 object-cover opacity-55 blur-2xl"
+            />
+          ) : (
+            <img
+              src={resolvedImage}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full scale-110 object-cover opacity-55 blur-2xl"
+              width={1920}
+              height={1280}
+            />
+          )}
+        </>
+      )}
       {resolvedVideo ? (
         <video
           src={resolvedVideo}
@@ -63,13 +92,13 @@ export function PageHero({
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
         />
       ) : (
         <img
           src={resolvedImage}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
           width={1920}
           height={1280}
         />
