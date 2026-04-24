@@ -47,6 +47,8 @@ export type SlotMedia = {
   external_url?: string | null;
   mime_type?: string | null;
   thumbnail_url?: string | null;
+  width?: number | null;
+  height?: number | null;
 };
 
 // ---- In-memory cache so repeated lookups don't refetch on every mount ----
@@ -59,7 +61,7 @@ async function loadAll(): Promise<Record<string, SlotMedia>> {
   cachePromise = (async () => {
     const { data, error } = await supabase
       .from("media_slots")
-      .select("slot_key, asset:asset_id(public_url, kind, external_url, mime_type, thumbnail_url)");
+      .select("slot_key, asset:asset_id(public_url, kind, external_url, mime_type, thumbnail_url, width, height)");
     if (error || !data) {
       cache = {};
       return cache;
@@ -73,6 +75,8 @@ async function loadAll(): Promise<Record<string, SlotMedia>> {
         external_url: string | null;
         mime_type: string | null;
         thumbnail_url: string | null;
+        width: number | null;
+        height: number | null;
       } | null;
     }>) {
       if (!row.asset) continue;
@@ -86,6 +90,8 @@ async function loadAll(): Promise<Record<string, SlotMedia>> {
         external_url: a.external_url,
         mime_type: a.mime_type,
         thumbnail_url: a.thumbnail_url,
+        width: a.width,
+        height: a.height,
       };
     }
     cache = map;
