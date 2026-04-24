@@ -30,6 +30,9 @@ export function PageHero({
 }: PageHeroProps) {
   const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
   const useSlot = slot != null && slotMedia != null;
+  // While a slot is specified but not yet loaded, suppress the fallback image
+  // to avoid a flash of the default hero before the video appears.
+  const slotPending = slot != null && slotMedia == null;
   const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
     ? slotMedia.height > slotMedia.width
     : false;
@@ -46,6 +49,8 @@ export function PageHero({
       : useSlot && slotMedia.thumbnail_url
         ? slotMedia.thumbnail_url
         : image;
+  // Only render the still image layer when there's no video AND the slot isn't pending.
+  const showImageLayer = !resolvedVideo && !slotPending;
 
   const heightClass =
     height === "tall"
@@ -94,7 +99,7 @@ export function PageHero({
           preload="metadata"
           className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
         />
-      ) : (
+      ) : showImageLayer ? (
         <img
           src={resolvedImage}
           alt=""
@@ -102,7 +107,7 @@ export function PageHero({
           width={1920}
           height={1280}
         />
-      )}
+      ) : null}
       <div className={`hero-cinematic-overlay absolute inset-0 ${align === "left" ? "hero-cinematic-overlay-left" : ""}`} />
       <div className="hero-film-grain absolute inset-0" aria-hidden="true" />
       <div className="hero-bottom-glow absolute inset-x-0 bottom-0 h-40" aria-hidden="true" />
