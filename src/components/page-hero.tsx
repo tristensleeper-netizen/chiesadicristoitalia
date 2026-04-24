@@ -14,6 +14,8 @@ interface PageHeroProps {
   secondaryCta?: { to: string; label: string };
   align?: "center" | "left";
   height?: "tall" | "medium" | "short";
+  /** When true, applies a vivid colorful overlay and pushes the media into the background. */
+  vivid?: boolean;
 }
 
 export function PageHero({
