@@ -15,9 +15,12 @@ export const milanoConfig: CityConfig = {
 export const bolognaConfig: CityConfig = {
   name: "Bologna",
   hero: heroBologna,
-  address: "Via dell'Indipendenza 67",
-  cap: "40121",
-  serviceTime: "Domenica · 11:00",
+  // Church plant — launching September 2026. No physical location yet.
+  address: "Sede in via di definizione",
+  cap: "",
+  serviceTime: "Lancio previsto · Settembre 2026",
   mapsUrl: "https://maps.google.com/?q=Bologna+Italy",
   basePath: "/bologna",
+  isPlant: true,
+  launchLabel: "Settembre 2026",
 };
