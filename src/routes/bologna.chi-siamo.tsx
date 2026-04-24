@@ -7,9 +7,9 @@ export const Route = createFileRoute("/bologna/chi-siamo")({
   head: () => ({
     meta: [
       { title: "Chi siamo — Chiesa di Cristo di Bologna" },
-      { name: "description", content: "Conosci la Chiesa di Cristo di Bologna: chi siamo, cosa ci muove, dove ci troviamo." },
+      { name: "description", content: "Conosci la Chiesa di Cristo di Bologna: un church plant in preparazione, lancio previsto per settembre 2026." },
       { property: "og:title", content: "Chi siamo — Chiesa di Cristo di Bologna" },
-      { property: "og:description", content: "Una famiglia spirituale nella dotta." },
+      { property: "og:description", content: "Una nuova comunità in arrivo a Bologna, settembre 2026." },
       { property: "og:image", content: heroBologna },
     ],
   }),
