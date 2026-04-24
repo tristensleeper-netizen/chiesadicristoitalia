@@ -83,6 +83,42 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          city: string
+          created_at: string
+          email: string
+          handled: boolean
+          id: string
+          interest: string | null
+          message: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          email: string
+          handled?: boolean
+          id?: string
+          interest?: string | null
+          message: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          email?: string
+          handled?: boolean
+          id?: string
+          interest?: string | null
+          message?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       devotionals: {
         Row: {
           author: string | null
