@@ -29,6 +29,7 @@ export function PageHero({
   secondaryCta,
   align = "center",
   height = "tall",
+  vivid = false,
 }: PageHeroProps) {
   const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
   const useSlot = slot != null && slotMedia != null;
