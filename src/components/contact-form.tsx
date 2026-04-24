@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactFormProps {
   defaultSubject?: string;
@@ -7,19 +8,35 @@ interface ContactFormProps {
 
 export function ContactForm({ defaultSubject, city }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState(defaultSubject ?? "Visitare la chiesa");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[${city}] ${interest} — ${name}`);
-    const body = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${email}\nInteresse: ${interest}\n\n${message}`,
-    );
-    window.location.href = `mailto:info@chiesadicristoitalia.it?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const { error: insertError } = await supabase
+        .from("contact_submissions")
+        .insert({
+          city,
+          name: name.trim(),
+          email: email.trim(),
+          interest,
+          message: message.trim(),
+        });
+      if (insertError) throw insertError;
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Contact submission failed", err);
+      setError("Non siamo riusciti a inviare il messaggio. Riprova tra poco.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -27,7 +44,7 @@ export function ContactForm({ defaultSubject, city }: ContactFormProps) {
       <div className="rounded-2xl border border-border bg-primary-soft p-10 text-center">
         <h3 className="font-display text-3xl text-primary">Grazie!</h3>
         <p className="mt-3 text-foreground/80">
-          Abbiamo aperto il tuo client di posta. Non vediamo l'ora di sentirti.
+          Abbiamo ricevuto il tuo messaggio. Ti risponderemo al più presto.
         </p>
       </div>
     );
@@ -40,6 +57,7 @@ export function ContactForm({ defaultSubject, city }: ContactFormProps) {
         <input
           id="name"
           required
+          maxLength={200}
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full rounded-xl border border-input bg-card px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
@@ -51,6 +69,7 @@ export function ContactForm({ defaultSubject, city }: ContactFormProps) {
           id="email"
           type="email"
           required
+          maxLength={255}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full rounded-xl border border-input bg-card px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
@@ -76,13 +95,17 @@ export function ContactForm({ defaultSubject, city }: ContactFormProps) {
           id="message"
           required
           rows={5}
+          maxLength={5000}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="w-full rounded-xl border border-input bg-card px-4 py-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
         />
       </div>
-      <button type="submit" className="btn-primary w-full md:w-auto">
-        Invia messaggio
+      {error && (
+        <p className="text-sm text-destructive">{error}</p>
+      )}
+      <button type="submit" disabled={submitting} className="btn-primary w-full md:w-auto disabled:opacity-60">
+        {submitting ? "Invio in corso…" : "Invia messaggio"}
       </button>
     </form>
   );

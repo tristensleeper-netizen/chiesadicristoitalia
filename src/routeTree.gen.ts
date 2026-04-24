@@ -31,6 +31,7 @@ import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
 import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
 import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
+import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
 import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminHeroRouteImport } from './routes/admin.hero'
@@ -149,6 +150,11 @@ const BolognaChiSiamoRoute = BolognaChiSiamoRouteImport.update({
   path: '/bologna/chi-siamo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
+  id: '/messaggi',
+  path: '/messaggi',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMediaRoute = AdminMediaRouteImport.update({
   id: '/media',
   path: '/media',
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -256,6 +264,7 @@ export interface FileRoutesById {
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/messaggi': typeof AdminMessaggiRoute
   '/bologna/chi-siamo': typeof BolognaChiSiamoRoute
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
@@ -289,6 +298,7 @@ export interface FileRouteTypes {
     | '/admin/hero'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/messaggi'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -319,6 +329,7 @@ export interface FileRouteTypes {
     | '/admin/hero'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/messaggi'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -350,6 +361,7 @@ export interface FileRouteTypes {
     | '/admin/hero'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/messaggi'
     | '/bologna/chi-siamo'
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
@@ -553,6 +565,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BolognaChiSiamoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/messaggi': {
+      id: '/admin/messaggi'
+      path: '/messaggi'
+      fullPath: '/admin/messaggi'
+      preLoaderRoute: typeof AdminMessaggiRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/media': {
       id: '/admin/media'
       path: '/media'
@@ -610,6 +629,7 @@ interface AdminRouteChildren {
   AdminHeroRoute: typeof AdminHeroRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
+  AdminMessaggiRoute: typeof AdminMessaggiRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminDevozionaliIdRoute: typeof AdminDevozionaliIdRoute
   AdminRisorseIdRoute: typeof AdminRisorseIdRoute
@@ -621,6 +641,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminHeroRoute: AdminHeroRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
+  AdminMessaggiRoute: AdminMessaggiRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminDevozionaliIdRoute: AdminDevozionaliIdRoute,
   AdminRisorseIdRoute: AdminRisorseIdRoute,
