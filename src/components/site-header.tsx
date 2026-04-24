@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logoMark from "@/assets/logo.svg";
 import logoMilano from "@/assets/duomo-milano.svg";
+import logoBologna from "@/assets/bologna-icon.svg";
 
 const cities = [
   { to: "/milano", label: "Milano" },
@@ -83,8 +84,8 @@ export function SiteHeader() {
       <div className="container-prose flex items-center justify-between py-4">
         <Link to={logoTo} className="flex items-center gap-3 group">
           <img
-            src={isMilano ? logoMilano : logoMark}
-            alt={isMilano ? "Chiesa di Cristo di Milano" : "Chiesa di Cristo Italia"}
+            src={isMilano ? logoMilano : isBologna ? logoBologna : logoMark}
+            alt={isMilano ? "Chiesa di Cristo di Milano" : isBologna ? "Chiesa di Cristo di Bologna" : "Chiesa di Cristo Italia"}
             className="h-11 w-11 object-contain"
           />
           {logoCityLabel && (
