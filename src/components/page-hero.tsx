@@ -100,18 +100,18 @@ export function PageHero({
           loop
           playsInline
           preload="metadata"
-          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
+          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
         />
       ) : showImageLayer ? (
         <img
           src={resolvedImage}
           alt=""
-          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
+          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
           width={1920}
           height={1280}
         />
       ) : null}
-      <div className={`hero-cinematic-overlay absolute inset-0 ${align === "left" ? "hero-cinematic-overlay-left" : ""}`} />
+      <div className={`${vivid ? "hero-home-vivid" : "hero-cinematic-overlay"} absolute inset-0 ${align === "left" && !vivid ? "hero-cinematic-overlay-left" : ""}`} />
       <div className="hero-film-grain absolute inset-0" aria-hidden="true" />
       <div className="hero-bottom-glow absolute inset-x-0 bottom-0 h-40" aria-hidden="true" />
       <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 md:pb-18 ${alignClass}`}>
