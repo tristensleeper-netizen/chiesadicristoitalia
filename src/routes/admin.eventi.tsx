@@ -358,14 +358,31 @@ function AdminEvents() {
                   </Field>
                 </div>
               ) : (
-                <Field label="Data">
-                  <input
-                    type="date"
-                    value={editing._start_date ?? ""}
-                    onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
-                    className="input"
-                  />
-                </Field>
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field label="Data inizio">
+                      <input
+                        type="date"
+                        value={editing._start_date ?? ""}
+                        onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
+                        className="input"
+                      />
+                    </Field>
+                    <Field label="Data fine (opzionale, per eventi multi-giorno)">
+                      <input
+                        type="date"
+                        value={editing._end_date ?? ""}
+                        min={editing._start_date || undefined}
+                        onChange={(e) => setEditing({ ...editing, _end_date: e.target.value })}
+                        className="input"
+                      />
+                    </Field>
+                  </div>
+                  <p className="-mt-2 text-xs text-muted-foreground">
+                    Lascia vuota la data fine per un evento di un solo giorno. Per un ritiro o
+                    camp di più giorni, imposta una data fine successiva.
+                  </p>
+                </>
               )}
 
               <div className="grid grid-cols-2 gap-4">
