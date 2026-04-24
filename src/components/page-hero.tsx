@@ -99,7 +99,7 @@ export function PageHero({
           preload="metadata"
           className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"}`}
         />
-      ) : (
+      ) : showImageLayer ? (
         <img
           src={resolvedImage}
           alt=""
@@ -107,7 +107,7 @@ export function PageHero({
           width={1920}
           height={1280}
         />
-      )}
+      ) : null}
       <div className={`hero-cinematic-overlay absolute inset-0 ${align === "left" ? "hero-cinematic-overlay-left" : ""}`} />
       <div className="hero-film-grain absolute inset-0" aria-hidden="true" />
       <div className="hero-bottom-glow absolute inset-x-0 bottom-0 h-40" aria-hidden="true" />
