@@ -16,7 +16,7 @@ export interface CityConfig {
   serviceTime: string;
   mapsUrl: string;
   basePath: "/milano" | "/bologna";
-  /** True when the city is a church plant in preparation — no physical location/services yet. */
+  /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
   isPlant?: boolean;
   /** When isPlant is true, a human-readable launch label like "Settembre 2026". */
   launchLabel?: string;
@@ -29,7 +29,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
       <PageHero
         slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
-        eyebrow={city.isPlant ? `Church plant · ${city.name}` : `Chi siamo · ${city.name}`}
+        eyebrow={city.isPlant ? `Chiesa in fondazione · ${city.name}` : `Chi siamo · ${city.name}`}
         title={city.isPlant ? <>Una nuova<br />comunità in arrivo.</> : <>Una famiglia<br />spirituale.</>}
         subtitle={
           city.isPlant
@@ -357,7 +357,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
           <ul className="space-y-3 text-foreground/85">
             <li><span className="eyebrow block mb-1">Email</span>info@chiesadicristoitalia.it</li>
             {isPlant ? (
-              <li><span className="eyebrow block mb-1">Stato</span>Church plant in preparazione · {city.launchLabel ?? "in arrivo"}</li>
+              <li><span className="eyebrow block mb-1">Stato</span>Chiesa in fondazione · {city.launchLabel ?? "in arrivo"}</li>
             ) : (
               <>
                 <li><span className="eyebrow block mb-1">Indirizzo</span>{city.address}<br />{city.cap} {city.name}</li>

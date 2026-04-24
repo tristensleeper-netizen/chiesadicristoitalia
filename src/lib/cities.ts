@@ -15,7 +15,7 @@ export const milanoConfig: CityConfig = {
 export const bolognaConfig: CityConfig = {
   name: "Bologna",
   hero: heroBologna,
-  // Church plant — launching September 2026. No physical location yet.
+  // Chiesa in fondazione — apertura settembre 2026. No physical location yet.
   address: "Sede in via di definizione",
   cap: "",
   serviceTime: "Lancio previsto · Settembre 2026",
