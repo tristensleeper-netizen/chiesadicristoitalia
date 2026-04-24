@@ -13,11 +13,11 @@ import bibleStudy from "@/assets/bible-study.jpg";
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — Church plant in arrivo (Settembre 2026)" },
+      { title: "Chiesa di Cristo di Bologna — Chiesa in fondazione — apertura settembre 2026" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna è un church plant in preparazione. Lancio previsto per settembre 2026. Unisciti a noi in preghiera, in uno studio biblico, o nel gruppo fondatore.",
+          "La Chiesa di Cristo di Bologna è una chiesa in fondazione. Lancio previsto per settembre 2026. Unisciti a noi in preghiera, in uno studio biblico, o nel gruppo fondatore.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Bologna — In arrivo settembre 2026" },
       {
@@ -44,7 +44,7 @@ function BolognaHome() {
       <PageHero
         slot="bologna.hero"
         image={heroImage}
-        eyebrow={`Church plant · Lancio ${LAUNCH_LABEL}`}
+        eyebrow={`Chiesa in fondazione · Lancio ${LAUNCH_LABEL}`}
         title={<>Bologna,<br />sta per nascere.</>}
         subtitle="Stiamo preparando una nuova Chiesa di Cristo nel cuore della dotta. Non abbiamo ancora una sede né funzioni regolari — ma stiamo pregando, studiando la Bibbia insieme e cercando chi vuole camminare con noi da subito."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
@@ -60,7 +60,7 @@ function BolognaHome() {
             <p className="eyebrow text-primary">A che punto siamo</p>
           </div>
           <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">
-            Un church plant in preparazione, non una chiesa già aperta.
+            Una chiesa in fondazione, non una chiesa già aperta.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
             Vogliamo essere onesti: a Bologna oggi non c'è ancora una funzione

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/bologna/visita")({
       { title: "Visita la Chiesa di Cristo di Bologna — Lancio settembre 2026" },
       { name: "description", content: "La Chiesa di Cristo di Bologna è in preparazione: lancio previsto per settembre 2026. Scrivici per uno studio biblico o per restare aggiornato." },
       { property: "og:title", content: "Visita la Chiesa di Cristo di Bologna" },
-      { property: "og:description", content: "Church plant in arrivo a settembre 2026. Cammina con noi." },
+      { property: "og:description", content: "Chiesa in fondazione — apertura settembre 2026. Cammina con noi." },
       { property: "og:image", content: heroBologna },
     ],
   }),

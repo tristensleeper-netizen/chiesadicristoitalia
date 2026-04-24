@@ -94,7 +94,7 @@ function HomePage() {
             image={bolognaImg}
             name="Bologna"
             tagline="Chiesa di Cristo di Bologna"
-            description="Church plant in preparazione. Lancio previsto per settembre 2026."
+            description="Chiesa in fondazione. Lancio previsto per settembre 2026."
             accent="from-red-900/40 to-red-950/80"
           />
         </div>
