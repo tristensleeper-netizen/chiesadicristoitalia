@@ -23,6 +23,7 @@ type EditState = Partial<CityEventRow> & {
   // Local-form helpers (separate date + time inputs)
   _start_date?: string;
   _start_time?: string;
+  _end_date?: string;
   _end_time?: string;
 };
 
@@ -40,6 +41,7 @@ const EMPTY: EditState = {
   active: true,
   _start_date: "",
   _start_time: "",
+  _end_date: "",
   _end_time: "",
 };
 
@@ -69,6 +71,7 @@ function rowToEdit(r: CityEventRow): EditState {
     ...r,
     _start_date: start.d,
     _start_time: start.t,
+    _end_date: end.d,
     _end_time: end.t,
   };
 }
@@ -116,10 +119,12 @@ function AdminEvents() {
     }
 
     const start = combineDateTime(editing._start_date || "", editing._start_time || "");
-    const end =
-      editing._start_date && editing._end_time
-        ? combineDateTime(editing._start_date, editing._end_time)
-        : null;
+    // End date defaults to start date when omitted (single-day event).
+    const endDate = editing._end_date || editing._start_date || "";
+    const endTime = editing._end_time || "";
+    const end = endDate && (endTime || editing._end_date)
+      ? combineDateTime(endDate, endTime || "23:59")
+      : null;
 
     const payload = {
       city: editing.city,
