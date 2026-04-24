@@ -38,6 +38,7 @@ function HomePage() {
       <PageHero
         slot="home.hero"
         image={homeHero}
+        vivid
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una famiglia<br />che ti aspetta.</>}
         subtitle="Da Milano a Bologna, da Napoli alla Sicilia — comunità di persone normali che cercano insieme di vivere come Gesù."
@@ -45,21 +46,37 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Intro band */}
-      <section className="container-prose py-24 md:py-32 text-center">
-        <p className="eyebrow mb-6">Benvenuti</p>
-        <h2 className="font-display text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight">
-          Gesù era un uomo semplice con un piano semplice per far conoscere Dio.
-        </h2>
-        <p className="mt-8 max-w-2xl mx-auto text-muted-foreground leading-relaxed">
-          Siamo una chiesa non tradizionale e non denominazionale, radicata nella
-          Bibbia e mossa da amicizie sincere. Ovunque tu sia in Italia, vogliamo
-          incontrarti — di persona, per un caffè, o questa domenica.
-        </p>
+      {/* Intro band — sunny color wash */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(circle at 12% 20%, oklch(0.88 0.13 80 / 0.55), transparent 45%), radial-gradient(circle at 88% 10%, oklch(0.82 0.14 200 / 0.45), transparent 45%), radial-gradient(circle at 70% 90%, oklch(0.85 0.13 350 / 0.4), transparent 50%)",
+          }}
+        />
+        <div className="container-prose py-24 md:py-32 text-center">
+          <p className="eyebrow mb-6">Benvenuti</p>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight">
+            Gesù era un uomo semplice con un piano semplice per far conoscere{" "}
+            <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio</em>.
+          </h2>
+          <p className="mt-8 max-w-2xl mx-auto text-muted-foreground leading-relaxed">
+            Siamo una chiesa non tradizionale e non denominazionale, radicata nella
+            Bibbia e mossa da amicizie sincere. Ovunque tu sia in Italia, vogliamo
+            incontrarti — di persona, per un caffè, o questa domenica.
+          </p>
+        </div>
       </section>
 
       {/* City selector */}
-      <section className="container-prose pb-16">
+      <section className="relative container-prose pb-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-72 w-[120%] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
+          style={{ background: "linear-gradient(90deg, oklch(0.85 0.16 35), oklch(0.84 0.14 200), oklch(0.85 0.15 320))" }}
+        />
         <p className="eyebrow text-center mb-3">Dove vuoi incontrarci?</p>
         <h2 className="font-display text-center text-3xl md:text-4xl mb-12">Le nostre comunità</h2>
 
