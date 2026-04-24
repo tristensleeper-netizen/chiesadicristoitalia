@@ -84,18 +84,13 @@ export function SiteHeader() {
           <img
             src={logoMark}
             alt="Chiesa di Cristo Italia"
-            className="h-11 w-9 object-contain"
+            className="h-11 w-11 object-contain"
           />
-          <span className="flex flex-col leading-tight">
-            <span className="font-display text-base md:text-lg text-foreground">
-              {logoCityLabel ? "Chiesa di Cristo" : "Chiesa di Cristo Italia"}
+          {logoCityLabel && (
+            <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
+              {logoCityLabel}
             </span>
-            {logoCityLabel && (
-              <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
-                {logoCityLabel}
-              </span>
-            )}
-          </span>
+          )}
         </Link>
 
         {/* Desktop nav */}
