@@ -5,6 +5,7 @@ import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
 import { Sprout, HandHeart, Users, CalendarClock } from "lucide-react";
+import type { ReactNode } from "react";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
