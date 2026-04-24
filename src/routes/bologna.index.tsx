@@ -169,7 +169,7 @@ function PlantCard({
   text,
   cta,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   text: string;
   cta: { to: string; label: string };
