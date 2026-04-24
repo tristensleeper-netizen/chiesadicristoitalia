@@ -23,6 +23,7 @@ type EditState = Partial<CityEventRow> & {
   // Local-form helpers (separate date + time inputs)
   _start_date?: string;
   _start_time?: string;
+  _end_date?: string;
   _end_time?: string;
 };
 
@@ -40,6 +41,7 @@ const EMPTY: EditState = {
   active: true,
   _start_date: "",
   _start_time: "",
+  _end_date: "",
   _end_time: "",
 };
 
@@ -69,6 +71,7 @@ function rowToEdit(r: CityEventRow): EditState {
     ...r,
     _start_date: start.d,
     _start_time: start.t,
+    _end_date: end.d,
     _end_time: end.t,
   };
 }
@@ -116,10 +119,12 @@ function AdminEvents() {
     }
 
     const start = combineDateTime(editing._start_date || "", editing._start_time || "");
-    const end =
-      editing._start_date && editing._end_time
-        ? combineDateTime(editing._start_date, editing._end_time)
-        : null;
+    // End date defaults to start date when omitted (single-day event).
+    const endDate = editing._end_date || editing._start_date || "";
+    const endTime = editing._end_time || "";
+    const end = endDate && (endTime || editing._end_date)
+      ? combineDateTime(endDate, endTime || "23:59")
+      : null;
 
     const payload = {
       city: editing.city,
@@ -173,7 +178,17 @@ function AdminEvents() {
       return `Ogni ${wd}${time ? ` · ${time}` : ""}`;
     }
     if (r.start_at) {
-      return format(new Date(r.start_at), "EEE d LLL yyyy · HH:mm", { locale: it });
+      const start = new Date(r.start_at);
+      const end = r.end_at ? new Date(r.end_at) : null;
+      const sameDay =
+        end &&
+        start.getFullYear() === end.getFullYear() &&
+        start.getMonth() === end.getMonth() &&
+        start.getDate() === end.getDate();
+      if (end && !sameDay) {
+        return `${format(start, "d LLL", { locale: it })} → ${format(end, "d LLL yyyy", { locale: it })}`;
+      }
+      return format(start, "EEE d LLL yyyy · HH:mm", { locale: it });
     }
     // Legacy fallback
     return [r.day_label, r.date_label].filter(Boolean).join(" ") + (r.time_label ? ` · ${r.time_label}` : "");
@@ -353,14 +368,31 @@ function AdminEvents() {
                   </Field>
                 </div>
               ) : (
-                <Field label="Data">
-                  <input
-                    type="date"
-                    value={editing._start_date ?? ""}
-                    onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
-                    className="input"
-                  />
-                </Field>
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field label="Data inizio">
+                      <input
+                        type="date"
+                        value={editing._start_date ?? ""}
+                        onChange={(e) => setEditing({ ...editing, _start_date: e.target.value })}
+                        className="input"
+                      />
+                    </Field>
+                    <Field label="Data fine (opzionale, per eventi multi-giorno)">
+                      <input
+                        type="date"
+                        value={editing._end_date ?? ""}
+                        min={editing._start_date || undefined}
+                        onChange={(e) => setEditing({ ...editing, _end_date: e.target.value })}
+                        className="input"
+                      />
+                    </Field>
+                  </div>
+                  <p className="-mt-2 text-xs text-muted-foreground">
+                    Lascia vuota la data fine per un evento di un solo giorno. Per un ritiro o
+                    camp di più giorni, imposta una data fine successiva.
+                  </p>
+                </>
               )}
 
               <div className="grid grid-cols-2 gap-4">
