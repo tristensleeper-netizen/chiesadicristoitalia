@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import logoMark from "@/assets/logo.svg";
 
 const cities = [
   { to: "/milano", label: "Milano" },
@@ -80,9 +81,11 @@ export function SiteHeader() {
     >
       <div className="container-prose flex items-center justify-between py-4">
         <Link to={logoTo} className="flex items-center gap-3 group">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground font-display text-lg">
-            ✝
-          </span>
+          <img
+            src={logoMark}
+            alt="Chiesa di Cristo Italia"
+            className="h-11 w-9 object-contain"
+          />
           <span className="flex flex-col leading-tight">
             <span className="font-display text-base md:text-lg text-foreground">
               {logoCityLabel ? "Chiesa di Cristo" : "Chiesa di Cristo Italia"}
