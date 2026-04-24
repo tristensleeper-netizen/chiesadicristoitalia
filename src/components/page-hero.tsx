@@ -56,7 +56,7 @@ export function PageHero({
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
 
   return (
-    <section className={`relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}>
+    <section className={`page-hero-shell relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}>
       {hasVerticalMedia && (
         <>
           {resolvedVideo ? (
@@ -103,36 +103,30 @@ export function PageHero({
           height={1280}
         />
       )}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            align === "left"
-              ? "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)"
-              : "linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%)",
-        }}
-      />
-      <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 ${alignClass}`}>
+      <div className={`hero-cinematic-overlay absolute inset-0 ${align === "left" ? "hero-cinematic-overlay-left" : ""}`} />
+      <div className="hero-film-grain absolute inset-0" aria-hidden="true" />
+      <div className="hero-bottom-glow absolute inset-x-0 bottom-0 h-40" aria-hidden="true" />
+      <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 md:pb-18 ${alignClass}`}>
         {eyebrow && (
-          <p className="eyebrow text-white/80 mb-5">{eyebrow}</p>
+          <p className="hero-eyebrow mb-5 animate-fade-up">{eyebrow}</p>
         )}
-        <h1 className="font-display text-white text-5xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl">
+        <h1 className="hero-title font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl animate-fade-up">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-6 max-w-2xl text-base md:text-lg text-white/85 leading-relaxed">
+          <p className="hero-subtitle mt-6 max-w-2xl text-base md:text-lg leading-relaxed animate-fade-up">
             {subtitle}
           </p>
         )}
         {(primaryCta || secondaryCta) && (
-          <div className={`mt-10 flex flex-wrap gap-3 ${align === "center" ? "justify-center" : ""}`}>
+          <div className={`mt-10 flex flex-wrap gap-3 animate-fade-up ${align === "center" ? "justify-center" : ""}`}>
             {primaryCta && (
-              <Link to={primaryCta.to} className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-medium text-primary transition-all hover:-translate-y-0.5 hover:shadow-xl">
+              <Link to={primaryCta.to} className="hero-primary-cta inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-medium transition-all hover:-translate-y-0.5">
                 {primaryCta.label}
               </Link>
             )}
             {secondaryCta && (
-              <Link to={secondaryCta.to} className="btn-ghost-light">
+              <Link to={secondaryCta.to} className="hero-secondary-cta inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium transition-all">
                 {secondaryCta.label}
               </Link>
             )}
