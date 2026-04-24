@@ -63,19 +63,27 @@ export function rowToRotator(r: CityEventRow): RotatorEvent {
   };
 }
 
-/** Expand a row into occurrences inside [from, to]. */
+/** Expand a row into occurrences inside [from, to]. Multi-day events emit
+ * one occurrence per day they span so each day is visible on the calendar. */
 export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrence[] {
   const out: EventOccurrence[] = [];
-  const make = (date: Date): EventOccurrence => ({
-    id: `${r.id}-${date.toISOString().slice(0, 10)}`,
-    source: r,
-    date,
-    end: r.end_at ? new Date(r.end_at) : undefined,
-    title: r.title,
-    blurb: r.blurb || "",
-    tag: r.tag || undefined,
-    location: r.location || undefined,
-  });
+  const make = (
+    date: Date,
+    opts?: { dayIndex: number; dayCount: number },
+  ): EventOccurrence => {
+    const isMulti = (opts?.dayCount ?? 1) > 1;
+    const suffix = isMulti && opts ? ` (giorno ${opts.dayIndex + 1}/${opts.dayCount})` : "";
+    return {
+      id: `${r.id}-${date.toISOString().slice(0, 10)}`,
+      source: r,
+      date,
+      end: r.end_at ? new Date(r.end_at) : undefined,
+      title: r.title + suffix,
+      blurb: r.blurb || "",
+      tag: r.tag || undefined,
+      location: r.location || undefined,
+    };
+  };
 
   if (r.recurrence === "weekly" && r.weekday !== null && r.start_at) {
     const start = new Date(r.start_at);
@@ -96,8 +104,29 @@ export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrenc
   }
 
   if (r.start_at) {
-    const d = new Date(r.start_at);
-    if (d >= from && d <= to) out.push(make(d));
+    const startDt = new Date(r.start_at);
+    const endDt = r.end_at ? new Date(r.end_at) : null;
+
+    // Compute inclusive day count (calendar days the event spans)
+    const startDay = new Date(startDt.getFullYear(), startDt.getMonth(), startDt.getDate());
+    const endDayBase = endDt ? new Date(endDt.getFullYear(), endDt.getMonth(), endDt.getDate()) : startDay;
+    const endDay = endDayBase < startDay ? startDay : endDayBase;
+    const dayCount = Math.round((endDay.getTime() - startDay.getTime()) / 86400000) + 1;
+
+    for (let i = 0; i < dayCount; i++) {
+      const dayDate = new Date(startDay);
+      dayDate.setDate(startDay.getDate() + i);
+      // First day keeps the actual start time so it sorts correctly; later
+      // days appear at the start of the day on the calendar.
+      if (i === 0) {
+        dayDate.setHours(startDt.getHours(), startDt.getMinutes(), 0, 0);
+      } else {
+        dayDate.setHours(9, 0, 0, 0);
+      }
+      if (dayDate >= from && dayDate <= to) {
+        out.push(make(dayDate, { dayIndex: i, dayCount }));
+      }
+    }
     return out;
   }
   return out;
