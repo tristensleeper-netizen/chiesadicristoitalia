@@ -1,65 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { CityInfoBlock } from "@/components/city-info-block";
-import { CityLatest } from "@/components/city-latest";
-import { InstagramFeed } from "@/components/instagram-feed";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
-import { PhotoMarquee } from "@/components/photo-marquee";
-import { EventsRotator } from "@/components/events-rotator";
-import { EventsPopup } from "@/components/events-popup";
-import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
+import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
+import { Sprout, HandHeart, Users, CalendarClock } from "lucide-react";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
-import heroItalia from "@/assets/hero-italia.jpg";
-
-const BOLOGNA_EVENTS = [
-  {
-    date: "Dom 27",
-    time: "11:00",
-    title: "Funzione domenicale",
-    blurb: "Sotto i portici di Via dell'Indipendenza — adorazione, comunione e una Parola viva per la settimana.",
-    tag: "Settimanale",
-  },
-  {
-    date: "Gio 01",
-    time: "19:30",
-    title: "Studio biblico universitari",
-    blurb: "Per studenti dell'Alma Mater. Pizza, domande, e il Vangelo di Giovanni capitolo per capitolo.",
-    tag: "Studenti",
-  },
-  {
-    date: "Sab 03",
-    time: "16:00",
-    title: "Pomeriggio di servizio in città",
-    blurb: "Distribuzione di pasti caldi e ascolto, in collaborazione con realtà locali. Iscriviti via email.",
-    tag: "Servizio",
-  },
-];
-
-const BOLOGNA_PHOTOS = [
-  { src: heroBologna, alt: "Bologna sotto i portici" },
-  { src: worship, alt: "Comunità in adorazione" },
-  { src: bibleStudy, alt: "Studio biblico" },
-  { src: heroItalia, alt: "Comunità italiana" },
-];
 
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — Funzione domenicale e comunità" },
+      { title: "Chiesa di Cristo di Bologna — Church plant in arrivo (Settembre 2026)" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna è una comunità accogliente nel centro storico. Funzione domenicale alle 11:00. Vieni a trovarci questa domenica.",
+          "La Chiesa di Cristo di Bologna è un church plant in preparazione. Lancio previsto per settembre 2026. Unisciti a noi in preghiera, in uno studio biblico, o nel gruppo fondatore.",
       },
-      { property: "og:title", content: "Chiesa di Cristo di Bologna" },
+      { property: "og:title", content: "Chiesa di Cristo di Bologna — In arrivo settembre 2026" },
       {
         property: "og:description",
         content:
-          "Comunità cristiana nel cuore di Bologna. Domenica 11:00. Tutti sono benvenuti.",
+          "Stiamo piantando una nuova chiesa a Bologna. Resta aggiornato e cammina con noi.",
       },
       { property: "og:image", content: heroBologna },
       { name: "twitter:image", content: heroBologna },
@@ -68,140 +31,129 @@ export const Route = createFileRoute("/bologna/")({
   component: BolognaHome,
 });
 
+const LAUNCH_LABEL = "Settembre 2026";
+
 function BolognaHome() {
-  const events = useCityEvents("bologna", BOLOGNA_EVENTS);
   const heroImage = useActiveHero("bologna", heroBologna);
   const welcomeImg = useSlotImage("bologna.welcome", worship);
   const bibleBandImg = useSlotImage("bologna.bibleband", bibleStudy);
-  const photo1 = useSlotImage("bologna.photo1", heroBologna);
-  const photo2 = useSlotImage("bologna.photo2", worship);
-  const photo3 = useSlotImage("bologna.photo3", bibleStudy);
-  const photo4 = useSlotImage("bologna.photo4", heroItalia);
-  const cityPhotos = [
-    { src: photo1, alt: "Bologna sotto i portici" },
-    { src: photo2, alt: "Comunità in adorazione" },
-    { src: photo3, alt: "Studio biblico" },
-    { src: photo4, alt: "Comunità italiana" },
-  ];
+
   return (
     <>
       <PageHero
         slot="bologna.hero"
         image={heroImage}
-        eyebrow="Chiesa di Cristo"
-        title={<>Bologna.</>}
-        subtitle="Sotto i portici della dotta — una comunità accogliente che cammina con Dio e con te."
-        primaryCta={{ to: "/bologna/visita", label: "Vieni a trovarci" }}
-        secondaryCta={{ to: "/bologna/contatti", label: "Scrivici" }}
+        eyebrow={`Church plant · Lancio ${LAUNCH_LABEL}`}
+        title={<>Bologna,<br />sta per nascere.</>}
+        subtitle="Stiamo preparando una nuova Chiesa di Cristo nel cuore della dotta. Non abbiamo ancora una sede né funzioni regolari — ma stiamo pregando, studiando la Bibbia insieme e cercando chi vuole camminare con noi da subito."
+        primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
+        secondaryCta={{ to: "/milano", label: "Visita Milano" }}
         align="left"
       />
 
-      <CityInfoBlock
-        city="Bologna"
-        address="Via dell'Indipendenza 67"
-        cap="40121"
-        serviceTime="Domenica · 11:00"
-        mapsUrl="https://maps.google.com/?q=Bologna+Italy"
-      />
-
-      {/* Floating bottom-right popup */}
-      <EventsPopup events={events} cityHref="/bologna/eventi" cityName="Bologna" />
-
-      {/* Animated events rotator */}
-      <section className="container-prose pt-4 md:pt-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-2">Cosa succede</p>
-            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Bologna</h2>
+      {/* Honest status banner */}
+      <section className="container-prose pt-16 md:pt-20">
+        <div className="rounded-3xl border border-primary/20 bg-primary/5 p-8 md:p-10">
+          <div className="flex flex-wrap items-center gap-3 text-primary">
+            <CalendarClock className="h-5 w-5" strokeWidth={1.75} />
+            <p className="eyebrow text-primary">A che punto siamo</p>
           </div>
-          <Link to="/bologna/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
-            Calendario completo →
-          </Link>
+          <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">
+            Un church plant in preparazione, non una chiesa già aperta.
+          </h2>
+          <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
+            Vogliamo essere onesti: a Bologna oggi non c'è ancora una funzione
+            domenicale, una sede stabile o un calendario di eventi della Chiesa
+            di Cristo. Quello che c'è è un piccolo gruppo che prega, sogna e si
+            prepara per il lancio previsto per <strong>{LAUNCH_LABEL}</strong>.
+            Se ti senti chiamato a far parte di questo inizio, c'è posto per te.
+          </p>
         </div>
-        <EventsRotator events={events} cityHref="/bologna/eventi" />
       </section>
 
       <div className="mt-16">
         <ScriptureMarquee reverse />
       </div>
 
+      {/* What we're doing now */}
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <img
           src={welcomeImg}
-          alt="Comunità in adorazione a Bologna"
+          alt="Comunità in preghiera per Bologna"
           loading="lazy"
           className="rounded-3xl object-cover aspect-[4/5] w-full md:order-last"
         />
         <div>
-          <p className="eyebrow mb-5">Benvenuti</p>
+          <p className="eyebrow mb-5">Cosa stiamo facendo ora</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            Una chiesa per la dotta — e per chiunque cerca.
+            Preparare il terreno, un passo alla volta.
           </h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
-            La Chiesa di Cristo di Bologna è una comunità di studenti,
-            professionisti e famiglie che desidera vivere la fede in modo
-            autentico. Studiamo la Bibbia insieme, condividiamo la vita e
-            cerchiamo di portare luce nella nostra città.
+            Mentre aspettiamo {LAUNCH_LABEL}, ci stiamo dedicando a tre cose:
+            pregare per Bologna e per chi la abita, costruire un gruppo
+            fondatore di persone che vogliono fondare la chiesa insieme, e
+            offrire studi biblici personali a chi è interessato a conoscere
+            Gesù — anche prima del lancio.
           </p>
-          <div className="mt-8 flex gap-3">
-            <Link to="/bologna/chi-siamo" className="btn-primary">Chi siamo</Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/bologna/contatti" className="btn-primary">Inizia uno studio biblico</Link>
             <Link to="/bologna/cosa-crediamo" className="btn-outline">Cosa crediamo</Link>
           </div>
         </div>
       </section>
 
+      {/* Three ways to join */}
       <section className="container-prose py-16 md:py-24">
-        <div className="grid gap-8 md:grid-cols-3">
-          <Pillar
-            title="Funzione domenicale"
-            text="Ogni domenica alle 11:00. Adorazione, comunione e un messaggio dalla Parola di Dio."
-            cta={{ to: "/bologna/visita", label: "Cosa aspettarsi" }}
+        <div className="mb-12">
+          <p className="eyebrow mb-3">Come puoi camminare con noi</p>
+          <h2 className="font-display text-3xl md:text-4xl">Tre modi concreti, da subito.</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          <PlantCard
+            icon={<HandHeart className="h-6 w-6" strokeWidth={1.75} />}
+            title="Prega con noi"
+            text="Aggiungi Bologna al tuo tempo di preghiera. Riceverai aggiornamenti mensili con motivi specifici per cui pregare."
+            cta={{ to: "/bologna/contatti", label: "Voglio pregare" }}
           />
-          <Pillar
-            title="Studi biblici"
-            text="Studi su misura per te, in italiano o in inglese. Senza giudizio, con tante domande benvenute."
-            cta={{ to: "/bologna/contatti", label: "Inizia uno studio" }}
+          <PlantCard
+            icon={<Users className="h-6 w-6" strokeWidth={1.75} />}
+            title="Unisciti al gruppo fondatore"
+            text="Vivi a Bologna o nelle vicinanze e senti il chiamato? Stiamo cercando persone che vogliano fondare questa chiesa con noi."
+            cta={{ to: "/bologna/contatti", label: "Voglio esserci" }}
           />
-          <Pillar
-            title="Vita di comunità"
-            text="Cene, gite, eventi per studenti universitari e famiglie. La fede vissuta insieme."
-            cta={{ to: "/bologna/eventi", label: "Prossimi eventi" }}
+          <PlantCard
+            icon={<Sprout className="h-6 w-6" strokeWidth={1.75} />}
+            title="Inizia uno studio biblico"
+            text="Anche prima del lancio possiamo incontrarci — di persona o online — per leggere la Bibbia insieme, al tuo ritmo."
+            cta={{ to: "/bologna/contatti", label: "Studiamo insieme" }}
           />
         </div>
       </section>
 
-      {/* Photo galleries — moving */}
-      <section className="py-16 md:py-20 space-y-6">
-        <div className="container-prose mb-2">
-          <p className="eyebrow mb-2">La nostra famiglia</p>
-          <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
-        </div>
-        <PhotoMarquee images={cityPhotos} />
-        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
-      </section>
-
+      {/* Promise / verse */}
       <section className="relative h-[60vh] overflow-hidden">
         <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-primary/75" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
           <p className="eyebrow text-white/80 mb-4">Una promessa</p>
           <h2 className="font-display text-4xl md:text-6xl max-w-3xl mx-auto leading-tight">
-            "Cercate prima il regno di Dio e la Sua giustizia."
+            "Io pianto, Apollo annaffia, ma Dio fa crescere."
           </h2>
-          <p className="mt-6 text-white/80">— Matteo 6:33</p>
+          <p className="mt-6 text-white/80">— 1 Corinzi 3:6</p>
         </div>
       </section>
 
-      <CityLatest cityTag="bologna" cityName="Bologna" />
-
-      <InstagramFeed handle="chiesadicristobologna" city="Bologna" />
-
+      {/* Newsletter — primary CTA for now */}
       <section className="bg-card border-y border-border">
         <div className="container-narrow py-20 text-center">
-          <p className="eyebrow mb-4">Resta in contatto</p>
-          <h2 className="font-display text-3xl md:text-4xl mb-4">Una Parola alla settimana, nella tua casella.</h2>
+          <p className="eyebrow mb-4">Resta aggiornato</p>
+          <h2 className="font-display text-3xl md:text-4xl mb-4">
+            Ti scriveremo quando apriamo le porte.
+          </h2>
           <p className="text-foreground/70 mb-8">
-            Devozionale settimanale, eventi e nuove risorse — niente spam.
+            Iscriviti per ricevere aggiornamenti sul lancio di {LAUNCH_LABEL},
+            sui primi incontri di preghiera e sulle prime funzioni a Bologna.
+            Niente spam.
           </p>
           <NewsletterSignup cityTag="bologna" source="bologna-home" />
         </div>
@@ -210,10 +162,23 @@ function BolognaHome() {
   );
 }
 
-function Pillar({ title, text, cta }: { title: string; text: string; cta: { to: string; label: string } }) {
+function PlantCard({
+  icon,
+  title,
+  text,
+  cta,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  text: string;
+  cta: { to: string; label: string };
+}) {
   return (
-    <div className="border-t border-border pt-8">
-      <h3 className="font-display text-2xl text-primary">{title}</h3>
+    <div className="group rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]">
+      <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <h3 className="font-display text-2xl text-foreground">{title}</h3>
       <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
       <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
         {cta.label} →
