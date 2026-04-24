@@ -16,7 +16,7 @@ export interface CityConfig {
   serviceTime: string;
   mapsUrl: string;
   basePath: "/milano" | "/bologna";
-  /** True when the city is a church plant in preparation — no physical location/services yet. */
+  /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
   isPlant?: boolean;
   /** When isPlant is true, a human-readable launch label like "Settembre 2026". */
   launchLabel?: string;
