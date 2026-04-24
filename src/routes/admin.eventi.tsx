@@ -178,7 +178,17 @@ function AdminEvents() {
       return `Ogni ${wd}${time ? ` · ${time}` : ""}`;
     }
     if (r.start_at) {
-      return format(new Date(r.start_at), "EEE d LLL yyyy · HH:mm", { locale: it });
+      const start = new Date(r.start_at);
+      const end = r.end_at ? new Date(r.end_at) : null;
+      const sameDay =
+        end &&
+        start.getFullYear() === end.getFullYear() &&
+        start.getMonth() === end.getMonth() &&
+        start.getDate() === end.getDate();
+      if (end && !sameDay) {
+        return `${format(start, "d LLL", { locale: it })} → ${format(end, "d LLL yyyy", { locale: it })}`;
+      }
+      return format(start, "EEE d LLL yyyy · HH:mm", { locale: it });
     }
     // Legacy fallback
     return [r.day_label, r.date_label].filter(Boolean).join(" ") + (r.time_label ? ` · ${r.time_label}` : "");
