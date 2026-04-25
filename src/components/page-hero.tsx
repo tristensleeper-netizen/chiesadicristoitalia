@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useSlotMedia, type SlotKey } from "@/lib/use-slot-image";
 
 interface PageHeroProps {
@@ -36,6 +36,7 @@ export function PageHero({
   // While a slot is specified but not yet loaded, suppress the fallback image
   // to avoid a flash of the default hero before the video appears.
   const slotPending = slot != null && slotMedia == null;
+  const [videoReady, setVideoReady] = useState(false);
   const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
     ? slotMedia.height > slotMedia.width
     : false;
