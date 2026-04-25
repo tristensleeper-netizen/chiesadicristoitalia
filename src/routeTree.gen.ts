@@ -21,13 +21,11 @@ import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
 import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
-import { Route as MilanoSermoniRouteImport } from './routes/milano.sermoni'
 import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
 import { Route as MilanoCosaCrediamoRouteImport } from './routes/milano.cosa-crediamo'
 import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
 import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
 import { Route as BolognaVisitaRouteImport } from './routes/bologna.visita'
-import { Route as BolognaSermoniRouteImport } from './routes/bologna.sermoni'
 import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
 import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
@@ -102,11 +100,6 @@ const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
   path: '/milano/visita',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MilanoSermoniRoute = MilanoSermoniRouteImport.update({
-  id: '/milano/sermoni',
-  path: '/milano/sermoni',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MilanoEventiRoute = MilanoEventiRouteImport.update({
   id: '/milano/eventi',
   path: '/milano/eventi',
@@ -130,11 +123,6 @@ const MilanoChiSiamoRoute = MilanoChiSiamoRouteImport.update({
 const BolognaVisitaRoute = BolognaVisitaRouteImport.update({
   id: '/bologna/visita',
   path: '/bologna/visita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaSermoniRoute = BolognaSermoniRouteImport.update({
-  id: '/bologna/sermoni',
-  path: '/bologna/sermoni',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BolognaEventiRoute = BolognaEventiRouteImport.update({
@@ -213,13 +201,11 @@ export interface FileRoutesByFullPath {
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
-  '/bologna/sermoni': typeof BolognaSermoniRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
   '/milano/eventi': typeof MilanoEventiRoute
-  '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -245,13 +231,11 @@ export interface FileRoutesByTo {
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
-  '/bologna/sermoni': typeof BolognaSermoniRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
   '/milano/eventi': typeof MilanoEventiRoute
-  '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -279,13 +263,11 @@ export interface FileRoutesById {
   '/bologna/contatti': typeof BolognaContattiRoute
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
-  '/bologna/sermoni': typeof BolognaSermoniRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
   '/milano/eventi': typeof MilanoEventiRoute
-  '/milano/sermoni': typeof MilanoSermoniRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -314,13 +296,11 @@ export interface FileRouteTypes {
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
-    | '/bologna/sermoni'
     | '/bologna/visita'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
     | '/milano/eventi'
-    | '/milano/sermoni'
     | '/milano/visita'
     | '/risorse/$slug'
     | '/admin/'
@@ -346,13 +326,11 @@ export interface FileRouteTypes {
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
-    | '/bologna/sermoni'
     | '/bologna/visita'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
     | '/milano/eventi'
-    | '/milano/sermoni'
     | '/milano/visita'
     | '/risorse/$slug'
     | '/admin'
@@ -379,13 +357,11 @@ export interface FileRouteTypes {
     | '/bologna/contatti'
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
-    | '/bologna/sermoni'
     | '/bologna/visita'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
     | '/milano/eventi'
-    | '/milano/sermoni'
     | '/milano/visita'
     | '/risorse/$slug'
     | '/admin/'
@@ -408,13 +384,11 @@ export interface RootRouteChildren {
   BolognaContattiRoute: typeof BolognaContattiRoute
   BolognaCosaCrediamoRoute: typeof BolognaCosaCrediamoRoute
   BolognaEventiRoute: typeof BolognaEventiRoute
-  BolognaSermoniRoute: typeof BolognaSermoniRoute
   BolognaVisitaRoute: typeof BolognaVisitaRoute
   MilanoChiSiamoRoute: typeof MilanoChiSiamoRoute
   MilanoContattiRoute: typeof MilanoContattiRoute
   MilanoCosaCrediamoRoute: typeof MilanoCosaCrediamoRoute
   MilanoEventiRoute: typeof MilanoEventiRoute
-  MilanoSermoniRoute: typeof MilanoSermoniRoute
   MilanoVisitaRoute: typeof MilanoVisitaRoute
   RisorseSlugRoute: typeof RisorseSlugRoute
   BolognaIndexRoute: typeof BolognaIndexRoute
@@ -509,13 +483,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MilanoVisitaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/milano/sermoni': {
-      id: '/milano/sermoni'
-      path: '/milano/sermoni'
-      fullPath: '/milano/sermoni'
-      preLoaderRoute: typeof MilanoSermoniRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/milano/eventi': {
       id: '/milano/eventi'
       path: '/milano/eventi'
@@ -549,13 +516,6 @@ declare module '@tanstack/react-router' {
       path: '/bologna/visita'
       fullPath: '/bologna/visita'
       preLoaderRoute: typeof BolognaVisitaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/sermoni': {
-      id: '/bologna/sermoni'
-      path: '/bologna/sermoni'
-      fullPath: '/bologna/sermoni'
-      preLoaderRoute: typeof BolognaSermoniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bologna/eventi': {
@@ -682,13 +642,11 @@ const rootRouteChildren: RootRouteChildren = {
   BolognaContattiRoute: BolognaContattiRoute,
   BolognaCosaCrediamoRoute: BolognaCosaCrediamoRoute,
   BolognaEventiRoute: BolognaEventiRoute,
-  BolognaSermoniRoute: BolognaSermoniRoute,
   BolognaVisitaRoute: BolognaVisitaRoute,
   MilanoChiSiamoRoute: MilanoChiSiamoRoute,
   MilanoContattiRoute: MilanoContattiRoute,
   MilanoCosaCrediamoRoute: MilanoCosaCrediamoRoute,
   MilanoEventiRoute: MilanoEventiRoute,
-  MilanoSermoniRoute: MilanoSermoniRoute,
   MilanoVisitaRoute: MilanoVisitaRoute,
   RisorseSlugRoute: RisorseSlugRoute,
   BolognaIndexRoute: BolognaIndexRoute,

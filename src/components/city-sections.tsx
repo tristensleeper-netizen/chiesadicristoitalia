@@ -216,57 +216,6 @@ export function VisitSection({ city }: { city: CityConfig }) {
   );
 }
 
-export function SermonsSection({ city }: { city: CityConfig }) {
-  const heroImg = useSlotImage("sermons.hero", bibleStudy);
-
-  if (city.isPlant) {
-    return (
-      <>
-        <PageHero
-          slot="sermons.hero"
-          image={heroImg}
-          eyebrow={`Sermoni · ${city.name}`}
-          title={<>I primi sermoni<br />arriveranno presto.</>}
-          subtitle={`La Chiesa di Cristo di ${city.name} apre nel ${city.launchLabel ?? "prossimo futuro"}. I sermoni saranno disponibili dopo le prime funzioni.`}
-          height="short"
-        />
-        <section className="container-narrow py-20 text-center">
-          <p className="eyebrow mb-4">Nel frattempo</p>
-          <h2 className="font-display text-3xl mb-6">Ascolta dalle altre comunità</h2>
-          <p className="text-foreground/75 mb-8 max-w-xl mx-auto">
-            In attesa che inizino le funzioni a {city.name}, ti invitiamo ad
-            ascoltare i sermoni della Chiesa di Cristo di Milano e a leggere
-            il devozionale settimanale.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/milano/sermoni" className="btn-primary">Sermoni di Milano</Link>
-            <Link to="/devozionale" className="btn-outline">Devozionale settimanale</Link>
-          </div>
-        </section>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <PageHero
-        slot="sermons.hero"
-        image={heroImg}
-        eyebrow={`Sermoni · ${city.name}`}
-        title={<>Ascolta. Leggi.<br />Cresci.</>}
-        subtitle="Predicazioni recenti dalla Chiesa di Cristo. Esplora la Bibbia al tuo ritmo."
-        height="short"
-      />
-      <section className="container-prose py-20">
-        <p className="text-center text-muted-foreground">
-          I sermoni audio saranno presto disponibili. Iscriviti al podcast per
-          essere avvisato.
-        </p>
-      </section>
-    </>
-  );
-}
-
 export function EventsSection({ city }: { city: CityConfig }) {
   const cityKey = city.name.toLowerCase() as "milano" | "bologna";
   const heroImage = useActiveHero(cityKey, city.hero);
