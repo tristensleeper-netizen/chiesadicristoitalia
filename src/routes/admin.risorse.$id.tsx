@@ -62,6 +62,7 @@ function ResourceEditor() {
           body: data.body ?? "",
           media_url: data.media_url ?? "",
           thumbnail_url: data.thumbnail_url ?? "",
+          thumbnail_caption: (data as any).thumbnail_caption ?? "",
           city_tag: data.city_tag,
           speaker_or_author: data.speaker_or_author ?? "",
           scripture_ref: data.scripture_ref ?? "",
