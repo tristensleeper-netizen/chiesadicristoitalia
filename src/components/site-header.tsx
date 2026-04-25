@@ -86,10 +86,7 @@ export function SiteHeader() {
           <img
             src={isMilano ? logoMilano : isBologna ? logoBologna : logoMark}
             alt={isMilano ? "Chiesa di Cristo di Milano" : isBologna ? "Chiesa di Cristo di Bologna" : "Chiesa di Cristo Italia"}
-            className={
-              "object-contain " +
-              (isMilano ? "h-16 w-16 -my-2" : "h-11 w-11")
-            }
+          className="h-16 w-16 -my-2 object-contain"
           />
           {logoCityLabel && (
             <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
