@@ -38,7 +38,6 @@ function HomePage() {
       <PageHero
         slot="home.hero"
         image={homeHero}
-        videoSrc="/hero-italy.mov"
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una famiglia<br />che ti aspetta.</>}
         subtitle="Da Milano a Bologna, da Napoli alla Sicilia — comunità di persone normali che cercano insieme di vivere come Gesù."
