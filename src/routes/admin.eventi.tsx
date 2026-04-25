@@ -452,6 +452,10 @@ function AdminEvents() {
                 />
                 <span className="text-sm">Visibile sul sito</span>
               </label>
+
+              {editing.id && (
+                <OverridesManager eventId={editing.id} />
+              )}
             </div>
             <div className="p-6 border-t border-border flex justify-end gap-3">
               <button onClick={() => setEditing(null)} className="btn-outline">Annulla</button>
