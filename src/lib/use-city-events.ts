@@ -23,6 +23,26 @@ export type CityEventRow = {
   active: boolean;
 };
 
+/** Per-date override for a recurring (or single) event. */
+export type EventOverrideRow = {
+  id: string;
+  event_id: string;
+  override_date: string; // YYYY-MM-DD
+  cancelled: boolean;
+  title: string | null;
+  blurb: string | null;
+  time_label: string | null;
+  location: string | null;
+  start_at: string | null;
+  end_at: string | null;
+  note: string | null;
+};
+
+function isoDay(d: Date) {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
 /** A single concrete occurrence of an event on the calendar. */
 export type EventOccurrence = {
   id: string; // unique per occurrence (event id + date)
