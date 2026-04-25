@@ -159,7 +159,7 @@ export function SiteHeader() {
         <button
           aria-label="Apri menu"
           aria-expanded={open}
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground"
+          className="lg:hidden inline-flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground"
           onClick={() => setOpen((v) => !v)}
         >
           <span className="relative block h-3 w-4">
