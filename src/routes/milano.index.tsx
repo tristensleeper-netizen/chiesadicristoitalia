@@ -147,7 +147,7 @@ function MilanoHome() {
           src={welcomeImg}
           alt="Comunità in adorazione"
           loading="lazy"
-          className="rounded-3xl object-cover object-left aspect-[4/5] w-full"
+          className="rounded-3xl object-cover object-right aspect-[4/5] w-full"
         />
       </section>
 
