@@ -191,6 +191,15 @@ export function expandRow(
   return out;
 }
 
+async function fetchOverridesFor(eventIds: string[]): Promise<EventOverrideRow[]> {
+  if (eventIds.length === 0) return [];
+  const { data } = await (supabase as any)
+    .from("city_event_overrides")
+    .select("*")
+    .in("event_id", eventIds);
+  return (data as EventOverrideRow[]) ?? [];
+}
+
 export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent[]) {
   const [events, setEvents] = useState<RotatorEvent[]>(fallback);
 
@@ -208,6 +217,8 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
       if (error || !active) return;
       if (data && data.length > 0) {
         const rows = data as CityEventRow[];
+        const overrides = await fetchOverridesFor(rows.map((r) => r.id));
+        if (!active) return;
         // Window: from start of today through next 7 days
         const now = new Date();
         const from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -216,11 +227,10 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
         to.setHours(23, 59, 59, 999);
 
         const occurrences: EventOccurrence[] = [];
-        for (const r of rows) occurrences.push(...expandRow(r, from, to));
-        // Drop occurrences already in the past today
+        for (const r of rows) occurrences.push(...expandRow(r, from, to, overrides));
         const upcoming = occurrences
           .filter((o) => o.date.getTime() >= now.getTime() || isSameDay(o.date, now))
-          .filter((o) => o.date.getTime() >= now.getTime() - 60 * 60 * 1000) // small grace for in-progress
+          .filter((o) => o.date.getTime() >= now.getTime() - 60 * 60 * 1000)
           .sort((a, b) => a.date.getTime() - b.date.getTime());
 
         if (upcoming.length > 0) {
@@ -251,6 +261,7 @@ function isSameDay(a: Date, b: Date) {
 /** Fetches raw city events (used by the calendar view). */
 export function useCityEventRows(city: "milano" | "bologna") {
   const [rows, setRows] = useState<CityEventRow[]>([]);
+  const [overrides, setOverrides] = useState<EventOverrideRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -263,7 +274,11 @@ export function useCityEventRows(city: "milano" | "bologna") {
         .eq("city", city)
         .eq("active", true);
       if (!active) return;
-      setRows((data as CityEventRow[]) ?? []);
+      const r = (data as CityEventRow[]) ?? [];
+      setRows(r);
+      const ovr = await fetchOverridesFor(r.map((x) => x.id));
+      if (!active) return;
+      setOverrides(ovr);
       setLoading(false);
     })();
     return () => {
@@ -271,18 +286,18 @@ export function useCityEventRows(city: "milano" | "bologna") {
     };
   }, [city]);
 
-  return { rows, loading };
+  return { rows, overrides, loading };
 }
 
 /** Returns occurrences expanded across the given range. */
 export function useEventOccurrences(city: "milano" | "bologna", from: Date, to: Date) {
-  const { rows, loading } = useCityEventRows(city);
+  const { rows, overrides, loading } = useCityEventRows(city);
   const occurrences = useMemo(() => {
     const all: EventOccurrence[] = [];
-    for (const r of rows) all.push(...expandRow(r, from, to));
+    for (const r of rows) all.push(...expandRow(r, from, to, overrides));
     all.sort((a, b) => a.date.getTime() - b.date.getTime());
     return all;
-  }, [rows, from, to]);
+  }, [rows, overrides, from, to]);
   return { occurrences, loading };
 }
 
