@@ -7,6 +7,7 @@ import { useSlotImage } from "@/lib/use-slot-image";
 import { EventsCalendar } from "@/components/events-calendar";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import milanoFamily from "@/assets/milano-family.jpg";
 
 export interface CityConfig {
   name: "Milano" | "Bologna";
