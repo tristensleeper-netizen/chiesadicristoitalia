@@ -7,6 +7,7 @@ import { useSlotImage } from "@/lib/use-slot-image";
 import { EventsCalendar } from "@/components/events-calendar";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import milanoFamily from "@/assets/milano-family.jpg";
 
 export interface CityConfig {
   name: "Milano" | "Bologna";
@@ -85,7 +86,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
           )}
         </div>
         <figure className="mt-12">
-          <img src={worship} alt="Comunità riunita" loading="lazy" className="rounded-2xl object-cover w-full aspect-video" />
+          <img src={city.name === "Milano" ? milanoFamily : worship} alt={`Comunità di ${city.name}`} loading="lazy" className="rounded-2xl object-cover w-full aspect-video" />
         </figure>
         {city.isPlant && (
           <div className="mt-10 flex flex-wrap gap-3">
