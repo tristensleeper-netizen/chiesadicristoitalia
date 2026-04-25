@@ -58,8 +58,7 @@ export const Route = createFileRoute("/milano/")({
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
-        content:
-          "Comunità cristiana nel cuore di Milano. Domenica 10:30, Corso di Porta Vigentina 15a.",
+        content: "Comunità cristiana nel cuore di Milano. Domenica 10:30, Corso di Porta Vigentina 15a.",
       },
       { property: "og:image", content: heroMilano },
       { name: "twitter:image", content: heroMilano },
@@ -89,7 +88,7 @@ function MilanoHome() {
         slot="milano.hero"
         image={heroImage}
         eyebrow="Chiesa di Cristo"
-        title={<>Milano.</>}
+        title={<>Milano</>}
         subtitle="Una chiesa nel cuore della città. Persone normali, amicizie vere, una fede che cambia la vita."
         primaryCta={{ to: "/milano/visita", label: "Vieni a trovarci" }}
         secondaryCta={{ to: "/milano/contatti", label: "Scrivici" }}
@@ -129,18 +128,19 @@ function MilanoHome() {
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <div>
           <p className="eyebrow mb-5">Benvenuti</p>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            Siamo contenti che siate qui.
-          </h2>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight">Siamo contenti che siate qui.</h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
-            La Chiesa di Cristo di Milano arde nel far conoscere Dio e nel
-            diffondere una luce intorno a sé, seguendo l'esempio di Gesù nel fare
-            il bene. Ci incontriamo la domenica per la funzione e durante la
-            settimana in piccoli gruppi nei quartieri della città.
+            La Chiesa di Cristo di Milano arde nel far conoscere Dio e nel diffondere una luce intorno a sé, seguendo
+            l'esempio di Gesù nel fare il bene. Ci incontriamo la domenica per la funzione e durante la settimana in
+            piccoli gruppi nei quartieri della città.
           </p>
           <div className="mt-8 flex gap-3">
-            <Link to="/milano/chi-siamo" className="btn-primary">Chi siamo</Link>
-            <Link to="/milano/cosa-crediamo" className="btn-outline">Cosa crediamo</Link>
+            <Link to="/milano/chi-siamo" className="btn-primary">
+              Chi siamo
+            </Link>
+            <Link to="/milano/cosa-crediamo" className="btn-outline">
+              Cosa crediamo
+            </Link>
           </div>
         </div>
         <img
@@ -203,9 +203,7 @@ function MilanoHome() {
         <div className="container-narrow py-20 text-center">
           <p className="eyebrow mb-4">Resta in contatto</p>
           <h2 className="font-display text-3xl md:text-4xl mb-4">Una Parola alla settimana, nella tua casella.</h2>
-          <p className="text-foreground/70 mb-8">
-            Devozionale settimanale, eventi e nuove risorse — niente spam.
-          </p>
+          <p className="text-foreground/70 mb-8">Devozionale settimanale, eventi e nuove risorse — niente spam.</p>
           <NewsletterSignup cityTag="milano" source="milano-home" />
         </div>
       </section>
