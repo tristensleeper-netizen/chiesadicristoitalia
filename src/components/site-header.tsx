@@ -66,7 +66,7 @@ export function SiteHeader() {
         { to: `${cityBase}/chi-siamo` as const, label: "Chi siamo" },
         { to: `${cityBase}/cosa-crediamo` as const, label: "Cosa crediamo" },
         { to: `${cityBase}/visita` as const, label: "Visita" },
-        { to: `${cityBase}/sermoni` as const, label: "Sermoni" },
+        
         { to: `${cityBase}/eventi` as const, label: "Eventi" },
         { to: `${cityBase}/contatti` as const, label: "Contatti" },
       ]
