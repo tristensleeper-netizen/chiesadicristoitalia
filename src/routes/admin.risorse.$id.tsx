@@ -146,6 +146,9 @@ function ResourceEditor() {
           <Field label="URL miniatura" hint="Immagine di anteprima (opzionale)">
             <input value={form.thumbnail_url} onChange={(e) => setForm({ ...form, thumbnail_url: e.target.value })} className="input-base" />
           </Field>
+          <Field label="Testo sulla miniatura" hint="Sovrascrive il testo che appare sopra l'immagine (es. 'Funzione domenicale'). Lascia vuoto per nessun testo.">
+            <input value={form.thumbnail_caption} onChange={(e) => setForm({ ...form, thumbnail_caption: e.target.value })} placeholder="Es. Funzione domenicale" className="input-base" />
+          </Field>
         </Section>
 
         {/* Section: Attribution */}
