@@ -86,7 +86,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
           )}
         </div>
         <figure className="mt-12">
-          <img src={worship} alt="Comunità riunita" loading="lazy" className="rounded-2xl object-cover w-full aspect-video" />
+          <img src={city.name === "Milano" ? milanoFamily : worship} alt={`Comunità di ${city.name}`} loading="lazy" className="rounded-2xl object-cover w-full aspect-video" />
         </figure>
         {city.isPlant && (
           <div className="mt-10 flex flex-wrap gap-3">
