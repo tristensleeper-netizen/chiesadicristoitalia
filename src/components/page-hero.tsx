@@ -72,7 +72,10 @@ export function PageHero({
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
 
   return (
-    <section className={`page-hero-shell relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}>
+    <section
+      className={`page-hero-shell relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}
+      style={resolvedVideo ? { backgroundImage: `url(${videoPoster})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+    >
       {hasVerticalMedia && (
         <>
           {resolvedVideo ? (
