@@ -37,6 +37,7 @@ function ResourceEditor() {
     body: "",
     media_url: "",
     thumbnail_url: "",
+    thumbnail_caption: "",
     city_tag: "national" as CityTag,
     speaker_or_author: "",
     scripture_ref: "",
