@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import type { CityEventRow } from "@/lib/use-city-events";
+import type { CityEventRow, EventOverrideRow } from "@/lib/use-city-events";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
 
