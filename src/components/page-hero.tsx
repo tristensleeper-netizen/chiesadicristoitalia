@@ -53,6 +53,11 @@ export function PageHero({
       : useSlot && slotMedia.thumbnail_url
         ? slotMedia.thumbnail_url
         : image;
+  // Poster shown beneath the video while it buffers (prevents blank background flash).
+  const videoPoster =
+    useSlot && slotMedia.kind === "video" && slotMedia.thumbnail_url
+      ? slotMedia.thumbnail_url
+      : image;
   // Only render the still image layer when there's no video AND the slot isn't pending.
   const showImageLayer = !resolvedVideo && !slotPending;
   // When the slot has a video, never render the fallback image at all (prevents flash).
