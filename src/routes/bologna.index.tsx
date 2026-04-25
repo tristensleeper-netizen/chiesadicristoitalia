@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { NewsletterSignup } from "@/components/newsletter-signup";
+
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
@@ -144,21 +144,6 @@ function BolognaHome() {
         </div>
       </section>
 
-      {/* Newsletter — primary CTA for now */}
-      <section className="bg-card border-y border-border">
-        <div className="container-narrow py-20 text-center">
-          <p className="eyebrow mb-4">Resta aggiornato</p>
-          <h2 className="font-display text-3xl md:text-4xl mb-4">
-            Ti scriveremo quando apriamo le porte.
-          </h2>
-          <p className="text-foreground/70 mb-8">
-            Iscriviti per ricevere aggiornamenti sul lancio di {LAUNCH_LABEL},
-            sui primi incontri di preghiera e sulle prime funzioni a Bologna.
-            Niente spam.
-          </p>
-          <NewsletterSignup cityTag="bologna" source="bologna-home" />
-        </div>
-      </section>
     </>
   );
 }

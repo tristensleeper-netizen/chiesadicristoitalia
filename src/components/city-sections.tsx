@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
-import { NewsletterSignup } from "@/components/newsletter-signup";
+
 import { Link } from "@tanstack/react-router";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
@@ -168,9 +168,6 @@ export function VisitSection({ city }: { city: CityConfig }) {
             <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere quando, dove e come parteciperemo alle prime funzioni.</li>
             <li><strong className="text-primary">Funzioni a Milano.</strong> Nel frattempo, sei il benvenuto la domenica alle 10:30 nella chiesa di Milano.</li>
           </ul>
-          <div className="mt-10 max-w-md">
-            <NewsletterSignup cityTag="bologna" source="bologna-visita" />
-          </div>
         </section>
       </>
     );
@@ -287,18 +284,14 @@ export function EventsSection({ city }: { city: CityConfig }) {
         />
         <section className="container-narrow py-20 text-center">
           <p className="eyebrow mb-4">Resta in contatto</p>
-          <h2 className="font-display text-3xl mb-6">Sarai tra i primi a saperlo</h2>
+          <h2 className="font-display text-3xl mb-6">Vuoi essere coinvolto?</h2>
           <p className="text-foreground/75 mb-8 max-w-xl mx-auto">
-            Iscriviti per ricevere aggiornamenti su incontri di preghiera,
-            studi biblici e — quando arriverà il momento — la prima funzione
-            domenicale a {city.name}.
+            Scrivici per sapere di più su incontri di preghiera, studi biblici
+            e — quando arriverà il momento — la prima funzione domenicale a {city.name}.
           </p>
-          <div className="max-w-md mx-auto">
-            <NewsletterSignup cityTag="bologna" source="bologna-eventi" />
-          </div>
-          <div className="mt-10">
-            <Link to={`${city.basePath}/contatti`} className="btn-outline">
-              Scrivici direttamente
+          <div className="mt-2">
+            <Link to={`${city.basePath}/contatti`} className="btn-primary">
+              Scrivici
             </Link>
           </div>
         </section>
