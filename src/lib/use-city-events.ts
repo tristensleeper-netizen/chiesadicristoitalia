@@ -36,16 +36,22 @@ export type EventOccurrence = {
 };
 
 const ITALIAN_DAYS = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+const ITALIAN_MONTHS = [
+  "Gen", "Feb", "Mar", "Apr", "Mag", "Giu",
+  "Lug", "Ago", "Set", "Ott", "Nov", "Dic",
+];
+
+function formatDateLabel(d: Date) {
+  return `${ITALIAN_DAYS[d.getDay()]} ${d.getDate()} ${ITALIAN_MONTHS[d.getMonth()]}`;
+}
 
 export function rowToRotator(r: CityEventRow): RotatorEvent {
   // Prefer real date if present
   if (r.start_at) {
     const d = new Date(r.start_at);
-    const day = ITALIAN_DAYS[d.getDay()];
-    const dayNum = d.getDate();
     const time = d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
     return {
-      date: `${day} ${dayNum}`,
+      date: formatDateLabel(d),
       time,
       title: r.title,
       blurb: r.blurb || "",
@@ -60,6 +66,17 @@ export function rowToRotator(r: CityEventRow): RotatorEvent {
     title: r.title,
     blurb: r.blurb || "",
     tag: r.tag || undefined,
+  };
+}
+
+export function occurrenceToRotator(occ: EventOccurrence): RotatorEvent {
+  const time = occ.date.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+  return {
+    date: formatDateLabel(occ.date),
+    time,
+    title: occ.title,
+    blurb: occ.blurb,
+    tag: occ.tag,
   };
 }
 
