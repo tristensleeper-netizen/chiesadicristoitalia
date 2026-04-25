@@ -35,7 +35,7 @@ export const MEDIA_SLOTS = {
   "risorse.hero": "Risorse — Hero",
   "devozionale.hero": "Devozionale — Hero",
   "beliefs.hero": "Cosa crediamo — Hero (entrambe le città)",
-  "sermons.hero": "Sermoni — Hero (entrambe le città)",
+  
 } as const;
 
 export type SlotKey = keyof typeof MEDIA_SLOTS;
