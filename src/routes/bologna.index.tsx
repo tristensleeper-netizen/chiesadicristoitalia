@@ -143,6 +143,16 @@ function BolognaHome() {
         </div>
       </section>
 
+      {/* Photo galleries — moving */}
+      <section className="py-16 md:py-20 space-y-6">
+        <div className="container-prose mb-2">
+          <p className="eyebrow mb-2">Volti e momenti</p>
+          <h2 className="font-display text-3xl md:text-4xl">Chi sta camminando con noi.</h2>
+        </div>
+        <PhotoMarquee images={cityPhotos} />
+        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
+      </section>
+
       {/* Promise / verse */}
       <section className="relative h-[60vh] overflow-hidden">
         <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
