@@ -40,6 +40,16 @@ function BolognaHome() {
   const heroImage = useActiveHero("bologna", heroBologna);
   const welcomeImg = useSlotImage("bologna.welcome", worship);
   const bibleBandImg = useSlotImage("bologna.bibleband", bibleStudy);
+  const photo1 = useSlotImage("bologna.photo1", heroBologna);
+  const photo2 = useSlotImage("bologna.photo2", worship);
+  const photo3 = useSlotImage("bologna.photo3", bibleStudy);
+  const photo4 = useSlotImage("bologna.photo4", heroItalia);
+  const cityPhotos = [
+    { src: photo1, alt: "Bologna" },
+    { src: photo2, alt: "Adorazione" },
+    { src: photo3, alt: "Studio biblico" },
+    { src: photo4, alt: "Comunità italiana" },
+  ];
 
   return (
     <>
