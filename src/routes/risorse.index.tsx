@@ -185,7 +185,7 @@ function ResourcesIndex() {
 }
 
 export function ResourceCard({ r }: { r: Resource }) {
-  const isPlayable = r.type === "video" || r.type === "sermon" || r.type === "podcast";
+  const isPlayable = r.type === "video" || r.type === "sermon";
   return (
     <Link
       to="/risorse/$slug"
