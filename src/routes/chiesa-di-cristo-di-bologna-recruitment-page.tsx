@@ -12,16 +12,16 @@ import worship from "@/assets/worship.jpg";
 export const Route = createFileRoute("/chiesa-di-cristo-di-bologna-recruitment-page")({
   head: () => ({
     meta: [
-      { title: "Unisciti alla missione — Chiesa di Cristo di Bologna · Settembre 2026" },
+      { title: "Join the Mission — Chiesa di Cristo di Bologna · September 2026" },
       {
         name: "description",
         content:
-          "La prima fondazione ICOC in Italia in 30 anni. Stiamo cercando italiani, studenti, pensionati, nomadi digitali e One Year Challengers per fondare la Chiesa di Cristo di Bologna a settembre 2026.",
+          "The first ICOC church planting in Italy in 30 years. We're recruiting Italians, students, retirees, digital nomads, and One Year Challengers to plant the Chiesa di Cristo di Bologna in September 2026.",
       },
-      { property: "og:title", content: "Unisciti alla missione — Chiesa di Cristo di Bologna" },
+      { property: "og:title", content: "Join the Mission — Chiesa di Cristo di Bologna" },
       {
         property: "og:description",
-        content: "Join the mission — settembre 2026. Recruitment per la prima fondazione ICOC in Italia in 30 anni.",
+        content: "Join the mission — September 2026. Recruitment for the first ICOC church planting in Italy in 30 years.",
       },
       { property: "og:image", content: heroBologna },
       { name: "twitter:image", content: heroBologna },
@@ -49,42 +49,42 @@ function RecruitmentPage() {
       <PageHero
         slot="bologna.hero"
         image={heroImage}
-        eyebrow="Recruitment · Lancio Settembre 2026"
-        title={<>Unisciti alla<br />missione.</>}
-        subtitle="La prima fondazione ICOC in Italia in 30 anni. Stiamo cercando persone disposte a trasferirsi a Bologna per fondare insieme una nuova Chiesa di Cristo."
-        primaryCta={{ to: "/chiesa-di-cristo-di-bologna-recruitment-page", label: "Compila il form" }}
-        secondaryCta={{ to: "/bologna", label: "Scopri Bologna" }}
+        eyebrow="Recruitment · Launching September 2026"
+        title={<>Join the<br />mission.</>}
+        subtitle="The first ICOC church planting in Italy in 30 years. We're looking for people willing to move to Bologna to plant a new Chiesa di Cristo together."
+        primaryCta={{ to: "/chiesa-di-cristo-di-bologna-recruitment-page", label: "Fill out the form" }}
+        secondaryCta={{ to: "/bologna", label: "Discover Bologna" }}
         align="left"
       />
 
       {/* About Bologna */}
       <section className="container-prose py-20 md:py-28 grid gap-12 md:grid-cols-2 items-center">
         <div>
-          <p className="eyebrow mb-5">La città</p>
+          <p className="eyebrow mb-5">The city</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
             Bologna — La Grassa, La Dotta, La Rossa.
           </h2>
           <div className="mt-6 space-y-5 text-foreground/80 leading-relaxed">
             <p>
-              Conosciuta come <em>La Grassa</em> (per la cucina), <em>La Dotta</em> (per
-              l'università) e <em>La Rossa</em> (per i tetti e la storia), Bologna è una
-              città di immenso significato storico, intellettuale e culinario. A solo 2
-              ore a sud-est di Milano, è la settima città più grande d'Italia.
-              L'<em>Università di Bologna</em>, la più antica al mondo in attività
-              continua, conta oltre 80.000 studenti ed è un crocevia del Paese.
+              Known as <em>La Grassa</em> (the fat), <em>La Dotta</em> (the learned),
+              and <em>La Rossa</em> (the red), Bologna is a city of immense historical,
+              intellectual, and culinary significance. Located just 2 hours south-east
+              of Milan, it is the seventh largest city in Italy. The{" "}
+              <em>Università di Bologna</em>, the oldest university in continuous
+              operation, has over 80,000 students and is a crossroads of Italy.
             </p>
             <p>
-              Mentre la città è famosa per i suoi chilometri di portici tutelati
-              dall'UNESCO e per la ricchezza della sua tradizione gastronomica, rimane
-              una significativa fame spirituale. Vediamo Bologna non solo come una
-              meta bellissima, ma come una porta dove il vangelo può mettere radici e
-              fiorire in una popolazione urbana e moderna.
+              While the city is famous for its miles of UNESCO-protected porticoes
+              and rich culinary traditions, there remains a significant spiritual
+              hunger. We see Bologna not just as a beautiful destination, but as a
+              gateway where the gospel can take root and flourish in a modern, urban
+              population.
             </p>
           </div>
         </div>
         <img
           src={storyImage}
-          alt="Bologna — portici e vita di città"
+          alt="Bologna — porticoes and city life"
           loading="lazy"
           className="rounded-3xl object-cover aspect-[4/5] w-full"
         />
@@ -95,40 +95,38 @@ function RecruitmentPage() {
       {/* Story & Mission */}
       <section className="container-prose py-20 md:py-28">
         <div className="max-w-3xl">
-          <p className="eyebrow mb-5">La nostra storia e missione</p>
+          <p className="eyebrow mb-5">Our story & mission</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            La prima fondazione ICOC in Italia in 30 anni.
+            The first ICOC church planting in Italy in 30 years.
           </h2>
         </div>
         <div className="mt-10 grid gap-10 md:grid-cols-2 text-foreground/80 leading-relaxed">
           <div className="space-y-5">
             <p className="text-primary text-lg leading-relaxed">
-              <strong>La Chiesa di Cristo di Bologna è la prima fondazione ICOC in
-              Italia in 30 anni.</strong> Ti invitiamo a camminare con noi attraverso
-              la preghiera, il sostegno economico, o unendoti al team mentre entriamo
-              in questo nuovo capitolo di ministero. Con l'aiuto di Dio, possiamo
-              portare la luce del Vangelo a una città che ha plasmato la storia per
-              secoli.
+              <strong>La Chiesa di Cristo di Bologna is the first ICOC planting in
+              Italy in 30 years.</strong> We invite you to partner with us through
+              prayer, financial support, or by joining our team as we step into this
+              new chapter of ministry. With God's help, we can bring the light of the
+              Gospel to a city that has shaped history for centuries.
             </p>
             <p>
-              Il nostro cammino è iniziato con preghiera e digiuno all'inizio del 2025,
-              quando alcuni discepoli della Chiesa di Cristo di Milano hanno
-              cominciato a sognare la prossima chiesa italiana. Guidato da due
-              italiani nativi, con il supporto della European Missions Society, il
-              nostro gruppo è cresciuto fino a includere otto discepoli da Milano e
-              da varie chiese statunitensi.
+              Our journey began with prayer and fasting in early 2025, as disciples
+              from the Chiesa di Cristo di Milano began dreaming of the next Italian
+              church. Led by two native-born Italians, with the support of the
+              European Missions Society, our group has grown to include eight
+              disciples from Milan and various US churches.
             </p>
           </div>
           <div className="space-y-5">
             <p>
-              Abbiamo posto il nostro cuore su Bologna per la sua enorme popolazione
-              universitaria e per la vicinanza alla nostra chiesa sorella di Milano.
-              Durante la primavera del 2026, il nostro team si incontrerà per
-              costruire relazioni e gestire la logistica di alloggi e visti.
+              We set our hearts on Bologna because of its massive university
+              population and its proximity to our sister church in Milan. Throughout
+              the spring of 2026, our team is meeting to build relationships and
+              navigate the logistics of housing and visas.
             </p>
             <p>
-              Se Dio vuole, <strong>settembre 2026</strong> porterà le prime funzioni
-              di questa nuova famiglia di discepoli.
+              God willing, <strong>September 2026</strong> will bring the first
+              services for this new family of disciples.
             </p>
           </div>
         </div>
@@ -138,41 +136,40 @@ function RecruitmentPage() {
       <section className="bg-card border-y border-border">
         <div className="container-prose py-20 md:py-28">
           <div className="mb-14 max-w-3xl">
-            <p className="eyebrow mb-5">Chi stiamo cercando</p>
+            <p className="eyebrow mb-5">Who we're looking for</p>
             <h2 className="font-display text-4xl md:text-5xl leading-tight">
-              Cinque tipi di missionari per settembre 2026.
+              Five types of missionaries for September 2026.
             </h2>
             <p className="mt-6 text-foreground/75 leading-relaxed">
-              Cerchiamo persone disposte a trasferirsi a Bologna questo settembre per
-              unirsi alla nostra comunità nell'amare Dio, gli uni gli altri e il nostro
-              prossimo.
+              We're seeking people willing to move to Bologna this September to join
+              our community in loving God, one another, and our neighbors.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <RoleCard
               icon={<Flag className="h-6 w-6" strokeWidth={1.75} />}
-              title="Italiani"
-              text="Porta il vangelo nella tua terra. Se sei italiano e senti il chiamato a casa, c'è posto per te."
+              title="Italians"
+              text="Bring the gospel to your homeland. If you're Italian and feel called home, there's a place for you."
             />
             <RoleCard
               icon={<GraduationCap className="h-6 w-6" strokeWidth={1.75} />}
-              title="Studenti"
-              text="Avvia un ministero universitario durante un anno di studio all'estero a Bologna, città di oltre 80.000 studenti."
+              title="Students"
+              text="Start a campus ministry during a year of study abroad in Bologna, a city of over 80,000 students."
             />
             <RoleCard
               icon={<Heart className="h-6 w-6" strokeWidth={1.75} />}
-              title="Pensionati"
-              text="Persone o coppie che terminano la professione ma continuano la missione. Una nuova stagione di servizio."
+              title="Retirees"
+              text="Individuals or couples ending their profession but continuing their commission. A new season of service."
             />
             <RoleCard
               icon={<Briefcase className="h-6 w-6" strokeWidth={1.75} />}
-              title="Nomadi digitali"
-              text="Usa la tua libertà professionale per servirci umilmente nell'amore, lavorando da remoto nel cuore di Bologna."
+              title="Digital nomads"
+              text="Use your professional freedom to serve one another humbly in love, working remotely from the heart of Bologna."
             />
             <RoleCard
               icon={<Plane className="h-6 w-6" strokeWidth={1.75} />}
               title="One Year Challengers"
-              text="Se hai i risparmi e sei disposto a passare un anno servendo Dio in questa fondazione, ti vogliamo con noi!"
+              text="If you have the savings and are willing to spend a year serving God on this planting, we'd love to have you!"
             />
           </div>
         </div>
@@ -181,33 +178,33 @@ function RecruitmentPage() {
       {/* How to apply + Form */}
       <section id="form" className="container-prose py-20 md:py-28 grid gap-12 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <p className="eyebrow mb-5">Come candidarti</p>
+          <p className="eyebrow mb-5">How to apply</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            Compila il form qui accanto.
+            Fill out the form on the right.
           </h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
-            Se senti il chiamato a unirti a noi, compila il modulo di interesse. Come
-            parte del processo, ti chiederemo:
+            If you feel called to join us, please complete the interest form. As
+            part of the process, we'll ask for:
           </p>
           <ul className="mt-6 space-y-4 text-foreground/80">
             <li className="flex gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               <span>
-                Un breve <strong>video di presentazione</strong> in cui condividi chi
-                sei e perché vuoi partecipare a questa fondazione.
+                A short <strong>video introducing yourself</strong> and sharing why
+                you want to participate in this planting.
               </span>
             </li>
             <li className="flex gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               <span>
-                Una <strong>lettera di sostegno</strong> dal tuo attuale ministro,
-                anziano o leadership della tua chiesa.
+                A <strong>letter of support</strong> from your current minister,
+                elder, or church leadership.
               </span>
             </li>
           </ul>
           <div className="mt-8 rounded-2xl border border-border bg-background p-6">
             <p className="text-sm text-foreground/70">
-              Hai altre domande prima di candidarti? Scrivici:
+              Have further questions before applying? Reach out:
             </p>
             <a
               href="mailto:tristen.sleeper@gmail.com"
@@ -235,21 +232,21 @@ function RecruitmentPage() {
       <section className="bg-card border-t border-border">
         <div className="container-prose py-20 md:py-28">
           <div className="mb-12 max-w-3xl">
-            <p className="eyebrow mb-5">Altri modi per sostenerci</p>
+            <p className="eyebrow mb-5">Other ways to support</p>
             <h2 className="font-display text-4xl md:text-5xl leading-tight">
-              Se trasferirti non è la tua strada, puoi comunque camminare con noi.
+              If moving isn't your path, you can still walk with us.
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             <SupportCard
               icon={<HandHeart className="h-6 w-6" strokeWidth={1.75} />}
-              title="Prega"
-              text="Iniziare una nuova chiesa è più grande di ogni nostro talento. Prega che riusciamo a ottenere lavoro, alloggi e visti per essere presenti. Prega che sviluppiamo una comunità d'amore e che Dio ci benedica per condividerla con altri."
+              title="Pray"
+              text="Starting a new church is bigger than any of our talents. Please pray that we can successfully get jobs, housing, and visas to be present. Pray that we develop a loving community and that God blesses us to share it with others."
             />
             <SupportCard
               icon={<Megaphone className="h-6 w-6" strokeWidth={1.75} />}
-              title="Spargi la voce"
-              text="Parla ad altri di questa fondazione. Anche le loro preghiere sono preziose. E forse, per qualcuno di loro, questa è proprio l'opportunità verso cui Dio li sta muovendo."
+              title="Spread the word"
+              text="Tell others about this church planting. Their prayers are precious too. And maybe, for one of them, this is just the opportunity God is moving them towards."
             />
           </div>
         </div>
@@ -265,12 +262,13 @@ function RecruitmentPage() {
         />
         <div className="absolute inset-0 bg-primary/75" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
+          <p className="eyebrow text-white/80 mb-4">A promise</p>
           <h2 className="font-display text-3xl md:text-5xl max-w-3xl mx-auto leading-tight italic">
-            "Nessuno accende una lampada e la mette sotto un vaso o sotto il letto;
-            anzi la mette sul candeliere, perché chi entra veda la luce."
+            "No one lights a lamp and hides it under a bowl or puts it under a bed.
+            Instead, he puts it on a lamp stand so that those who come in will see
+            the light."
           </h2>
-          <p className="mt-6 text-white/80">— Luca 8:16</p>
+          <p className="mt-6 text-white/80">— Luke 8:16</p>
         </div>
       </section>
     </>
