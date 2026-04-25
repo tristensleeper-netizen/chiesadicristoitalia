@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
-  <g fill="#040001">
-    <rect x="80" y="1090" width="1040" height="14"></rect>
-    <rect x="180" y="1060" width="840" height="14"></rect>
-    <rect x="220" y="1030" width="760" height="10"></rect>
-    <path d="M 130 1030 L 130 700 L 350 700 L 350 1030 Z"></path>
-    <path d="M 1070 1030 L 1070 700 L 850 700 L 850 1030 Z"></path>
-    <path d="M 350 1030 L 350 480 L 600 280 L 850 480 L 850 1030 Z"></path>
-    <rect x="148" y="718" width="184" height="312" fill="#e8e6de"></rect>
-    <rect x="868" y="718" width="184" height="312" fill="#e8e6de"></rect>
-    <path d="M 368 1030 L 368 498 L 600 312 L 832 498 L 832 1030 Z" fill="#e8e6de"></path>
-    <rect x="130" y="830" width="940" height="200"></rect>
-    <rect x="148" y="848" width="904" height="165" fill="#e8e6de"></rect>
-    <rect x="130" y="835" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="858" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="884" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="910" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="936" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="962" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="988" width="940" height="5" opacity="0.6"></rect>
-    <rect x="130" y="1014" width="940" height="5" opacity="0.6"></rect>
-    <path d="M 545 1030 V 920 Q 545 855 600 855 Q 655 855 655 920 V 1030 Z"></path>
-    <path d="M 410 1030 V 935 Q 410 895 450 895 Q 490 895 490 935 V 1030 Z"></path>
-    <path d="M 710 1030 V 935 Q 710 895 750 895 Q 790 895 790 935 V 1030 Z"></path>
-    <path d="M 562 790 V 530 Q 562 458 600 458 Q 638 458 638 530 V 790 Z"></path>
-    <path d="M 576 780 V 535 Q 576 472 600 472 Q 624 472 624 535 V 780 Z" fill="#e8e6de"></path>
-    <rect x="597" y="550" width="6" height="232"></rect>
-    <rect x="594" y="218" width="12" height="66"></rect>
-    <rect x="578" y="238" width="44" height="12"></rect>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-label="Chiesa di Cristo di Bologna">
+  <g fill="none" stroke="#040001" stroke-width="26" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M90 1090H1110"/>
+    <path d="M180 1058H1020" stroke-width="18"/>
+    <path d="M225 1028H975" stroke-width="14"/>
+    <path d="M140 1028V706H350V1028"/>
+    <path d="M1060 1028V706H850V1028"/>
+    <path d="M350 1028V484L600 286L850 484V1028"/>
+    <path d="M142 830H1058" stroke-width="24"/>
+    <path d="M150 866H1050M150 902H1050M150 938H1050M150 974H1050M150 1010H1050" stroke-width="10" opacity=".72"/>
+    <path d="M545 1028V920C545 875 569 852 600 852C631 852 655 875 655 920V1028"/>
+    <path d="M410 1028V936C410 905 427 890 450 890C473 890 490 905 490 936V1028" stroke-width="20"/>
+    <path d="M710 1028V936C710 905 727 890 750 890C773 890 790 905 790 936V1028" stroke-width="20"/>
+    <path d="M562 790V532C562 481 579 456 600 456C621 456 638 481 638 532V790"/>
+    <path d="M600 550V790" stroke-width="10"/>
+    <path d="M600 218V284M578 242H622" stroke-width="14"/>
   </g>
 </svg>

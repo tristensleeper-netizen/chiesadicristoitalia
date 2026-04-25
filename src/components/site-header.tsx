@@ -2,7 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logoMark from "@/assets/logo.svg";
 import logoMilano from "@/assets/duomo-milano.svg";
-import logoBologna from "@/assets/bologna-icon.png";
+import logoBologna from "@/assets/bologna-icon.svg";
 
 const cities = [
   { to: "/milano", label: "Milano" },
