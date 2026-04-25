@@ -85,6 +85,7 @@ function ResourceEditor() {
       body: form.body || null,
       media_url: form.media_url || null,
       thumbnail_url: form.thumbnail_url || null,
+      thumbnail_caption: form.thumbnail_caption || null,
       speaker_or_author: form.speaker_or_author || null,
       scripture_ref: form.scripture_ref || null,
     };
