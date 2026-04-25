@@ -22,12 +22,12 @@ export const Route = createFileRoute("/risorse/")({
       {
         name: "description",
         content:
-          "Esplora la nostra biblioteca di sermoni, articoli, video e podcast dalle Chiese di Cristo di Milano, Bologna, Napoli e Sicilia.",
+          "Esplora la nostra biblioteca di sermoni, articoli e video dalle Chiese di Cristo di Milano, Bologna, Napoli e Sicilia.",
       },
       { property: "og:title", content: "Risorse — Chiesa di Cristo in Italia" },
       {
         property: "og:description",
-        content: "Sermoni, articoli, video e podcast per crescere nella fede.",
+        content: "Sermoni, articoli e video per crescere nella fede.",
       },
       { property: "og:image", content: bibleStudy },
     ],
@@ -40,7 +40,6 @@ const TYPE_FILTERS: Array<{ value: ResourceType | "all"; label: string }> = [
   { value: "sermon", label: "Sermoni" },
   { value: "article", label: "Articoli" },
   { value: "video", label: "Video" },
-  { value: "podcast", label: "Podcast" },
   { value: "pdf", label: "PDF" },
 ];
 
@@ -102,7 +101,7 @@ function ResourcesIndex() {
         image={heroImg}
         eyebrow="Risorse"
         title={<>Esplora. Ascolta.<br />Cresci.</>}
-        subtitle="Una biblioteca viva di sermoni, articoli, video e podcast dalla nostra famiglia di chiese in Italia."
+        subtitle="Una biblioteca viva di sermoni, articoli e video dalla nostra famiglia di chiese in Italia."
         height="medium"
       />
 
@@ -186,7 +185,7 @@ function ResourcesIndex() {
 }
 
 export function ResourceCard({ r }: { r: Resource }) {
-  const isPlayable = r.type === "video" || r.type === "sermon" || r.type === "podcast";
+  const isPlayable = r.type === "video" || r.type === "sermon";
   return (
     <Link
       to="/risorse/$slug"
