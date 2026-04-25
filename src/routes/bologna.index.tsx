@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 
 import { ScriptureMarquee } from "@/components/scripture-marquee";
+import { PhotoMarquee } from "@/components/photo-marquee";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
 import { Sprout, HandHeart, Users, CalendarClock } from "lucide-react";
@@ -9,6 +10,7 @@ import type { ReactNode } from "react";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
+import heroItalia from "@/assets/hero-italia.jpg";
 
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
@@ -38,6 +40,16 @@ function BolognaHome() {
   const heroImage = useActiveHero("bologna", heroBologna);
   const welcomeImg = useSlotImage("bologna.welcome", worship);
   const bibleBandImg = useSlotImage("bologna.bibleband", bibleStudy);
+  const photo1 = useSlotImage("bologna.photo1", heroBologna);
+  const photo2 = useSlotImage("bologna.photo2", worship);
+  const photo3 = useSlotImage("bologna.photo3", bibleStudy);
+  const photo4 = useSlotImage("bologna.photo4", heroItalia);
+  const cityPhotos = [
+    { src: photo1, alt: "Bologna" },
+    { src: photo2, alt: "Adorazione" },
+    { src: photo3, alt: "Studio biblico" },
+    { src: photo4, alt: "Comunità italiana" },
+  ];
 
   return (
     <>
@@ -129,6 +141,16 @@ function BolognaHome() {
             cta={{ to: "/bologna/contatti", label: "Studiamo insieme" }}
           />
         </div>
+      </section>
+
+      {/* Photo galleries — moving */}
+      <section className="py-16 md:py-20 space-y-6">
+        <div className="container-prose mb-2">
+          <p className="eyebrow mb-2">Volti e momenti</p>
+          <h2 className="font-display text-3xl md:text-4xl">Chi sta camminando con noi.</h2>
+        </div>
+        <PhotoMarquee images={cityPhotos} />
+        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
       </section>
 
       {/* Promise / verse */}
