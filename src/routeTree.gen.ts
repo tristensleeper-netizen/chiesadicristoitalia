@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiciliaRouteImport } from './routes/sicilia'
 import { Route as NapoliRouteImport } from './routes/napoli'
+import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
@@ -50,6 +51,12 @@ const NapoliRoute = NapoliRouteImport.update({
   path: '/napoli',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChiesaDiCristoDiBolognaRecruitmentPageRoute =
+  ChiesaDiCristoDiBolognaRecruitmentPageRouteImport.update({
+    id: '/chiesa-di-cristo-di-bologna-recruitment-page',
+    path: '/chiesa-di-cristo-di-bologna-recruitment-page',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -194,6 +201,7 @@ const AdminDevozionaliIdRoute = AdminDevozionaliIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -225,6 +233,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -258,6 +267,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -292,6 +302,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
     | '/admin/eventi'
@@ -323,6 +334,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
     | '/admin/eventi'
@@ -355,6 +367,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
     | '/admin/eventi'
@@ -388,6 +401,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ChiesaDiCristoDiBolognaRecruitmentPageRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   NapoliRoute: typeof NapoliRoute
   SiciliaRoute: typeof SiciliaRoute
   BolognaChiSiamoRoute: typeof BolognaChiSiamoRoute
@@ -423,6 +437,13 @@ declare module '@tanstack/react-router' {
       path: '/napoli'
       fullPath: '/napoli'
       preLoaderRoute: typeof NapoliRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chiesa-di-cristo-di-bologna-recruitment-page': {
+      id: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      path: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      fullPath: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      preLoaderRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -653,6 +674,8 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ChiesaDiCristoDiBolognaRecruitmentPageRoute:
+    ChiesaDiCristoDiBolognaRecruitmentPageRoute,
   NapoliRoute: NapoliRoute,
   SiciliaRoute: SiciliaRoute,
   BolognaChiSiamoRoute: BolognaChiSiamoRoute,
