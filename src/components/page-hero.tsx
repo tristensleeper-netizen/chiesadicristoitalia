@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useSlotMedia, type SlotKey } from "@/lib/use-slot-image";
 
 interface PageHeroProps {
@@ -36,6 +36,7 @@ export function PageHero({
   // While a slot is specified but not yet loaded, suppress the fallback image
   // to avoid a flash of the default hero before the video appears.
   const slotPending = slot != null && slotMedia == null;
+  const [videoReady, setVideoReady] = useState(false);
   const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
     ? slotMedia.height > slotMedia.width
     : false;
@@ -54,6 +55,8 @@ export function PageHero({
         : image;
   // Only render the still image layer when there's no video AND the slot isn't pending.
   const showImageLayer = !resolvedVideo && !slotPending;
+  // When the slot has a video, never render the fallback image at all (prevents flash).
+  const slotHasVideo = useSlot && slotMedia.kind === "video";
 
   const heightClass =
     height === "tall"
@@ -94,15 +97,16 @@ export function PageHero({
       {resolvedVideo ? (
         <video
           src={resolvedVideo}
-          poster={resolvedImage}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
+          preload="auto"
+          onCanPlay={() => setVideoReady(true)}
+          onLoadedData={() => setVideoReady(true)}
+          className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""} ${videoReady ? "opacity-100" : "opacity-0"}`}
         />
-      ) : showImageLayer ? (
+      ) : showImageLayer && !slotHasVideo ? (
         <img
           src={resolvedImage}
           alt=""
