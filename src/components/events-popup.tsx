@@ -75,7 +75,7 @@ export function EventsPopup({ events, cityHref, cityName }: Props) {
               {current.date.split(" ")[1]}
             </p>
             <p className="font-display text-sm text-foreground/60">
-              {current.date.split(" ")[0]} · {current.time}
+              {current.date.split(" ")[0]} {current.date.split(" ")[2] ?? ""} · {current.time}
             </p>
           </div>
           <h3 className="font-display mt-2 text-lg leading-tight text-foreground">

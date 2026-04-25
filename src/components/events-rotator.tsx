@@ -40,7 +40,7 @@ export function EventsRotator({ events, cityHref, ctaLabel = "Tutti gli eventi" 
             {current.date.split(" ")[1]}
           </p>
           <p className="font-display text-xl text-foreground/70 mt-1">
-            {current.date.split(" ")[0]} · {current.time}
+            {current.date.split(" ")[0]} {current.date.split(" ")[2] ?? ""} · {current.time}
           </p>
         </div>
 

@@ -36,16 +36,22 @@ export type EventOccurrence = {
 };
 
 const ITALIAN_DAYS = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+const ITALIAN_MONTHS = [
+  "Gen", "Feb", "Mar", "Apr", "Mag", "Giu",
+  "Lug", "Ago", "Set", "Ott", "Nov", "Dic",
+];
+
+function formatDateLabel(d: Date) {
+  return `${ITALIAN_DAYS[d.getDay()]} ${d.getDate()} ${ITALIAN_MONTHS[d.getMonth()]}`;
+}
 
 export function rowToRotator(r: CityEventRow): RotatorEvent {
   // Prefer real date if present
   if (r.start_at) {
     const d = new Date(r.start_at);
-    const day = ITALIAN_DAYS[d.getDay()];
-    const dayNum = d.getDate();
     const time = d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
     return {
-      date: `${day} ${dayNum}`,
+      date: formatDateLabel(d),
       time,
       title: r.title,
       blurb: r.blurb || "",
@@ -60,6 +66,17 @@ export function rowToRotator(r: CityEventRow): RotatorEvent {
     title: r.title,
     blurb: r.blurb || "",
     tag: r.tag || undefined,
+  };
+}
+
+export function occurrenceToRotator(occ: EventOccurrence): RotatorEvent {
+  const time = occ.date.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+  return {
+    date: formatDateLabel(occ.date),
+    time,
+    title: occ.title,
+    blurb: occ.blurb,
+    tag: occ.tag,
   };
 }
 
@@ -148,7 +165,29 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
         .order("event_date", { ascending: true, nullsFirst: false });
       if (error || !active) return;
       if (data && data.length > 0) {
-        setEvents((data as CityEventRow[]).map(rowToRotator));
+        const rows = data as CityEventRow[];
+        // Window: from start of today through next 7 days
+        const now = new Date();
+        const from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const to = new Date(from);
+        to.setDate(to.getDate() + 7);
+        to.setHours(23, 59, 59, 999);
+
+        const occurrences: EventOccurrence[] = [];
+        for (const r of rows) occurrences.push(...expandRow(r, from, to));
+        // Drop occurrences already in the past today
+        const upcoming = occurrences
+          .filter((o) => o.date.getTime() >= now.getTime() || isSameDay(o.date, now))
+          .filter((o) => o.date.getTime() >= now.getTime() - 60 * 60 * 1000) // small grace for in-progress
+          .sort((a, b) => a.date.getTime() - b.date.getTime());
+
+        if (upcoming.length > 0) {
+          setEvents(upcoming.map(occurrenceToRotator));
+        } else {
+          setEvents([]);
+        }
+      } else {
+        setEvents([]);
       }
     })();
     return () => {
@@ -157,6 +196,14 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
   }, [city]);
 
   return events;
+}
+
+function isSameDay(a: Date, b: Date) {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
 
 /** Fetches raw city events (used by the calendar view). */

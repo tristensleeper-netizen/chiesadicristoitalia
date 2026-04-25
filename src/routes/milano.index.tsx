@@ -105,18 +105,20 @@ function MilanoHome() {
       <EventsPopup events={events} cityHref="/milano/eventi" cityName="Milano" />
 
       {/* Animated events rotator */}
-      <section className="container-prose pt-4 md:pt-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-2">Cosa succede</p>
-            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+      {events.length > 0 && (
+        <section className="container-prose pt-4 md:pt-8">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow mb-2">Cosa succede</p>
+              <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+            </div>
+            <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+              Calendario completo →
+            </Link>
           </div>
-          <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
-            Calendario completo →
-          </Link>
-        </div>
-        <EventsRotator events={events} cityHref="/milano/eventi" />
-      </section>
+          <EventsRotator events={events} cityHref="/milano/eventi" />
+        </section>
+      )}
 
       <div className="mt-16">
         <ScriptureMarquee />
