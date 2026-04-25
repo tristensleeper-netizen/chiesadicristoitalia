@@ -105,6 +105,7 @@ export function PageHero({
       {resolvedVideo ? (
         <video
           src={resolvedVideo}
+          poster={videoPoster}
           autoPlay
           muted
           loop
