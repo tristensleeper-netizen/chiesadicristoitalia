@@ -32,7 +32,7 @@ export const Route = createFileRoute("/chiesa-di-cristo-di-bologna-recruitment-p
 
 function RecruitmentPage() {
   const heroImage = useActiveHero("bologna", heroBologna);
-  const storyImage = useSlotImage("bologna.recruitment.story", worship);
+  const storyImage = useSlotImage("bologna.welcome", worship);
 
   // Load the Fillout embed script
   useEffect(() => {
@@ -47,7 +47,7 @@ function RecruitmentPage() {
   return (
     <>
       <PageHero
-        slot="bologna.recruitment.hero"
+        slot="bologna.hero"
         image={heroImage}
         eyebrow="Recruitment · Lancio Settembre 2026"
         title={<>Unisciti alla<br />missione.</>}
