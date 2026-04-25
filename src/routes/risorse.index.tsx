@@ -232,6 +232,8 @@ function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }
     };
   }, [r.media_url, thumb]);
 
+  const caption = (r as any).thumbnail_caption as string | null | undefined;
+
   if (thumb) {
     return (
       <div className="relative aspect-video overflow-hidden bg-muted">
@@ -252,6 +254,13 @@ function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }
               </div>
             </div>
           </>
+        )}
+        {caption && (
+          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+            <p className="font-display text-white text-lg leading-tight drop-shadow-md">
+              {caption}
+            </p>
+          </div>
         )}
       </div>
     );

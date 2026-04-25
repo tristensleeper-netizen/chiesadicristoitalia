@@ -37,6 +37,7 @@ function ResourceEditor() {
     body: "",
     media_url: "",
     thumbnail_url: "",
+    thumbnail_caption: "",
     city_tag: "national" as CityTag,
     speaker_or_author: "",
     scripture_ref: "",
@@ -61,6 +62,7 @@ function ResourceEditor() {
           body: data.body ?? "",
           media_url: data.media_url ?? "",
           thumbnail_url: data.thumbnail_url ?? "",
+          thumbnail_caption: (data as any).thumbnail_caption ?? "",
           city_tag: data.city_tag,
           speaker_or_author: data.speaker_or_author ?? "",
           scripture_ref: data.scripture_ref ?? "",
@@ -83,6 +85,7 @@ function ResourceEditor() {
       body: form.body || null,
       media_url: form.media_url || null,
       thumbnail_url: form.thumbnail_url || null,
+      thumbnail_caption: form.thumbnail_caption || null,
       speaker_or_author: form.speaker_or_author || null,
       scripture_ref: form.scripture_ref || null,
     };
@@ -142,6 +145,9 @@ function ResourceEditor() {
           </Field>
           <Field label="URL miniatura" hint="Immagine di anteprima (opzionale)">
             <input value={form.thumbnail_url} onChange={(e) => setForm({ ...form, thumbnail_url: e.target.value })} className="input-base" />
+          </Field>
+          <Field label="Testo sulla miniatura" hint="Sovrascrive il testo che appare sopra l'immagine (es. 'Funzione domenicale'). Lascia vuoto per nessun testo.">
+            <input value={form.thumbnail_caption} onChange={(e) => setForm({ ...form, thumbnail_caption: e.target.value })} placeholder="Es. Funzione domenicale" className="input-base" />
           </Field>
         </Section>
 

@@ -356,6 +356,7 @@ export type Database = {
           scripture_ref: string | null
           slug: string
           speaker_or_author: string | null
+          thumbnail_caption: string | null
           thumbnail_url: string | null
           title: string
           type: Database["public"]["Enums"]["resource_type"]
@@ -374,6 +375,7 @@ export type Database = {
           scripture_ref?: string | null
           slug: string
           speaker_or_author?: string | null
+          thumbnail_caption?: string | null
           thumbnail_url?: string | null
           title: string
           type: Database["public"]["Enums"]["resource_type"]
@@ -392,6 +394,7 @@ export type Database = {
           scripture_ref?: string | null
           slug?: string
           speaker_or_author?: string | null
+          thumbnail_caption?: string | null
           thumbnail_url?: string | null
           title?: string
           type?: Database["public"]["Enums"]["resource_type"]
