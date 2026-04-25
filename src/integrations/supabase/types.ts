@@ -14,6 +14,62 @@ export type Database = {
   }
   public: {
     Tables: {
+      city_event_overrides: {
+        Row: {
+          blurb: string | null
+          cancelled: boolean
+          created_at: string
+          end_at: string | null
+          event_id: string
+          id: string
+          location: string | null
+          note: string | null
+          override_date: string
+          start_at: string | null
+          time_label: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          blurb?: string | null
+          cancelled?: boolean
+          created_at?: string
+          end_at?: string | null
+          event_id: string
+          id?: string
+          location?: string | null
+          note?: string | null
+          override_date: string
+          start_at?: string | null
+          time_label?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          blurb?: string | null
+          cancelled?: boolean
+          created_at?: string
+          end_at?: string | null
+          event_id?: string
+          id?: string
+          location?: string | null
+          note?: string | null
+          override_date?: string
+          start_at?: string | null
+          time_label?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "city_event_overrides_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "city_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       city_events: {
         Row: {
           active: boolean

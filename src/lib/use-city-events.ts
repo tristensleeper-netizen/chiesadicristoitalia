@@ -23,6 +23,26 @@ export type CityEventRow = {
   active: boolean;
 };
 
+/** Per-date override for a recurring (or single) event. */
+export type EventOverrideRow = {
+  id: string;
+  event_id: string;
+  override_date: string; // YYYY-MM-DD
+  cancelled: boolean;
+  title: string | null;
+  blurb: string | null;
+  time_label: string | null;
+  location: string | null;
+  start_at: string | null;
+  end_at: string | null;
+  note: string | null;
+};
+
+function isoDay(d: Date) {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
 /** A single concrete occurrence of an event on the calendar. */
 export type EventOccurrence = {
   id: string; // unique per occurrence (event id + date)
@@ -82,39 +102,63 @@ export function occurrenceToRotator(occ: EventOccurrence): RotatorEvent {
 
 /** Expand a row into occurrences inside [from, to]. Multi-day events emit
  * one occurrence per day they span so each day is visible on the calendar. */
-export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrence[] {
+export function expandRow(
+  r: CityEventRow,
+  from: Date,
+  to: Date,
+  overrides?: EventOverrideRow[],
+): EventOccurrence[] {
   const out: EventOccurrence[] = [];
+  const ovrByDate = new Map<string, EventOverrideRow>();
+  for (const o of overrides ?? []) {
+    if (o.event_id === r.id) ovrByDate.set(o.override_date, o);
+  }
+
   const make = (
     date: Date,
     opts?: { dayIndex: number; dayCount: number },
-  ): EventOccurrence => {
+  ): EventOccurrence | null => {
+    const ovr = ovrByDate.get(isoDay(date));
+    if (ovr?.cancelled) return null;
+
+    let finalDate = date;
+    let endDate: Date | undefined = r.end_at ? new Date(r.end_at) : undefined;
+    if (ovr?.start_at) {
+      finalDate = new Date(ovr.start_at);
+    }
+    if (ovr?.end_at) {
+      endDate = new Date(ovr.end_at);
+    }
+
     const isMulti = (opts?.dayCount ?? 1) > 1;
     const suffix = isMulti && opts ? ` (giorno ${opts.dayIndex + 1}/${opts.dayCount})` : "";
+    const baseTitle = ovr?.title || r.title;
+    const baseBlurb = ovr?.blurb ?? r.blurb ?? "";
+    const blurbWithNote = ovr?.note ? `${ovr.note}${baseBlurb ? ` — ${baseBlurb}` : ""}` : baseBlurb;
     return {
-      id: `${r.id}-${date.toISOString().slice(0, 10)}`,
+      id: `${r.id}-${isoDay(finalDate)}`,
       source: r,
-      date,
-      end: r.end_at ? new Date(r.end_at) : undefined,
-      title: r.title + suffix,
-      blurb: r.blurb || "",
+      date: finalDate,
+      end: endDate,
+      title: baseTitle + suffix,
+      blurb: blurbWithNote,
       tag: r.tag || undefined,
-      location: r.location || undefined,
+      location: ovr?.location || r.location || undefined,
     };
   };
 
   if (r.recurrence === "weekly" && r.weekday !== null && r.start_at) {
     const start = new Date(r.start_at);
     const recEnd = r.recurrence_end ? new Date(r.recurrence_end + "T23:59:59") : null;
-    // Walk from max(start, from) through to
     const cursor = new Date(Math.max(from.getTime(), start.getTime()));
     cursor.setHours(start.getHours(), start.getMinutes(), 0, 0);
-    // Move cursor forward to the next matching weekday
     while (cursor.getDay() !== r.weekday) {
       cursor.setDate(cursor.getDate() + 1);
     }
     while (cursor <= to) {
       if (recEnd && cursor > recEnd) break;
-      out.push(make(new Date(cursor)));
+      const occ = make(new Date(cursor));
+      if (occ) out.push(occ);
       cursor.setDate(cursor.getDate() + 7);
     }
     return out;
@@ -124,7 +168,6 @@ export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrenc
     const startDt = new Date(r.start_at);
     const endDt = r.end_at ? new Date(r.end_at) : null;
 
-    // Compute inclusive day count (calendar days the event spans)
     const startDay = new Date(startDt.getFullYear(), startDt.getMonth(), startDt.getDate());
     const endDayBase = endDt ? new Date(endDt.getFullYear(), endDt.getMonth(), endDt.getDate()) : startDay;
     const endDay = endDayBase < startDay ? startDay : endDayBase;
@@ -133,20 +176,28 @@ export function expandRow(r: CityEventRow, from: Date, to: Date): EventOccurrenc
     for (let i = 0; i < dayCount; i++) {
       const dayDate = new Date(startDay);
       dayDate.setDate(startDay.getDate() + i);
-      // First day keeps the actual start time so it sorts correctly; later
-      // days appear at the start of the day on the calendar.
       if (i === 0) {
         dayDate.setHours(startDt.getHours(), startDt.getMinutes(), 0, 0);
       } else {
         dayDate.setHours(9, 0, 0, 0);
       }
       if (dayDate >= from && dayDate <= to) {
-        out.push(make(dayDate, { dayIndex: i, dayCount }));
+        const occ = make(dayDate, { dayIndex: i, dayCount });
+        if (occ) out.push(occ);
       }
     }
     return out;
   }
   return out;
+}
+
+async function fetchOverridesFor(eventIds: string[]): Promise<EventOverrideRow[]> {
+  if (eventIds.length === 0) return [];
+  const { data } = await (supabase as any)
+    .from("city_event_overrides")
+    .select("*")
+    .in("event_id", eventIds);
+  return (data as EventOverrideRow[]) ?? [];
 }
 
 export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent[]) {
@@ -166,6 +217,8 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
       if (error || !active) return;
       if (data && data.length > 0) {
         const rows = data as CityEventRow[];
+        const overrides = await fetchOverridesFor(rows.map((r) => r.id));
+        if (!active) return;
         // Window: from start of today through next 7 days
         const now = new Date();
         const from = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -174,11 +227,10 @@ export function useCityEvents(city: "milano" | "bologna", fallback: RotatorEvent
         to.setHours(23, 59, 59, 999);
 
         const occurrences: EventOccurrence[] = [];
-        for (const r of rows) occurrences.push(...expandRow(r, from, to));
-        // Drop occurrences already in the past today
+        for (const r of rows) occurrences.push(...expandRow(r, from, to, overrides));
         const upcoming = occurrences
           .filter((o) => o.date.getTime() >= now.getTime() || isSameDay(o.date, now))
-          .filter((o) => o.date.getTime() >= now.getTime() - 60 * 60 * 1000) // small grace for in-progress
+          .filter((o) => o.date.getTime() >= now.getTime() - 60 * 60 * 1000)
           .sort((a, b) => a.date.getTime() - b.date.getTime());
 
         if (upcoming.length > 0) {
@@ -209,6 +261,7 @@ function isSameDay(a: Date, b: Date) {
 /** Fetches raw city events (used by the calendar view). */
 export function useCityEventRows(city: "milano" | "bologna") {
   const [rows, setRows] = useState<CityEventRow[]>([]);
+  const [overrides, setOverrides] = useState<EventOverrideRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -221,7 +274,11 @@ export function useCityEventRows(city: "milano" | "bologna") {
         .eq("city", city)
         .eq("active", true);
       if (!active) return;
-      setRows((data as CityEventRow[]) ?? []);
+      const r = (data as CityEventRow[]) ?? [];
+      setRows(r);
+      const ovr = await fetchOverridesFor(r.map((x) => x.id));
+      if (!active) return;
+      setOverrides(ovr);
       setLoading(false);
     })();
     return () => {
@@ -229,18 +286,18 @@ export function useCityEventRows(city: "milano" | "bologna") {
     };
   }, [city]);
 
-  return { rows, loading };
+  return { rows, overrides, loading };
 }
 
 /** Returns occurrences expanded across the given range. */
 export function useEventOccurrences(city: "milano" | "bologna", from: Date, to: Date) {
-  const { rows, loading } = useCityEventRows(city);
+  const { rows, overrides, loading } = useCityEventRows(city);
   const occurrences = useMemo(() => {
     const all: EventOccurrence[] = [];
-    for (const r of rows) all.push(...expandRow(r, from, to));
+    for (const r of rows) all.push(...expandRow(r, from, to, overrides));
     all.sort((a, b) => a.date.getTime() - b.date.getTime());
     return all;
-  }, [rows, from, to]);
+  }, [rows, overrides, from, to]);
   return { occurrences, loading };
 }
 

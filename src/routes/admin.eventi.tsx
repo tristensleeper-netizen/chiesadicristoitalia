@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import type { CityEventRow } from "@/lib/use-city-events";
+import type { CityEventRow, EventOverrideRow } from "@/lib/use-city-events";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
 
@@ -452,6 +452,10 @@ function AdminEvents() {
                 />
                 <span className="text-sm">Visibile sul sito</span>
               </label>
+
+              {editing.id && (
+                <OverridesManager eventId={editing.id} />
+              )}
             </div>
             <div className="p-6 border-t border-border flex justify-end gap-3">
               <button onClick={() => setEditing(null)} className="btn-outline">Annulla</button>
@@ -475,5 +479,200 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
       <span className="text-xs uppercase tracking-wider text-muted-foreground font-medium block mb-1.5">{label}</span>
       {children}
     </label>
+  );
+}
+
+type NewOverride = {
+  override_date: string;
+  cancelled: boolean;
+  title: string;
+  blurb: string;
+  location: string;
+  start_time: string;
+  end_time: string;
+  note: string;
+};
+
+const EMPTY_OVR: NewOverride = {
+  override_date: "",
+  cancelled: false,
+  title: "",
+  blurb: "",
+  location: "",
+  start_time: "",
+  end_time: "",
+  note: "",
+};
+
+function OverridesManager({ eventId }: { eventId: string }) {
+  const [overrides, setOverrides] = useState<EventOverrideRow[]>([]);
+  const [draft, setDraft] = useState<NewOverride>(EMPTY_OVR);
+  const [loading, setLoading] = useState(true);
+
+  const load = async () => {
+    setLoading(true);
+    const { data } = await (supabase as any)
+      .from("city_event_overrides")
+      .select("*")
+      .eq("event_id", eventId)
+      .order("override_date", { ascending: true });
+    setOverrides((data as EventOverrideRow[]) ?? []);
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, [eventId]);
+
+  const add = async () => {
+    if (!draft.override_date) {
+      alert("Indica la data dell'eccezione.");
+      return;
+    }
+    const startIso = draft.start_time
+      ? new Date(`${draft.override_date}T${draft.start_time}:00`).toISOString()
+      : null;
+    const endIso = draft.end_time
+      ? new Date(`${draft.override_date}T${draft.end_time}:00`).toISOString()
+      : null;
+    const payload = {
+      event_id: eventId,
+      override_date: draft.override_date,
+      cancelled: draft.cancelled,
+      title: draft.title || null,
+      blurb: draft.blurb || null,
+      location: draft.location || null,
+      start_at: startIso,
+      end_at: endIso,
+      note: draft.note || null,
+    };
+    const { error } = await (supabase as any)
+      .from("city_event_overrides")
+      .upsert(payload, { onConflict: "event_id,override_date" });
+    if (error) { alert(error.message); return; }
+    setDraft(EMPTY_OVR);
+    load();
+  };
+
+  const remove = async (id: string) => {
+    if (!confirm("Rimuovere questa eccezione?")) return;
+    const { error } = await (supabase as any)
+      .from("city_event_overrides")
+      .delete()
+      .eq("id", id);
+    if (error) { alert(error.message); return; }
+    load();
+  };
+
+  return (
+    <div className="mt-6 pt-6 border-t border-border">
+      <h4 className="font-display text-lg mb-1">Eccezioni per data</h4>
+      <p className="text-xs text-muted-foreground mb-4">
+        Sovrascrivi una singola occorrenza: cancellala oppure cambia ora, luogo o titolo solo per quel giorno.
+      </p>
+
+      {loading ? (
+        <p className="text-sm text-muted-foreground">Caricamento…</p>
+      ) : overrides.length === 0 ? (
+        <p className="text-sm text-muted-foreground italic mb-4">Nessuna eccezione.</p>
+      ) : (
+        <ul className="space-y-2 mb-4">
+          {overrides.map((o) => (
+            <li key={o.id} className="flex items-start justify-between gap-3 bg-muted/40 rounded-lg p-3 text-sm">
+              <div>
+                <p className="font-medium">
+                  {format(new Date(o.override_date + "T00:00:00"), "EEE d LLL yyyy", { locale: it })}
+                  {o.cancelled && <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700">Cancellato</span>}
+                </p>
+                {!o.cancelled && (
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {[
+                      o.title && `Titolo: ${o.title}`,
+                      o.start_at && `Ora: ${format(new Date(o.start_at), "HH:mm")}`,
+                      o.location && `Luogo: ${o.location}`,
+                      o.note && `Nota: ${o.note}`,
+                    ].filter(Boolean).join(" · ") || "Nessun cambiamento"}
+                  </p>
+                )}
+              </div>
+              <button onClick={() => remove(o.id)} className="text-xs text-destructive hover:underline shrink-0">
+                Rimuovi
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="bg-muted/30 rounded-lg p-4 space-y-3">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">Aggiungi eccezione</p>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Data">
+            <input
+              type="date"
+              value={draft.override_date}
+              onChange={(e) => setDraft({ ...draft, override_date: e.target.value })}
+              className="input"
+            />
+          </Field>
+          <label className="flex items-end gap-2 pb-2">
+            <input
+              type="checkbox"
+              checked={draft.cancelled}
+              onChange={(e) => setDraft({ ...draft, cancelled: e.target.checked })}
+            />
+            <span className="text-sm">Cancella questa occorrenza</span>
+          </label>
+        </div>
+
+        {!draft.cancelled && (
+          <>
+            <Field label="Titolo (lascia vuoto per non cambiare)">
+              <input
+                value={draft.title}
+                onChange={(e) => setDraft({ ...draft, title: e.target.value })}
+                className="input"
+                placeholder="Titolo speciale per questa data"
+              />
+            </Field>
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Ora inizio">
+                <input
+                  type="time"
+                  value={draft.start_time}
+                  onChange={(e) => setDraft({ ...draft, start_time: e.target.value })}
+                  className="input"
+                />
+              </Field>
+              <Field label="Ora fine">
+                <input
+                  type="time"
+                  value={draft.end_time}
+                  onChange={(e) => setDraft({ ...draft, end_time: e.target.value })}
+                  className="input"
+                />
+              </Field>
+            </div>
+            <Field label="Luogo">
+              <input
+                value={draft.location}
+                onChange={(e) => setDraft({ ...draft, location: e.target.value })}
+                className="input"
+                placeholder="Luogo solo per questa data"
+              />
+            </Field>
+            <Field label="Nota">
+              <input
+                value={draft.note}
+                onChange={(e) => setDraft({ ...draft, note: e.target.value })}
+                className="input"
+                placeholder="Es. Ospite speciale"
+              />
+            </Field>
+          </>
+        )}
+
+        <button onClick={add} className="btn-primary text-sm">
+          Salva eccezione
+        </button>
+      </div>
+    </div>
   );
 }
