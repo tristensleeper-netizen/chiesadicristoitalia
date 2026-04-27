@@ -243,23 +243,21 @@ function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }
           loading="lazy"
           className="h-full w-full object-cover transition group-hover:scale-105"
         />
-        {showPlay && (
-          <>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          </>
-        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
         {caption && (
-          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-            <p className="font-display text-white text-lg leading-tight drop-shadow-md">
+          <div className="absolute inset-0 flex items-center px-6">
+            <p className="font-display italic text-white/90 text-2xl md:text-3xl leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
               {caption}
             </p>
+          </div>
+        )}
+        {showPlay && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </div>
         )}
       </div>
