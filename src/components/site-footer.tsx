@@ -6,8 +6,18 @@ export function SiteFooter() {
       <div className="container-prose py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/15 font-display text-lg">
-              ✝
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/15">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              >
+                <path d="M12 3v18M7 9h10" />
+              </svg>
             </span>
             <span className="font-display text-xl">Chiesa di Cristo in Italia</span>
           </div>
