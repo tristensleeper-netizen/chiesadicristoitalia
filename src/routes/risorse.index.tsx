@@ -4,9 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
-  fetchOEmbedThumbnail,
   formatItalianDate,
-  getInstantThumbnail,
   type CityTag,
   type Resource,
   type ResourceType,
@@ -218,39 +216,8 @@ export function ResourceCard({ r }: { r: Resource }) {
 }
 
 function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }) {
-  // Only use a thumbnail image if one was explicitly uploaded for this resource.
-  // We intentionally ignore auto-fetched YouTube/Vimeo thumbnails because they
-  // include the video's title baked into the image.
-  const thumb = r.thumbnail_url ?? null;
-
-  if (thumb) {
-    return (
-      <div className="relative aspect-video overflow-hidden bg-muted">
-        <img
-          src={thumb}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover transition group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
-        {showPlay && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   return (
-    <div className="relative aspect-video bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center">
-      <span className="font-display text-5xl text-primary/40">
-        {r.type === "sermon" ? "✝" : r.type === "video" ? "▶" : r.type === "podcast" ? "♪" : r.type === "pdf" ? "↓" : "✎"}
-      </span>
+    <div className="relative aspect-video bg-gradient-to-br from-primary/10 via-secondary/20 to-primary/30">
       {showPlay && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
