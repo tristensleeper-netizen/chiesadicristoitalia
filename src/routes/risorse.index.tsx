@@ -244,13 +244,6 @@ function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }
           className="h-full w-full object-cover transition group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
-        {caption && (
-          <div className="absolute inset-0 flex items-center px-6">
-            <p className="font-display italic text-white/90 text-2xl md:text-3xl leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
-              {caption}
-            </p>
-          </div>
-        )}
         {showPlay && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
