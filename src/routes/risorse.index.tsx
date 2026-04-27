@@ -215,9 +215,26 @@ export function ResourceCard({ r }: { r: Resource }) {
   );
 }
 
+// Rich, varied gradient palettes inspired by the original video thumbnails
+const GRADIENT_PALETTES = [
+  "bg-[linear-gradient(135deg,#1e2a3a_0%,#2a3a4f_50%,#3a4a60_100%)]", // deep navy
+  "bg-[linear-gradient(135deg,#3d2817_0%,#5a3a1f_50%,#7a4f2a_100%)]", // warm brown
+  "bg-[linear-gradient(135deg,#1a2e1f_0%,#234030_50%,#2f5540_100%)]", // forest green
+  "bg-[linear-gradient(135deg,#2a1e2e_0%,#3f2a45_50%,#553a5c_100%)]", // plum
+  "bg-[linear-gradient(135deg,#2e2418_0%,#453620_50%,#5e4a2e_100%)]", // bronze
+  "bg-[linear-gradient(135deg,#1a2a3d_0%,#1f3a55_50%,#2a4a6e_100%)]", // ocean blue
+];
+
+function hashToIndex(s: string, mod: number) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h) % mod;
+}
+
 function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }) {
+  const palette = GRADIENT_PALETTES[hashToIndex(r.id ?? r.slug ?? r.title, GRADIENT_PALETTES.length)];
   return (
-    <div className="relative aspect-video bg-gradient-to-br from-primary/10 via-secondary/20 to-primary/30">
+    <div className={`relative aspect-video ${palette}`}>
       {showPlay && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
