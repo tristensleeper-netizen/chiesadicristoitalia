@@ -38,6 +38,7 @@ import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
 import { Route as AdminDevozionaliIndexRouteImport } from './routes/admin.devozionali.index'
 import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
 import { Route as AdminDevozionaliIdRouteImport } from './routes/admin.devozionali.$id'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
 const SiciliaRoute = SiciliaRouteImport.update({
   id: '/sicilia',
@@ -185,6 +186,12 @@ const AdminDevozionaliIdRoute = AdminDevozionaliIdRouteImport.update({
   path: '/devozionali/$id',
   getParentRoute: () => AdminRoute,
 } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -246,6 +254,7 @@ export interface FileRoutesByTo {
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali': typeof AdminDevozionaliIndexRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -278,6 +287,7 @@ export interface FileRoutesById {
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -311,6 +321,7 @@ export interface FileRouteTypes {
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali/'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali'
+    | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
@@ -372,6 +384,7 @@ export interface FileRouteTypes {
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali/'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -395,6 +408,7 @@ export interface RootRouteChildren {
   DevozionaleIndexRoute: typeof DevozionaleIndexRoute
   MilanoIndexRoute: typeof MilanoIndexRoute
   RisorseIndexRoute: typeof RisorseIndexRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -602,6 +616,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDevozionaliIdRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -653,6 +674,7 @@ const rootRouteChildren: RootRouteChildren = {
   DevozionaleIndexRoute: DevozionaleIndexRoute,
   MilanoIndexRoute: MilanoIndexRoute,
   RisorseIndexRoute: RisorseIndexRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
