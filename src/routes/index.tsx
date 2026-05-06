@@ -46,46 +46,16 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Scripture — editorial split spread */}
-      <section className="relative overflow-hidden bg-background">
-        <div className="container-prose py-20 md:py-28">
-          <div className="grid gap-10 md:gap-16 md:grid-cols-12 items-center">
-            <div className="md:col-span-7 order-2 md:order-1">
-              <p className="eyebrow mb-6 text-primary">Una promessa</p>
-              <figure>
-                <blockquote className="font-display italic text-3xl md:text-4xl lg:text-5xl leading-[1.2] text-foreground">
-                  <span className="text-primary/40 font-display not-italic text-5xl md:text-6xl leading-none align-top mr-1">“</span>
-                  E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.
-                </blockquote>
-                <figcaption className="mt-8 flex items-center gap-4">
-                  <span className="h-px w-10 bg-primary/50" aria-hidden="true" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
-                    Vangelo secondo Giovanni 17:26
-                  </span>
-                </figcaption>
-              </figure>
-            </div>
-            <div className="md:col-span-5 order-1 md:order-2">
-              <div className="relative overflow-hidden rounded-3xl aspect-[4/5] shadow-[var(--shadow-elegant)]">
-                <img
-                  src={sunsetItalia}
-                  alt="Tramonto sulle colline italiane"
-                  loading="lazy"
-                  width={1920}
-                  height={1280}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, transparent 50%, color-mix(in oklab, var(--primary) 35%, transparent) 100%)",
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+      {/* Scripture — Milano-style image band */}
+      <section className="relative h-[60vh] overflow-hidden">
+        <img src={sunsetItalia} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-primary/70" />
+        <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
+          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
+          <h2 className="font-display italic text-3xl md:text-5xl max-w-4xl mx-auto leading-tight">
+            «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.»
+          </h2>
+          <p className="mt-6 text-white/80 text-xs uppercase tracking-[0.3em]">— Vangelo secondo Giovanni 17:26</p>
         </div>
       </section>
 
