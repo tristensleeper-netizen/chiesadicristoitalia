@@ -77,10 +77,10 @@ function HomePage() {
             Gesù, un uomo semplice con un piano semplice: far conoscere{" "}
             <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio e il suo amore</em>.
           </h2>
+          <p className="eyebrow text-center" style={{ fontSize: "calc(1em + 3mm)", marginBottom: "1.5cm" }}>Benvenuti</p>
           <p className="max-w-2xl mx-auto text-muted-foreground leading-relaxed" style={{ marginBottom: "1.5cm" }}>
             Siamo cristiani, persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu!
           </p>
-          <p className="eyebrow">Benvenuti</p>
         </div>
       </section>
 
