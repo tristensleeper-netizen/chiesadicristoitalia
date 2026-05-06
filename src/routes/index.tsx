@@ -61,10 +61,16 @@ function HomePage() {
             Gesù era un uomo semplice con un piano semplice per far conoscere{" "}
             <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio</em>.
           </h2>
+          <figure className="mt-10 max-w-2xl mx-auto text-center">
+            <blockquote className="font-display italic text-xl md:text-2xl leading-relaxed bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              “Ed erano perseveranti nell'ascoltare l'insegnamento degli apostoli e nella comunione fraterna, nel rompere il pane e nelle preghiere. E ogni giorno andavano assidui e concordi al tempio, rompevano il pane nelle case e prendevano il loro cibo insieme, con gioia e semplicità di cuore, lodando Dio e godendo il favore di tutto il popolo.”
+            </blockquote>
+            <figcaption className="mt-4 text-center text-sm uppercase tracking-[0.3em] text-muted-foreground">
+              Atti degli Apostoli 2:46-47
+            </figcaption>
+          </figure>
           <p className="mt-8 max-w-2xl mx-auto text-muted-foreground leading-relaxed">
-            Siamo una chiesa non tradizionale e non denominazionale, radicata nella
-            Bibbia e mossa da amicizie sincere. Ovunque tu sia in Italia, vogliamo
-            incontrarti — di persona, per un caffè, o questa domenica.
+            Siamo cristiani, persone semplici che prendono la Bibbia seriamente, cercando di metterla in pratica ogni giorno per seguire le orme di Gesù. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica, per un caffè… oppure quando vuoi tu!
           </p>
         </div>
       </section>
