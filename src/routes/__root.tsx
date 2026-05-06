@@ -25,18 +25,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Sicilia" },
+      { title: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Palermo" },
       {
         name: "description",
         content:
-          "Una famiglia spirituale in Italia. Trovaci a Milano, Bologna, Napoli e in Sicilia. Funzioni domenicali, studi biblici e una comunità che ti aspetta.",
+          "Una famiglia spirituale in Italia. Trovaci a Milano, Bologna, Napoli e Palermo. Funzioni domenicali, studi biblici e una comunità che ti aspetta.",
       },
       { name: "author", content: "Chiesa di Cristo in Italia" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Sicilia" },
-      { name: "twitter:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Sicilia" },
+      { property: "og:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Palermo" },
+      { name: "twitter:title", content: "Chiesa di Cristo in Italia — Milano, Bologna, Napoli, Palermo" },
       { name: "description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
       { property: "og:description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
       { name: "twitter:description", content: "Christ Italian Connect is a modern, welcoming church website designed to connect local communities with their respective congregations." },
