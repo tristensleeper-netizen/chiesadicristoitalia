@@ -6,6 +6,7 @@ import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import heroNapoli from "@/assets/hero-napoli.jpg";
 import heroSicilia from "@/assets/hero-sicilia.jpg";
+import sunsetWarm from "@/assets/sunset-warm.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
