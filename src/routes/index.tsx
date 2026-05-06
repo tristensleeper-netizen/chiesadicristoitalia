@@ -65,8 +65,8 @@ function HomePage() {
               «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro»
             </blockquote>
             <figcaption
-              className="mt-4 text-center font-display italic text-xl md:text-2xl leading-relaxed"
-              style={{ color: "oklch(0.78 0.15 90)" }}
+              className="mt-4 text-center font-display italic text-xl md:text-2xl leading-relaxed lowercase"
+              style={{ color: "oklch(0.78 0.15 90)", fontVariant: "small-caps" }}
             >
               Vangelo secondo Giovanni 17:26
             </figcaption>
