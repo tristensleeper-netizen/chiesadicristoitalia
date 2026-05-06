@@ -46,40 +46,64 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Intro band — sunny color wash */}
+      {/* Scripture on warm sunset backdrop */}
+      <section className="relative overflow-hidden">
+        <img
+          src={sunsetWarm}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width={1920}
+          height={1024}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ filter: "blur(6px) saturate(1.05)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, color-mix(in oklab, var(--background) 10%, transparent) 0%, color-mix(in oklab, var(--background) 0%, transparent) 40%, color-mix(in oklab, var(--background) 95%, transparent) 100%)",
+          }}
+        />
+        <div className="relative container-prose py-28 md:py-36 text-center">
+          <figure className="max-w-2xl mx-auto text-center">
+            <blockquote
+              className="font-display italic text-2xl md:text-3xl leading-relaxed"
+              style={{ color: "oklch(0.99 0.01 80)", textShadow: "0 2px 24px rgba(40,15,5,0.55)" }}
+            >
+              «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro»
+            </blockquote>
+            <figcaption
+              className="mt-5 text-center font-display italic text-2xl md:text-3xl leading-relaxed lowercase"
+              style={{ color: "oklch(0.99 0.01 80)", fontVariant: "small-caps", textShadow: "0 2px 24px rgba(40,15,5,0.55)" }}
+            >
+              Vangelo secondo Giovanni 17:26
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* Welcome — soft cream wash, smooth transition */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(circle at 12% 20%, oklch(0.88 0.13 80 / 0.55), transparent 45%), radial-gradient(circle at 88% 10%, oklch(0.82 0.14 200 / 0.45), transparent 45%), radial-gradient(circle at 70% 90%, oklch(0.85 0.13 350 / 0.4), transparent 50%)",
+              "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 55%), linear-gradient(180deg, var(--background), var(--primary-soft))",
           }}
         />
         <div className="container-prose py-24 md:py-32 text-center">
-          <figure className="max-w-2xl mx-auto text-center" style={{ marginBottom: "1.5cm" }}>
-            <blockquote
-              className="font-display italic text-xl md:text-2xl leading-relaxed"
-              style={{ color: "oklch(0.78 0.15 90)" }}
-            >
-              «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro»
-            </blockquote>
-            <figcaption
-              className="mt-4 text-center font-display italic text-xl md:text-2xl leading-relaxed lowercase"
-              style={{ color: "oklch(0.78 0.15 90)", fontVariant: "small-caps" }}
-            >
-              Vangelo secondo Giovanni 17:26
-            </figcaption>
-          </figure>
           <h2
-            className="font-display text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight"
-            style={{ marginBottom: "1.5cm" }}
+            className="font-display text-foreground max-w-3xl mx-auto leading-tight"
+            style={{ marginBottom: "1.5cm", fontSize: "calc(2.25rem - 1mm)", fontWeight: 400 }}
           >
             Gesù, un uomo semplice con un piano semplice: far conoscere{" "}
-            <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio e il suo amore</em>.
+            <em className="italic font-bold text-foreground">Dio e il suo amore</em>.
           </h2>
-          <p className="eyebrow text-center" style={{ marginBottom: "1.5cm" }}>Benvenuti</p>
-          <p className="max-w-2xl mx-auto text-muted-foreground leading-relaxed" style={{ marginBottom: "1.5cm" }}>
+          <p className="eyebrow text-center mb-5">Benvenuti</p>
+          <p className="max-w-2xl mx-auto text-foreground/80 leading-relaxed">
             Siamo cristiani, persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu!
           </p>
         </div>
