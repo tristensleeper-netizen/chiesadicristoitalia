@@ -23,7 +23,7 @@ export function SiteFooter() {
           </div>
           <p className="mt-5 max-w-md text-sm text-primary-foreground/75 leading-relaxed">
             Una famiglia spirituale che si incontra a Milano, Bologna, Napoli e in
-            Sicilia. Cerchiamo di vivere il Vangelo con umiltà e di amare il
+            Palermo. Cerchiamo di vivere il Vangelo con umiltà e di amare il
             prossimo come Gesù ci ha amati.
           </p>
         </div>
@@ -36,7 +36,7 @@ export function SiteFooter() {
             <li><Link to="/milano" className="hover:underline">Milano</Link></li>
             <li><Link to="/bologna" className="hover:underline">Bologna</Link></li>
             <li><Link to="/napoli" className="hover:underline">Napoli</Link></li>
-            <li><Link to="/sicilia" className="hover:underline">Sicilia</Link></li>
+            <li><Link to="/sicilia" className="hover:underline">Palermo</Link></li>
           </ul>
         </div>
 

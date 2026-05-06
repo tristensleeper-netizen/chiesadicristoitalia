@@ -20,7 +20,7 @@ export const Route = createFileRoute("/risorse/")({
       {
         name: "description",
         content:
-          "Esplora la nostra biblioteca di sermoni, articoli e video dalle Chiese di Cristo di Milano, Bologna, Napoli e Sicilia.",
+          "Esplora la nostra biblioteca di sermoni, articoli e video dalle Chiese di Cristo di Milano, Bologna, Napoli e Palermo.",
       },
       { property: "og:title", content: "Risorse — Chiesa di Cristo in Italia" },
       {
@@ -46,7 +46,7 @@ const CITY_FILTERS: Array<{ value: CityTag | "all"; label: string }> = [
   { value: "milano", label: "Milano" },
   { value: "bologna", label: "Bologna" },
   { value: "napoli", label: "Napoli" },
-  { value: "sicilia", label: "Sicilia" },
+  { value: "sicilia", label: "Palermo" },
   { value: "national", label: "Nazionale" },
 ];
 
