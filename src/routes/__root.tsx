@@ -80,7 +80,7 @@ function RootComponent() {
     ? "theme-milano"
     : path.startsWith("/bologna")
       ? "theme-bologna"
-      : "";
+      : "theme-italia";
 
   return (
     <div className={themeClass + " min-h-screen flex flex-col bg-background text-foreground"}>
