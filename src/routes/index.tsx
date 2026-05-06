@@ -57,19 +57,28 @@ function HomePage() {
         />
         <div className="container-prose py-24 md:py-32 text-center">
           <p className="eyebrow mb-6">Benvenuti</p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight">
-            Gesù era un uomo semplice con un piano semplice per far conoscere{" "}
-            <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio</em>.
-          </h2>
-          <figure className="mt-10 max-w-2xl mx-auto text-center">
-            <blockquote className="font-display italic text-xl md:text-2xl leading-relaxed bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              “Ed erano perseveranti nell'ascoltare l'insegnamento degli apostoli e nella comunione fraterna, nel rompere il pane e nelle preghiere. E ogni giorno andavano assidui e concordi al tempio, rompevano il pane nelle case e prendevano il loro cibo insieme, con gioia e semplicità di cuore, lodando Dio e godendo il favore di tutto il popolo.”
+          <figure className="max-w-2xl mx-auto text-center" style={{ marginBottom: "1.5cm" }}>
+            <blockquote
+              className="font-display italic text-xl md:text-2xl leading-relaxed"
+              style={{ color: "oklch(0.78 0.15 90)" }}
+            >
+              “E io ho fatto loro conoscere il tuo nome, e lo farò conoscere, affinché l'amore del quale tu mi hai amato sia in loro, e io in loro”
             </blockquote>
-            <figcaption className="mt-4 text-center text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Atti degli Apostoli 2:46-47
+            <figcaption
+              className="mt-4 text-center text-sm tracking-[0.2em]"
+              style={{ color: "oklch(0.78 0.15 90)", fontVariant: "small-caps" }}
+            >
+              vangelo secondo giovanni 17:26
             </figcaption>
           </figure>
-          <p className="mt-8 max-w-2xl mx-auto text-muted-foreground leading-relaxed">
+          <h2
+            className="font-display text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight"
+            style={{ marginBottom: "1.5cm" }}
+          >
+            Gesù, un uomo semplice con un piano semplice: far conoscere{" "}
+            <em className="not-italic bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Dio</em>.
+          </h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground leading-relaxed">
             Siamo cristiani, persone semplici che prendono la Bibbia seriamente, cercando di metterla in pratica ogni giorno per seguire le orme di Gesù. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica, per un caffè… oppure quando vuoi tu!
           </p>
         </div>
