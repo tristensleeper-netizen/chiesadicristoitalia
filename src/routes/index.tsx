@@ -46,8 +46,8 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Scripture on warm sunset backdrop */}
-      <section className="relative overflow-hidden">
+      {/* Scripture — cinematic sunset band */}
+      <section className="relative h-[70vh] min-h-[480px] overflow-hidden">
         <img
           src={sunsetWarm}
           alt=""
@@ -55,29 +55,30 @@ function HomePage() {
           loading="lazy"
           width={1920}
           height={1024}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ filter: "blur(6px) saturate(1.05)" }}
+          className="absolute inset-0 h-full w-full object-cover scale-105"
+          style={{ filter: "blur(2px)" }}
         />
+        {/* Cinematic dark warm overlay for legibility */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, color-mix(in oklab, var(--background) 10%, transparent) 0%, color-mix(in oklab, var(--background) 0%, transparent) 40%, color-mix(in oklab, var(--background) 95%, transparent) 100%)",
+              "radial-gradient(ellipse at 50% 50%, rgba(40,15,5,0.25) 0%, rgba(30,10,5,0.6) 70%), linear-gradient(180deg, rgba(20,10,5,0.55) 0%, rgba(20,10,5,0.35) 50%, rgba(20,10,5,0.7) 100%)",
           }}
         />
-        <div className="relative container-prose py-28 md:py-36 text-center">
-          <figure className="max-w-2xl mx-auto text-center">
-            <blockquote
-              className="font-display italic text-2xl md:text-3xl leading-relaxed"
-              style={{ color: "oklch(0.99 0.01 80)", textShadow: "0 2px 24px rgba(40,15,5,0.55)" }}
-            >
+        {/* Soft fade into next section */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-40"
+          style={{ background: "linear-gradient(180deg, transparent, var(--background))" }}
+        />
+        <div className="relative z-10 container-prose h-full flex flex-col justify-center text-center text-white">
+          <figure className="max-w-3xl mx-auto">
+            <blockquote className="font-display italic text-3xl md:text-5xl leading-[1.2] text-white/95">
               «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro»
             </blockquote>
-            <figcaption
-              className="mt-5 text-center font-display italic text-2xl md:text-3xl leading-relaxed lowercase"
-              style={{ color: "oklch(0.99 0.01 80)", fontVariant: "small-caps", textShadow: "0 2px 24px rgba(40,15,5,0.55)" }}
-            >
+            <figcaption className="mt-8 text-xs md:text-sm uppercase tracking-[0.3em] text-white/75 font-medium">
               Vangelo secondo Giovanni 17:26
             </figcaption>
           </figure>
