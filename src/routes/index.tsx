@@ -10,17 +10,17 @@ import heroSicilia from "@/assets/hero-sicilia.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo in Italia — Milano · Bologna · Napoli · Sicilia" },
+      { title: "Chiesa di Cristo in Italia — Milano · Bologna · Napoli · Palermo" },
       {
         name: "description",
         content:
-          "Una famiglia spirituale che si incontra a Milano, Bologna, Napoli e in Sicilia. Trova la chiesa più vicina e vieni a trovarci questa domenica.",
+          "Una famiglia spirituale che si incontra a Milano, Bologna, Napoli e Palermo. Trova la chiesa più vicina e vieni a trovarci questa domenica.",
       },
       { property: "og:title", content: "Chiesa di Cristo in Italia" },
       {
         property: "og:description",
         content:
-          "Trova la nostra chiesa a Milano, Bologna, Napoli o in Sicilia. Tutti sono benvenuti.",
+          "Trova la nostra chiesa a Milano, Bologna, Napoli o Palermo. Tutti sono benvenuti.",
       },
     ],
   }),
@@ -40,7 +40,7 @@ function HomePage() {
         image={homeHero}
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una famiglia<br />che ti aspetta.</>}
-        subtitle="Da Milano a Bologna, da Napoli alla Sicilia — comunità di persone normali che cercano insieme di vivere come Gesù."
+        subtitle="Da Milano a Bologna, da Napoli a Palermo — comunità di persone normali che cercano insieme di vivere come Gesù."
         primaryCta={{ to: "/milano", label: "Trova la chiesa di Milano" }}
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
@@ -108,7 +108,7 @@ function HomePage() {
           <SmallCityCard
             to="/sicilia"
             image={siciliaImg}
-            name="Sicilia"
+            name="Palermo"
             description="Una piccola comunità in casa. Saremmo felici di conoscerti."
           />
         </div>
