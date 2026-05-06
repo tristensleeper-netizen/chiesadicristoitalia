@@ -8,7 +8,7 @@ const cities = [
   { to: "/milano", label: "Milano" },
   { to: "/bologna", label: "Bologna" },
   { to: "/napoli", label: "Napoli" },
-  { to: "/sicilia", label: "Sicilia" },
+  { to: "/sicilia", label: "Palermo" },
 ] as const;
 
 const sharedLinks = [
@@ -57,7 +57,7 @@ export function SiteHeader() {
       : isNapoli
         ? "Napoli"
         : isSicilia
-          ? "Sicilia"
+          ? "Palermo"
           : "";
 
   const cityNav = inCity
