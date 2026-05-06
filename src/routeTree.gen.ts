@@ -35,6 +35,7 @@ import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminHeroRouteImport } from './routes/admin.hero'
 import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
+import { Route as AdminAdminsRouteImport } from './routes/admin.admins'
 import { Route as AdminDevozionaliIndexRouteImport } from './routes/admin.devozionali.index'
 import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
 import { Route as AdminDevozionaliIdRouteImport } from './routes/admin.devozionali.$id'
@@ -171,6 +172,11 @@ const AdminEventiRoute = AdminEventiRouteImport.update({
   path: '/eventi',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAdminsRoute = AdminAdminsRouteImport.update({
+  id: '/admins',
+  path: '/admins',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDevozionaliIndexRoute = AdminDevozionaliIndexRouteImport.update({
   id: '/devozionali/',
   path: '/devozionali/',
@@ -199,6 +205,7 @@ export interface FileRoutesByFullPath {
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
@@ -230,6 +237,7 @@ export interface FileRoutesByTo {
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
+  '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
   '/admin/hero': typeof AdminHeroRoute
   '/admin/login': typeof AdminLoginRoute
@@ -297,6 +306,7 @@ export interface FileRouteTypes {
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
+    | '/admin/admins'
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
+    | '/admin/admins'
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
+    | '/admin/admins'
     | '/admin/eventi'
     | '/admin/hero'
     | '/admin/login'
@@ -595,6 +607,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEventiRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/admins': {
+      id: '/admin/admins'
+      path: '/admins'
+      fullPath: '/admin/admins'
+      preLoaderRoute: typeof AdminAdminsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/devozionali/': {
       id: '/admin/devozionali/'
       path: '/devozionali'
@@ -627,6 +646,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAdminsRoute: typeof AdminAdminsRoute
   AdminEventiRoute: typeof AdminEventiRoute
   AdminHeroRoute: typeof AdminHeroRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -639,6 +659,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdminsRoute: AdminAdminsRoute,
   AdminEventiRoute: AdminEventiRoute,
   AdminHeroRoute: AdminHeroRoute,
   AdminLoginRoute: AdminLoginRoute,

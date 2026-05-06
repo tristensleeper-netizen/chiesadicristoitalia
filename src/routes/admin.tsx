@@ -131,6 +131,7 @@ function AdminLayout() {
           <AdminTab to="/admin/messaggi" label="Messaggi" icon="✉" />
           <AdminTab to="/admin/hero" label="Hero città" icon="🏙" />
           <AdminTab to="/admin/media" label="Foto del sito" icon="🖼" />
+          <AdminTab to="/admin/admins" label="Admin" icon="👤" />
         </div>
       </div>
 
