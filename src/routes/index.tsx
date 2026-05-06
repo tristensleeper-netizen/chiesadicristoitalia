@@ -129,29 +129,11 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Beliefs — intertwined circles */}
-      <section
-        className="relative mt-16 overflow-hidden"
-        style={{
-          ["--mustard" as string]: "#D9B85A",
-          ["--mustard-soft" as string]: "#F5EAC8",
-          ["--mustard-deep" as string]: "#A8852E",
-          background:
-            "radial-gradient(circle at 20% 10%, #FBF3DC 0%, transparent 55%), radial-gradient(circle at 85% 90%, #F5EAC8 0%, transparent 55%), #FDF8E8",
-        }}
-      >
+      {/* Beliefs — interactive pillars */}
+      <section className="relative mt-16 overflow-hidden bg-primary-soft">
         {/* Floating scripture marquee */}
-        <div
-          className="marquee-mask overflow-hidden border-y py-4"
-          style={{
-            borderColor: "color-mix(in oklab, var(--mustard) 25%, transparent)",
-            background: "color-mix(in oklab, var(--mustard) 10%, transparent)",
-          }}
-        >
-          <div
-            className="animate-marquee flex gap-12 whitespace-nowrap font-display text-2xl md:text-3xl"
-            style={{ color: "var(--mustard-deep)" }}
-          >
+        <div className="marquee-mask overflow-hidden border-y border-primary/10 bg-primary/5 py-4">
+          <div className="animate-marquee flex gap-12 whitespace-nowrap font-display text-2xl md:text-3xl text-primary/70">
             {Array.from({ length: 2 }).map((_, k) => (
               <div key={k} className="flex gap-12">
                 <span>· Amati così come sei ·</span>
@@ -166,96 +148,91 @@ function HomePage() {
 
         <div className="container-prose py-24 md:py-28">
           <div className="text-center mb-16">
-            <p className="eyebrow mb-4" style={{ color: "var(--mustard-deep)" }}>
-              Tre pilastri
-            </p>
+            <p className="eyebrow mb-4">Tre pilastri</p>
             <h2 className="font-display text-4xl md:text-5xl text-foreground">
-              Cosa ci tiene{" "}
-              <em className="not-italic" style={{ color: "var(--mustard-deep)" }}>
-                insieme
-              </em>
-              .
+              Cosa ci tiene <em className="not-italic text-primary">insieme</em>.
             </h2>
           </div>
 
-          {/* Intertwined circles */}
-          <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 md:h-[460px] md:flex-row md:items-center md:justify-center md:gap-0">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 t: "Bibbia",
                 d: "La Parola di Dio guida ogni cosa che facciamo.",
                 icon: "book",
                 verse: "«La tua parola è una lampada al mio piede.» — Salmo 119:105",
-                pos: "md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2",
-                z: 10,
               },
               {
                 t: "Comunità",
                 d: "Amicizie profonde, sincere e quotidiane.",
                 icon: "people",
                 verse: "«Perseveravano nella comunione fraterna.» — Atti 2:42",
-                pos: "md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2",
-                z: 20,
               },
               {
                 t: "Missione",
                 d: "Portare speranza a chi ancora non la conosce.",
-                icon: "send",
+                icon: "→",
                 verse: "«Andate e fate discepoli.» — Matteo 28:19",
-                pos: "md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2",
-                z: 10,
               },
             ].map((item, i) => (
               <div
                 key={item.t}
-                className={`group relative flex aspect-square w-[88vw] max-w-[360px] items-center justify-center rounded-full p-8 text-center transition-all duration-500 hover:scale-105 md:w-[340px] lg:w-[380px] ${item.pos}`}
-                style={{
-                  zIndex: item.z,
-                  background:
-                    i === 1
-                      ? "radial-gradient(circle at 35% 30%, #FFFDF6 0%, var(--mustard-soft) 70%, var(--mustard) 100%)"
-                      : "radial-gradient(circle at 35% 30%, #FFFDF6 0%, #FAEFCB 75%, var(--mustard) 100%)",
-                  boxShadow:
-                    "0 20px 50px -15px color-mix(in oklab, var(--mustard-deep) 40%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--mustard) 30%, transparent)",
-                  animationDelay: `${i * 120}ms`,
-                }}
+                className="group relative overflow-hidden rounded-3xl bg-card p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-border/50"
+                style={{ animationDelay: `${i * 120}ms` }}
               >
-                <div className="relative flex max-w-[78%] flex-col items-center">
-                  <div
-                    className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
-                    style={{
-                      background: "var(--mustard-deep)",
-                      color: "#FFFDF6",
-                    }}
-                  >
+                {/* Animated gradient orb on hover */}
+                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
+                <div className="relative">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                     {item.icon === "book" ? (
-                      <svg aria-hidden="true" className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg
+                        aria-hidden="true"
+                        className="h-7 w-7"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
                         <path d="M8 7h7" />
                         <path d="M8 11h5" />
                       </svg>
                     ) : item.icon === "people" ? (
-                      <svg aria-hidden="true" className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg
+                        aria-hidden="true"
+                        className="h-7 w-7"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                         <circle cx="9" cy="7" r="4" />
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                       </svg>
                     ) : (
-                      <svg aria-hidden="true" className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" />
-                        <path d="M13 5l7 7-7 7" />
-                      </svg>
+                      item.icon
                     )}
                   </div>
-                  <h3 className="font-display text-3xl mb-2" style={{ color: "var(--mustard-deep)" }}>
-                    {item.t}
-                  </h3>
-                  <p className="text-foreground/80 leading-relaxed text-sm md:text-base">{item.d}</p>
-                  <p className="mt-3 text-xs italic text-foreground/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    {item.verse}
-                  </p>
+                  <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
+                  <p className="text-foreground/75 leading-relaxed mb-5">{item.d}</p>
+
+                  {/* Verse — slides in on hover */}
+                  <div className="overflow-hidden">
+                    <p className="text-sm italic text-muted-foreground translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                      {item.verse}
+                    </p>
+                  </div>
+
+                  {/* Animated underline accent */}
+                  <div className="mt-6 h-0.5 w-10 bg-primary transition-all duration-500 group-hover:w-full" />
                 </div>
               </div>
             ))}
@@ -265,8 +242,7 @@ function HomePage() {
           <div className="mt-16 text-center">
             <Link
               to="/milano"
-              className="inline-flex items-center gap-2 font-display text-xl md:text-2xl hover:gap-4 transition-all"
-              style={{ color: "var(--mustard-deep)" }}
+              className="inline-flex items-center gap-2 font-display text-xl md:text-2xl text-primary hover:gap-4 transition-all"
             >
               Vieni a trovarci questa domenica
               <span className="inline-block animate-float">→</span>
