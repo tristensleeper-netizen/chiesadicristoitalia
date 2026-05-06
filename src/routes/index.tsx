@@ -46,20 +46,7 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Scripture — Milano-style image band */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <img src={sunsetItalia} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-primary/70" />
-        <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
-          <h2 className="font-display italic text-3xl md:text-5xl max-w-4xl mx-auto leading-tight">
-            «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.»
-          </h2>
-          <p className="mt-6 text-white/80 text-xs uppercase tracking-[0.3em]">— Vangelo secondo Giovanni 17:26</p>
-        </div>
-      </section>
-
-      {/* Welcome — soft cream wash, smooth transition */}
+      {/* Welcome — soft cream wash, flows directly out of the hero */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
@@ -83,6 +70,34 @@ function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* Scripture — Milano-style image band, framed by soft fades that blend with the cream sections above and below */}
+      <section className="relative">
+        <div className="relative h-[60vh] min-h-[420px] overflow-hidden">
+          <img src={sunsetItalia} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-primary/70" />
+          {/* Top fade into the cream welcome above */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-32"
+            style={{ background: "linear-gradient(180deg, var(--primary-soft), transparent)" }}
+          />
+          {/* Bottom fade into the section that follows */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-32"
+            style={{ background: "linear-gradient(0deg, var(--background), transparent)" }}
+          />
+          <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
+            <p className="eyebrow text-white/80 mb-4">Una promessa</p>
+            <h2 className="font-display italic text-3xl md:text-5xl max-w-4xl mx-auto leading-tight">
+              «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.»
+            </h2>
+            <p className="mt-6 text-white/85 text-xs uppercase tracking-[0.3em]">— Vangelo secondo Giovanni 17:26</p>
+          </div>
+        </div>
+      </section>
+
 
       {/* City selector */}
       <section className="relative container-prose pb-20">
