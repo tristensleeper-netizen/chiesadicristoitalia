@@ -7,10 +7,10 @@ import heroSicilia from "@/assets/hero-sicilia.jpg";
 export const Route = createFileRoute("/sicilia")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo in Sicilia — Piccola comunità in casa" },
-      { name: "description", content: "Una piccola comunità cristiana in Sicilia. Ci troviamo in casa. Scrivici per conoscerci." },
-      { property: "og:title", content: "Chiesa di Cristo in Sicilia" },
-      { property: "og:description", content: "Piccola comunità accogliente in Sicilia. Scrivici per visitarci." },
+      { title: "Chiesa di Cristo a Palermo — Piccola comunità in casa" },
+      { name: "description", content: "Una piccola comunità cristiana a Palermo. Ci troviamo in casa. Scrivici per conoscerci." },
+      { property: "og:title", content: "Chiesa di Cristo a Palermo" },
+      { property: "og:description", content: "Piccola comunità accogliente a Palermo. Scrivici per visitarci." },
       { property: "og:image", content: heroSicilia },
     ],
   }),
@@ -25,7 +25,7 @@ function SiciliaPage() {
         slot="sicilia.hero"
         image={hero}
         eyebrow="Chiesa di Cristo"
-        title={<>Sicilia.</>}
+        title={<>Palermo.</>}
         subtitle="Una piccola comunità che si incontra in casa. Tanto calore mediterraneo, tanta voglia di conoscerti."
         height="medium"
       />
@@ -34,7 +34,7 @@ function SiciliaPage() {
           <p className="eyebrow mb-4">Come funziona</p>
           <h2 className="font-display text-3xl mb-6">Chiesa di casa.</h2>
           <p className="text-foreground/80 leading-relaxed mb-6">
-            In Sicilia ci ritroviamo in piccoli gruppi nelle case. Studiamo la
+            A Palermo ci ritroviamo in piccoli gruppi nelle case. Studiamo la
             Bibbia, condividiamo la cena, preghiamo insieme. Se vuoi unirti,
             scrivici — ti raccontiamo dove e quando.
           </p>
@@ -44,7 +44,7 @@ function SiciliaPage() {
           </ul>
         </div>
         <div className="rounded-3xl border border-border bg-card p-8 md:p-10">
-          <ContactForm city="Sicilia" defaultSubject="Visitare la chiesa in Sicilia" />
+          <ContactForm city="Palermo" defaultSubject="Visitare la chiesa a Palermo" />
         </div>
       </section>
     </>

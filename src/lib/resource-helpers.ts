@@ -17,7 +17,7 @@ export const CITY_TAG_LABELS: Record<CityTag, string> = {
   milano: "Milano",
   bologna: "Bologna",
   napoli: "Napoli",
-  sicilia: "Sicilia",
+  sicilia: "Palermo",
   national: "Nazionale",
 };
 
