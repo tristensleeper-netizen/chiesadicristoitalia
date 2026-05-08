@@ -42,12 +42,13 @@ export function SiteFooter() {
 
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60 mb-4">
-            Contatti
+            Esplora
           </p>
-          <ul className="space-y-2 text-sm text-primary-foreground/85">
-            <li>info@chiesadicristoitalia.it</li>
-            <li>Corso di Porta Vigentina 15a</li>
-            <li>20122 Milano, MI</li>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/chi-siamo" className="hover:underline">Chi siamo</Link></li>
+            <li><Link to="/sermoni" className="hover:underline">Sermoni</Link></li>
+            <li><Link to="/risorse" className="hover:underline">Risorse</Link></li>
+            <li><Link to="/devozionale" className="hover:underline">Devozionale</Link></li>
           </ul>
         </div>
       </div>
