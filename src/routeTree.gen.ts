@@ -28,6 +28,7 @@ import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
 import { Route as MilanoCosaCrediamoRouteImport } from './routes/milano.cosa-crediamo'
 import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
 import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
+import { Route as DevozionaleSlugRouteImport } from './routes/devozionale.$slug'
 import { Route as BolognaVisitaRouteImport } from './routes/bologna.visita'
 import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
@@ -140,6 +141,11 @@ const MilanoChiSiamoRoute = MilanoChiSiamoRouteImport.update({
   path: '/milano/chi-siamo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevozionaleSlugRoute = DevozionaleSlugRouteImport.update({
+  id: '/devozionale/$slug',
+  path: '/devozionale/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BolognaVisitaRoute = BolognaVisitaRouteImport.update({
   id: '/bologna/visita',
   path: '/bologna/visita',
@@ -236,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
+  '/devozionale/$slug': typeof DevozionaleSlugRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
+  '/devozionale/$slug': typeof DevozionaleSlugRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/bologna/cosa-crediamo': typeof BolognaCosaCrediamoRoute
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
+  '/devozionale/$slug': typeof DevozionaleSlugRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -346,6 +355,7 @@ export interface FileRouteTypes {
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
     | '/bologna/visita'
+    | '/devozionale/$slug'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -381,6 +391,7 @@ export interface FileRouteTypes {
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
     | '/bologna/visita'
+    | '/devozionale/$slug'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -417,6 +428,7 @@ export interface FileRouteTypes {
     | '/bologna/cosa-crediamo'
     | '/bologna/eventi'
     | '/bologna/visita'
+    | '/devozionale/$slug'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -448,6 +460,7 @@ export interface RootRouteChildren {
   BolognaCosaCrediamoRoute: typeof BolognaCosaCrediamoRoute
   BolognaEventiRoute: typeof BolognaEventiRoute
   BolognaVisitaRoute: typeof BolognaVisitaRoute
+  DevozionaleSlugRoute: typeof DevozionaleSlugRoute
   MilanoChiSiamoRoute: typeof MilanoChiSiamoRoute
   MilanoContattiRoute: typeof MilanoContattiRoute
   MilanoCosaCrediamoRoute: typeof MilanoCosaCrediamoRoute
@@ -595,6 +608,13 @@ declare module '@tanstack/react-router' {
       path: '/milano/chi-siamo'
       fullPath: '/milano/chi-siamo'
       preLoaderRoute: typeof MilanoChiSiamoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devozionale/$slug': {
+      id: '/devozionale/$slug'
+      path: '/devozionale/$slug'
+      fullPath: '/devozionale/$slug'
+      preLoaderRoute: typeof DevozionaleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bologna/visita': {
@@ -747,6 +767,7 @@ const rootRouteChildren: RootRouteChildren = {
   BolognaCosaCrediamoRoute: BolognaCosaCrediamoRoute,
   BolognaEventiRoute: BolognaEventiRoute,
   BolognaVisitaRoute: BolognaVisitaRoute,
+  DevozionaleSlugRoute: DevozionaleSlugRoute,
   MilanoChiSiamoRoute: MilanoChiSiamoRoute,
   MilanoContattiRoute: MilanoContattiRoute,
   MilanoCosaCrediamoRoute: MilanoCosaCrediamoRoute,
@@ -763,3 +784,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

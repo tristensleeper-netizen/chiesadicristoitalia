@@ -59,7 +59,7 @@ export function CityLatest({ cityTag, cityName }: { cityTag: CityTag; cityName: 
               {devotional.body}
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <Link to="/devozionale" className="btn-primary">
+              <Link to="/devozionale/$slug" params={{ slug: devotional.slug }} className="btn-primary">
                 Leggi tutto
               </Link>
               <span className="text-xs text-muted-foreground">
