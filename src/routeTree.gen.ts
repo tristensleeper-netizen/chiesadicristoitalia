@@ -13,6 +13,7 @@ import { Route as SuDiNoiRouteImport } from './routes/su-di-noi'
 import { Route as SiciliaRouteImport } from './routes/sicilia'
 import { Route as NapoliRouteImport } from './routes/napoli'
 import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
+import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SermoniIndexRouteImport } from './routes/sermoni.index'
@@ -64,6 +65,11 @@ const ChiesaDiCristoDiBolognaRecruitmentPageRoute =
     path: '/chiesa-di-cristo-di-bologna-recruitment-page',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ChiSiamoRoute = ChiSiamoRouteImport.update({
+  id: '/chi-siamo',
+  path: '/chi-siamo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -214,6 +220,7 @@ const LovableEmailQueueProcessRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
@@ -284,6 +292,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
   '/sicilia': typeof SiciliaRoute
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
     | '/sicilia'
@@ -426,6 +438,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ChiSiamoRoute: typeof ChiSiamoRoute
   ChiesaDiCristoDiBolognaRecruitmentPageRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   NapoliRoute: typeof NapoliRoute
   SiciliaRoute: typeof SiciliaRoute
@@ -477,6 +490,13 @@ declare module '@tanstack/react-router' {
       path: '/chiesa-di-cristo-di-bologna-recruitment-page'
       fullPath: '/chiesa-di-cristo-di-bologna-recruitment-page'
       preLoaderRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chi-siamo': {
+      id: '/chi-siamo'
+      path: '/chi-siamo'
+      fullPath: '/chi-siamo'
+      preLoaderRoute: typeof ChiSiamoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -716,6 +736,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  ChiSiamoRoute: ChiSiamoRoute,
   ChiesaDiCristoDiBolognaRecruitmentPageRoute:
     ChiesaDiCristoDiBolognaRecruitmentPageRoute,
   NapoliRoute: NapoliRoute,
@@ -742,3 +763,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
