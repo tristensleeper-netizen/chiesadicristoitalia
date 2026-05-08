@@ -151,7 +151,7 @@ function ChiSiamoPage() {
           <p className="eyebrow mb-3">For English speakers</p>
           <p className="text-foreground/80 leading-relaxed">
             English speakers are warmly welcome at any of our churches in Italy. Sunday
-            services are in Italian, with informal translation available — just let us
+            services are in Italian, with translation available — just let us
             know you're coming and we'll make sure someone is there to help.
           </p>
         </div>
