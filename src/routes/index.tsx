@@ -77,16 +77,8 @@ function HomePage() {
             <span className="h-px flex-1 bg-primary/25" />
           </div>
 
-          {/* Scripture — editorial pull-quote with a small postcard image */}
+          {/* Scripture — editorial pull-quote */}
           <figure className="max-w-3xl mx-auto text-center">
-            <div className="mb-10 inline-block overflow-hidden rounded-2xl shadow-[var(--shadow-elegant)]">
-              <img
-                src={sunsetItalia}
-                alt=""
-                loading="lazy"
-                className="block h-40 md:h-48 w-auto object-cover"
-              />
-            </div>
             <p className="eyebrow mb-6">Una promessa</p>
             <blockquote className="font-display italic text-foreground leading-[1.25] text-2xl md:text-3xl lg:text-[2.25rem] font-normal">
               <span className="text-primary/40 mr-1">«</span>
