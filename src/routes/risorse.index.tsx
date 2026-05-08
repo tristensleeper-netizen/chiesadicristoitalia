@@ -16,16 +16,16 @@ import bibleStudy from "@/assets/bible-study.jpg";
 export const Route = createFileRoute("/risorse/")({
   head: () => ({
     meta: [
-      { title: "Risorse — Sermoni, articoli e video | Chiesa di Cristo Italia" },
+      { title: "Sermoni e Risorse Cristiane — Chiesa di Cristo Italia" },
       {
         name: "description",
         content:
-          "Esplora la nostra biblioteca di sermoni, articoli e video dalle Chiese di Cristo di Milano, Bologna, Napoli e Palermo.",
+          "Sermoni, articoli e video biblici dalle Chiese di Cristo in Italia. Ascolta i nostri sermoni settimanali da Milano, Bologna, Napoli e Palermo.",
       },
-      { property: "og:title", content: "Risorse — Chiesa di Cristo in Italia" },
+      { property: "og:title", content: "Sermoni e Risorse Cristiane — Chiesa di Cristo Italia" },
       {
         property: "og:description",
-        content: "Sermoni, articoli e video per crescere nella fede.",
+        content: "Sermoni, articoli e video biblici dalle Chiese di Cristo in Italia. Ascolta i nostri sermoni settimanali da Milano, Bologna, Napoli e Palermo.",
       },
       { property: "og:image", content: bibleStudy },
     ],
