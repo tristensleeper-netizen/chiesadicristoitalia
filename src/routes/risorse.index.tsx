@@ -224,9 +224,13 @@ function ResourcesIndex() {
           </p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((r) => (
-              <ResourceCard key={r.id} r={r} />
-            ))}
+            {filtered.map((item) =>
+              item.kind === "resource" ? (
+                <ResourceCard key={`r-${item.r.id}`} r={item.r} />
+              ) : (
+                <DevotionalCard key={`d-${item.d.id}`} d={item.d} />
+              ),
+            )}
           </div>
         )}
       </section>
