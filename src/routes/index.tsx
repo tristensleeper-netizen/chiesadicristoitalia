@@ -8,20 +8,58 @@ import heroNapoli from "@/assets/hero-napoli.jpg";
 import heroSicilia from "@/assets/hero-sicilia.jpg";
 import sunsetItalia from "@/assets/sunset-italia.jpg";
 
+const churchJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Church",
+  name: "Chiesa di Cristo in Italia",
+  alternateName: "Church of Christ Italy",
+  url: "https://www.chiesadicristoitalia.it",
+  description:
+    "Una chiesa cristiana non confessionale del movimento di restaurazione, basata sulla Bibbia, con comunità a Milano e Bologna.",
+  location: [
+    {
+      "@type": "Place",
+      name: "Chiesa di Cristo di Milano",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Corso di Porta Vigentina 15a",
+        postalCode: "20122",
+        addressLocality: "Milano",
+        addressCountry: "IT",
+      },
+    },
+    {
+      "@type": "Place",
+      name: "Chiesa di Cristo di Bologna",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bologna",
+        addressCountry: "IT",
+      },
+    },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo in Italia — Milano · Bologna · Napoli · Palermo" },
+      { title: "Chiesa di Cristo in Italia — Chiesa Cristiana a Milano e Bologna" },
       {
         name: "description",
         content:
-          "Una famiglia spirituale che si incontra a Milano, Bologna, Napoli e Palermo. Trova la chiesa più vicina e vieni a trovarci questa domenica.",
+          "Chiesa di Cristo in Italia: una chiesa cristiana non confessionale, basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
       },
-      { property: "og:title", content: "Chiesa di Cristo in Italia" },
+      { property: "og:title", content: "Chiesa di Cristo in Italia — Chiesa Cristiana a Milano e Bologna" },
       {
         property: "og:description",
         content:
-          "Trova la nostra chiesa a Milano, Bologna, Napoli o Palermo. Tutti sono benvenuti.",
+          "Una chiesa cristiana non confessionale, basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(churchJsonLd),
       },
     ],
   }),
