@@ -15,7 +15,6 @@ const sharedLinks = [
   { to: "/chi-siamo", label: "Chi siamo" },
   { to: "/sermoni", label: "Sermoni" },
   { to: "/risorse", label: "Risorse" },
-  { to: "/devozionale", label: "Devozionale" },
 ] as const;
 
 export function SiteHeader() {

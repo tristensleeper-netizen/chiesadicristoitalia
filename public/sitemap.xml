@@ -89,7 +89,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Sermoni, Risorse & Devozionali -->
+  <!-- Sermoni & Risorse -->
   <url>
     <loc>https://chiesadicristoitalia.it/sermoni</loc>
     <changefreq>weekly</changefreq>
@@ -97,11 +97,6 @@
   </url>
   <url>
     <loc>https://chiesadicristoitalia.it/risorse</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://chiesadicristoitalia.it/devozionale</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
