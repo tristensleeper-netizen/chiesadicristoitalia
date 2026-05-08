@@ -303,3 +303,45 @@ function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }
     </div>
   );
 }
+
+function DevotionalCard({ d }: { d: Devotional }) {
+  return (
+    <Link
+      to="/devozionale/$slug"
+      params={{ slug: d.slug }}
+      className="group rounded-2xl border border-border bg-card overflow-hidden transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+    >
+      <div className="relative aspect-video bg-[linear-gradient(135deg,#1f3a55_0%,#2a4a6e_50%,#3a5f8a_100%)] flex items-center justify-center">
+        <div className="text-center text-white/90 px-6">
+          {d.scripture_ref && (
+            <p className="font-display italic text-base md:text-lg">
+              {d.scripture_ref}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
+            Devozionale
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Settimanale
+          </span>
+        </div>
+        <h3 className="font-display text-xl text-foreground leading-tight group-hover:text-primary transition-colors">
+          {d.title}
+        </h3>
+        {d.body && (
+          <p className="mt-2 text-sm text-muted-foreground line-clamp-2 whitespace-pre-line">
+            {d.body}
+          </p>
+        )}
+        <p className="mt-4 text-xs text-muted-foreground">
+          Settimana del {formatItalianDate(d.week_of)}
+          {d.author && ` · ${d.author}`}
+        </p>
+      </div>
+    </Link>
+  );
+}
