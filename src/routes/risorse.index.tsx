@@ -98,25 +98,35 @@ function ResourcesIndex() {
         slot="risorse.hero"
         image={heroImg}
         eyebrow="Risorse"
-        title={<>Sermoni, articoli<br />e video</>}
-        subtitle="Ascolta i nostri sermoni settimanali, leggi articoli biblici e guarda video dalle Chiese di Cristo di Milano, Bologna, Napoli e Palermo."
+        title={<>Articoli, video<br />e studi biblici.</>}
+        subtitle="Risorse cristiane dalle Chiese di Cristo di Milano e Bologna per crescere nella fede e nella conoscenza della Bibbia."
         height="medium"
       />
 
       <section className="container-prose py-16 md:py-20">
-        <div className="mb-12 max-w-3xl">
-          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
-            La nostra raccolta di sermoni e risorse cristiane
-          </h2>
-          <p className="text-foreground/75 leading-relaxed">
-            Esplora l'archivio completo dei sermoni predicati ogni domenica nelle nostre
-            congregazioni in Italia. Trovi sermoni audio e video, articoli di studio biblico,
-            podcast e PDF scaricabili. Filtra i sermoni per città, predicatore o argomento, e
-            ordina per data per scoprire le predicazioni più recenti.
+        <div className="mb-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6">
+          <p className="text-sm md:text-base text-foreground/80">
+            <span className="font-medium text-primary">Cerchi i sermoni?</span>{" "}
+            Trovi tutte le prediche bibliche delle nostre comunità nella sezione dedicata{" "}
+            <Link to="/sermoni" className="text-primary underline-offset-4 underline hover:opacity-80">
+              Sermoni →
+            </Link>
           </p>
         </div>
 
-        <div className="flex flex-col gap-6 mb-12" aria-label="Filtri sermoni e risorse">
+        <div className="mb-12 max-w-3xl">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
+            Articoli, video e risorse cristiane
+          </h2>
+          <p className="text-foreground/75 leading-relaxed">
+            Una raccolta di articoli, video e materiali di studio prodotti dalle nostre
+            comunità. Trovi approfondimenti biblici, riflessioni sulla vita cristiana,
+            video di insegnamento e PDF scaricabili. Filtra per tipo di contenuto o
+            per città per scoprire ciò che ti interessa di più.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6 mb-12" aria-label="Filtri risorse">
 
           <div>
             <p className="eyebrow mb-3">Filtra per tipo</p>
