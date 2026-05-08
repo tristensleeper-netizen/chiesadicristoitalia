@@ -46,55 +46,57 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Welcome — soft cream wash, flows directly out of the hero */}
+      {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 55%), linear-gradient(180deg, var(--background), var(--primary-soft))",
+              "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%), linear-gradient(180deg, var(--background), var(--primary-soft) 55%, var(--background))",
           }}
         />
-        <div className="container-prose py-24 md:py-32 text-center">
-          <h2
-            className="font-display text-foreground max-w-3xl mx-auto leading-tight"
-            style={{ marginBottom: "1.5cm", fontSize: "calc(2.25rem - 1mm)", fontWeight: 400 }}
-          >
-            Gesù, un uomo semplice con un piano semplice: far conoscere{" "}
-            <em className="italic font-bold text-foreground">Dio e il suo amore</em>.
-          </h2>
-          <p className="eyebrow text-center mb-5">Benvenuti</p>
-          <p className="max-w-2xl mx-auto text-foreground/80 leading-relaxed">
-            Siamo cristiani, persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu!
-          </p>
-        </div>
-      </section>
 
-      {/* Scripture — Milano-style image band, framed by soft fades that blend with the cream sections above and below */}
-      <section className="relative">
-        <div className="relative h-[60vh] min-h-[420px] overflow-hidden">
-          <img src={sunsetItalia} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-primary/70" />
-          {/* Top fade into the cream welcome above */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-32"
-            style={{ background: "linear-gradient(180deg, var(--primary-soft), transparent)" }}
-          />
-          {/* Bottom fade into the section that follows */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32"
-            style={{ background: "linear-gradient(0deg, var(--background), transparent)" }}
-          />
-          <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-            <p className="eyebrow text-white/80 mb-4">Una promessa</p>
-            <h2 className="font-display italic text-3xl md:text-5xl max-w-4xl mx-auto leading-tight">
-              «E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.»
+        <div className="container-prose py-24 md:py-32">
+          {/* Welcome */}
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="eyebrow mb-6">Benvenuti</p>
+            <h2 className="font-display text-foreground leading-[1.15] text-3xl md:text-4xl lg:text-[2.75rem] font-normal">
+              Gesù, un uomo semplice con un piano semplice:{" "}
+              <em className="italic text-primary">far conoscere Dio e il suo amore.</em>
             </h2>
-            <p className="mt-6 text-white/85 text-xs uppercase tracking-[0.3em]">— Vangelo secondo Giovanni 17:26</p>
+            <p className="mt-10 text-foreground/75 leading-relaxed text-base md:text-lg">
+              Siamo cristiani, persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
+            </p>
           </div>
+
+          {/* Delicate divider */}
+          <div className="mx-auto my-20 md:my-24 flex items-center justify-center gap-4 max-w-xs">
+            <span className="h-px flex-1 bg-primary/25" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary/50" />
+            <span className="h-px flex-1 bg-primary/25" />
+          </div>
+
+          {/* Scripture — editorial pull-quote with a small postcard image */}
+          <figure className="max-w-3xl mx-auto text-center">
+            <div className="mb-10 inline-block overflow-hidden rounded-2xl shadow-[var(--shadow-elegant)]">
+              <img
+                src={sunsetItalia}
+                alt=""
+                loading="lazy"
+                className="block h-40 md:h-48 w-auto object-cover"
+              />
+            </div>
+            <p className="eyebrow mb-6">Una promessa</p>
+            <blockquote className="font-display italic text-foreground leading-[1.25] text-2xl md:text-3xl lg:text-[2.25rem] font-normal">
+              <span className="text-primary/40 mr-1">«</span>
+              E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.
+              <span className="text-primary/40 ml-1">»</span>
+            </blockquote>
+            <figcaption className="mt-8 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Vangelo secondo Giovanni · 17:26
+            </figcaption>
+          </figure>
         </div>
       </section>
 
