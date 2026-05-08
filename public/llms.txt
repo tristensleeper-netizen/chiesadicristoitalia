@@ -7,7 +7,9 @@ La Chiesa di Cristo in Italia è composta da congregazioni locali di cristiani c
 ## Pagine principali
 
 - [Home — Chiesa di Cristo in Italia](https://chiesadicristoitalia.it/): panoramica nazionale, benvenuto e collegamenti alle città.
-- [Risorse](https://chiesadicristoitalia.it/risorse): articoli, studi e materiali di approfondimento.
+- [Chi siamo](https://chiesadicristoitalia.it/chi-siamo): chi siamo a livello nazionale — chiesa cristiana non confessionale.
+- [Sermoni](https://chiesadicristoitalia.it/sermoni): sermoni cristiani in italiano, prediche bibliche audio e video.
+- [Risorse](https://chiesadicristoitalia.it/risorse): articoli, video e studi biblici di approfondimento.
 - [Devozionali](https://chiesadicristoitalia.it/devozionale): brevi riflessioni quotidiane sulla Parola.
 
 ## Milano

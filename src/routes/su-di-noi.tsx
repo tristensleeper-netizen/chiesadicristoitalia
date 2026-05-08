@@ -6,11 +6,11 @@ export const Route = createFileRoute("/su-di-noi")({
       GET: async () =>
         new Response(null, {
           status: 301,
-          headers: { Location: "/milano/chi-siamo" },
+          headers: { Location: "/chi-siamo" },
         }),
     },
   },
   beforeLoad: () => {
-    throw redirect({ to: "/milano/chi-siamo" });
+    throw redirect({ to: "/chi-siamo" });
   },
 });

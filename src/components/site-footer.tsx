@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-primary text-primary-foreground">
-      <div className="container-prose py-16 grid gap-12 md:grid-cols-4">
+      <div className="container-prose py-16 grid gap-12 md:grid-cols-5">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/15">
@@ -37,6 +37,18 @@ export function SiteFooter() {
             <li><Link to="/bologna" className="hover:underline">Bologna</Link></li>
             <li><Link to="/napoli" className="hover:underline">Napoli</Link></li>
             <li><Link to="/sicilia" className="hover:underline">Palermo</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60 mb-4">
+            Esplora
+          </p>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/chi-siamo" className="hover:underline">Chi siamo</Link></li>
+            <li><Link to="/sermoni" className="hover:underline">Sermoni</Link></li>
+            <li><Link to="/risorse" className="hover:underline">Risorse</Link></li>
+            <li><Link to="/devozionale" className="hover:underline">Devozionale</Link></li>
           </ul>
         </div>
 
