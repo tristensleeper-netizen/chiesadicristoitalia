@@ -135,7 +135,7 @@ function HomePage() {
                 <br />
                 <span className="text-foreground/60 text-sm md:text-base italic">
                   English speakers are welcome — Sunday services are in Italian, with
-                  informal translation available.
+                  translation available.
                 </span>
               </p>
             </div>
