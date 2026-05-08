@@ -11,11 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SuDiNoiRouteImport } from './routes/su-di-noi'
 import { Route as SiciliaRouteImport } from './routes/sicilia'
-import { Route as SermoniRouteImport } from './routes/sermoni'
 import { Route as NapoliRouteImport } from './routes/napoli'
 import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SermoniIndexRouteImport } from './routes/sermoni.index'
 import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
 import { Route as MilanoIndexRouteImport } from './routes/milano.index'
 import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
@@ -53,11 +53,6 @@ const SiciliaRoute = SiciliaRouteImport.update({
   path: '/sicilia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SermoniRoute = SermoniRouteImport.update({
-  id: '/sermoni',
-  path: '/sermoni',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NapoliRoute = NapoliRouteImport.update({
   id: '/napoli',
   path: '/napoli',
@@ -77,6 +72,11 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SermoniIndexRoute = SermoniIndexRouteImport.update({
+  id: '/sermoni/',
+  path: '/sermoni/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RisorseIndexRoute = RisorseIndexRouteImport.update({
@@ -216,7 +216,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
-  '/sermoni': typeof SermoniRoute
   '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
@@ -241,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
   '/risorse/': typeof RisorseIndexRoute
+  '/sermoni/': typeof SermoniIndexRoute
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
@@ -250,7 +250,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
-  '/sermoni': typeof SermoniRoute
   '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
@@ -275,6 +274,7 @@ export interface FileRoutesByTo {
   '/devozionale': typeof DevozionaleIndexRoute
   '/milano': typeof MilanoIndexRoute
   '/risorse': typeof RisorseIndexRoute
+  '/sermoni': typeof SermoniIndexRoute
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali': typeof AdminDevozionaliIndexRoute
@@ -286,7 +286,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   '/napoli': typeof NapoliRoute
-  '/sermoni': typeof SermoniRoute
   '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
@@ -311,6 +310,7 @@ export interface FileRoutesById {
   '/devozionale/': typeof DevozionaleIndexRoute
   '/milano/': typeof MilanoIndexRoute
   '/risorse/': typeof RisorseIndexRoute
+  '/sermoni/': typeof SermoniIndexRoute
   '/admin/devozionali/$id': typeof AdminDevozionaliIdRoute
   '/admin/risorse/$id': typeof AdminRisorseIdRoute
   '/admin/devozionali/': typeof AdminDevozionaliIndexRoute
@@ -323,7 +323,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
-    | '/sermoni'
     | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
@@ -348,6 +347,7 @@ export interface FileRouteTypes {
     | '/devozionale/'
     | '/milano/'
     | '/risorse/'
+    | '/sermoni/'
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali/'
@@ -357,7 +357,6 @@ export interface FileRouteTypes {
     | '/'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
-    | '/sermoni'
     | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
@@ -382,6 +381,7 @@ export interface FileRouteTypes {
     | '/devozionale'
     | '/milano'
     | '/risorse'
+    | '/sermoni'
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali'
@@ -392,7 +392,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
     | '/napoli'
-    | '/sermoni'
     | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
@@ -417,6 +416,7 @@ export interface FileRouteTypes {
     | '/devozionale/'
     | '/milano/'
     | '/risorse/'
+    | '/sermoni/'
     | '/admin/devozionali/$id'
     | '/admin/risorse/$id'
     | '/admin/devozionali/'
@@ -428,7 +428,6 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   ChiesaDiCristoDiBolognaRecruitmentPageRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
   NapoliRoute: typeof NapoliRoute
-  SermoniRoute: typeof SermoniRoute
   SiciliaRoute: typeof SiciliaRoute
   SuDiNoiRoute: typeof SuDiNoiRoute
   BolognaChiSiamoRoute: typeof BolognaChiSiamoRoute
@@ -446,6 +445,7 @@ export interface RootRouteChildren {
   DevozionaleIndexRoute: typeof DevozionaleIndexRoute
   MilanoIndexRoute: typeof MilanoIndexRoute
   RisorseIndexRoute: typeof RisorseIndexRoute
+  SermoniIndexRoute: typeof SermoniIndexRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
@@ -463,13 +463,6 @@ declare module '@tanstack/react-router' {
       path: '/sicilia'
       fullPath: '/sicilia'
       preLoaderRoute: typeof SiciliaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sermoni': {
-      id: '/sermoni'
-      path: '/sermoni'
-      fullPath: '/sermoni'
-      preLoaderRoute: typeof SermoniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napoli': {
@@ -498,6 +491,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sermoni/': {
+      id: '/sermoni/'
+      path: '/sermoni'
+      fullPath: '/sermoni/'
+      preLoaderRoute: typeof SermoniIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/risorse/': {
@@ -719,7 +719,6 @@ const rootRouteChildren: RootRouteChildren = {
   ChiesaDiCristoDiBolognaRecruitmentPageRoute:
     ChiesaDiCristoDiBolognaRecruitmentPageRoute,
   NapoliRoute: NapoliRoute,
-  SermoniRoute: SermoniRoute,
   SiciliaRoute: SiciliaRoute,
   SuDiNoiRoute: SuDiNoiRoute,
   BolognaChiSiamoRoute: BolognaChiSiamoRoute,
@@ -737,8 +736,18 @@ const rootRouteChildren: RootRouteChildren = {
   DevozionaleIndexRoute: DevozionaleIndexRoute,
   MilanoIndexRoute: MilanoIndexRoute,
   RisorseIndexRoute: RisorseIndexRoute,
+  SermoniIndexRoute: SermoniIndexRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
