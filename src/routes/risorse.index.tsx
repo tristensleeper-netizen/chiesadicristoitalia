@@ -6,6 +6,7 @@ import {
   RESOURCE_TYPE_LABELS,
   formatItalianDate,
   type CityTag,
+  type Devotional,
   type Resource,
   type ResourceType,
 } from "@/lib/resource-helpers";
@@ -33,10 +34,13 @@ export const Route = createFileRoute("/risorse/")({
   component: ResourcesIndex,
 });
 
-const TYPE_FILTERS: Array<{ value: ResourceType | "all"; label: string }> = [
+type FilterType = ResourceType | "devotional" | "all";
+
+const TYPE_FILTERS: Array<{ value: FilterType; label: string }> = [
   { value: "all", label: "Tutti" },
   { value: "article", label: "Articoli" },
   { value: "video", label: "Video" },
+  { value: "devotional", label: "Devozionali" },
   { value: "pdf", label: "PDF" },
 ];
 
@@ -51,25 +55,39 @@ const CITY_FILTERS: Array<{ value: CityTag | "all"; label: string }> = [
 
 type SortOrder = "newest" | "oldest";
 
+type ListItem =
+  | { kind: "resource"; r: Resource; sortDate: string }
+  | { kind: "devotional"; d: Devotional; sortDate: string };
+
 function ResourcesIndex() {
   const [resources, setResources] = useState<Resource[]>([]);
+  const [devotionals, setDevotionals] = useState<Devotional[]>([]);
   const [loading, setLoading] = useState(true);
-  const [typeFilter, setTypeFilter] = useState<ResourceType | "all">("all");
+  const [typeFilter, setTypeFilter] = useState<FilterType>("all");
   const [cityFilter, setCityFilter] = useState<CityTag | "all">("all");
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
 
   useEffect(() => {
     let active = true;
     (async () => {
-      const { data, error } = await supabase
-        .from("resources")
-        .select("*")
-        .eq("published", true)
-        .neq("type", "sermon")
-        .order("published_at", { ascending: false });
+      const [resRes, devRes] = await Promise.all([
+        supabase
+          .from("resources")
+          .select("*")
+          .eq("published", true)
+          .neq("type", "sermon")
+          .order("published_at", { ascending: false }),
+        supabase
+          .from("devotionals")
+          .select("*")
+          .eq("published", true)
+          .order("week_of", { ascending: false }),
+      ]);
       if (!active) return;
-      if (error) console.error(error);
-      setResources(data ?? []);
+      if (resRes.error) console.error(resRes.error);
+      if (devRes.error) console.error(devRes.error);
+      setResources(resRes.data ?? []);
+      setDevotionals(devRes.data ?? []);
       setLoading(false);
     })();
     return () => {
@@ -77,18 +95,29 @@ function ResourcesIndex() {
     };
   }, []);
 
-  const filtered = useMemo(() => {
-    const list = resources.filter(
-      (r) =>
-        (typeFilter === "all" || r.type === typeFilter) &&
-        (cityFilter === "all" || r.city_tag === cityFilter),
-    );
-    return [...list].sort((a, b) => {
-      const ta = new Date(a.published_at).getTime();
-      const tb = new Date(b.published_at).getTime();
+  const filtered = useMemo<ListItem[]>(() => {
+    const items: ListItem[] = [];
+    if (typeFilter === "all" || typeFilter === "devotional") {
+      // devotionals are not city-scoped — only show when city filter is "all" or "national"
+      if (cityFilter === "all" || cityFilter === "national") {
+        for (const d of devotionals) {
+          items.push({ kind: "devotional", d, sortDate: d.week_of });
+        }
+      }
+    }
+    if (typeFilter !== "devotional") {
+      for (const r of resources) {
+        if (typeFilter !== "all" && r.type !== typeFilter) continue;
+        if (cityFilter !== "all" && r.city_tag !== cityFilter) continue;
+        items.push({ kind: "resource", r, sortDate: r.published_at });
+      }
+    }
+    return items.sort((a, b) => {
+      const ta = new Date(a.sortDate).getTime();
+      const tb = new Date(b.sortDate).getTime();
       return sortOrder === "newest" ? tb - ta : ta - tb;
     });
-  }, [resources, typeFilter, cityFilter, sortOrder]);
+  }, [resources, devotionals, typeFilter, cityFilter, sortOrder]);
 
   const heroImg = useSlotImage("risorse.hero", bibleStudy);
 
