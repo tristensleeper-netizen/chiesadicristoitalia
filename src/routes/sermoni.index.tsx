@@ -82,7 +82,7 @@ function SermoniIndex() {
       <PageHero
         image={bibleStudy}
         eyebrow="Sermoni"
-        title={<>Sermoni cristiani<br />in italiano.</>}
+        title={<>Sermoni e<br />prediche bibliche.</>}
         subtitle="Prediche bibliche dalle Chiese di Cristo di Milano e Bologna. Ascolta i nostri sermoni settimanali, in audio e video."
         height="medium"
       />
