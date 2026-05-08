@@ -16,16 +16,16 @@ import bibleStudy from "@/assets/bible-study.jpg";
 export const Route = createFileRoute("/risorse/")({
   head: () => ({
     meta: [
-      { title: "Sermoni e Risorse Cristiane — Chiesa di Cristo Italia" },
+      { title: "Risorse cristiane — Articoli, video e studi biblici | Chiesa di Cristo Italia" },
       {
         name: "description",
         content:
-          "Sermoni, articoli e video biblici dalle Chiese di Cristo in Italia. Ascolta i nostri sermoni settimanali da Milano, Bologna, Napoli e Palermo.",
+          "Articoli, video e studi biblici dalle Chiese di Cristo di Milano e Bologna. Risorse cristiane per crescere nella fede e nella conoscenza della Bibbia.",
       },
-      { property: "og:title", content: "Sermoni e Risorse Cristiane — Chiesa di Cristo Italia" },
+      { property: "og:title", content: "Risorse cristiane — Articoli, video e studi biblici" },
       {
         property: "og:description",
-        content: "Sermoni, articoli e video biblici dalle Chiese di Cristo in Italia. Ascolta i nostri sermoni settimanali da Milano, Bologna, Napoli e Palermo.",
+        content: "Articoli, video e studi biblici dalle Chiese di Cristo di Milano e Bologna.",
       },
       { property: "og:image", content: bibleStudy },
     ],
@@ -35,7 +35,6 @@ export const Route = createFileRoute("/risorse/")({
 
 const TYPE_FILTERS: Array<{ value: ResourceType | "all"; label: string }> = [
   { value: "all", label: "Tutti" },
-  { value: "sermon", label: "Sermoni" },
   { value: "article", label: "Articoli" },
   { value: "video", label: "Video" },
   { value: "pdf", label: "PDF" },
