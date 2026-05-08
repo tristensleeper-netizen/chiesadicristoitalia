@@ -65,6 +65,7 @@ function ResourcesIndex() {
         .from("resources")
         .select("*")
         .eq("published", true)
+        .neq("type", "sermon")
         .order("published_at", { ascending: false });
       if (!active) return;
       if (error) console.error(error);
