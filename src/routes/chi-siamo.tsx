@@ -9,17 +9,17 @@ import heroSicilia from "@/assets/hero-sicilia.jpg";
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
     meta: [
-      { title: "Chi siamo — Chiesa di Cristo in Italia | Chiesa Cristiana Non Confessionale" },
+      { title: "Chi siamo — Chiesa di Cristo in Italia | Chiesa Cristiana" },
       {
         name: "description",
         content:
-          "Conosci la Chiesa di Cristo in Italia: una chiesa cristiana non confessionale del movimento di restaurazione, con comunità a Milano e Bologna.",
+          "Conosci la Chiesa di Cristo in Italia: una chiesa cristiana del movimento di restaurazione, con comunità a Milano e Bologna.",
       },
       { property: "og:title", content: "Chi siamo — Chiesa di Cristo in Italia" },
       {
         property: "og:description",
         content:
-          "Una chiesa cristiana non confessionale del movimento di restaurazione, con comunità a Milano e Bologna.",
+          "Una chiesa cristiana del movimento di restaurazione, con comunità a Milano e Bologna.",
       },
       { property: "og:image", content: heroItalia },
     ],
@@ -48,7 +48,7 @@ function ChiSiamoPage() {
           <p>
             La Chiesa di Cristo in Italia è una famiglia di comunità cristiane che si
             ritrovano per pregare, leggendo la Bibbia insieme, e per camminare nella fede
-            le une accanto alle altre. Siamo persone normali, di età e provenienze
+            le une accanto alle altre. Siamo persone, di età e provenienze
             diverse, che cercano semplicemente di seguire Gesù e di vivere il Vangelo nella
             quotidianità.
           </p>
@@ -66,11 +66,11 @@ function ChiSiamoPage() {
         <div className="container-narrow py-20 md:py-24">
           <p className="eyebrow mb-5">La nostra identità</p>
           <h2 className="font-display text-3xl md:text-4xl mb-6 leading-tight">
-            Una chiesa cristiana, non confessionale.
+            Una chiesa cristiana, semplice.
           </h2>
           <div className="space-y-5 text-foreground/80 leading-relaxed">
             <p>
-              Siamo una <strong>chiesa cristiana non confessionale</strong>: non
+              Siamo una <strong>chiesa cristiana</strong>: non
               apparteniamo ad alcuna denominazione, non rispondiamo a una gerarchia
               ecclesiastica esterna e ogni comunità locale è autonoma. Quello che ci tiene
               insieme non è una struttura, ma una fede comune: <em>Gesù Cristo</em>, la

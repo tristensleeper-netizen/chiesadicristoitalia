@@ -48,7 +48,6 @@ export function SiteFooter() {
             <li><Link to="/chi-siamo" className="hover:underline">Chi siamo</Link></li>
             <li><Link to="/sermoni" className="hover:underline">Sermoni</Link></li>
             <li><Link to="/risorse" className="hover:underline">Risorse</Link></li>
-            <li><Link to="/devozionale" className="hover:underline">Devozionale</Link></li>
           </ul>
         </div>
 

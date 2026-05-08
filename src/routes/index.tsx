@@ -15,7 +15,7 @@ const churchJsonLd = {
   alternateName: "Church of Christ Italy",
   url: "https://www.chiesadicristoitalia.it",
   description:
-    "Una chiesa cristiana non confessionale del movimento di restaurazione, basata sulla Bibbia, con comunità a Milano e Bologna.",
+    "Una chiesa cristiana basata sulla Bibbia, del movimento di restaurazione, con comunità a Milano e Bologna.",
   location: [
     {
       "@type": "Place",
@@ -47,13 +47,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chiesa di Cristo in Italia: una chiesa cristiana non confessionale, basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
+          "Chiesa di Cristo in Italia: una chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
       },
       { property: "og:title", content: "Chiesa di Cristo in Italia — Chiesa Cristiana a Milano e Bologna" },
       {
         property: "og:description",
         content:
-          "Una chiesa cristiana non confessionale, basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
+          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
       },
     ],
     scripts: [
@@ -79,7 +79,7 @@ function HomePage() {
         image={homeHero}
         eyebrow="Chiesa di Cristo · Italia"
         title={<>Una chiesa cristiana<br />a Milano e Bologna.</>}
-        subtitle="Comunità di persone normali che cercano insieme di vivere come Gesù — una famiglia che ti aspetta."
+        subtitle="Comunità di persone che cercano insieme di vivere come Gesù — una famiglia che ti aspetta."
         primaryCta={{ to: "/milano", label: "Trova la chiesa di Milano" }}
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
@@ -105,7 +105,7 @@ function HomePage() {
             </h2>
             <div className="mt-10 space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg text-left md:text-center">
               <p>
-                Siamo una <strong>chiesa cristiana non confessionale</strong>: persone
+                Siamo una <strong>chiesa cristiana</strong>: persone
                 semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e
                 vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
                 comunità locale è autonoma — quello che ci tiene insieme è la fede in

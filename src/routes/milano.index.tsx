@@ -87,7 +87,7 @@ function MilanoHome() {
         image={heroImage}
         eyebrow="Chiesa di Cristo"
         title={<>Milano</>}
-        subtitle="Una chiesa nel cuore della città. Persone normali, amicizie vere, una fede che cambia la vita."
+        subtitle="Una chiesa nel cuore della città. Persone, amicizie vere, una fede che cambia la vita."
         primaryCta={{ to: "/milano/visita", label: "Vieni a trovarci" }}
         secondaryCta={{ to: "/milano/contatti", label: "Scrivici" }}
         align="left"
