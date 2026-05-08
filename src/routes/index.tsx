@@ -78,8 +78,8 @@ function HomePage() {
         slot="home.hero"
         image={homeHero}
         eyebrow="Chiesa di Cristo · Italia"
-        title={<>Una famiglia<br />che ti aspetta.</>}
-        subtitle="Da Milano a Bologna, da Napoli a Palermo — comunità di persone normali che cercano insieme di vivere come Gesù."
+        title={<>Una chiesa cristiana<br />a Milano e Bologna.</>}
+        subtitle="Comunità di persone normali che cercano insieme di vivere come Gesù — una famiglia che ti aspetta."
         primaryCta={{ to: "/milano", label: "Trova la chiesa di Milano" }}
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
@@ -103,9 +103,42 @@ function HomePage() {
               Gesù, un uomo semplice con un piano semplice:{" "}
               <em className="italic text-primary">far conoscere Dio e il suo amore.</em>
             </h2>
-            <p className="mt-10 text-foreground/75 leading-relaxed text-base md:text-lg">
-              Siamo cristiani, persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno. Crediamo nella potenza della preghiera e nelle amicizie sincere che ci avvicinano a Dio. Se sei in Italia e stai cercando una famiglia spirituale, un posto dove sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
-            </p>
+            <div className="mt-10 space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg text-left md:text-center">
+              <p>
+                Siamo una <strong>chiesa cristiana non confessionale</strong>: persone
+                semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e
+                vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
+                comunità locale è autonoma — quello che ci tiene insieme è la fede in
+                Gesù e l'amore reciproco.
+              </p>
+              <p>
+                La nostra fede si fonda esclusivamente sulla Bibbia. Crediamo nella
+                potenza della preghiera, nelle amicizie sincere che ci avvicinano a Dio
+                e in una comunità che accoglie chiunque, senza condizioni. Se vuoi
+                approfondire,{" "}
+                <Link to="/chi-siamo" className="text-primary underline-offset-4 hover:underline">
+                  scopri chi siamo
+                </Link>
+                ,{" "}
+                <Link to="/sermoni" className="text-primary underline-offset-4 hover:underline">
+                  ascolta i nostri sermoni
+                </Link>{" "}
+                o{" "}
+                <Link to="/risorse" className="text-primary underline-offset-4 hover:underline">
+                  leggi articoli e guarda video
+                </Link>
+                .
+              </p>
+              <p>
+                Se sei in Italia e stai cercando una famiglia spirituale, un posto dove
+                sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
+                <br />
+                <span className="text-foreground/60 text-sm md:text-base italic">
+                  English speakers are welcome — Sunday services are in Italian, with
+                  informal translation available.
+                </span>
+              </p>
+            </div>
           </div>
 
           {/* Delicate divider */}
