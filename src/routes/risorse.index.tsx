@@ -98,13 +98,26 @@ function ResourcesIndex() {
         slot="risorse.hero"
         image={heroImg}
         eyebrow="Risorse"
-        title={<>Esplora. Ascolta.<br />Cresci.</>}
-        subtitle="Una biblioteca viva di sermoni, articoli e video dalla nostra famiglia di chiese in Italia."
+        title={<>Sermoni, articoli<br />e video</>}
+        subtitle="Ascolta i nostri sermoni settimanali, leggi articoli biblici e guarda video dalle Chiese di Cristo di Milano, Bologna, Napoli e Palermo."
         height="medium"
       />
 
       <section className="container-prose py-16 md:py-20">
-        <div className="flex flex-col gap-6 mb-12">
+        <div className="mb-12 max-w-3xl">
+          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
+            La nostra raccolta di sermoni e risorse cristiane
+          </h2>
+          <p className="text-foreground/75 leading-relaxed">
+            Esplora l'archivio completo dei sermoni predicati ogni domenica nelle nostre
+            congregazioni in Italia. Trovi sermoni audio e video, articoli di studio biblico,
+            podcast e PDF scaricabili. Filtra i sermoni per città, predicatore o argomento, e
+            ordina per data per scoprire le predicazioni più recenti.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6 mb-12" aria-label="Filtri sermoni e risorse">
+
           <div>
             <p className="eyebrow mb-3">Filtra per tipo</p>
             <div className="flex flex-wrap gap-2">
