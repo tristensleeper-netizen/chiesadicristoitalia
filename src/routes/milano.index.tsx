@@ -213,14 +213,3 @@ function MilanoHome() {
   );
 }
 
-function Pillar({ title, text, cta }: { title: string; text: string; cta: { to: string; label: string } }) {
-  return (
-    <div className="border-t border-border pt-8">
-      <h3 className="font-display text-2xl text-primary">{title}</h3>
-      <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
-      <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
-        {cta.label} →
-      </Link>
-    </div>
-  );
-}
