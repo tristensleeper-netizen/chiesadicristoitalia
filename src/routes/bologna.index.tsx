@@ -116,26 +116,31 @@ function BolognaHome() {
       </section>
 
       {/* Three ways to join */}
-      <section className="container-prose py-16 md:py-24">
-        <div className="mb-12">
+      <section className="container-prose py-20 md:py-28">
+        <div className="mb-14 max-w-2xl">
           <p className="eyebrow mb-3">Come puoi camminare con noi</p>
-          <h2 className="font-display text-3xl md:text-4xl">Tre modi concreti, da subito.</h2>
+          <h2 className="font-display text-3xl md:text-4xl leading-tight">
+            Tre modi concreti, da subito.
+          </h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          <PlantCard
-            icon={<HandHeart className="h-6 w-6" strokeWidth={1.75} />}
+          <ElegantPillar
+            index={0}
+            eyebrow="Preghiera"
             title="Prega con noi"
             text="Aggiungi Bologna al tuo tempo di preghiera. Riceverai aggiornamenti mensili con motivi specifici per cui pregare."
             cta={{ to: "/bologna/contatti", label: "Voglio pregare" }}
           />
-          <PlantCard
-            icon={<Users className="h-6 w-6" strokeWidth={1.75} />}
+          <ElegantPillar
+            index={1}
+            eyebrow="Gruppo fondatore"
             title="Unisciti al gruppo fondatore"
             text="Vivi a Bologna o nelle vicinanze e senti il chiamato? Stiamo cercando persone che vogliano fondare questa chiesa con noi."
             cta={{ to: "/bologna/contatti", label: "Voglio esserci" }}
           />
-          <PlantCard
-            icon={<Sprout className="h-6 w-6" strokeWidth={1.75} />}
+          <ElegantPillar
+            index={2}
+            eyebrow="Bibbia"
             title="Inizia uno studio biblico"
             text="Anche prima del lancio possiamo incontrarci — di persona o online — per leggere la Bibbia insieme, al tuo ritmo."
             cta={{ to: "/bologna/contatti", label: "Studiamo insieme" }}
