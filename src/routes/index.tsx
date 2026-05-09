@@ -240,39 +240,49 @@ function HomePage() {
                 t: "Bibbia",
                 d: "La Parola di Dio guida ogni cosa che facciamo.",
                 icon: "book",
-                verse: "«La tua parola è una lampada al mio piede.» — Salmo 119:105",
+                verse: "«La tua parola è una lampada al mio piede e una luce sul mio cammino.» — Salmo 119:105",
               },
               {
                 t: "Comunità",
                 d: "Amicizie profonde, sincere e quotidiane.",
                 icon: "people",
-                verse: "«Perseveravano nella comunione fraterna.» — Atti 2:42",
+                verse: "«Dove due o tre sono riuniti nel mio nome, lì sono io in mezzo a loro.» — Matteo 18:20",
               },
               {
                 t: "Missione",
-                d: "Portare speranza a chi ancora non la conosce.",
-                icon: "→",
-                verse: "«Andate e fate discepoli.» — Matteo 28:19",
+                d: "Portare speranza a chi ancora non l'ha trovata.",
+                icon: "mission",
+                verse: "«Andate dunque e fate discepoli di tutte le nazioni.» — Matteo 28:19",
               },
             ].map((item, i) => (
               <div
                 key={item.t}
-                className="group relative overflow-hidden rounded-3xl bg-card p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-border/50"
-                style={{ animationDelay: `${i * 120}ms` }}
+                className="group relative overflow-hidden rounded-3xl p-10 md:p-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-primary/10 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.08)]"
+                style={{
+                  animationDelay: `${i * 120}ms`,
+                  background:
+                    "radial-gradient(ellipse at top left, color-mix(in oklab, var(--primary-soft) 70%, transparent), var(--card) 65%)",
+                }}
               >
+                {/* Left vertical accent line */}
+                <div className="pointer-events-none absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-primary/70" />
+
+                {/* Top decorative hairline */}
+                <div className="pointer-events-none absolute left-10 right-10 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
                 {/* Animated gradient orb on hover */}
                 <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg shadow-primary/20">
                     {item.icon === "book" ? (
                       <svg
                         aria-hidden="true"
-                        className="h-7 w-7"
+                        className="h-8 w-8"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.75"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
@@ -284,11 +294,11 @@ function HomePage() {
                     ) : item.icon === "people" ? (
                       <svg
                         aria-hidden="true"
-                        className="h-7 w-7"
+                        className="h-8 w-8"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.75"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
@@ -298,18 +308,36 @@ function HomePage() {
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                       </svg>
                     ) : (
-                      item.icon
+                      <svg
+                        aria-hidden="true"
+                        className="h-8 w-8"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M3 12h18" />
+                        <path d="M12 3a14 14 0 0 1 0 18" />
+                        <path d="M12 3a14 14 0 0 0 0 18" />
+                      </svg>
                     )}
                   </div>
                   <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
-                  <p className="text-foreground/75 leading-relaxed mb-5">{item.d}</p>
+                  <p className="text-foreground/75 leading-relaxed">{item.d}</p>
 
-                  {/* Verse — slides in on hover */}
-                  <div className="overflow-hidden">
-                    <p className="text-sm italic text-muted-foreground translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                      {item.verse}
-                    </p>
-                  </div>
+                  {/* Decorative separator */}
+                  <div className="h-px w-8 bg-primary/30 my-5" />
+
+                  {/* Scripture — always visible, editorial italic serif */}
+                  <p
+                    className="text-sm leading-relaxed text-foreground/60"
+                    style={{ fontStyle: "italic", fontFamily: 'Georgia, "Times New Roman", serif' }}
+                  >
+                    {item.verse}
+                  </p>
 
                   {/* Animated underline accent */}
                   <div className="mt-6 h-0.5 w-10 bg-primary transition-all duration-500 group-hover:w-full" />
