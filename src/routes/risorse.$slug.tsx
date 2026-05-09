@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
   formatItalianDate,
+  getYouTubeId,
   isSpotifyUrl,
   isVimeoUrl,
   isYouTubeUrl,
@@ -12,17 +13,100 @@ import {
   type Resource,
 } from "@/lib/resource-helpers";
 
+const SITE_URL = "https://chiesadicristoitalia.it";
+
 export const Route = createFileRoute("/risorse/$slug")({
+  loader: async ({ params }) => {
+    const { data } = await supabase
+      .from("resources")
+      .select("*")
+      .eq("slug", params.slug)
+      .eq("published", true)
+      .maybeSingle();
+    return { resource: (data as Resource | null) ?? null };
+  },
+  head: ({ loaderData, params }) => {
+    const r = loaderData?.resource;
+    if (!r) {
+      return {
+        meta: [
+          { title: "Risorsa non trovata — Chiesa di Cristo Italia" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
+    }
+    const canonical = `${SITE_URL}/risorse/${params.slug}`;
+    const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
+    const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
+    const title = `${r.title} — ${r.speaker_or_author ?? "Chiesa di Cristo"} | Chiesa di Cristo Italia`;
+    const desc = r.description ?? `${r.title} — risorsa cristiana dalla Chiesa di Cristo Italia.`;
+    const ogType = r.type === "video" || r.type === "sermon" ? "video.other" : "article";
+
+    const meta: Array<Record<string, string>> = [
+      { title },
+      { name: "description", content: desc },
+      { name: "language", content: "it" },
+      { property: "og:title", content: title },
+      { property: "og:description", content: desc },
+      { property: "og:type", content: ogType },
+      { property: "og:url", content: canonical },
+      { property: "og:locale", content: "it_IT" },
+      { property: "og:site_name", content: "Chiesa di Cristo Italia" },
+      { name: "twitter:card", content: thumb ? "summary_large_image" : "summary" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: desc },
+    ];
+    if (thumb) {
+      meta.push({ property: "og:image", content: thumb });
+      meta.push({ name: "twitter:image", content: thumb });
+    }
+
+    const jsonLd: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": r.type === "video" || r.type === "sermon" ? "VideoObject" : "Article",
+      name: r.title,
+      headline: r.title,
+      description: desc,
+      inLanguage: "it",
+      url: canonical,
+      datePublished: r.published_at,
+      author: { "@type": "Person", name: r.speaker_or_author ?? "Chiesa di Cristo" },
+      publisher: {
+        "@type": "Organization",
+        name: "Chiesa di Cristo Italia",
+        url: SITE_URL,
+      },
+    };
+    if (thumb) jsonLd.thumbnailUrl = thumb;
+    if (r.media_url) {
+      jsonLd.contentUrl = r.media_url;
+      if (ytId) jsonLd.embedUrl = `https://www.youtube.com/embed/${ytId}`;
+      jsonLd.uploadDate = r.published_at;
+    }
+
+    return {
+      meta,
+      links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(jsonLd),
+        },
+      ],
+    };
+  },
   component: ResourceDetail,
 });
 
 function ResourceDetail() {
   const { slug } = Route.useParams();
-  const [resource, setResource] = useState<Resource | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFoundState, setNotFoundState] = useState(false);
+  const initial = Route.useLoaderData().resource;
+  const [resource, setResource] = useState<Resource | null>(initial);
+  const [loading, setLoading] = useState(initial === null);
+  const [notFoundState, setNotFoundState] = useState(initial === null);
 
   useEffect(() => {
+    if (initial) return;
     let active = true;
     (async () => {
       const { data, error } = await supabase
@@ -33,18 +117,17 @@ function ResourceDetail() {
         .maybeSingle();
       if (!active) return;
       if (error) console.error(error);
-      if (!data) {
-        setNotFoundState(true);
-      } else {
+      if (!data) setNotFoundState(true);
+      else {
         setResource(data);
-        document.title = `${data.title} — Chiesa di Cristo`;
+        setNotFoundState(false);
       }
       setLoading(false);
     })();
     return () => {
       active = false;
     };
-  }, [slug]);
+  }, [slug, initial]);
 
   if (loading) {
     return (
