@@ -174,28 +174,3 @@ function BolognaHome() {
     </>
   );
 }
-
-function PlantCard({
-  icon,
-  title,
-  text,
-  cta,
-}: {
-  icon: ReactNode;
-  title: string;
-  text: string;
-  cta: { to: string; label: string };
-}) {
-  return (
-    <div className="group rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]">
-      <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-        {icon}
-      </div>
-      <h3 className="font-display text-2xl text-foreground">{title}</h3>
-      <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
-      <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
-        {cta.label} →
-      </Link>
-    </div>
-  );
-}
