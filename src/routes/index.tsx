@@ -274,14 +274,14 @@ function HomePage() {
                 <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
                 <div className="relative">
-                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg shadow-primary/20">
+                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-[rgba(107,76,53,0.18)] bg-[#f7ede2] shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                     {item.icon === "book" ? (
                       <svg
                         aria-hidden="true"
                         className="h-8 w-8"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="currentColor"
+                        stroke="#a0623a"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -297,7 +297,7 @@ function HomePage() {
                         className="h-8 w-8"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="currentColor"
+                        stroke="#a0623a"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -311,7 +311,7 @@ function HomePage() {
                         className="h-8 w-8"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="currentColor"
+                        stroke="#a0623a"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
