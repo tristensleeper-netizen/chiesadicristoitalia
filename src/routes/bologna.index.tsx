@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { ElegantPillar } from "@/components/elegant-pillar";
 
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
-import { CalendarClock } from "lucide-react";
+import { Sprout, HandHeart, Users, CalendarClock } from "lucide-react";
+import type { ReactNode } from "react";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -116,31 +116,26 @@ function BolognaHome() {
       </section>
 
       {/* Three ways to join */}
-      <section className="container-prose py-20 md:py-28">
-        <div className="mb-14 max-w-2xl">
+      <section className="container-prose py-16 md:py-24">
+        <div className="mb-12">
           <p className="eyebrow mb-3">Come puoi camminare con noi</p>
-          <h2 className="font-display text-3xl md:text-4xl leading-tight">
-            Tre modi concreti, da subito.
-          </h2>
+          <h2 className="font-display text-3xl md:text-4xl">Tre modi concreti, da subito.</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          <ElegantPillar
-            index={0}
-            eyebrow="Preghiera"
+          <PlantCard
+            icon={<HandHeart className="h-6 w-6" strokeWidth={1.75} />}
             title="Prega con noi"
             text="Aggiungi Bologna al tuo tempo di preghiera. Riceverai aggiornamenti mensili con motivi specifici per cui pregare."
             cta={{ to: "/bologna/contatti", label: "Voglio pregare" }}
           />
-          <ElegantPillar
-            index={1}
-            eyebrow="Gruppo fondatore"
+          <PlantCard
+            icon={<Users className="h-6 w-6" strokeWidth={1.75} />}
             title="Unisciti al gruppo fondatore"
             text="Vivi a Bologna o nelle vicinanze e senti il chiamato? Stiamo cercando persone che vogliano fondare questa chiesa con noi."
             cta={{ to: "/bologna/contatti", label: "Voglio esserci" }}
           />
-          <ElegantPillar
-            index={2}
-            eyebrow="Bibbia"
+          <PlantCard
+            icon={<Sprout className="h-6 w-6" strokeWidth={1.75} />}
             title="Inizia uno studio biblico"
             text="Anche prima del lancio possiamo incontrarci — di persona o online — per leggere la Bibbia insieme, al tuo ritmo."
             cta={{ to: "/bologna/contatti", label: "Studiamo insieme" }}
@@ -172,5 +167,30 @@ function BolognaHome() {
       </section>
 
     </>
+  );
+}
+
+function PlantCard({
+  icon,
+  title,
+  text,
+  cta,
+}: {
+  icon: ReactNode;
+  title: string;
+  text: string;
+  cta: { to: string; label: string };
+}) {
+  return (
+    <div className="group rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]">
+      <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <h3 className="font-display text-2xl text-foreground">{title}</h3>
+      <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
+      <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
+        {cta.label} →
+      </Link>
+    </div>
   );
 }
