@@ -289,9 +289,19 @@ function hashToIndex(s: string, mod: number) {
 }
 
 function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }) {
+  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
+  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null;
   const palette = GRADIENT_PALETTES[hashToIndex(r.id ?? r.slug ?? r.title, GRADIENT_PALETTES.length)];
   return (
-    <div className={`relative aspect-video ${palette}`}>
+    <div className={`relative aspect-video ${thumb ? "bg-black" : palette}`}>
+      {thumb && (
+        <img
+          src={thumb}
+          alt={r.title}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
       {showPlay && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
