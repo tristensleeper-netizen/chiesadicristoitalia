@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { ElegantPillar } from "@/components/elegant-pillar";
 import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
