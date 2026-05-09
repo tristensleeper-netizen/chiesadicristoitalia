@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { ElegantPillar } from "@/components/elegant-pillar";
 import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
@@ -152,19 +153,31 @@ function MilanoHome() {
       </section>
 
       {/* Three pillars */}
-      <section className="container-prose py-16 md:py-24">
-        <div className="grid gap-8 md:grid-cols-3">
-          <Pillar
+      <section className="container-prose py-20 md:py-28">
+        <div className="mb-14 max-w-2xl">
+          <p className="eyebrow mb-3">Tre modi per camminare insieme</p>
+          <h2 className="font-display text-3xl md:text-4xl leading-tight">
+            Una comunità che si incontra, ascolta e cresce.
+          </h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          <ElegantPillar
+            index={0}
+            eyebrow="Domenica"
             title="Funzione domenicale"
             text="Ogni domenica alle 10:30 ci ritroviamo per adorare insieme, prendere la comunione e ascoltare un messaggio dalla Bibbia."
             cta={{ to: "/milano/visita", label: "Cosa aspettarsi" }}
           />
-          <Pillar
+          <ElegantPillar
+            index={1}
+            eyebrow="A tuo ritmo"
             title="Studi biblici"
             text="Studi personalizzati, uno-a-uno o in piccoli gruppi, per scoprire chi è davvero Gesù — al tuo ritmo, senza pressione."
             cta={{ to: "/milano/contatti", label: "Inizia uno studio" }}
           />
-          <Pillar
+          <ElegantPillar
+            index={2}
+            eyebrow="In settimana"
             title="Gruppi di quartiere"
             text="Connettiti con i membri della tua zona di Milano per discussioni profonde su Dio e sulla vita quotidiana."
             cta={{ to: "/milano/eventi", label: "Trova un gruppo" }}
@@ -200,14 +213,3 @@ function MilanoHome() {
   );
 }
 
-function Pillar({ title, text, cta }: { title: string; text: string; cta: { to: string; label: string } }) {
-  return (
-    <div className="border-t border-border pt-8">
-      <h3 className="font-display text-2xl text-primary">{title}</h3>
-      <p className="mt-3 text-foreground/75 leading-relaxed">{text}</p>
-      <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
-        {cta.label} →
-      </Link>
-    </div>
-  );
-}
