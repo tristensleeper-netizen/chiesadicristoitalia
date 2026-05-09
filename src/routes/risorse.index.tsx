@@ -9,6 +9,7 @@ import {
   type Devotional,
   type Resource,
   type ResourceType,
+  getYouTubeId,
 } from "@/lib/resource-helpers";
 import { PageHero } from "@/components/page-hero";
 import { useSlotImage } from "@/lib/use-slot-image";
