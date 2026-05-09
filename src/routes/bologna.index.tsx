@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { ElegantPillar } from "@/components/elegant-pillar";
 
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
-import { Sprout, HandHeart, Users, CalendarClock } from "lucide-react";
-import type { ReactNode } from "react";
+import { CalendarClock } from "lucide-react";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
