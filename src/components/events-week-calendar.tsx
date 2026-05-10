@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
 
 interface Props {
@@ -9,6 +9,8 @@ interface Props {
   ctaLabel?: string;
   /** How many weeks ahead the user can swipe through. */
   maxWeeksAhead?: number;
+  /** How many past weeks the user can swipe back to. */
+  maxWeeksBack?: number;
 }
 
 const ITALIAN_DAYS_FULL = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
@@ -37,19 +39,21 @@ export function EventsWeekCalendar({
   cityHref,
   ctaLabel = "Calendario completo",
   maxWeeksAhead = 7,
+  maxWeeksBack = 4,
 }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
 
   const today = useMemo(() => startOfDay(new Date()), []);
 
-  // Fetch a wide window once to cover all swipeable weeks.
+  // Fetch a wide window covering past + future swipeable weeks.
   const { from, to } = useMemo(() => {
     const from = new Date(today);
+    from.setDate(from.getDate() - (maxWeeksBack + 1) * 7);
     const to = new Date(today);
     to.setDate(to.getDate() + (maxWeeksAhead + 1) * 7);
     to.setHours(23, 59, 59, 999);
     return { from, to };
-  }, [today, maxWeeksAhead]);
+  }, [today, maxWeeksAhead, maxWeeksBack]);
 
   const { occurrences } = useEventOccurrences(city, from, to);
 
@@ -78,7 +82,6 @@ export function EventsWeekCalendar({
     return map;
   }, [occurrences, days]);
 
-  // Month / range label
   const rangeLabel = useMemo(() => {
     const first = days[0];
     const last = days[days.length - 1];
@@ -88,13 +91,24 @@ export function EventsWeekCalendar({
     return `${ITALIAN_MONTHS[first.getMonth()]} – ${ITALIAN_MONTHS[last.getMonth()]} ${last.getFullYear()}`;
   }, [days]);
 
-  const canPrev = weekOffset > 0;
+  const canPrev = weekOffset > -maxWeeksBack;
   const canNext = weekOffset < maxWeeksAhead;
 
   const goPrev = () => canPrev && setWeekOffset((w) => w - 1);
   const goNext = () => canNext && setWeekOffset((w) => w + 1);
 
-  // Swipe handling (touch + mouse drag)
+  const periodLabel =
+    weekOffset === 0
+      ? "Questa settimana"
+      : weekOffset === 1
+      ? "Prossima settimana"
+      : weekOffset === -1
+      ? "Settimana scorsa"
+      : weekOffset > 0
+      ? `Tra ${weekOffset} settimane`
+      : `${Math.abs(weekOffset)} settimane fa`;
+
+  // Swipe handling
   const dragRef = useRef<{ startX: number; active: boolean } | null>(null);
   const SWIPE_THRESHOLD = 50;
 
@@ -109,6 +123,9 @@ export function EventsWeekCalendar({
     if (dx < 0) goNext();
     else goPrev();
   };
+
+  const totalDots = maxWeeksBack + maxWeeksAhead + 1;
+  const dotIndex = weekOffset + maxWeeksBack;
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 md:p-10 shadow-[var(--shadow-soft)]">
@@ -129,9 +146,7 @@ export function EventsWeekCalendar({
           <ChevronLeft className="h-5 w-5" />
         </button>
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/60">
-            {weekOffset === 0 ? "Questa settimana" : weekOffset === 1 ? "Prossima settimana" : `Tra ${weekOffset} settimane`}
-          </p>
+          <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/60">{periodLabel}</p>
           <p className="font-display text-lg md:text-xl text-foreground mt-0.5">{rangeLabel}</p>
         </div>
         <button
@@ -159,25 +174,37 @@ export function EventsWeekCalendar({
           {days.map((d) => {
             const list = byDay.get(d.toDateString()) ?? [];
             const isToday = isSameDay(d, today);
+            const isPast = d < today && !isToday;
             return (
               <div
                 key={d.toDateString()}
                 className={
-                  "rounded-2xl border p-4 transition-colors min-h-[140px] flex flex-col " +
+                  "rounded-2xl border p-4 transition-colors min-h-[180px] flex flex-col " +
                   (isToday
                     ? "border-primary/40 bg-primary/5"
+                    : isPast
+                    ? "border-border/40 bg-background/20"
                     : "border-border/60 bg-background/40")
                 }
               >
                 <div className="flex items-baseline justify-between mb-3">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/60">
+                  <p
+                    className={
+                      "text-[11px] uppercase tracking-[0.22em] " +
+                      (isPast ? "text-foreground/40" : "text-foreground/60")
+                    }
+                  >
                     <span className="md:hidden">{ITALIAN_DAYS_FULL[d.getDay()]}</span>
                     <span className="hidden md:inline">{ITALIAN_DAYS_SHORT[d.getDay()]}</span>
                   </p>
                   <p
                     className={
                       "font-display text-2xl leading-none " +
-                      (isToday ? "text-primary" : "text-foreground/70")
+                      (isToday
+                        ? "text-primary"
+                        : isPast
+                        ? "text-foreground/40"
+                        : "text-foreground/70")
                     }
                   >
                     {d.getDate()}
@@ -185,9 +212,9 @@ export function EventsWeekCalendar({
                 </div>
 
                 {list.length === 0 ? (
-                  <p className="text-xs text-foreground/40 italic">—</p>
+                  <p className="text-sm text-foreground/40 italic">Nessun evento</p>
                 ) : (
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5 flex-1">
                     {list.map((occ) => {
                       const time = occ.date.toLocaleTimeString("it-IT", {
                         hour: "2-digit",
@@ -196,16 +223,27 @@ export function EventsWeekCalendar({
                       return (
                         <li
                           key={occ.id}
-                          className="rounded-lg bg-card border border-border/60 p-2 hover:border-primary/40 transition-colors"
+                          className={
+                            "rounded-lg bg-card border p-3 transition-colors " +
+                            (isPast
+                              ? "border-border/40 opacity-70 hover:opacity-100"
+                              : "border-border/60 hover:border-primary/40")
+                          }
                         >
-                          <p className="text-[10px] font-medium text-primary tracking-wide">
+                          <p className="text-xs font-semibold text-primary tracking-wide">
                             {time}
                           </p>
-                          <p className="text-xs font-medium text-foreground leading-snug mt-0.5 line-clamp-2">
+                          <p className="text-sm font-medium text-foreground leading-snug mt-1 break-words">
                             {occ.title}
                           </p>
+                          {occ.location && (
+                            <p className="mt-1.5 flex items-start gap-1 text-xs text-foreground/65 leading-snug break-words">
+                              <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
+                              <span>{occ.location}</span>
+                            </p>
+                          )}
                           {occ.tag && (
-                            <span className="mt-1 inline-block text-[9px] uppercase tracking-[0.18em] text-foreground/50">
+                            <span className="mt-1.5 inline-block text-[10px] uppercase tracking-[0.18em] text-foreground/55">
                               {occ.tag}
                             </span>
                           )}
@@ -222,14 +260,14 @@ export function EventsWeekCalendar({
 
       {/* Week dots */}
       <div className="relative mt-6 flex justify-center gap-1.5">
-        {Array.from({ length: maxWeeksAhead + 1 }).map((_, i) => (
+        {Array.from({ length: totalDots }).map((_, i) => (
           <button
             key={i}
-            onClick={() => setWeekOffset(i)}
+            onClick={() => setWeekOffset(i - maxWeeksBack)}
             aria-label={`Settimana ${i + 1}`}
             className={
               "h-1.5 rounded-full transition-all " +
-              (i === weekOffset ? "w-8 bg-primary" : "w-1.5 bg-primary/25 hover:bg-primary/50")
+              (i === dotIndex ? "w-8 bg-primary" : "w-1.5 bg-primary/25 hover:bg-primary/50")
             }
           />
         ))}
