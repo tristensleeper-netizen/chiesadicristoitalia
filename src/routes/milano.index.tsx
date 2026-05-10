@@ -4,8 +4,8 @@ import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
-import { EventsRotator } from "@/components/events-rotator";
 import { EventsPopup } from "@/components/events-popup";
+import { EventsWeekCalendar } from "@/components/events-week-calendar";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
 import heroMilano from "@/assets/hero-milano.jpg";
@@ -104,21 +104,19 @@ function MilanoHome() {
       {/* Floating bottom-right popup */}
       <EventsPopup events={events} cityHref="/milano/eventi" cityName="Milano" />
 
-      {/* Animated events rotator */}
-      {events.length > 0 && (
-        <section className="container-prose pt-4 md:pt-8">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow mb-2">Cosa succede</p>
-              <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
-            </div>
-            <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
-              Calendario completo →
-            </Link>
+      {/* Weekly calendar */}
+      <section className="container-prose pt-4 md:pt-8">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow mb-2">Cosa succede</p>
+            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
           </div>
-          <EventsRotator events={events} cityHref="/milano/eventi" />
-        </section>
-      )}
+          <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
+            Calendario completo →
+          </Link>
+        </div>
+        <EventsWeekCalendar city="milano" cityHref="/milano/eventi" />
+      </section>
 
       <div className="mt-16">
         <ScriptureMarquee />
