@@ -214,8 +214,8 @@ export function EventsWeekCalendar({
                 {list.length === 0 ? (
                   <p className="text-sm text-foreground/40 italic">Nessun evento</p>
                 ) : (
-                  <ul className="space-y-2.5 flex-1">
-                    {list.map((occ) => {
+                  <ul className="space-y-2.5 flex-1 divide-y divide-border/40">
+                    {list.map((occ, idx) => {
                       const time = occ.date.toLocaleTimeString("it-IT", {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -224,26 +224,25 @@ export function EventsWeekCalendar({
                         <li
                           key={occ.id}
                           className={
-                            "rounded-lg bg-card border p-3 transition-colors " +
-                            (isPast
-                              ? "border-border/40 opacity-70 hover:opacity-100"
-                              : "border-border/60 hover:border-primary/40")
+                            "min-w-0 " +
+                            (idx > 0 ? "pt-2.5 " : "") +
+                            (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className="text-xs font-semibold text-primary tracking-wide">
+                          <p className="text-[11px] font-semibold text-primary tracking-wide">
                             {time}
                           </p>
-                          <p className="text-sm font-medium text-foreground leading-snug mt-1 break-words">
+                          <p className="text-[13px] font-medium text-foreground leading-snug mt-0.5 break-words hyphens-auto">
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className="mt-1.5 flex items-start gap-1 text-xs text-foreground/65 leading-snug break-words">
+                            <p className="mt-1 flex items-start gap-1 text-[11px] text-foreground/65 leading-snug break-words hyphens-auto">
                               <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
-                              <span>{occ.location}</span>
+                              <span className="min-w-0 break-words">{occ.location}</span>
                             </p>
                           )}
                           {occ.tag && (
-                            <span className="mt-1.5 inline-block text-[10px] uppercase tracking-[0.18em] text-foreground/55">
+                            <span className="mt-1 inline-block text-[9px] uppercase tracking-[0.18em] text-foreground/55 break-words">
                               {occ.tag}
                             </span>
                           )}
