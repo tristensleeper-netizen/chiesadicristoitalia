@@ -229,20 +229,20 @@ export function EventsWeekCalendar({
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className="text-[11px] font-semibold text-primary tracking-wide">
+                          <p className="text-[11px] font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">
                             {time}
                           </p>
-                          <p className="text-[13px] font-medium text-foreground leading-snug mt-0.5 break-words hyphens-auto">
+                          <p className="text-[11px] font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className="mt-1 flex items-start gap-1 text-[11px] text-foreground/65 leading-snug break-words hyphens-auto">
+                            <p className="mt-1 flex min-w-0 items-center gap-1 text-[10px] text-foreground/65 leading-snug whitespace-nowrap overflow-hidden">
                               <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
-                              <span className="min-w-0 break-words">{occ.location}</span>
+                              <span className="min-w-0 overflow-hidden text-ellipsis">{occ.location}</span>
                             </p>
                           )}
                           {occ.tag && (
-                            <span className="mt-1 inline-block text-[9px] uppercase tracking-[0.18em] text-foreground/55 break-words">
+                            <span className="mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55">
                               {occ.tag}
                             </span>
                           )}
