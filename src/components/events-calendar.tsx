@@ -112,40 +112,40 @@ export function EventsCalendar({ city }: Props) {
                 key={key}
                 onClick={() => setSelected(d)}
                 className={[
-                  "aspect-square sm:aspect-auto sm:min-h-[88px] rounded-xl p-2 text-left transition border",
-                  inMonth ? "" : "opacity-40",
+                  "rounded-xl p-1.5 text-left transition border flex flex-col min-h-[80px]",
+                  inMonth ? "" : "opacity-35",
                   isSelected
                     ? "border-primary bg-primary/5 ring-2 ring-primary/30"
                     : "border-transparent hover:border-border hover:bg-muted/50",
                 ].join(" ")}
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span
-                    className={[
-                      "inline-grid place-items-center h-7 w-7 rounded-full text-sm",
-                      isToday ? "bg-primary text-primary-foreground font-semibold" : "text-foreground",
-                    ].join(" ")}
-                  >
-                    {d.getDate()}
-                  </span>
-                  {events.length > 0 && (
-                    <span className="text-[10px] font-medium text-primary bg-primary/10 px-1.5 py-0.5 rounded-full">
-                      {events.length}
-                    </span>
-                  )}
-                </div>
-                <div className="space-y-0.5">
+                <span
+                  className={[
+                    "inline-grid place-items-center h-6 w-6 rounded-full text-[11px] font-medium mb-1 shrink-0",
+                    isToday ? "bg-primary text-primary-foreground font-semibold" : "text-foreground/80",
+                  ].join(" ")}
+                >
+                  {d.getDate()}
+                </span>
+
+                <div className="flex flex-col gap-0.5 flex-1 overflow-hidden">
                   {events.slice(0, 2).map((e) => (
-                    <p
-                      key={e.id}
-                      className="text-[11px] leading-tight truncate text-foreground/70"
-                      title={e.title}
-                    >
-                      • {e.title}
-                    </p>
+                    <div key={e.id} className="min-w-0">
+                      <p className="text-[9px] leading-tight font-semibold text-primary truncate">
+                        {format(e.date, "HH:mm")}
+                      </p>
+                      <p className="text-[9px] leading-tight text-foreground/75 truncate">
+                        {e.title}
+                      </p>
+                      {e.location && (
+                        <p className="text-[8px] leading-tight text-muted-foreground truncate">
+                          {e.location}
+                        </p>
+                      )}
+                    </div>
                   ))}
                   {events.length > 2 && (
-                    <p className="text-[10px] text-muted-foreground">+{events.length - 2}</p>
+                    <p className="text-[8px] text-muted-foreground">+{events.length - 2}</p>
                   )}
                 </div>
               </button>
