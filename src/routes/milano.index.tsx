@@ -195,14 +195,14 @@ function MilanoHome() {
 
       {/* Lettura Devozionale */}
       <section className="container-prose py-16 md:py-24">
-        <div className="mb-8 text-center">
+        <div className="mb-8">
           <p className="eyebrow mb-3">Crescita spirituale</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">Lettura devozionale del giorno.</h2>
         </div>
-        <div className="mx-auto max-w-2xl rounded-3xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-8 md:p-12 space-y-6">
+        <div className="max-w-2xl space-y-6">
           <div className="flex items-center gap-3">
-            <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#f0e4d6] border border-[rgba(107,76,53,0.18)]">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a0623a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/5 border border-primary/15">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-primary" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
                 <line x1="12" y1="7" x2="12" y2="14"/><line x1="9" y1="10" x2="15" y2="10"/>
               </svg>
@@ -213,7 +213,7 @@ function MilanoHome() {
           <p className="text-foreground/75 leading-relaxed">
             Un piano devozionale che ti guida attraverso il libro di Isaia, giorno per giorno. Una scrittura, un riassunto, domande di applicazione e una preghiera per iniziare bene la giornata.
           </p>
-          <div className="h-px w-full bg-[rgba(107,76,53,0.15)]" />
+          <div className="h-px w-full bg-border" />
           <div>
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura di oggi</p>
             <p className="font-serif italic text-foreground/80 text-lg leading-relaxed">
