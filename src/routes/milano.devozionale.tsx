@@ -383,10 +383,10 @@ function DevozionalePage() {
                               !inSeries
                                 ? "text-muted-foreground/40 cursor-default"
                                 : isSel
-                                ? "bg-primary text-primary-foreground font-semibold shadow"
+                                ? "bg-primary text-primary-foreground font-semibold shadow cursor-pointer hover:scale-105 active:scale-95"
                                 : isTod
-                                ? "bg-[#f7ede2] text-primary font-semibold ring-2 ring-primary/40 hover:bg-[#f0e4d6]"
-                                : "bg-[#f7ede2] text-primary font-medium hover:bg-[#f0e4d6]",
+                                ? "bg-[#f7ede2] text-primary font-semibold ring-2 ring-primary/40 cursor-pointer hover:bg-primary hover:text-primary-foreground hover:scale-105 active:scale-95"
+                                : "bg-[#f7ede2] text-primary font-medium cursor-pointer hover:bg-primary hover:text-primary-foreground hover:scale-105 active:scale-95",
                             ].join(" ")}
                           >
                             {d}
