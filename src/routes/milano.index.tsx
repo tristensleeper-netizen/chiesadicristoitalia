@@ -18,6 +18,11 @@ import family3 from "@/assets/family-3.jpg";
 import family4 from "@/assets/family-4.jpg";
 import family5 from "@/assets/family-5.jpg";
 import family6 from "@/assets/family-6.jpg";
+import family7 from "@/assets/family-7.jpg";
+import family8 from "@/assets/family-8.jpg";
+import family9 from "@/assets/family-9.jpg";
+import family10 from "@/assets/family-10.jpg";
+import family11 from "@/assets/family-11.jpg";
 
 const MILANO_EVENTS = [
   {
@@ -91,6 +96,11 @@ function MilanoHome() {
     { src: family4, alt: "Foto di gruppo della comunità" },
     { src: family5, alt: "Ritiro in montagna" },
     { src: family6, alt: "Pranzo insieme" },
+    { src: family7, alt: "Papà e bambini a Bologna" },
+    { src: family8, alt: "Donne in ritiro" },
+    { src: family9, alt: "Amicizia in natura" },
+    { src: family10, alt: "Momento di comunità" },
+    { src: family11, alt: "Mamme alla chiesa di Milano" },
   ];
   return (
     <>
