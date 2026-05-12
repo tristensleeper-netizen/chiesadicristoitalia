@@ -193,17 +193,20 @@ export function EventsWeekCalendar({
                 onPointerUp={release}
                 onPointerLeave={release}
                 onPointerCancel={release}
+                style={isPressed && !isMobile ? { willChange: "auto", backfaceVisibility: "hidden" } : undefined}
                 className={
                   "relative rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
-                  "transition-all duration-300 ease-out will-change-transform origin-center " +
+                  "transition-all duration-300 ease-out origin-center " +
                   (isPressed
-                    ? (isMobile ? "z-30 shadow-2xl scale-100 " : "z-30 shadow-2xl scale-[3] ")
-                    : "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 ") +
-                  (isToday
-                    ? "border-primary/40 bg-primary/5"
-                    : isPast
-                    ? "border-border/40 bg-background/20"
-                    : "border-border/60 bg-background/40")
+                    ? (isMobile
+                        ? "z-30 shadow-2xl scale-100 bg-card border-primary/40 "
+                        : "z-30 shadow-2xl scale-[3] bg-card border-primary/40 ")
+                    : "will-change-transform hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 " +
+                      (isToday
+                        ? "border-primary/40 bg-primary/5"
+                        : isPast
+                        ? "border-border/40 bg-background/20"
+                        : "border-border/60 bg-background/40"))
                 }
               >
                 <div className="flex items-baseline justify-between mb-3">
