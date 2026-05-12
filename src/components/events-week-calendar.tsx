@@ -196,7 +196,9 @@ export function EventsWeekCalendar({
                 className={
                   "relative rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
                   "transition-all duration-300 ease-out will-change-transform origin-center " +
-                  (isPressed ? "z-30 shadow-2xl scale-[3] " : "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 ") +
+                  (isPressed
+                    ? (isMobile ? "z-30 shadow-2xl scale-100 " : "z-30 shadow-2xl scale-[3] ")
+                    : "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 ") +
                   (isToday
                     ? "border-primary/40 bg-primary/5"
                     : isPast
@@ -237,6 +239,18 @@ export function EventsWeekCalendar({
                         hour: "2-digit",
                         minute: "2-digit",
                       });
+                      const truncCls = isPressed
+                        ? "break-words"
+                        : "whitespace-nowrap overflow-hidden text-ellipsis";
+                      const locTruncCls = isPressed
+                        ? "break-words"
+                        : "whitespace-nowrap overflow-hidden";
+                      const innerLocCls = isPressed
+                        ? "min-w-0 break-words"
+                        : "min-w-0 overflow-hidden text-ellipsis";
+                      const tagCls = isPressed
+                        ? "mt-1 block break-words text-[8px] uppercase tracking-[0.14em] text-foreground/55"
+                        : "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55";
                       return (
                         <li
                           key={occ.id}
@@ -246,20 +260,20 @@ export function EventsWeekCalendar({
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className="text-[11px] font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">
+                          <p className={"text-[11px] font-semibold text-primary tracking-wide " + truncCls}>
                             {time}
                           </p>
-                          <p className="text-[11px] font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
+                          <p className={"text-[11px] font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className="mt-1 flex min-w-0 items-center gap-1 text-[10px] text-foreground/65 leading-snug whitespace-nowrap overflow-hidden">
+                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-[10px] text-foreground/65 leading-snug " + locTruncCls}>
                               <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
-                              <span className="min-w-0 overflow-hidden text-ellipsis">{occ.location}</span>
+                              <span className={innerLocCls}>{occ.location}</span>
                             </p>
                           )}
                           {occ.tag && (
-                            <span className="mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55">
+                            <span className={tagCls}>
                               {occ.tag}
                             </span>
                           )}
