@@ -178,8 +178,13 @@ export function EventsWeekCalendar({
             return (
               <div
                 key={d.toDateString()}
+                tabIndex={0}
+                role="button"
                 className={
-                  "rounded-2xl border p-4 transition-colors min-h-[180px] flex flex-col " +
+                  "rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
+                  "transition-transform duration-200 ease-out will-change-transform " +
+                  "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 " +
+                  "active:scale-[1.08] focus-visible:scale-[1.04] focus-visible:outline-none " +
                   (isToday
                     ? "border-primary/40 bg-primary/5"
                     : isPast
