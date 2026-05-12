@@ -218,7 +218,7 @@ function DevozionalePage() {
         </div>
 
         {/* CONTENUTO */}
-        <div className="space-y-10">
+        <div id="devozionale-contenuto" className="space-y-10 scroll-mt-24">
           {/* Scrittura */}
           <div className="rounded-3xl bg-primary p-8 md:p-10 text-white">
             <p className="text-xs uppercase tracking-widest text-white/60 mb-4">Giorno {selected + 1} di 66 · Isaia {day.chapter}</p>
