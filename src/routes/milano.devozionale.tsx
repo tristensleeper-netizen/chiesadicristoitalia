@@ -298,7 +298,7 @@ function DevozionalePage() {
           {/* Navigazione */}
           <div className="flex items-center justify-between pt-4 border-t border-border">
             <button
-              onClick={() => setSelected(Math.max(0, selected - 1))}
+              onClick={() => openDay(Math.max(0, selected - 1))}
               disabled={selected === 0}
               className="inline-flex items-center gap-2 text-sm text-primary hover:underline disabled:opacity-30 disabled:cursor-not-allowed"
             >
@@ -306,7 +306,7 @@ function DevozionalePage() {
             </button>
             <span className="text-xs text-muted-foreground">Giorno {selected + 1} / {DAYS.length}</span>
             <button
-              onClick={() => setSelected(Math.min(DAYS.length - 1, selected + 1))}
+              onClick={() => openDay(Math.min(DAYS.length - 1, selected + 1))}
               disabled={selected === DAYS.length - 1}
               className="inline-flex items-center gap-2 text-sm text-primary hover:underline disabled:opacity-30 disabled:cursor-not-allowed"
             >
@@ -315,6 +315,87 @@ function DevozionalePage() {
           </div>
         </div>
       </div>
+
+      {/* MODALE CALENDARIO COMPLETO */}
+      {showFullCalendar && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start md:items-center justify-center p-4 overflow-y-auto"
+          onClick={() => setShowFullCalendar(false)}
+        >
+          <div
+            className="relative bg-background rounded-3xl shadow-2xl max-w-4xl w-full my-8 p-6 md:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <p className="eyebrow mb-2">Calendario completo</p>
+                <h2 className="font-display text-3xl text-primary">Studiare Isaia — 66 giorni</h2>
+                <p className="text-sm text-foreground/60 mt-1">I giorni evidenziati sono parte della serie. Clicca su un giorno per aprirlo.</p>
+              </div>
+              <button
+                onClick={() => setShowFullCalendar(false)}
+                aria-label="Chiudi"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border hover:bg-muted transition text-foreground/70"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid gap-8 sm:grid-cols-2">
+              {months.map(({ year, month }) => {
+                const firstOfMonth = new Date(year, month, 1);
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const leadDow = firstOfMonth.getDay();
+                const leadBlanks = leadDow === 0 ? 6 : leadDow - 1;
+                const cells: (number | null)[] = [
+                  ...Array(leadBlanks).fill(null),
+                  ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+                ];
+                return (
+                  <div key={`${year}-${month}`}>
+                    <p className="font-display text-lg text-primary mb-3">{MONTHS_FULL[month]} {year}</p>
+                    <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
+                      {["L", "M", "M", "G", "V", "S", "D"].map((d, i) => (
+                        <span key={i}>{d}</span>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-7 gap-1">
+                      {cells.map((d, i) => {
+                        if (d === null) return <span key={i} className="aspect-square" />;
+                        const date = new Date(year, month, d);
+                        const idx = diffDays(date, START);
+                        const inSeries = idx >= 0 && idx < DAYS.length;
+                        const isSel = inSeries && idx === selected;
+                        const isTod = inSeries && idx === todayIdx;
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => inSeries && openDay(idx)}
+                            disabled={!inSeries}
+                            title={inSeries ? `Isaia ${DAYS[idx].chapter}` : undefined}
+                            className={[
+                              "aspect-square grid place-items-center text-xs rounded-lg transition",
+                              !inSeries
+                                ? "text-muted-foreground/40 cursor-default"
+                                : isSel
+                                ? "bg-primary text-primary-foreground font-semibold shadow"
+                                : isTod
+                                ? "bg-[#f7ede2] text-primary font-semibold ring-2 ring-primary/40 hover:bg-[#f0e4d6]"
+                                : "bg-[#f7ede2] text-primary font-medium hover:bg-[#f0e4d6]",
+                            ].join(" ")}
+                          >
+                            {d}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
