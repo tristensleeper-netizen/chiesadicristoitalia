@@ -15,6 +15,9 @@ import heroItalia from "@/assets/hero-italia.jpg";
 import family1 from "@/assets/family-1.jpg";
 import family2 from "@/assets/family-2.jpg";
 import family3 from "@/assets/family-3.jpg";
+import family4 from "@/assets/family-4.jpg";
+import family5 from "@/assets/family-5.jpg";
+import family6 from "@/assets/family-6.jpg";
 
 const MILANO_EVENTS = [
   {
@@ -85,6 +88,9 @@ function MilanoHome() {
     { src: photo3, alt: "Milano" },
     { src: family3, alt: "Vita di comunità" },
     { src: photo4, alt: "Comunità italiana" },
+    { src: family4, alt: "Foto di gruppo della comunità" },
+    { src: family5, alt: "Ritiro in montagna" },
+    { src: family6, alt: "Pranzo insieme" },
   ];
   return (
     <>
