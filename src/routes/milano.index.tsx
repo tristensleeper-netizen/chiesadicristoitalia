@@ -305,7 +305,7 @@ function DevozionaleDurationCalendar({ start, end }: { start: Date; end: Date })
       </div>
       <p className="text-xs text-muted-foreground mb-4">{fmt(start)} → {fmt(end)}</p>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         {months.map(({ year, month }) => {
           const firstOfMonth = new Date(year, month, 1);
           const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -315,18 +315,18 @@ function DevozionaleDurationCalendar({ start, end }: { start: Date; end: Date })
           for (let d = 1; d <= daysInMonth; d++) cells.push(d);
 
           return (
-            <div key={`${year}-${month}`} className="rounded-xl bg-[#fbf3e6]/60 p-2.5 border border-[rgba(107,76,53,0.1)]">
-              <p className="text-[11px] font-semibold text-primary capitalize text-center mb-1.5">
-                {monthNames[month]}
+            <div key={`${year}-${month}`} className="rounded-xl bg-[#fbf3e6]/60 p-4 border border-[rgba(107,76,53,0.1)]">
+              <p className="text-base font-semibold text-primary capitalize text-center mb-3">
+                {monthNames[month]} {year}
               </p>
-              <div className="grid grid-cols-7 gap-0.5 text-[8px] text-muted-foreground/70 mb-0.5">
+              <div className="grid grid-cols-7 gap-1 text-xs text-muted-foreground/70 mb-1">
                 {weekdays.map((w, i) => (
                   <div key={i} className="text-center font-medium">{w}</div>
                 ))}
               </div>
-              <div className="grid grid-cols-7 gap-0.5">
+              <div className="grid grid-cols-7 gap-1">
                 {cells.map((d, i) => {
-                  if (d === null) return <div key={i} className="h-4" />;
+                  if (d === null) return <div key={i} className="aspect-square" />;
                   const date = new Date(year, month, d);
                   const inRange = date >= new Date(start.getFullYear(), start.getMonth(), start.getDate())
                     && date <= new Date(end.getFullYear(), end.getMonth(), end.getDate());
@@ -337,7 +337,7 @@ function DevozionaleDurationCalendar({ start, end }: { start: Date; end: Date })
                     <div
                       key={i}
                       className={[
-                        "h-4 grid place-items-center text-[8px] rounded-sm transition",
+                        "aspect-square grid place-items-center text-xs rounded-md transition",
                         inRange ? "bg-primary/25 text-primary font-medium" : "text-foreground/40",
                         (isStart || isEnd) ? "bg-primary text-primary-foreground font-bold" : "",
                         isToday && !isStart && !isEnd ? "ring-1 ring-primary ring-offset-0" : "",
