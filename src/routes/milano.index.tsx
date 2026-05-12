@@ -195,36 +195,53 @@ function MilanoHome() {
 
       {/* Lettura Devozionale */}
       <section className="container-prose py-16 md:py-24">
-        <div className="mb-8 text-center">
+        <div className="mb-10 text-center">
           <p className="eyebrow mb-3">Crescita spirituale</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">Lettura devozionale del giorno.</h2>
         </div>
-        <div className="mx-auto max-w-2xl rounded-3xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-8 md:p-12 space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#f0e4d6] border border-[rgba(107,76,53,0.18)]">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a0623a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
-                <line x1="12" y1="7" x2="12" y2="14"/><line x1="9" y1="10" x2="15" y2="10"/>
-              </svg>
+        <div className="relative mx-auto max-w-5xl">
+          {/* Soft glow halo for highlight */}
+          <div aria-hidden className="pointer-events-none absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-primary/15 via-[#f0c98a]/25 to-primary/10 blur-2xl opacity-70" />
+          <div className="relative grid gap-8 md:grid-cols-[1.3fr_1fr] rounded-3xl bg-gradient-to-br from-[#fbf3e6] to-[#f5e6d0] border border-[rgba(107,76,53,0.18)] p-6 md:p-10 shadow-[0_20px_60px_-20px_rgba(107,76,53,0.35)]">
+            {/* Left: content */}
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/70 border border-[rgba(107,76,53,0.18)] shadow-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a0623a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                    <line x1="12" y1="7" x2="12" y2="14"/><line x1="9" y1="10" x2="15" y2="10"/>
+                  </svg>
+                </div>
+                <p className="eyebrow text-primary/80">Studio di Isaia</p>
+                <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  In corso
+                </span>
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">Isaia — Il Signore è salvezza</h3>
+              <p className="text-foreground/75 leading-relaxed text-sm md:text-base">
+                Un piano devozionale che ti guida attraverso il libro di Isaia, giorno per giorno. Una scrittura, un riassunto, domande di applicazione e una preghiera per iniziare bene la giornata.
+              </p>
+              <div className="h-px w-full bg-[rgba(107,76,53,0.15)]" />
+              <div>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura di oggi</p>
+                <p className="font-serif italic text-foreground/85 text-lg leading-relaxed">
+                  «Non temere, perché io sono con te; non ti scoraggiare, perché io sono il tuo Dio.»
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">— Isaia 41:10</p>
+              </div>
+              <div className="pt-2">
+                <Link to="/milano/devozionale" className="btn-primary inline-flex items-center gap-2">
+                  Lettura completa <span aria-hidden>→</span>
+                </Link>
+              </div>
             </div>
-            <p className="eyebrow text-primary/80">Studio di Isaia</p>
-          </div>
-          <h3 className="font-display text-2xl md:text-3xl text-primary">Isaia — Il Signore è salvezza</h3>
-          <p className="text-foreground/75 leading-relaxed">
-            Un piano devozionale che ti guida attraverso il libro di Isaia, giorno per giorno. Una scrittura, un riassunto, domande di applicazione e una preghiera per iniziare bene la giornata.
-          </p>
-          <div className="h-px w-full bg-[rgba(107,76,53,0.15)]" />
-          <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura di oggi</p>
-            <p className="font-serif italic text-foreground/80 text-lg leading-relaxed">
-              «Non temere, perché io sono con te; non ti scoraggiare, perché io sono il tuo Dio.»
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">— Isaia 41:10</p>
-          </div>
-          <div className="pt-2">
-            <Link to="/milano/devozionale" className="btn-primary inline-flex items-center gap-2">
-              Lettura completa <span aria-hidden>→</span>
-            </Link>
+
+            {/* Right: study duration calendar */}
+            <DevozionaleDurationCalendar
+              start={new Date(2026, 4, 11)}
+              end={new Date(2026, 7, 29)}
+            />
           </div>
         </div>
       </section>
@@ -242,6 +259,93 @@ function Pillar({ title, text, cta }: { title: string; text: string; cta: { to: 
       <Link to={cta.to} className="mt-5 inline-block text-sm font-medium text-primary hover:underline">
         {cta.label} →
       </Link>
+    </div>
+  );
+}
+
+function DevozionaleDurationCalendar({ start, end }: { start: Date; end: Date }) {
+  const monthNames = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+  const weekdays = ["L","M","M","G","V","S","D"];
+  const today = new Date();
+
+  const months: { year: number; month: number }[] = [];
+  let cur = new Date(start.getFullYear(), start.getMonth(), 1);
+  const last = new Date(end.getFullYear(), end.getMonth(), 1);
+  while (cur <= last) {
+    months.push({ year: cur.getFullYear(), month: cur.getMonth() });
+    cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+  }
+
+  const totalDays = Math.round((end.getTime() - start.getTime()) / 86400000) + 1;
+  const fmt = (d: Date) => `${d.getDate()} ${monthNames[d.getMonth()].toLowerCase()} ${d.getFullYear()}`;
+
+  return (
+    <div className="rounded-2xl bg-white/70 backdrop-blur-sm border border-[rgba(107,76,53,0.15)] p-5 shadow-sm">
+      <div className="flex items-center justify-between mb-1">
+        <p className="eyebrow text-primary/80">Durata dello studio</p>
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full">{totalDays} giorni</span>
+      </div>
+      <p className="text-xs text-muted-foreground mb-4">{fmt(start)} → {fmt(end)}</p>
+
+      <div className="grid grid-cols-2 gap-3">
+        {months.map(({ year, month }) => {
+          const firstOfMonth = new Date(year, month, 1);
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+          const offset = (firstOfMonth.getDay() + 6) % 7; // Mon-first
+          const cells: (number | null)[] = [];
+          for (let i = 0; i < offset; i++) cells.push(null);
+          for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+          return (
+            <div key={`${year}-${month}`} className="rounded-xl bg-[#fbf3e6]/60 p-2.5 border border-[rgba(107,76,53,0.1)]">
+              <p className="text-[11px] font-semibold text-primary capitalize text-center mb-1.5">
+                {monthNames[month]}
+              </p>
+              <div className="grid grid-cols-7 gap-0.5 text-[8px] text-muted-foreground/70 mb-0.5">
+                {weekdays.map((w, i) => (
+                  <div key={i} className="text-center font-medium">{w}</div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 gap-0.5">
+                {cells.map((d, i) => {
+                  if (d === null) return <div key={i} className="h-4" />;
+                  const date = new Date(year, month, d);
+                  const inRange = date >= new Date(start.getFullYear(), start.getMonth(), start.getDate())
+                    && date <= new Date(end.getFullYear(), end.getMonth(), end.getDate());
+                  const isStart = date.getTime() === new Date(start.getFullYear(), start.getMonth(), start.getDate()).getTime();
+                  const isEnd = date.getTime() === new Date(end.getFullYear(), end.getMonth(), end.getDate()).getTime();
+                  const isToday = date.toDateString() === today.toDateString();
+                  return (
+                    <div
+                      key={i}
+                      className={[
+                        "h-4 grid place-items-center text-[8px] rounded-sm transition",
+                        inRange ? "bg-primary/25 text-primary font-medium" : "text-foreground/40",
+                        (isStart || isEnd) ? "bg-primary text-primary-foreground font-bold" : "",
+                        isToday && !isStart && !isEnd ? "ring-1 ring-primary ring-offset-0" : "",
+                      ].join(" ")}
+                    >
+                      {d}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[10px] text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-sm bg-primary" /> Inizio / Fine
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-sm bg-primary/25" /> Periodo studio
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-sm ring-1 ring-primary" /> Oggi
+        </span>
+      </div>
     </div>
   );
 }
