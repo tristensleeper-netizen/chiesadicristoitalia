@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Props {
   city: "milano" | "bologna";
