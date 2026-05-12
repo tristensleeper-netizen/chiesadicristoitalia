@@ -200,7 +200,7 @@ export function EventsWeekCalendar({
                   (isPressed
                     ? (isMobile
                         ? "z-30 shadow-2xl scale-100 bg-card border-primary/40 "
-                        : "z-30 shadow-2xl scale-[3] bg-card border-primary/40 ")
+                        : "z-30 shadow-2xl scale-150 bg-card border-primary/40 ")
                     : "will-change-transform hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 " +
                       (isToday
                         ? "border-primary/40 bg-primary/5"
@@ -251,9 +251,7 @@ export function EventsWeekCalendar({
                       const innerLocCls = isPressed
                         ? "min-w-0 break-words"
                         : "min-w-0 overflow-hidden text-ellipsis";
-                      const tagCls = isPressed
-                        ? "mt-1 block break-words text-[8px] uppercase tracking-[0.14em] text-foreground/55"
-                        : "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55";
+                      const tagCls = "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55";
                       return (
                         <li
                           key={occ.id}
