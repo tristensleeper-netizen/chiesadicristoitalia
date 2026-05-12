@@ -229,9 +229,9 @@ export function EventsWeekCalendar({
                 </div>
 
                 {list.length === 0 ? (
-                  <p className={(isPressed ? "text-[6px] " : "text-sm ") + "text-foreground/40 italic"}>Nessun evento</p>
+                  <p className="text-sm text-foreground/40 italic">Nessun evento</p>
                 ) : (
-                  <ul className={"flex-1 divide-y divide-border/40 " + (isPressed ? "space-y-1" : "space-y-2.5")}>
+                  <ul className="space-y-2.5 flex-1 divide-y divide-border/40">
                     {list.map((occ, idx) => {
                       const time = occ.date.toLocaleTimeString("it-IT", {
                         hour: "2-digit",
@@ -242,24 +242,24 @@ export function EventsWeekCalendar({
                           key={occ.id}
                           className={
                             "min-w-0 " +
-                            (idx > 0 ? (isPressed ? "pt-1 " : "pt-2.5 ") : "") +
+                            (idx > 0 ? "pt-2.5 " : "") +
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className={(isPressed ? "text-[5px] " : "text-[11px] ") + "font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis"}>
+                          <p className="text-[11px] font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">
                             {time}
                           </p>
-                          <p className={(isPressed ? "text-[5px] " : "text-[11px] ") + "font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis"}>
+                          <p className="text-[11px] font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className={"mt-1 flex min-w-0 items-center gap-1 text-foreground/65 leading-snug whitespace-nowrap overflow-hidden " + (isPressed ? "text-[4px]" : "text-[10px]")}>
-                              <MapPin className={isPressed ? "h-1 w-1 mt-0.5 shrink-0" : "h-3 w-3 mt-0.5 shrink-0"} />
+                            <p className="mt-1 flex min-w-0 items-center gap-1 text-[10px] text-foreground/65 leading-snug whitespace-nowrap overflow-hidden">
+                              <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
                               <span className="min-w-0 overflow-hidden text-ellipsis">{occ.location}</span>
                             </p>
                           )}
                           {occ.tag && (
-                            <span className={"mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap uppercase tracking-[0.14em] text-foreground/55 " + (isPressed ? "text-[3px]" : "text-[8px]")}>
+                            <span className="mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55">
                               {occ.tag}
                             </span>
                           )}
