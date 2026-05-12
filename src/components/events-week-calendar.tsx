@@ -129,7 +129,7 @@ export function EventsWeekCalendar({
   const dotIndex = weekOffset + maxWeeksBack;
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 md:p-10 shadow-[var(--shadow-soft)]">
+    <div className="relative rounded-3xl border border-border bg-card p-6 md:p-10 shadow-[var(--shadow-soft)]">
       <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl animate-float" />
       <div
         className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-accent/15 blur-3xl animate-float"
