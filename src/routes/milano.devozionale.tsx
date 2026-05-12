@@ -379,7 +379,7 @@ function DevozionalePage() {
                             disabled={!inSeries}
                             title={inSeries ? `Isaia ${DAYS[idx].chapter}` : undefined}
                             className={[
-                              "aspect-square grid place-items-center text-xs rounded-lg transition",
+                              "aspect-square grid place-items-center text-xs rounded-lg transition select-none",
                               !inSeries
                                 ? "text-muted-foreground/40 cursor-default"
                                 : isSel
