@@ -42,6 +42,7 @@ export function EventsWeekCalendar({
   maxWeeksBack = 4,
 }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
+  const [pressedKey, setPressedKey] = useState<string | null>(null);
 
   const today = useMemo(() => startOfDay(new Date()), []);
 
@@ -128,7 +129,7 @@ export function EventsWeekCalendar({
   const dotIndex = weekOffset + maxWeeksBack;
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 md:p-10 shadow-[var(--shadow-soft)]">
+    <div className="relative rounded-3xl border border-border bg-card p-6 md:p-10 shadow-[var(--shadow-soft)]">
       <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl animate-float" />
       <div
         className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-accent/15 blur-3xl animate-float"
@@ -175,16 +176,25 @@ export function EventsWeekCalendar({
             const list = byDay.get(d.toDateString()) ?? [];
             const isToday = isSameDay(d, today);
             const isPast = d < today && !isToday;
+            const key = d.toDateString();
+            const isPressed = pressedKey === key;
+            const release = () => setPressedKey((k) => (k === key ? null : k));
             return (
               <div
-                key={d.toDateString()}
+                key={key}
                 tabIndex={0}
                 role="button"
+                onPointerDown={(e) => {
+                  e.currentTarget.setPointerCapture?.(e.pointerId);
+                  setPressedKey(key);
+                }}
+                onPointerUp={release}
+                onPointerLeave={release}
+                onPointerCancel={release}
                 className={
-                  "rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
-                  "transition-transform duration-200 ease-out will-change-transform " +
-                  "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 " +
-                  "active:scale-[1.08] focus-visible:scale-[1.04] focus-visible:outline-none " +
+                  "relative rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
+                  "transition-all duration-300 ease-out will-change-transform origin-center " +
+                  (isPressed ? "z-30 shadow-2xl scale-[3] " : "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 ") +
                   (isToday
                     ? "border-primary/40 bg-primary/5"
                     : isPast
