@@ -214,7 +214,7 @@ function MilanoHome() {
             Un piano devozionale che ti guida attraverso il libro di Isaia, giorno per giorno. Una scrittura, un riassunto, domande di applicazione e una preghiera per iniziare bene la giornata.
           </p>
           <div className="h-px w-full bg-border" />
-          <div>
+          <div className="rounded-xl border border-border bg-background/40 px-5 py-4">
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura di oggi</p>
             <p className="font-serif italic text-foreground/80 text-lg leading-relaxed">
               «Non temere, perché io sono con te; non ti scoraggiare, perché io sono il tuo Dio.»
