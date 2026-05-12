@@ -12,6 +12,9 @@ import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 import heroItalia from "@/assets/hero-italia.jpg";
+import family1 from "@/assets/family-1.jpg";
+import family2 from "@/assets/family-2.jpg";
+import family3 from "@/assets/family-3.jpg";
 
 const MILANO_EVENTS = [
   {
@@ -76,8 +79,11 @@ function MilanoHome() {
   const photo4 = useSlotImage("milano.photo4", heroItalia);
   const cityPhotos = [
     { src: photo1, alt: "Adorazione domenicale" },
+    { src: family1, alt: "Momento di gioia in famiglia" },
     { src: photo2, alt: "Studio biblico" },
+    { src: family2, alt: "Celebrazione di matrimonio" },
     { src: photo3, alt: "Milano" },
+    { src: family3, alt: "Vita di comunità" },
     { src: photo4, alt: "Comunità italiana" },
   ];
   return (
