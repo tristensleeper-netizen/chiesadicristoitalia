@@ -44,6 +44,7 @@ export function EventsWeekCalendar({
 }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
   const [pressedKey, setPressedKey] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   const today = useMemo(() => startOfDay(new Date()), []);
 
