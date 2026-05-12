@@ -251,9 +251,7 @@ export function EventsWeekCalendar({
                       const innerLocCls = isPressed
                         ? "min-w-0 break-words"
                         : "min-w-0 overflow-hidden text-ellipsis";
-                      const tagCls = isPressed
-                        ? "mt-1 block break-words text-[8px] uppercase tracking-[0.14em] text-foreground/55"
-                        : "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55";
+                      const tagCls = "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55";
                       return (
                         <li
                           key={occ.id}
