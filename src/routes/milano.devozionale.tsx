@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import daysData from "@/lib/isaia-days.json";
 
 export const Route = createFileRoute("/milano/devozionale")({
   head: () => ({
@@ -8,18 +9,15 @@ export const Route = createFileRoute("/milano/devozionale")({
       {
         name: "description",
         content:
-          "Piano devozionale quotidiano sul libro di Isaia. Ogni giorno una scrittura, riflessioni e una preghiera. Chiesa di Cristo di Milano.",
+          "Studiare Isaia insieme: 66 giorni, un capitolo al giorno. Scrittura, riflessioni, pratica e preghiera. Chiesa di Cristo di Milano.",
       },
     ],
   }),
   component: DevozionalePage,
 });
 
-const WEEK_START = new Date("2026-05-11"); // Monday 11 May 2026
-
-const DAYS: {
-  label: string;
-  date: string;
+type Day = {
+  chapter: number;
   scripture: string;
   ref: string;
   title: string;
@@ -28,118 +26,57 @@ const DAYS: {
   questions: string[];
   practice: string[];
   prayer: string;
-}[] = [
-  {
-    label: "Lun",
-    date: "11 Mag",
-    scripture: "«Il Signore degli eserciti ha giurato: Sì, come ho pensato, così avverrà; come ho deciso, così sarà.»",
-    ref: "Isaia 14:24",
-    title: "Dio governa la storia",
-    intro: "Isaia ci introduce a un Dio che non è spettatore passivo della storia umana, ma il suo sovrano assoluto. Questo primo giorno ci invita a riposarci nella certezza che nulla sfugge alla mano di Dio.",
-    summary: "Nel libro di Isaia, Dio si presenta come il Signore della storia. Egli usò persino nazioni pagane come l'Assiria come strumenti del Suo giudizio, eppure rimase sempre in controllo. Isaia profetizzò durante il regno di quattro re di Giuda (740–680 a.C.) in un periodo di grande instabilità politica. Eppure il suo messaggio era costante: confidate nel Signore, non nelle alleanze umane. La grandezza di Dio si manifesta nel fatto che Egli conosce la fine dall'inizio e che i Suoi piani non possono essere frustrati da nessuna potenza umana o spirituale.",
-    questions: [
-      "In quale area della tua vita fai più fatica a confidare che Dio è in controllo?",
-      "Come cambierebbe il tuo atteggiamento se credessi davvero che Dio governa anche le situazioni difficili che stai affrontando?",
-      "Quali eventi della tua vita, guardando indietro, vedi ora come guidati dalla mano di Dio?",
-    ],
-    practice: [
-      "Scrivi su un foglio una situazione nella tua vita che ti spaventa o preoccupa. Poi scrivici sopra: 'Dio è in controllo di questo.'",
-      "Oggi, quando senti ansia per il futuro, ripeti a voce alta: 'Il Signore degli eserciti ha deciso — così sarà.'",
-    ],
-    prayer: "Padre, ti ringrazio perché non sei un Dio lontano ma il Signore della storia — anche della mia storia. Aiutami oggi ad affidarti le mie paure, le mie incertezze e i miei piani. Che la mia fiducia sia in Te soltanto. Amen.",
-  },
-  {
-    label: "Mar",
-    date: "12 Mag",
-    scripture: "«Eccomi, manda me!»",
-    ref: "Isaia 6:8",
-    title: "La chiamata di Isaia — e la nostra",
-    intro: "La visione di Isaia nel tempio è uno dei momenti più potenti dell'intera Bibbia. Davanti alla santità di Dio, Isaia riconosce la sua indegnità — e poi, purificato, risponde con disponibilità totale. Oggi riflettiamo sulla nostra chiamata.",
-    summary: "Nel capitolo 6, Isaia ha una visione di Dio sul trono circondato dai serafini che cantano: 'Santo, santo, santo'. Di fronte a questa gloria, Isaia esclama: 'Sono perduto! Sono un uomo dalle labbra impure.' Ma Dio non lo allontana — lo purifica. Un serafino tocca le sue labbra con un carbone ardente dell'altare e dichiara il suo peccato espiato. Solo dopo questa purificazione Dio chiede: 'Chi manderò?' E Isaia, ora libero dalla colpa, risponde con slancio: 'Eccomi, manda me!' Questo è il modello della vera vocazione cristiana: prima l'incontro con la santità di Dio, poi la purificazione per grazia, infine la disponibilità al servizio.",
-    questions: [
-      "Come ti sentiresti tu di fronte alla piena santità di Dio?",
-      "C'è qualcosa che ti impedisce di dire 'Eccomi' a Dio nella tua vita quotidiana?",
-      "In quale area specifica senti che Dio potrebbe starti chiamando a fare un passo avanti?",
-    ],
-    practice: [
-      "Prenditi 5 minuti di silenzio oggi. Immagina di essere davanti a Dio. Cosa provi? Poi di' semplicemente: 'Eccomi, manda me.'",
-      "Identifica un'opportunità concreta questa settimana per servire qualcuno — un collega, un vicino, un familiare.",
-    ],
-    prayer: "Signore santo, quando mi avvicino a Te riconosco la mia imperfezione. Grazie perché attraverso Gesù sono purificato e posso stare davanti a Te. Rendimi disponibile: 'Eccomi'. Usami oggi per il Tuo scopo. Amen.",
-  },
-  {
-    label: "Mer",
-    date: "13 Mag",
-    scripture: "«Se non rimanete saldi nella fede, non resisterete affatto.»",
-    ref: "Isaia 7:9",
-    title: "Mantieni la calma e confida in Dio",
-    intro: "Il re Acaz era terrorizzato da due eserciti nemici. Dio, attraverso Isaia, gli offrì una sola via d'uscita: la fede. Ma Acaz preferì l'alleanza con l'Assiria. Oggi vediamo cosa accade quando cerchiamo soluzioni umane ai problemi spirituali.",
-    summary: "Nel 734 a.C., la Siria e il regno settentrionale di Israele avevano unito le forze per attaccare Gerusalemme. Il popolo tremava 'come gli alberi della foresta agitati dal vento'. Isaia si avvicinò al re Acaz con un messaggio chiaro: 'Mantieni la calma, non temere.' Dio prometteva che i nemici sarebbero caduti. Ma Acaz, invece di credere, fingette umiltà spirituale rifiutando di chiedere un segno — mentre in segreto stava già negoziando un'alleanza con l'Assiria. Isaia smontò l'ipocrisia e annunciò il segno di Emmanuele: 'Dio è con noi.' Questa profezia ha un doppio adempimento: nel figlio di Isaia e in Gesù Cristo.",
-    questions: [
-      "Quali sono le 'Assiria' della tua vita — cioè le soluzioni mondane a cui ti rivolgi invece di affidarti a Dio?",
-      "In che modo la paura condiziona le tue decisioni quotidiane?",
-      "Il fatto che 'Dio è con noi' (Emmanuele) — quanto è reale per te oggi, concretamente?",
-    ],
-    practice: [
-      "Identifica una decisione che stai rimandando per paura. Portala a Dio in preghiera questa settimana prima di agire.",
-      "Scrivi 'Emmanuele — Dio con me' in un posto dove lo vedrai spesso oggi.",
-    ],
-    prayer: "Dio mio, quanto spesso cerco soluzioni umane invece di fidarmi di Te. Perdonami per le volte in cui ho preferito le mie alleanze alla Tua guida. Oggi voglio credere davvero che Tu sei con me. Dammi coraggio e fede. Amen.",
-  },
-  {
-    label: "Gio",
-    date: "14 Mag",
-    scripture: "«Il popolo che camminava nelle tenebre ha visto una grande luce.»",
-    ref: "Isaia 9:2",
-    title: "Una grande luce nelle tenebre",
-    intro: "Uno dei passi più belli e più citati di tutto Isaia. In mezzo al giudizio e all'oscurità, Dio annuncia la venuta di una luce straordinaria — un bambino, un figlio, il cui nome sarà 'Dio potente, Padre eterno, Principe della pace.'",
-    summary: "Il capitolo 8 si concludeva con 'morte, tenebre e angoscia'. Ma il capitolo 9 apre con alba e gioia. Isaia profetizza che le regioni di Zabulon e Neftali — tra le prime a essere invase dagli Assiri — vedranno una grande luce. Matteo cita questo passo per descrivere l'inizio del ministero di Gesù in Galilea (Mt 4:13-16). Il bambino profetizzato porterà una pace senza fine sul trono di Davide. I suoi titoli — Consigliere ammirabile, Dio potente, Padre eterno, Principe della pace — indicano chiaramente la sua natura divina. Questa profezia, pronunciata in un momento di crisi politica, punta verso il Messia che sarebbe venuto secoli dopo: Gesù Cristo.",
-    questions: [
-      "In quale area della tua vita hai bisogno di sentire oggi la 'grande luce' di Dio?",
-      "Come vivi tu la pace che Gesù — il Principe della pace — promette?",
-      "Quali 'tenebre' intorno a te potresti illuminare con la luce del Vangelo?",
-    ],
-    practice: [
-      "Oggi raggiungi qualcuno che sai che sta attraversando un momento difficile — con un messaggio, una chiamata, o un gesto concreto.",
-      "Leggi Matteo 4:13-16 e medita su come Gesù ha adempiuto questa profezia.",
-    ],
-    prayer: "Signore Gesù, Tu sei la luce che è venuta nel mondo. Illumina le mie tenebre oggi — le paure, i dubbi, le tristezze. E fa' che io sia un riflesso della Tua luce per chi mi sta intorno. Amen.",
-  },
-  {
-    label: "Ven",
-    date: "15 Mag",
-    scripture: "«Un germoglio spunterà dal ceppo di Jesse, un ramo crescerà dalle sue radici.»",
-    ref: "Isaia 11:1",
-    title: "Il ramo di Jesse — il re che verrà",
-    intro: "Dopo i giudizi dei capitoli precedenti, Isaia dipinge un quadro straordinario del futuro re che nascerà dalla stirpe di Davide. Uno spirito di saggezza, intelligenza e timore del Signore riposerà su di lui. È la profezia più dettagliata del Messia in tutta la prima parte di Isaia.",
-    summary: "Il capitolo 10 descriveva l'abbattimento degli alberi maestosi — un'immagine del giudizio. Ma dall'11 emerge una speranza nuova: dal ceppo abbattuto di Jesse (il padre del re Davide) spunterà un germoglio. Su questo futuro re riposerà lo Spirito del Signore con pienezza: spirito di saggezza, intelligenza, consiglio, forza, conoscenza e timore del Signore. Questo re non giudicherà secondo le apparenze, ma con giustizia per i poveri e i miti. La sua venuta porterà una pace cosmica: il lupo abiterà con l'agnello. Questo è Gesù — il Figlio di Davide, il Messia atteso. Il capitolo 12 risponde con un canto di lode: 'Io ti ringrazio, o Signore, perché eri adontato con me, ma la Tua collera si è placata ed Egli mi ha consolato.'",
-    questions: [
-      "Quali doni dello Spirito descritti in questo passo desideri di più nella tua vita (saggezza, intelligenza, forza, timore di Dio)?",
-      "Come vivi tu il 'timore del Signore' — non come paura paralizzante, ma come profondo rispetto e meraviglia?",
-      "In che modo Gesù, il 'ramo di Jesse', ha cambiato concretamente la tua vita?",
-    ],
-    practice: [
-      "Leggi il capitolo 12 di Isaia come un canto di lode personale. Sostituisci 'Israele' con il tuo nome.",
-      "Scrivi tre modi in cui Gesù ha portato pace nella tua vita quest'anno.",
-    ],
-    prayer: "Padre, grazie per Gesù — il germoglio di Jesse, il mio Re. Fa' che lo Spirito di saggezza e di timore del Signore riposi anche su di me. Che io possa giudicare con giustizia, trattare i poveri con dignità e vivere in pace con chi mi circonda. Amen.",
-  },
-];
+};
+
+const DAYS = daysData as Day[];
+
+// Inizio dello studio: lunedì 11 maggio 2026 — un capitolo per giorno (incl. weekend)
+const START = new Date(2026, 4, 11);
+
+const WEEKDAY_SHORT = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
+const MONTHS_SHORT = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
+
+function startOfDay(d: Date) {
+  const x = new Date(d);
+  x.setHours(0, 0, 0, 0);
+  return x;
+}
+
+function diffDays(a: Date, b: Date) {
+  return Math.floor((startOfDay(a).getTime() - startOfDay(b).getTime()) / 86400000);
+}
 
 function getTodayIndex(): number {
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const start = new Date(WEEK_START);
-  start.setHours(0, 0, 0, 0);
-  const diff = Math.floor((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-  if (diff < 0 || diff > 4) return 0;
-  return diff;
+  const idx = diffDays(today, START);
+  if (idx < 0) return 0;
+  if (idx >= DAYS.length) return DAYS.length - 1;
+  return idx;
 }
 
 function DevozionalePage() {
   const todayIdx = getTodayIndex();
   const [selected, setSelected] = useState(todayIdx);
+
+  // Settimana visualizzata: contiene il giorno selezionato (Lun-Dom)
+  const week = useMemo(() => {
+    const selectedDate = new Date(START);
+    selectedDate.setDate(START.getDate() + selected);
+    const dow = selectedDate.getDay(); // 0=Dom..6=Sab
+    const offsetToMonday = dow === 0 ? -6 : 1 - dow;
+    const monday = new Date(selectedDate);
+    monday.setDate(selectedDate.getDate() + offsetToMonday);
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      const idx = diffDays(d, START);
+      const within = idx >= 0 && idx < DAYS.length;
+      return { date: d, idx, within, day: within ? DAYS[idx] : null };
+    });
+  }, [selected]);
+
   const day = DAYS[selected];
+  const weekLabel = `${week[0].date.getDate()} ${MONTHS_SHORT[week[0].date.getMonth()]} – ${week[6].date.getDate()} ${MONTHS_SHORT[week[6].date.getMonth()]} ${week[6].date.getFullYear()}`;
 
   return (
     <>
@@ -153,13 +90,12 @@ function DevozionalePage() {
       </div>
 
       <div className="container-prose py-12 md:py-20">
-
-        {/* ── HEADER: fixed intro block ── */}
+        {/* HEADER */}
         <div className="mb-12 max-w-2xl">
           <p className="eyebrow mb-3">Serie devozionale</p>
           <h1 className="font-display text-5xl md:text-6xl leading-tight">Studiare Isaia insieme.</h1>
           <p className="mt-5 text-foreground/70 leading-relaxed text-lg">
-            Un percorso di meditazione quotidiana attraverso il libro del profeta Isaia — dal lunedì al venerdì. Ogni giorno una scrittura, una riflessione, domande per la vita e una preghiera.
+            Un percorso di meditazione quotidiana attraverso il libro del profeta Isaia — 66 capitoli, 66 giorni, uno al giorno (sabato e domenica inclusi). Ogni giorno una scrittura, una riflessione, domande per la vita e una preghiera.
           </p>
           <div className="mt-6 rounded-2xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-6">
             <p className="text-sm font-medium text-primary mb-1">Obiettivo di questa serie</p>
@@ -169,42 +105,55 @@ function DevozionalePage() {
           </div>
         </div>
 
-        {/* ── WEEKLY CALENDAR ── */}
+        {/* CALENDARIO SETTIMANALE */}
         <div className="mb-12">
-          <p className="eyebrow mb-4">Settimana dell'11 Maggio 2026</p>
-          <div className="grid grid-cols-5 gap-2 md:gap-3">
-            {DAYS.map((d, i) => (
-              <button
-                key={i}
-                onClick={() => setSelected(i)}
-                className={[
-                  "rounded-2xl border p-3 md:p-4 text-left transition-all duration-200",
-                  selected === i
-                    ? "border-primary bg-primary text-primary-foreground shadow-md"
-                    : "border-border bg-card hover:border-primary/40 hover:bg-[#f7ede2]",
-                ].join(" ")}
-              >
-                <p className={["text-xs font-medium uppercase tracking-wider mb-1", selected === i ? "text-white/70" : "text-muted-foreground"].join(" ")}>{d.label}</p>
-                <p className={["text-sm font-semibold", selected === i ? "text-white" : "text-foreground"].join(" ")}>{d.date}</p>
-                <p className={["text-[10px] mt-1.5 leading-tight line-clamp-2", selected === i ? "text-white/80" : "text-muted-foreground"].join(" ")}>{d.ref}</p>
-              </button>
-            ))}
+          <p className="eyebrow mb-4">Settimana del {weekLabel}</p>
+          <div className="grid grid-cols-7 gap-2 md:gap-3">
+            {week.map((w, i) => {
+              const isSelected = w.within && w.idx === selected;
+              const isToday = w.within && w.idx === todayIdx;
+              return (
+                <button
+                  key={i}
+                  onClick={() => w.within && setSelected(w.idx)}
+                  disabled={!w.within}
+                  className={[
+                    "rounded-2xl border p-2 md:p-3 text-left transition-all duration-200 min-h-[88px]",
+                    !w.within
+                      ? "border-dashed border-border bg-muted/30 opacity-50 cursor-not-allowed"
+                      : isSelected
+                      ? "border-primary bg-primary text-primary-foreground shadow-md"
+                      : "border-border bg-card hover:border-primary/40 hover:bg-[#f7ede2]",
+                  ].join(" ")}
+                >
+                  <p className={["text-[10px] font-medium uppercase tracking-wider mb-0.5", isSelected ? "text-white/70" : "text-muted-foreground"].join(" ")}>{WEEKDAY_SHORT[w.date.getDay()]}</p>
+                  <p className={["text-sm font-semibold", isSelected ? "text-white" : "text-foreground"].join(" ")}>{w.date.getDate()} {MONTHS_SHORT[w.date.getMonth()]}</p>
+                  {w.within ? (
+                    <p className={["text-[10px] mt-1 leading-tight", isSelected ? "text-white/80" : "text-muted-foreground"].join(" ")}>
+                      Isaia {w.day!.chapter}
+                      {isToday && !isSelected && <span className="ml-1 text-primary font-semibold">• oggi</span>}
+                    </p>
+                  ) : (
+                    <p className="text-[10px] mt-1 text-muted-foreground/70">—</p>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* ── DAILY CONTENT ── */}
+        {/* CONTENUTO */}
         <div className="space-y-10">
-
-          {/* 1. Scrittura del giorno */}
+          {/* Scrittura */}
           <div className="rounded-3xl bg-primary p-8 md:p-10 text-white">
-            <p className="text-xs uppercase tracking-widest text-white/60 mb-4">Scrittura del giorno · {day.date}</p>
+            <p className="text-xs uppercase tracking-widest text-white/60 mb-4">Giorno {selected + 1} di 66 · Isaia {day.chapter}</p>
             <blockquote className="font-display text-2xl md:text-3xl leading-snug mb-4">
               {day.scripture}
             </blockquote>
             <cite className="text-sm text-white/70 not-italic font-medium">{day.ref}</cite>
           </div>
 
-          {/* 2. Riassunto */}
+          {/* Riassunto */}
           <div className="rounded-3xl border border-border bg-card p-8 md:p-10">
             <div className="flex items-center gap-3 mb-5">
               <div className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#f0e4d6] border border-[rgba(107,76,53,0.18)]">
@@ -217,10 +166,10 @@ function DevozionalePage() {
             </div>
             <p className="text-foreground/65 text-sm leading-relaxed mb-4 italic">{day.intro}</p>
             <div className="h-px w-full bg-border mb-5" />
-            <p className="text-foreground/80 leading-relaxed">{day.summary}</p>
+            <p className="text-foreground/80 leading-relaxed whitespace-pre-line">{day.summary}</p>
           </div>
 
-          {/* 3. Riflessione e pratica */}
+          {/* Riflessione e pratica */}
           <div className="grid gap-6 md:grid-cols-2">
             <div className="rounded-3xl border border-border bg-card p-7">
               <div className="flex items-center gap-3 mb-5">
@@ -262,7 +211,7 @@ function DevozionalePage() {
             </div>
           </div>
 
-          {/* 4. Preghiera */}
+          {/* Preghiera */}
           <div className="rounded-3xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-8 md:p-10">
             <div className="flex items-center gap-3 mb-5">
               <div className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#f0e4d6] border border-[rgba(107,76,53,0.18)]">
@@ -276,7 +225,7 @@ function DevozionalePage() {
             <p className="font-serif italic text-foreground/80 leading-relaxed text-lg">{day.prayer}</p>
           </div>
 
-          {/* Navigation */}
+          {/* Navigazione */}
           <div className="flex items-center justify-between pt-4 border-t border-border">
             <button
               onClick={() => setSelected(Math.max(0, selected - 1))}
@@ -285,6 +234,7 @@ function DevozionalePage() {
             >
               ← Giorno precedente
             </button>
+            <span className="text-xs text-muted-foreground">Giorno {selected + 1} / {DAYS.length}</span>
             <button
               onClick={() => setSelected(Math.min(DAYS.length - 1, selected + 1))}
               disabled={selected === DAYS.length - 1}
