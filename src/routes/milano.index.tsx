@@ -93,7 +93,7 @@ function MilanoHome() {
     { src: photo3, alt: "Milano" },
     { src: family3, alt: "Vita di comunità" },
     { src: photo4, alt: "Comunità italiana" },
-    { src: family4, alt: "Foto di gruppo della comunità" },
+    
     { src: family5, alt: "Ritiro in montagna" },
     { src: family6, alt: "Pranzo insieme" },
     { src: family7, alt: "Papà e bambini a Bologna" },

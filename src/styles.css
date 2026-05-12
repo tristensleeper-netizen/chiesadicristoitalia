@@ -309,13 +309,13 @@
 }
 
 .animate-marquee {
-  animation: marquee-x 40s linear infinite;
+  animation: marquee-x 80s linear infinite;
 }
 .animate-marquee-slow {
-  animation: marquee-x 60s linear infinite;
+  animation: marquee-x 110s linear infinite;
 }
 .animate-marquee-reverse {
-  animation: marquee-x-reverse 50s linear infinite;
+  animation: marquee-x-reverse 95s linear infinite;
 }
 .animate-float {
   animation: float-y 4s ease-in-out infinite;
