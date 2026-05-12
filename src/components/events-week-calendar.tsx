@@ -42,6 +42,7 @@ export function EventsWeekCalendar({
   maxWeeksBack = 4,
 }: Props) {
   const [weekOffset, setWeekOffset] = useState(0);
+  const [pressedKey, setPressedKey] = useState<string | null>(null);
 
   const today = useMemo(() => startOfDay(new Date()), []);
 
