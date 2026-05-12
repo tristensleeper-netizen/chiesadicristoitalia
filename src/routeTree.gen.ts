@@ -25,6 +25,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
 import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
 import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
+import { Route as MilanoDevozionaleRouteImport } from './routes/milano.devozionale'
 import { Route as MilanoCosaCrediamoRouteImport } from './routes/milano.cosa-crediamo'
 import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
 import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
@@ -124,6 +125,11 @@ const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
 const MilanoEventiRoute = MilanoEventiRouteImport.update({
   id: '/milano/eventi',
   path: '/milano/eventi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoDevozionaleRoute = MilanoDevozionaleRouteImport.update({
+  id: '/milano/devozionale',
+  path: '/milano/devozionale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MilanoCosaCrediamoRoute = MilanoCosaCrediamoRouteImport.update({
@@ -246,6 +252,7 @@ export interface FileRoutesByFullPath {
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
+  '/milano/devozionale': typeof MilanoDevozionaleRoute
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
@@ -282,6 +289,7 @@ export interface FileRoutesByTo {
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
+  '/milano/devozionale': typeof MilanoDevozionaleRoute
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
@@ -320,6 +328,7 @@ export interface FileRoutesById {
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
+  '/milano/devozionale': typeof MilanoDevozionaleRoute
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
@@ -359,6 +368,7 @@ export interface FileRouteTypes {
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
+    | '/milano/devozionale'
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
@@ -395,6 +405,7 @@ export interface FileRouteTypes {
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
+    | '/milano/devozionale'
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
+    | '/milano/devozionale'
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
@@ -464,6 +476,7 @@ export interface RootRouteChildren {
   MilanoChiSiamoRoute: typeof MilanoChiSiamoRoute
   MilanoContattiRoute: typeof MilanoContattiRoute
   MilanoCosaCrediamoRoute: typeof MilanoCosaCrediamoRoute
+  MilanoDevozionaleRoute: typeof MilanoDevozionaleRoute
   MilanoEventiRoute: typeof MilanoEventiRoute
   MilanoVisitaRoute: typeof MilanoVisitaRoute
   RisorseSlugRoute: typeof RisorseSlugRoute
@@ -587,6 +600,13 @@ declare module '@tanstack/react-router' {
       path: '/milano/eventi'
       fullPath: '/milano/eventi'
       preLoaderRoute: typeof MilanoEventiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/devozionale': {
+      id: '/milano/devozionale'
+      path: '/milano/devozionale'
+      fullPath: '/milano/devozionale'
+      preLoaderRoute: typeof MilanoDevozionaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/milano/cosa-crediamo': {
@@ -771,6 +791,7 @@ const rootRouteChildren: RootRouteChildren = {
   MilanoChiSiamoRoute: MilanoChiSiamoRoute,
   MilanoContattiRoute: MilanoContattiRoute,
   MilanoCosaCrediamoRoute: MilanoCosaCrediamoRoute,
+  MilanoDevozionaleRoute: MilanoDevozionaleRoute,
   MilanoEventiRoute: MilanoEventiRoute,
   MilanoVisitaRoute: MilanoVisitaRoute,
   RisorseSlugRoute: RisorseSlugRoute,
