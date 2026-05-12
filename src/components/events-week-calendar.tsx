@@ -63,7 +63,10 @@ export function EventsWeekCalendar({
   // Days for the currently visible week.
   const days = useMemo(() => {
     const start = new Date(today);
-    start.setDate(start.getDate() + weekOffset * 7);
+    // Align to Monday of the current week (Italian standard).
+    const day = start.getDay(); // 0 = Sun, 1 = Mon, ...
+    const diffToMonday = (day + 6) % 7;
+    start.setDate(start.getDate() - diffToMonday + weekOffset * 7);
     return Array.from({ length: 7 }, (_, i) => {
       const d = new Date(start);
       d.setDate(start.getDate() + i);
