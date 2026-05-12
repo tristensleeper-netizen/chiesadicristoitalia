@@ -54,29 +54,73 @@ function getTodayIndex(): number {
   return idx;
 }
 
+function mondayOf(date: Date) {
+  const d = new Date(date);
+  const dow = d.getDay();
+  const offset = dow === 0 ? -6 : 1 - dow;
+  d.setDate(d.getDate() + offset);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+const MONTHS_FULL = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+
 function DevozionalePage() {
   const todayIdx = getTodayIndex();
   const [selected, setSelected] = useState(todayIdx);
+  const [weekStart, setWeekStart] = useState<Date>(() => {
+    const d = new Date(START);
+    d.setDate(START.getDate() + todayIdx);
+    return mondayOf(d);
+  });
+  const [showFullCalendar, setShowFullCalendar] = useState(false);
 
-  // Settimana visualizzata: contiene il giorno selezionato (Lun-Dom)
+  // Settimana visualizzata (Lun-Dom) basata su weekStart
   const week = useMemo(() => {
-    const selectedDate = new Date(START);
-    selectedDate.setDate(START.getDate() + selected);
-    const dow = selectedDate.getDay(); // 0=Dom..6=Sab
-    const offsetToMonday = dow === 0 ? -6 : 1 - dow;
-    const monday = new Date(selectedDate);
-    monday.setDate(selectedDate.getDate() + offsetToMonday);
     return Array.from({ length: 7 }, (_, i) => {
-      const d = new Date(monday);
-      d.setDate(monday.getDate() + i);
+      const d = new Date(weekStart);
+      d.setDate(weekStart.getDate() + i);
       const idx = diffDays(d, START);
       const within = idx >= 0 && idx < DAYS.length;
       return { date: d, idx, within, day: within ? DAYS[idx] : null };
     });
-  }, [selected]);
+  }, [weekStart]);
+
+  const shiftWeek = (delta: number) => {
+    const d = new Date(weekStart);
+    d.setDate(weekStart.getDate() + delta * 7);
+    setWeekStart(d);
+  };
+
+  const lastDay = new Date(START);
+  lastDay.setDate(START.getDate() + DAYS.length - 1);
+  const firstWeekStart = mondayOf(START);
+  const lastWeekStart = mondayOf(lastDay);
+  const canPrev = weekStart.getTime() > firstWeekStart.getTime();
+  const canNext = weekStart.getTime() < lastWeekStart.getTime();
 
   const day = DAYS[selected];
   const weekLabel = `${week[0].date.getDate()} ${MONTHS_SHORT[week[0].date.getMonth()]} – ${week[6].date.getDate()} ${MONTHS_SHORT[week[6].date.getMonth()]} ${week[6].date.getFullYear()}`;
+
+  // Mesi coperti dalla serie per il calendario completo
+  const months = useMemo(() => {
+    const result: { year: number; month: number }[] = [];
+    const cur = new Date(START.getFullYear(), START.getMonth(), 1);
+    const end = new Date(lastDay.getFullYear(), lastDay.getMonth(), 1);
+    while (cur.getTime() <= end.getTime()) {
+      result.push({ year: cur.getFullYear(), month: cur.getMonth() });
+      cur.setMonth(cur.getMonth() + 1);
+    }
+    return result;
+  }, []);
+
+  const openDay = (idx: number) => {
+    setSelected(idx);
+    const d = new Date(START);
+    d.setDate(START.getDate() + idx);
+    setWeekStart(mondayOf(d));
+    setShowFullCalendar(false);
+  };
 
   return (
     <>
