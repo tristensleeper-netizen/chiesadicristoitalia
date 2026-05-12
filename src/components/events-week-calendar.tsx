@@ -209,10 +209,8 @@ export function EventsWeekCalendar({
                       (isPast ? "text-foreground/40" : "text-foreground/60")
                     }
                   >
-                    <span className={isPressed ? "" : "md:hidden"}>{ITALIAN_DAYS_FULL[d.getDay()]}</span>
-                    {!isPressed && (
-                      <span className="hidden md:inline">{ITALIAN_DAYS_SHORT[d.getDay()]}</span>
-                    )}
+                    <span className="md:hidden">{ITALIAN_DAYS_FULL[d.getDay()]}</span>
+                    <span className="hidden md:inline">{ITALIAN_DAYS_SHORT[d.getDay()]}</span>
                   </p>
                   <p
                     className={
