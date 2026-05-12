@@ -176,16 +176,25 @@ export function EventsWeekCalendar({
             const list = byDay.get(d.toDateString()) ?? [];
             const isToday = isSameDay(d, today);
             const isPast = d < today && !isToday;
+            const key = d.toDateString();
+            const isPressed = pressedKey === key;
+            const release = () => setPressedKey((k) => (k === key ? null : k));
             return (
               <div
-                key={d.toDateString()}
+                key={key}
                 tabIndex={0}
                 role="button"
+                onPointerDown={(e) => {
+                  e.currentTarget.setPointerCapture?.(e.pointerId);
+                  setPressedKey(key);
+                }}
+                onPointerUp={release}
+                onPointerLeave={release}
+                onPointerCancel={release}
                 className={
-                  "rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
-                  "transition-transform duration-200 ease-out will-change-transform " +
-                  "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 " +
-                  "active:scale-[1.08] focus-visible:scale-[1.04] focus-visible:outline-none " +
+                  "relative rounded-2xl border p-4 min-h-[180px] flex flex-col cursor-pointer select-none " +
+                  "transition-all duration-300 ease-out will-change-transform origin-center " +
+                  (isPressed ? "z-30 shadow-2xl scale-[3] " : "hover:scale-[1.04] hover:shadow-[var(--shadow-soft)] hover:z-10 ") +
                   (isToday
                     ? "border-primary/40 bg-primary/5"
                     : isPast
@@ -200,8 +209,10 @@ export function EventsWeekCalendar({
                       (isPast ? "text-foreground/40" : "text-foreground/60")
                     }
                   >
-                    <span className="md:hidden">{ITALIAN_DAYS_FULL[d.getDay()]}</span>
-                    <span className="hidden md:inline">{ITALIAN_DAYS_SHORT[d.getDay()]}</span>
+                    <span className={isPressed ? "" : "md:hidden"}>{ITALIAN_DAYS_FULL[d.getDay()]}</span>
+                    {!isPressed && (
+                      <span className="hidden md:inline">{ITALIAN_DAYS_SHORT[d.getDay()]}</span>
+                    )}
                   </p>
                   <p
                     className={
@@ -218,9 +229,9 @@ export function EventsWeekCalendar({
                 </div>
 
                 {list.length === 0 ? (
-                  <p className="text-sm text-foreground/40 italic">Nessun evento</p>
+                  <p className={(isPressed ? "text-[6px] " : "text-sm ") + "text-foreground/40 italic"}>Nessun evento</p>
                 ) : (
-                  <ul className="space-y-2.5 flex-1 divide-y divide-border/40">
+                  <ul className={"flex-1 divide-y divide-border/40 " + (isPressed ? "space-y-1" : "space-y-2.5")}>
                     {list.map((occ, idx) => {
                       const time = occ.date.toLocaleTimeString("it-IT", {
                         hour: "2-digit",
@@ -231,24 +242,24 @@ export function EventsWeekCalendar({
                           key={occ.id}
                           className={
                             "min-w-0 " +
-                            (idx > 0 ? "pt-2.5 " : "") +
+                            (idx > 0 ? (isPressed ? "pt-1 " : "pt-2.5 ") : "") +
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className="text-[11px] font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">
+                          <p className={(isPressed ? "text-[5px] " : "text-[11px] ") + "font-semibold text-primary tracking-wide whitespace-nowrap overflow-hidden text-ellipsis"}>
                             {time}
                           </p>
-                          <p className="text-[11px] font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
+                          <p className={(isPressed ? "text-[5px] " : "text-[11px] ") + "font-medium text-foreground leading-snug mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis"}>
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className="mt-1 flex min-w-0 items-center gap-1 text-[10px] text-foreground/65 leading-snug whitespace-nowrap overflow-hidden">
-                              <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
+                            <p className={"mt-1 flex min-w-0 items-center gap-1 text-foreground/65 leading-snug whitespace-nowrap overflow-hidden " + (isPressed ? "text-[4px]" : "text-[10px]")}>
+                              <MapPin className={isPressed ? "h-1 w-1 mt-0.5 shrink-0" : "h-3 w-3 mt-0.5 shrink-0"} />
                               <span className="min-w-0 overflow-hidden text-ellipsis">{occ.location}</span>
                             </p>
                           )}
                           {occ.tag && (
-                            <span className="mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[8px] uppercase tracking-[0.14em] text-foreground/55">
+                            <span className={"mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap uppercase tracking-[0.14em] text-foreground/55 " + (isPressed ? "text-[3px]" : "text-[8px]")}>
                               {occ.tag}
                             </span>
                           )}
