@@ -151,7 +151,33 @@ function DevozionalePage() {
 
         {/* CALENDARIO SETTIMANALE */}
         <div className="mb-12">
-          <p className="eyebrow mb-4">Settimana del {weekLabel}</p>
+          <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => shiftWeek(-1)}
+                disabled={!canPrev}
+                aria-label="Settimana precedente"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-primary hover:bg-[#f7ede2] disabled:opacity-30 disabled:cursor-not-allowed transition"
+              >
+                ←
+              </button>
+              <p className="eyebrow">Settimana del {weekLabel}</p>
+              <button
+                onClick={() => shiftWeek(1)}
+                disabled={!canNext}
+                aria-label="Settimana successiva"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-primary hover:bg-[#f7ede2] disabled:opacity-30 disabled:cursor-not-allowed transition"
+              >
+                →
+              </button>
+            </div>
+            <button
+              onClick={() => setShowFullCalendar(true)}
+              className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              Calendario completo →
+            </button>
+          </div>
           <div className="grid grid-cols-7 gap-2 md:gap-3">
             {week.map((w, i) => {
               const isSelected = w.within && w.idx === selected;
