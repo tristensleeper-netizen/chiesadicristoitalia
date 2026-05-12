@@ -290,13 +290,9 @@ function DevozionaleDurationCalendar({ start, end }: { start: Date; end: Date })
   const weekdays = ["L","M","M","G","V","S","D"];
   const today = new Date();
 
-  const months: { year: number; month: number }[] = [];
-  let cur = new Date(start.getFullYear(), start.getMonth(), 1);
-  const last = new Date(end.getFullYear(), end.getMonth(), 1);
-  while (cur <= last) {
-    months.push({ year: cur.getFullYear(), month: cur.getMonth() });
-    cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
-  }
+  const months: { year: number; month: number }[] = [
+    { year: today.getFullYear(), month: today.getMonth() },
+  ];
 
   const totalDays = Math.round((end.getTime() - start.getTime()) / 86400000) + 1;
   const fmt = (d: Date) => `${d.getDate()} ${monthNames[d.getMonth()].toLowerCase()} ${d.getFullYear()}`;
