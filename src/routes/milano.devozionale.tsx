@@ -120,6 +120,11 @@ function DevozionalePage() {
     d.setDate(START.getDate() + idx);
     setWeekStart(mondayOf(d));
     setShowFullCalendar(false);
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => {
+        document.getElementById("devozionale-contenuto")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   };
 
   return (
