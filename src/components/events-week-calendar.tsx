@@ -263,15 +263,15 @@ export function EventsWeekCalendar({
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className={"text-[11px] font-semibold text-primary tracking-wide " + truncCls}>
+                          <p className={"text-[10px] font-semibold text-primary tracking-wide " + truncCls}>
                             {time}
                           </p>
-                          <p className={"text-[11px] font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
+                          <p className={"text-[10px] font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-[10px] text-foreground/65 leading-snug " + locTruncCls}>
-                              <MapPin className="h-3 w-3 mt-0.5 shrink-0" />
+                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-[9px] text-foreground/65 leading-snug " + locTruncCls}>
+                              <MapPin className="h-2.5 w-2.5 mt-0.5 shrink-0" />
                               <span className={innerLocCls}>{occ.location}</span>
                             </p>
                           )}
