@@ -114,18 +114,18 @@ export function CityInfoBlock({
           {/* 3. Email — soft glass with gold halo */}
           <Link
             to={contactTo}
-            className="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl border border-accent/20 p-5 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_color-mix(in_oklab,var(--accent)_25%,transparent)]"
+            className="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl border border-accent/40 p-5 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_color-mix(in_oklab,var(--accent)_50%,transparent)]"
             style={{
               background:
-                "linear-gradient(135deg, color-mix(in oklab, var(--accent) 6%, var(--card)) 0%, var(--card) 100%)",
+                "linear-gradient(135deg, color-mix(in oklab, var(--accent) 28%, var(--card)) 0%, color-mix(in oklab, var(--accent) 14%, var(--card)) 55%, var(--card) 100%)",
             }}
           >
-            <div aria-hidden className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-accent/20 blur-3xl transition-transform duration-700 group-hover:scale-150" />
-            <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_60%)]" />
+            <div aria-hidden className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-accent/40 blur-3xl transition-transform duration-700 group-hover:scale-150" />
+            <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--accent)_35%,transparent),transparent_60%)]" />
 
             <div className="relative z-10">
-              <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-card text-accent-foreground shadow-sm ring-1 ring-accent/25 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                <Mail className="h-4 w-4" strokeWidth={1.75} />
+              <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-md ring-1 ring-accent/60 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                <Mail className="h-4 w-4" strokeWidth={2} />
               </div>
               <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
                 Mettiti in contatto
