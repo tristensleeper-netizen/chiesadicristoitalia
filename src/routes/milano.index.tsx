@@ -224,10 +224,9 @@ function MilanoHome() {
         <div className="relative mx-auto max-w-5xl">
           {/* Soft glow halo for highlight */}
           <div aria-hidden className="pointer-events-none absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-primary/15 via-[#f0c98a]/25 to-primary/10 blur-2xl opacity-70" />
-          <div className="relative grid gap-8 md:grid-cols-[1.3fr_1fr] rounded-3xl bg-gradient-to-br from-[#fbf3e6] to-[#f5e6d0] border border-[rgba(107,76,53,0.18)] p-6 md:p-10 shadow-[0_20px_60px_-20px_rgba(107,76,53,0.35)]">
-            {/* Left: content */}
-            <div className="space-y-5">
-              <div className="flex items-center gap-3">
+          <div className="relative rounded-3xl bg-gradient-to-br from-[#fbf3e6] to-[#f5e6d0] border border-[rgba(107,76,53,0.18)] p-6 md:p-10 shadow-[0_20px_60px_-20px_rgba(107,76,53,0.35)]">
+            <div className="space-y-5 max-w-2xl mx-auto text-center">
+              <div className="flex items-center justify-center gap-3">
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/70 border border-[rgba(107,76,53,0.18)] shadow-sm">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a0623a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
@@ -235,18 +234,18 @@ function MilanoHome() {
                   </svg>
                 </div>
                 <p className="eyebrow text-primary/80">Studio di Isaia</p>
-                <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
                   In corso
                 </span>
               </div>
               <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">Isaia — Il Signore è salvezza</h3>
               <p className="text-foreground/75 leading-relaxed text-sm md:text-base">
-                Un piano devozionale che ti guida attraverso il libro di Isaia, giorno per giorno. Una scrittura, un riassunto, domande di applicazione e una preghiera per iniziare bene la giornata.
+                Un percorso devozionale attraverso i 66 capitoli di Isaia: 66 giorni, un capitolo al giorno. Contesto, domande sul testo, domande per noi e ulteriori note per ogni capitolo.
               </p>
               <div className="h-px w-full bg-[rgba(107,76,53,0.15)]" />
               <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura di oggi</p>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Scrittura guida</p>
                 <p className="font-serif italic text-foreground/85 text-lg leading-relaxed">
                   «Non temere, perché io sono con te; non ti scoraggiare, perché io sono il tuo Dio.»
                 </p>
@@ -254,16 +253,10 @@ function MilanoHome() {
               </div>
               <div className="pt-2">
                 <Link to="/milano/devozionale" className="btn-primary inline-flex items-center gap-2">
-                  Lettura completa <span aria-hidden>→</span>
+                  Apri lo studio <span aria-hidden>→</span>
                 </Link>
               </div>
             </div>
-
-            {/* Right: study duration calendar */}
-            <DevozionaleDurationCalendar
-              start={new Date(2026, 4, 11)}
-              end={new Date(2026, 7, 29)}
-            />
           </div>
         </div>
       </section>
