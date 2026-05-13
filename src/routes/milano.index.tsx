@@ -87,16 +87,12 @@ function MilanoHome() {
   const photo4 = useSlotImage("milano.photo4", heroItalia);
   const cityPhotos = [
     { src: photo1, alt: "Adorazione domenicale" },
-    { src: family1, alt: "Momento di gioia in famiglia" },
     { src: photo2, alt: "Studio biblico" },
     { src: family2, alt: "Celebrazione di matrimonio" },
     { src: photo3, alt: "Milano" },
-    { src: family3, alt: "Vita di comunità" },
     { src: photo4, alt: "Comunità italiana" },
-    
     { src: family5, alt: "Ritiro in montagna" },
     { src: family6, alt: "Pranzo insieme" },
-    { src: family7, alt: "Papà e bambini a Bologna" },
     { src: family8, alt: "Donne in ritiro" },
     { src: family9, alt: "Amicizia in natura" },
     { src: family10, alt: "Momento di comunità" },
