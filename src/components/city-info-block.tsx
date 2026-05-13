@@ -45,39 +45,36 @@ export function CityInfoBlock({
         <div className="absolute -bottom-32 -right-20 h-[40vw] w-[40vw] max-h-[480px] max-w-[480px] rounded-full bg-accent/[0.10] blur-[120px]" />
       </div>
 
-      <div className="container-prose relative py-16 md:py-24">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-prose relative py-10 md:py-14">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {/* 1. Funzione domenicale — deep filled */}
           <Link
             to={visitTo}
-            className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-[2rem] bg-primary p-8 text-primary-foreground transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
+            className="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl bg-primary p-5 text-primary-foreground transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
           >
-            {/* decorative oversized clock */}
-            <div aria-hidden className="absolute right-6 top-6 opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.14]">
-              <Clock className="h-32 w-32" strokeWidth={1} />
+            <div aria-hidden className="absolute right-4 top-4 opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.14]">
+              <Clock className="h-20 w-20" strokeWidth={1} />
             </div>
-            <div aria-hidden className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/20 blur-3xl transition-transform duration-700 group-hover:scale-125" />
+            <div aria-hidden className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent/20 blur-3xl transition-transform duration-700 group-hover:scale-125" />
 
             <div className="relative z-10">
-              <div className="mb-10 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-primary shadow-lg ring-1 ring-accent/40 transition-transform duration-500 group-hover:rotate-12">
-                <Clock className="h-5 w-5" strokeWidth={1.75} />
+              <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-primary shadow-md ring-1 ring-accent/40 transition-transform duration-500 group-hover:rotate-12">
+                <Clock className="h-4 w-4" strokeWidth={1.75} />
               </div>
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-accent">
                 Domenica
               </p>
-              <h3 className="font-display text-4xl leading-tight">
-                Ore
-                <br />
-                <span className="text-accent italic">{serviceTime.replace(/^.*·\s*/, "")}</span>
+              <h3 className="font-display text-2xl leading-tight">
+                Ore <span className="text-accent italic">{serviceTime.replace(/^.*·\s*/, "")}</span>
               </h3>
-              <p className="mt-4 max-w-[200px] text-sm leading-relaxed text-primary-foreground/70">
-                Adorazione, comunione e una Parola viva. Vieni come sei.
+              <p className="mt-2 max-w-[200px] text-xs leading-relaxed text-primary-foreground/70">
+                Adorazione, comunione e una Parola viva.
               </p>
             </div>
 
-            <div className="relative z-10 mt-10 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+            <div className="relative z-10 mt-4 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-accent">
               <span>Cosa aspettarsi</span>
-              <ArrowRight className="h-3.5 w-3.5 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              <ArrowRight className="h-3 w-3 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
             </div>
           </Link>
 
