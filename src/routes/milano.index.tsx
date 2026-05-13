@@ -12,13 +12,9 @@ import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 import heroItalia from "@/assets/hero-italia.jpg";
-import family1 from "@/assets/family-1.jpg";
 import family2 from "@/assets/family-2.jpg";
-import family3 from "@/assets/family-3.jpg";
-import family4 from "@/assets/family-4.jpg";
 import family5 from "@/assets/family-5.jpg";
 import family6 from "@/assets/family-6.jpg";
-import family7 from "@/assets/family-7.jpg";
 import family8 from "@/assets/family-8.jpg";
 import family9 from "@/assets/family-9.jpg";
 import family10 from "@/assets/family-10.jpg";
@@ -87,16 +83,12 @@ function MilanoHome() {
   const photo4 = useSlotImage("milano.photo4", heroItalia);
   const cityPhotos = [
     { src: photo1, alt: "Adorazione domenicale" },
-    { src: family1, alt: "Momento di gioia in famiglia" },
     { src: photo2, alt: "Studio biblico" },
     { src: family2, alt: "Celebrazione di matrimonio" },
     { src: photo3, alt: "Milano" },
-    { src: family3, alt: "Vita di comunità" },
     { src: photo4, alt: "Comunità italiana" },
-    
     { src: family5, alt: "Ritiro in montagna" },
     { src: family6, alt: "Pranzo insieme" },
-    { src: family7, alt: "Papà e bambini a Bologna" },
     { src: family8, alt: "Donne in ritiro" },
     { src: family9, alt: "Amicizia in natura" },
     { src: family10, alt: "Momento di comunità" },
@@ -234,10 +226,6 @@ function MilanoHome() {
                   </svg>
                 </div>
                 <p className="eyebrow text-primary/80">Studio di Isaia</p>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                  In corso
-                </span>
               </div>
               <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">Isaia — Il Signore è salvezza</h3>
               <p className="text-foreground/75 leading-relaxed text-sm md:text-base">
