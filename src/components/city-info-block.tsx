@@ -83,30 +83,30 @@ export function CityInfoBlock({
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)]"
+            className="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-5 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)]"
           >
             <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-background to-card opacity-60" />
-            <div aria-hidden className="absolute -right-16 -bottom-16 h-44 w-44 rounded-full bg-primary/5 blur-2xl transition-all duration-700 group-hover:scale-150 group-hover:bg-primary/10" />
+            <div aria-hidden className="absolute -right-12 -bottom-12 h-32 w-32 rounded-full bg-primary/5 blur-2xl transition-all duration-700 group-hover:scale-150 group-hover:bg-primary/10" />
 
             <div className="relative z-10">
-              <div className="mb-10 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-muted text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110">
-                <MapPin className="h-5 w-5" strokeWidth={1.75} />
+              <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-muted text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110">
+                <MapPin className="h-4 w-4" strokeWidth={1.75} />
               </div>
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
                 La nostra sede
               </p>
-              <h3 className="font-display text-3xl leading-snug text-foreground">{address}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">
+              <h3 className="font-display text-xl leading-snug text-foreground">{address}</h3>
+              <p className="mt-1.5 text-xs text-muted-foreground">
                 {cap} {city}, Italia
               </p>
             </div>
 
-            <div className="relative z-10 mt-10 flex items-center justify-between border-t border-border/60 pt-6">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">
+            <div className="relative z-10 mt-4 flex items-center justify-between border-t border-border/60 pt-3">
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground">
                 Google Maps
               </span>
-              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
-                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+              <div className="flex h-6 w-6 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                <ArrowUpRight className="h-3 w-3" strokeWidth={2} />
               </div>
             </div>
           </a>
