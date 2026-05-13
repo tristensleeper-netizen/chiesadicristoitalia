@@ -226,10 +226,6 @@ function MilanoHome() {
                   </svg>
                 </div>
                 <p className="eyebrow text-primary/80">Studio di Isaia</p>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                  In corso
-                </span>
               </div>
               <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">Isaia — Il Signore è salvezza</h3>
               <p className="text-foreground/75 leading-relaxed text-sm md:text-base">
