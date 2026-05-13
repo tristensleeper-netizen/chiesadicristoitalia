@@ -1,4 +1,4 @@
-import { Clock, MapPin, Mail, Play, ArrowUpRight } from "lucide-react";
+import { Clock, MapPin, Mail, Play, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 interface CityInfoProps {
@@ -30,156 +30,179 @@ export function CityInfoBlock({
   visitPath,
   contactPath,
 }: CityInfoProps) {
-  const mailto = `mailto:${email ?? "info@chiesadicristoitalia.it"}`;
+  const emailAddr = email ?? "info@chiesadicristoitalia.it";
+  const mailto = `mailto:${emailAddr}`;
   const visitTo = visitPath ?? `/${city.toLowerCase()}/visita`;
   const contactTo = contactPath ?? `/${city.toLowerCase()}/contatti`;
   const ytId = getYouTubeId(videoUrl);
   const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
 
   return (
-    <section className="container-prose py-16 md:py-20">
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {/* 1. Service time — primary filled, links to /visita */}
-        <Link
-          to={visitTo}
-          className="group relative overflow-hidden rounded-3xl bg-primary p-7 text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
-        >
-          <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-white/10 blur-2xl transition-transform duration-700 group-hover:scale-125" />
-          <div className="absolute -bottom-14 -left-10 h-36 w-36 rounded-full bg-accent/25 blur-2xl transition-transform duration-700 group-hover:scale-110" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
-          <div className="relative flex h-full flex-col">
-            <div className="flex items-start justify-between">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 backdrop-blur ring-1 ring-white/20">
+    <section className="relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-20 h-[40vw] w-[40vw] max-h-[480px] max-w-[480px] rounded-full bg-primary/[0.06] blur-[120px]" />
+        <div className="absolute -bottom-32 -right-20 h-[40vw] w-[40vw] max-h-[480px] max-w-[480px] rounded-full bg-accent/[0.10] blur-[120px]" />
+      </div>
+
+      <div className="container-prose relative py-16 md:py-24">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {/* 1. Funzione domenicale — deep filled */}
+          <Link
+            to={visitTo}
+            className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-[2rem] bg-primary p-8 text-primary-foreground transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
+          >
+            {/* decorative oversized clock */}
+            <div aria-hidden className="absolute right-6 top-6 opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.14]">
+              <Clock className="h-32 w-32" strokeWidth={1} />
+            </div>
+            <div aria-hidden className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/20 blur-3xl transition-transform duration-700 group-hover:scale-125" />
+
+            <div className="relative z-10">
+              <div className="mb-10 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-primary shadow-lg ring-1 ring-accent/40 transition-transform duration-500 group-hover:rotate-12">
                 <Clock className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <ArrowUpRight className="h-5 w-5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+                Domenica
+              </p>
+              <h3 className="font-display text-4xl leading-tight">
+                Ore
+                <br />
+                <span className="text-accent italic">{serviceTime.replace(/^.*·\s*/, "")}</span>
+              </h3>
+              <p className="mt-4 max-w-[200px] text-sm leading-relaxed text-primary-foreground/70">
+                Adorazione, comunione e una Parola viva. Vieni come sei.
+              </p>
             </div>
-            <p className="eyebrow mt-6 mb-2 text-white/70">Funzione domenicale</p>
-            <p className="font-display text-3xl leading-tight md:text-[2rem]">{serviceTime}</p>
-            <p className="mt-3 text-sm leading-relaxed text-white/80">
-              Adorazione, comunione e una Parola viva. Vieni come sei.
-            </p>
-            <p className="mt-auto pt-5 text-xs font-semibold uppercase tracking-widest text-white/85">
-              Cosa aspettarsi
-              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </p>
-          </div>
-        </Link>
 
-        {/* 2. Address — bordered, opens Maps */}
-        <a
-          href={mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-3xl border border-border bg-card p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-2xl"
-        >
-          <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          <div aria-hidden className="pointer-events-none absolute -right-16 -bottom-16 h-44 w-44 rounded-full bg-primary/5 blur-3xl transition-all duration-700 group-hover:bg-primary/15 group-hover:scale-125" />
-          <div className="relative flex h-full flex-col">
-            <div className="flex items-start justify-between">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/15 transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:scale-110">
+            <div className="relative z-10 mt-10 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+              <span>Cosa aspettarsi</span>
+              <ArrowRight className="h-3.5 w-3.5 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+            </div>
+          </Link>
+
+          {/* 2. Indirizzo — clean white */}
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)]"
+          >
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-background to-card opacity-60" />
+            <div aria-hidden className="absolute -right-16 -bottom-16 h-44 w-44 rounded-full bg-primary/5 blur-2xl transition-all duration-700 group-hover:scale-150 group-hover:bg-primary/10" />
+
+            <div className="relative z-10">
+              <div className="mb-10 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-muted text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110">
                 <MapPin className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <ArrowUpRight className="h-5 w-5 -translate-x-1 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                La nostra sede
+              </p>
+              <h3 className="font-display text-3xl leading-snug text-foreground">{address}</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                {cap} {city}, Italia
+              </p>
             </div>
-            <p className="eyebrow mt-6 mb-2">Dove ci troviamo</p>
-            <p className="font-display text-2xl leading-tight text-foreground">{address}</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {cap} {city}, Italia
-            </p>
-            <p className="mt-auto pt-5 text-xs font-semibold uppercase tracking-widest text-primary">
-              Apri in Maps
-              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </p>
-          </div>
-        </a>
 
-        {/* 3. Email — accent surface, links to /contatti */}
-        <Link
-          to={contactTo}
-          className="group relative overflow-hidden rounded-3xl border border-accent/30 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
-          style={{ backgroundColor: "color-mix(in oklab, var(--accent) 10%, var(--card))" }}
-        >
-          <div className="absolute -right-14 -bottom-14 h-44 w-44 rounded-full bg-accent/20 blur-2xl transition-transform duration-700 group-hover:scale-125" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--accent)_25%,transparent),transparent_60%)]" />
-          <div className="relative flex h-full flex-col">
-            <div className="flex items-start justify-between">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/20 text-accent-foreground ring-1 ring-accent/25 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
+            <div className="relative z-10 mt-10 flex items-center justify-between border-t border-border/60 pt-6">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground">
+                Google Maps
+              </span>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+              </div>
+            </div>
+          </a>
+
+          {/* 3. Email — soft glass with gold halo */}
+          <Link
+            to={contactTo}
+            className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-[2rem] border border-accent/20 p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_color-mix(in_oklab,var(--accent)_25%,transparent)]"
+            style={{
+              background:
+                "linear-gradient(135deg, color-mix(in oklab, var(--accent) 6%, var(--card)) 0%, var(--card) 100%)",
+            }}
+          >
+            <div aria-hidden className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-accent/20 blur-3xl transition-transform duration-700 group-hover:scale-150" />
+            <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_60%)]" />
+
+            <div className="relative z-10">
+              <div className="mb-10 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-card text-accent-foreground shadow-sm ring-1 ring-accent/25 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                 <Mail className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <ArrowUpRight className="h-5 w-5 -translate-x-1 text-accent-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                Mettiti in contatto
+              </p>
+              <h3 className="font-display text-2xl leading-tight text-foreground break-words">
+                {emailAddr}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/65">
+                Rispondiamo entro 24 ore. Saremo felici di accoglierti.
+              </p>
             </div>
-            <p className="eyebrow mt-6 mb-2">Scrivici</p>
-            <p className="font-display text-xl leading-tight text-foreground break-all md:text-2xl">
-              {email ?? "info@chiesadicristoitalia.it"}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-              Rispondiamo entro 24 ore. Saremo felici di accoglierti.
-            </p>
-            <p className="mt-auto pt-5 text-xs font-semibold uppercase tracking-widest text-foreground/80">
-              Contattaci
-              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-              <span className="ml-2 text-foreground/50">o invia una mail</span>
+
+            <div className="relative z-10 mt-10 flex items-center gap-3">
+              <span className="rounded-full bg-primary px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-primary-foreground transition-colors duration-300 group-hover:bg-foreground">
+                Scrivici
+              </span>
               <a
                 href={mailto}
                 onClick={(e) => e.stopPropagation()}
-                className="ml-1 underline decoration-dotted underline-offset-2 hover:text-primary"
+                className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/60 underline decoration-dotted underline-offset-4 hover:text-primary"
               >
-                diretta
+                Mail diretta
               </a>
-            </p>
-          </div>
-        </Link>
-
-        {/* 4. YouTube video — opens YouTube in new tab */}
-        <a
-          href={videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-3xl bg-foreground text-background transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
-        >
-          {thumb && (
-            <img
-              src={thumb}
-              alt="Anteprima video"
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/30" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_45%,rgba(220,38,38,0.35),transparent_60%)]" />
-
-          <div className="relative flex h-full min-h-[240px] flex-col p-7 text-white">
-            <div className="flex items-start justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest backdrop-blur ring-1 ring-white/20">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
-                YouTube
-              </span>
-              <ArrowUpRight className="h-5 w-5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
             </div>
+          </Link>
 
-            {/* Play button */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <div className="relative">
-                <div aria-hidden className="absolute inset-0 rounded-full bg-red-600/40 blur-xl transition-all duration-500 group-hover:bg-red-500/60 group-hover:scale-125" />
-                <div className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-red-600 ring-4 ring-white/15 transition-all duration-500 group-hover:scale-110 group-hover:bg-red-500 group-hover:ring-white/25">
-                  <Play className="h-7 w-7 translate-x-0.5 fill-white text-white" strokeWidth={0} />
+          {/* 4. YouTube — cinematic */}
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex min-h-[400px] flex-col overflow-hidden rounded-[2rem] bg-primary shadow-2xl transition-all duration-500 hover:-translate-y-2"
+          >
+            {thumb && (
+              <img
+                src={thumb}
+                alt="Anteprima video"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-1000 group-hover:scale-110"
+              />
+            )}
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-primary/10" />
+            <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_60%,rgba(220,38,38,0.25),transparent_60%)]" />
+
+            <div className="relative z-10 flex h-full flex-col justify-between p-8 text-white">
+              <div className="flex items-start justify-between">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600/95 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.2em]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                  YouTube
+                </span>
+                <ArrowUpRight className="h-5 w-5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              </div>
+
+              <div className="flex flex-col items-start">
+                <div className="relative mb-6">
+                  <div aria-hidden className="absolute inset-0 rounded-full bg-accent/30 blur-xl transition-all duration-500 group-hover:bg-accent/60 group-hover:scale-125" />
+                  <div className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-md ring-1 ring-white/30 transition-all duration-500 group-hover:bg-accent group-hover:ring-accent group-hover:scale-110">
+                    <Play className="h-6 w-6 translate-x-0.5 fill-white text-white transition-colors duration-500 group-hover:fill-primary group-hover:text-primary" strokeWidth={0} />
+                  </div>
+                </div>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/60">
+                  Conoscici in 2 minuti
+                </p>
+                <h3 className="font-display text-2xl leading-tight">
+                  Guarda il video di {city}
+                </h3>
+                <div className="mt-6 flex items-center gap-2 border-t border-white/15 pt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-accent w-full">
+                  <span>Riproduci</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
             </div>
-
-            <div className="mt-auto">
-              <p className="eyebrow mb-2 text-white/70">Conoscici in 2 minuti</p>
-              <p className="font-display text-xl leading-tight md:text-2xl">
-                Guarda il video di {city}
-              </p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-white/85">
-                Riproduci su YouTube
-                <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </p>
-            </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </section>
   );
