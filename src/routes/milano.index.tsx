@@ -54,20 +54,22 @@ const MILANO_PHOTOS = [
 export const Route = createFileRoute("/milano/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Milano — Funzione domenicale e comunità" },
+      { title: "Chiesa di Cristo di Milano — Funzione domenicale" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Milano è una comunità nel cuore della città. Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a. Vieni a trovarci.",
+          "Chiesa di Cristo di Milano: comunità nel cuore della città. Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
         content: "Comunità cristiana nel cuore di Milano. Domenica 10:30, Corso di Porta Vigentina 15a.",
       },
+      { property: "og:url", content: "https://chiesadicristoitalia.it/milano" },
       { property: "og:image", content: heroMilano },
       { name: "twitter:image", content: heroMilano },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano" }],
   }),
   component: MilanoHome,
 });
