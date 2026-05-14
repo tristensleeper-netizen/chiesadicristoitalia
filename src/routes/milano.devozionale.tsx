@@ -5,13 +5,22 @@ import daysData from "@/lib/isaia-days.json";
 export const Route = createFileRoute("/milano/devozionale")({
   head: () => ({
     meta: [
-      { title: "Lettura Devozionale — Isaia | Chiesa di Cristo di Milano" },
+      { title: "Devozionale Isaia — Chiesa di Cristo di Milano" },
       {
         name: "description",
         content:
-          "Studiare Isaia insieme: 66 giorni, 66 capitoli. Contesto, domande sul testo, domande per noi e ulteriori note per ogni capitolo.",
+          "Studiare Isaia insieme: 66 giorni, 66 capitoli. Contesto, domande sul testo, domande per noi e note per ogni capitolo.",
       },
+      { property: "og:title", content: "Devozionale Isaia — Milano" },
+      {
+        property: "og:description",
+        content:
+          "66 giorni in Isaia con la Chiesa di Cristo di Milano: contesto, domande e note per ogni capitolo.",
+      },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://chiesadicristoitalia.it/milano/devozionale" },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/devozionale" }],
   }),
   component: DevozionalePage,
 });
