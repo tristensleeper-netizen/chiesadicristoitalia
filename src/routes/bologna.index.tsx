@@ -15,11 +15,11 @@ import heroItalia from "@/assets/hero-italia.jpg";
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — Chiesa in fondazione — apertura settembre 2026" },
+      { title: "Chiesa di Cristo di Bologna — apertura settembre 2026" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna è una chiesa in fondazione. Lancio previsto per settembre 2026. Unisciti a noi in preghiera, in uno studio biblico, o nel gruppo fondatore.",
+          "Chiesa di Cristo di Bologna: chiesa in fondazione, lancio settembre 2026. Unisciti in preghiera, in uno studio biblico o nel gruppo fondatore.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Bologna — In arrivo settembre 2026" },
       {
@@ -27,9 +27,11 @@ export const Route = createFileRoute("/bologna/")({
         content:
           "Stiamo piantando una nuova chiesa a Bologna. Resta aggiornato e cammina con noi.",
       },
+      { property: "og:url", content: "https://chiesadicristoitalia.it/bologna" },
       { property: "og:image", content: heroBologna },
       { name: "twitter:image", content: heroBologna },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna" }],
   }),
   component: BolognaHome,
 });
