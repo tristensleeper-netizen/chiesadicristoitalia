@@ -3,7 +3,46 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { formatItalianDate, type Devotional } from "@/lib/resource-helpers";
 
+const SITE_URL = "https://chiesadicristoitalia.it";
+
 export const Route = createFileRoute("/devozionale/$slug")({
+  loader: async ({ params }) => {
+    const { data } = await supabase
+      .from("devotionals")
+      .select("*")
+      .eq("slug", params.slug)
+      .eq("published", true)
+      .maybeSingle();
+    return { devotional: (data as Devotional | null) ?? null };
+  },
+  head: ({ loaderData, params }) => {
+    const d = loaderData?.devotional;
+    const canonical = `${SITE_URL}/devozionale/${params.slug}`;
+    if (!d) {
+      return {
+        meta: [
+          { title: "Devozionale non trovato — Chiesa di Cristo Italia" },
+          { name: "robots", content: "noindex" },
+        ],
+        links: [{ rel: "canonical", href: canonical }],
+      };
+    }
+    const title = `${d.title} — Devozionale | Chiesa di Cristo`;
+    const raw = (d.body ?? "").replace(/\s+/g, " ").trim();
+    const excerpt = raw.length > 155 ? raw.slice(0, 152).trimEnd() + "…" : raw;
+    const desc = excerpt || `Devozionale: ${d.title}${d.scripture_ref ? ` — ${d.scripture_ref}` : ""}.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: canonical },
+      ],
+      links: [{ rel: "canonical", href: canonical }],
+    };
+  },
   component: DevotionalDetail,
 });
 
