@@ -43,19 +43,21 @@ const churchJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo in Italia — Chiesa Cristiana a Milano e Bologna" },
+      { title: "Chiesa di Cristo in Italia — Milano e Bologna" },
       {
         name: "description",
         content:
-          "Chiesa di Cristo in Italia: una chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
+          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
       },
-      { property: "og:title", content: "Chiesa di Cristo in Italia — Chiesa Cristiana a Milano e Bologna" },
+      { property: "og:title", content: "Chiesa di Cristo in Italia — Milano e Bologna" },
       {
         property: "og:description",
         content:
           "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
       },
+      { property: "og:url", content: "https://chiesadicristoitalia.it/" },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/" }],
     scripts: [
       {
         type: "application/ld+json",
