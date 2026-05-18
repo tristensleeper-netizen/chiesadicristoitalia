@@ -12,6 +12,7 @@ export const Route = createFileRoute("/bologna/chi-siamo")({
       { property: "og:description", content: "Una nuova comunità in arrivo a Bologna, settembre 2026." },
       { property: "og:image", content: heroBologna },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/chi-siamo" }],
   }),
   component: () => <AboutSection city={bolognaConfig} />,
 });

@@ -10,6 +10,7 @@ export const Route = createFileRoute("/bologna/contatti")({
       { property: "og:title", content: "Contatti — Chiesa di Cristo di Bologna" },
       { property: "og:description", content: "Facci sapere se verrai. Ti aspettiamo." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/contatti" }],
   }),
   component: () => <ContactSection city={bolognaConfig} />,
 });

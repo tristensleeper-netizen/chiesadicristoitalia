@@ -10,6 +10,7 @@ export const Route = createFileRoute("/milano/eventi")({
       { property: "og:title", content: "Eventi — Chiesa di Cristo di Milano" },
       { property: "og:description", content: "La vita della comunità a Milano." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/eventi" }],
   }),
   component: () => <EventsSection city={milanoConfig} />,
 });

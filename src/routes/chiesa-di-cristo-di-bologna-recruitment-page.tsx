@@ -26,6 +26,7 @@ export const Route = createFileRoute("/chiesa-di-cristo-di-bologna-recruitment-p
       { property: "og:image", content: heroBologna },
       { name: "twitter:image", content: heroBologna },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/chiesa-di-cristo-di-bologna-recruitment-page" }],
   }),
   component: RecruitmentPage,
 });

@@ -10,6 +10,7 @@ export const Route = createFileRoute("/bologna/cosa-crediamo")({
       { property: "og:title", content: "Cosa crediamo — Chiesa di Cristo di Bologna" },
       { property: "og:description", content: "Una fede semplice, biblica e viva." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/cosa-crediamo" }],
   }),
   component: () => <BeliefsSection city={bolognaConfig} />,
 });

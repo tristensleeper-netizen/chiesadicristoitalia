@@ -13,6 +13,7 @@ export const Route = createFileRoute("/sicilia")({
       { property: "og:description", content: "Piccola comunità accogliente a Palermo. Scrivici per visitarci." },
       { property: "og:image", content: heroSicilia },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/sicilia" }],
   }),
   component: SiciliaPage,
 });
