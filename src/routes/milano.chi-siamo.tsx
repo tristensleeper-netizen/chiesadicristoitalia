@@ -12,6 +12,7 @@ export const Route = createFileRoute("/milano/chi-siamo")({
       { property: "og:description", content: "La nostra storia, la nostra fede, la nostra comunità." },
       { property: "og:image", content: heroMilano },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/chi-siamo" }],
   }),
   component: () => <AboutSection city={milanoConfig} />,
 });

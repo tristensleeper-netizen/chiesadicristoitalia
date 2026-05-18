@@ -12,6 +12,7 @@ export const Route = createFileRoute("/milano/visita")({
       { property: "og:description", content: "Domenica 10:30 · Corso di Porta Vigentina 15a, Milano." },
       { property: "og:image", content: heroMilano },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/visita" }],
   }),
   component: () => <VisitSection city={milanoConfig} />,
 });

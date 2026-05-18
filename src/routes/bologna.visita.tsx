@@ -12,6 +12,7 @@ export const Route = createFileRoute("/bologna/visita")({
       { property: "og:description", content: "Chiesa in fondazione — apertura settembre 2026. Cammina con noi." },
       { property: "og:image", content: heroBologna },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/visita" }],
   }),
   component: () => <VisitSection city={bolognaConfig} />,
 });

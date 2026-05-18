@@ -23,6 +23,7 @@ export const Route = createFileRoute("/chi-siamo")({
       },
       { property: "og:image", content: heroItalia },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/chi-siamo" }],
   }),
   component: ChiSiamoPage,
 });

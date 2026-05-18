@@ -10,6 +10,7 @@ export const Route = createFileRoute("/bologna/eventi")({
       { property: "og:title", content: "Eventi — Chiesa di Cristo di Bologna" },
       { property: "og:description", content: "La vita della comunità a Bologna." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/eventi" }],
   }),
   component: () => <EventsSection city={bolognaConfig} />,
 });

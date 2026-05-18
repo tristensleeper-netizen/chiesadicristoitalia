@@ -10,6 +10,7 @@ export const Route = createFileRoute("/milano/contatti")({
       { property: "og:title", content: "Contatti — Chiesa di Cristo di Milano" },
       { property: "og:description", content: "Facci sapere se verrai. Ti aspettiamo." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/contatti" }],
   }),
   component: () => <ContactSection city={milanoConfig} />,
 });

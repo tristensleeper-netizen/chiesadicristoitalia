@@ -13,6 +13,7 @@ export const Route = createFileRoute("/napoli")({
       { property: "og:description", content: "Piccola comunità accogliente. Scrivici e ti raccontiamo dove e quando." },
       { property: "og:image", content: heroNapoli },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/napoli" }],
   }),
   component: NapoliPage,
 });

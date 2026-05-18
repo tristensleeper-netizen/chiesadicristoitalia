@@ -26,6 +26,7 @@ export const Route = createFileRoute("/sermoni/")({
       },
       { property: "og:image", content: bibleStudy },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/sermoni" }],
   }),
   component: SermoniIndex,
 });

@@ -10,6 +10,7 @@ export const Route = createFileRoute("/milano/cosa-crediamo")({
       { property: "og:title", content: "Cosa crediamo — Chiesa di Cristo di Milano" },
       { property: "og:description", content: "Una fede semplice, biblica e viva." },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/cosa-crediamo" }],
   }),
   component: () => <BeliefsSection city={milanoConfig} />,
 });

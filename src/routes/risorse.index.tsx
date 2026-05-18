@@ -31,6 +31,7 @@ export const Route = createFileRoute("/risorse/")({
       },
       { property: "og:image", content: bibleStudy },
     ],
+    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/risorse" }],
   }),
   component: ResourcesIndex,
 });
