@@ -242,9 +242,10 @@ function ResourcesIndex() {
 
 export function ResourceCard({ r }: { r: Resource }) {
   const isPlayable = r.type === "video" || r.type === "sermon";
+  const isSermon = r.type === "sermon";
   return (
     <Link
-      to="/risorse/$slug"
+      to={isSermon ? "/sermoni/$slug" : "/risorse/$slug"}
       params={{ slug: r.slug }}
       className="group rounded-2xl border border-border bg-card overflow-hidden transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
     >
