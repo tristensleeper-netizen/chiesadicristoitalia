@@ -22,6 +22,7 @@ import { Route as MilanoIndexRouteImport } from './routes/milano.index'
 import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
 import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as SermoniSlugRouteImport } from './routes/sermoni.$slug'
 import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
 import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
 import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
@@ -111,6 +112,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const SermoniSlugRoute = SermoniSlugRouteImport.update({
+  id: '/sermoni/$slug',
+  path: '/sermoni/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const RisorseSlugRoute = RisorseSlugRouteImport.update({
   id: '/risorse/$slug',
@@ -256,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
+  '/sermoni/$slug': typeof SermoniSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/bologna/': typeof BolognaIndexRoute
   '/devozionale/': typeof DevozionaleIndexRoute
@@ -293,6 +300,7 @@ export interface FileRoutesByTo {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
+  '/sermoni/$slug': typeof SermoniSlugRoute
   '/admin': typeof AdminIndexRoute
   '/bologna': typeof BolognaIndexRoute
   '/devozionale': typeof DevozionaleIndexRoute
@@ -332,6 +340,7 @@ export interface FileRoutesById {
   '/milano/eventi': typeof MilanoEventiRoute
   '/milano/visita': typeof MilanoVisitaRoute
   '/risorse/$slug': typeof RisorseSlugRoute
+  '/sermoni/$slug': typeof SermoniSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/bologna/': typeof BolognaIndexRoute
   '/devozionale/': typeof DevozionaleIndexRoute
@@ -372,6 +381,7 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
+    | '/sermoni/$slug'
     | '/admin/'
     | '/bologna/'
     | '/devozionale/'
@@ -409,6 +419,7 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
+    | '/sermoni/$slug'
     | '/admin'
     | '/bologna'
     | '/devozionale'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/milano/eventi'
     | '/milano/visita'
     | '/risorse/$slug'
+    | '/sermoni/$slug'
     | '/admin/'
     | '/bologna/'
     | '/devozionale/'
@@ -480,6 +492,7 @@ export interface RootRouteChildren {
   MilanoEventiRoute: typeof MilanoEventiRoute
   MilanoVisitaRoute: typeof MilanoVisitaRoute
   RisorseSlugRoute: typeof RisorseSlugRoute
+  SermoniSlugRoute: typeof SermoniSlugRoute
   BolognaIndexRoute: typeof BolognaIndexRoute
   DevozionaleIndexRoute: typeof DevozionaleIndexRoute
   MilanoIndexRoute: typeof MilanoIndexRoute
@@ -580,6 +593,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/sermoni/$slug': {
+      id: '/sermoni/$slug'
+      path: '/sermoni/$slug'
+      fullPath: '/sermoni/$slug'
+      preLoaderRoute: typeof SermoniSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/risorse/$slug': {
       id: '/risorse/$slug'
@@ -795,6 +815,7 @@ const rootRouteChildren: RootRouteChildren = {
   MilanoEventiRoute: MilanoEventiRoute,
   MilanoVisitaRoute: MilanoVisitaRoute,
   RisorseSlugRoute: RisorseSlugRoute,
+  SermoniSlugRoute: SermoniSlugRoute,
   BolognaIndexRoute: BolognaIndexRoute,
   DevozionaleIndexRoute: DevozionaleIndexRoute,
   MilanoIndexRoute: MilanoIndexRoute,

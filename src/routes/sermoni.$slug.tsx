@@ -9,7 +9,7 @@ import {
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 
-export const Route = createFileRoute("/risorse/$slug")({
+export const Route = createFileRoute("/sermoni/$slug")({
   loader: async ({ params }) => {
     const { data } = await supabase
       .from("resources")
@@ -18,11 +18,11 @@ export const Route = createFileRoute("/risorse/$slug")({
       .eq("published", true)
       .maybeSingle();
     const resource = (data as Resource | null) ?? null;
-    // Sermons live at /sermoni/$slug for SEO. 301 redirect anyone hitting the
-    // old /risorse/ URL so link equity transfers to the new canonical.
-    if (resource && resource.type === "sermon") {
+    // /sermoni/$slug is only for sermon-type resources. If something else
+    // shares the slug, redirect to the canonical /risorse/$slug location.
+    if (resource && resource.type !== "sermon") {
       throw redirect({
-        to: "/sermoni/$slug",
+        to: "/risorse/$slug",
         params: { slug: params.slug },
         statusCode: 301,
       });
@@ -33,13 +33,13 @@ export const Route = createFileRoute("/risorse/$slug")({
     buildResourceHead({
       resource: loaderData?.resource ?? null,
       slug: params.slug,
-      basePath: "/risorse",
+      basePath: "/sermoni",
       siteUrl: SITE_URL,
     }),
-  component: ResourceDetail,
+  component: SermonDetail,
 });
 
-function ResourceDetail() {
+function SermonDetail() {
   const { slug } = Route.useParams();
   const initial = Route.useLoaderData().resource;
   const [resource, setResource] = useState<Resource | null>(initial);
@@ -82,9 +82,9 @@ function ResourceDetail() {
     return (
       <div className="container-prose py-32 text-center">
         <p className="eyebrow mb-4">404</p>
-        <h1 className="font-display text-4xl mb-6">Risorsa non trovata</h1>
-        <Link to="/risorse" className="btn-primary">
-          Torna alle risorse
+        <h1 className="font-display text-4xl mb-6">Sermone non trovato</h1>
+        <Link to="/sermoni" className="btn-primary">
+          Tutti i sermoni
         </Link>
       </div>
     );
@@ -93,7 +93,7 @@ function ResourceDetail() {
   return (
     <ResourceDetailView
       resource={resource}
-      back={{ to: "/risorse", label: "Tutte le risorse" }}
+      back={{ to: "/sermoni", label: "Tutti i sermoni" }}
     />
   );
 }
