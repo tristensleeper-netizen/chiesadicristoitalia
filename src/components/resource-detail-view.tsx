@@ -118,7 +118,7 @@ export function buildResourceHead({
   }
   const r = resource;
   const canonical = `${siteUrl}${basePath}/${slug}`;
-  const ytId = r.media_url ? getYouTubeIdLocal(r.media_url) : null;
+  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
   const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
   const title = `${r.title} — ${r.speaker_or_author ?? "Chiesa di Cristo"} | Chiesa di Cristo Italia`;
   const desc = r.description ?? `${r.title} — risorsa cristiana dalla Chiesa di Cristo Italia.`;
@@ -176,19 +176,4 @@ export function buildResourceHead({
       },
     ],
   };
-}
-
-function getYouTubeIdLocal(url: string): string | null {
-  // Re-export to avoid circular: same logic as resource-helpers.getYouTubeId
-  try {
-    const u = new URL(url);
-    if (u.hostname.includes("youtu.be")) return u.pathname.slice(1) || null;
-    if (u.hostname.includes("youtube.com")) {
-      if (u.pathname.startsWith("/embed/")) return u.pathname.split("/")[2] ?? null;
-      return u.searchParams.get("v");
-    }
-    return null;
-  } catch {
-    return null;
-  }
 }
