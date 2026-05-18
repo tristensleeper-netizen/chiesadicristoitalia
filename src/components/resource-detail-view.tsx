@@ -3,6 +3,7 @@ import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
   formatItalianDate,
+  getYouTubeId,
   isSpotifyUrl,
   isVimeoUrl,
   isYouTubeUrl,
