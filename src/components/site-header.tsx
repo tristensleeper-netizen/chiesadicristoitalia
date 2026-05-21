@@ -112,7 +112,7 @@ export function SiteHeader() {
                 </Link>
               ))}
               <span className="mx-2 h-4 w-px bg-border" />
-              {sharedLinks.map((l) => (
+              {sharedLinks.filter((l) => l.to !== "/chi-siamo").map((l) => (
                 <Link
                   key={l.to}
                   to={l.to}
