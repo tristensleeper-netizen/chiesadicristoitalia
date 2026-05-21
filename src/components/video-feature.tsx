@@ -71,18 +71,18 @@ export function VideoFeature({
           <span className="h-px w-8 bg-primary/40" />
         </div>
         <h2 className="font-display text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.15] text-balance">
-          {title}
+          {activeTitle}
         </h2>
-        {description && (
-          <p className="mt-4 text-foreground/70 leading-relaxed">{description}</p>
+        {activeDescription && (
+          <p className="mt-4 text-foreground/70 leading-relaxed">{activeDescription}</p>
         )}
       </div>
 
       <a
-        href={videoUrl}
+        href={activeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Guarda il video: ${title}`}
+        aria-label={`Guarda il video: ${activeTitle}`}
         className="group relative block overflow-hidden rounded-3xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.45)] ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.55)]"
       >
         <div className="relative aspect-[16/9] w-full bg-primary">
