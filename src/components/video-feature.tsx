@@ -1,7 +1,17 @@
 import { Play, ArrowUpRight } from "lucide-react";
 
-interface VideoFeatureProps {
+export interface VideoItem {
   videoUrl: string;
+  title?: string;
+  description?: string;
+  duration?: string;
+}
+
+interface VideoFeatureProps {
+  /** Single video (legacy) */
+  videoUrl?: string;
+  /** Rotating list — one is chosen per ISO week */
+  videos?: VideoItem[];
   eyebrow?: string;
   title: string;
   description?: string;
@@ -13,14 +23,41 @@ function getYouTubeId(url: string) {
   return m ? m[1] : null;
 }
 
+/** ISO week — deterministic across server & client (UTC based, no hydration mismatch) */
+function getIsoWeek(d: Date) {
+  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dayNum = date.getUTCDay() || 7;
+  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil(((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+}
+
 export function VideoFeature({
   videoUrl,
+  videos,
   eyebrow = "Guardaci",
   title,
   description,
   duration = "2 min",
 }: VideoFeatureProps) {
-  const ytId = getYouTubeId(videoUrl);
+  // Pick this week's video deterministically
+  const pool: VideoItem[] =
+    videos && videos.length > 0
+      ? videos
+      : videoUrl
+        ? [{ videoUrl, title, description, duration }]
+        : [];
+
+  const now = new Date();
+  const weekIndex = getIsoWeek(now) + now.getUTCFullYear() * 53;
+  const selected = pool[weekIndex % Math.max(pool.length, 1)] ?? { videoUrl: "", title, description, duration };
+
+  const activeUrl = selected.videoUrl;
+  const activeTitle = selected.title ?? title;
+  const activeDescription = selected.description ?? description;
+  const activeDuration = selected.duration ?? duration;
+
+  const ytId = activeUrl ? getYouTubeId(activeUrl) : null;
   const thumb = ytId
     ? `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`
     : undefined;
@@ -34,18 +71,18 @@ export function VideoFeature({
           <span className="h-px w-8 bg-primary/40" />
         </div>
         <h2 className="font-display text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.15] text-balance">
-          {title}
+          {activeTitle}
         </h2>
-        {description && (
-          <p className="mt-4 text-foreground/70 leading-relaxed">{description}</p>
+        {activeDescription && (
+          <p className="mt-4 text-foreground/70 leading-relaxed">{activeDescription}</p>
         )}
       </div>
 
       <a
-        href={videoUrl}
+        href={activeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Guarda il video: ${title}`}
+        aria-label={`Guarda il video: ${activeTitle}`}
         className="group relative block overflow-hidden rounded-3xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.45)] ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_100px_-30px_rgba(0,0,0,0.55)]"
       >
         <div className="relative aspect-[16/9] w-full bg-primary">
@@ -75,7 +112,7 @@ export function VideoFeature({
               YouTube
             </span>
             <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
-              {duration}
+              {activeDuration}
             </span>
           </div>
 
@@ -114,7 +151,7 @@ export function VideoFeature({
                   Premi play
                 </p>
                 <p className="mt-1 font-display text-lg md:text-2xl leading-tight max-w-xl text-balance">
-                  {title}
+                  {activeTitle}
                 </p>
               </div>
               <span className="hidden md:inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary shadow-lg transition-all duration-300 group-hover:bg-red-600 group-hover:text-white">
