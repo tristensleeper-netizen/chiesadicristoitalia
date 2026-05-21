@@ -1,7 +1,17 @@
 import { Play, ArrowUpRight } from "lucide-react";
 
-interface VideoFeatureProps {
+export interface VideoItem {
   videoUrl: string;
+  title?: string;
+  description?: string;
+  duration?: string;
+}
+
+interface VideoFeatureProps {
+  /** Single video (legacy) */
+  videoUrl?: string;
+  /** Rotating list — one is chosen per ISO week */
+  videos?: VideoItem[];
   eyebrow?: string;
   title: string;
   description?: string;
@@ -13,14 +23,41 @@ function getYouTubeId(url: string) {
   return m ? m[1] : null;
 }
 
+/** ISO week — deterministic across server & client (UTC based, no hydration mismatch) */
+function getIsoWeek(d: Date) {
+  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dayNum = date.getUTCDay() || 7;
+  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil(((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+}
+
 export function VideoFeature({
   videoUrl,
+  videos,
   eyebrow = "Guardaci",
   title,
   description,
   duration = "2 min",
 }: VideoFeatureProps) {
-  const ytId = getYouTubeId(videoUrl);
+  // Pick this week's video deterministically
+  const pool: VideoItem[] =
+    videos && videos.length > 0
+      ? videos
+      : videoUrl
+        ? [{ videoUrl, title, description, duration }]
+        : [];
+
+  const now = new Date();
+  const weekIndex = getIsoWeek(now) + now.getUTCFullYear() * 53;
+  const selected = pool[weekIndex % Math.max(pool.length, 1)] ?? { videoUrl: "", title, description, duration };
+
+  const activeUrl = selected.videoUrl;
+  const activeTitle = selected.title ?? title;
+  const activeDescription = selected.description ?? description;
+  const activeDuration = selected.duration ?? duration;
+
+  const ytId = activeUrl ? getYouTubeId(activeUrl) : null;
   const thumb = ytId
     ? `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`
     : undefined;
