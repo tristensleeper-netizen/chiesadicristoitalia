@@ -31,6 +31,24 @@ export const Route = createFileRoute("/devozionale/$slug")({
     const raw = (d.body ?? "").replace(/\s+/g, " ").trim();
     const excerpt = raw.length > 155 ? raw.slice(0, 152).trimEnd() + "…" : raw;
     const desc = excerpt || `Devozionale: ${d.title}${d.scripture_ref ? ` — ${d.scripture_ref}` : ""}.`;
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: d.title,
+      description: desc,
+      inLanguage: "it",
+      url: canonical,
+      datePublished: d.week_of,
+      author: {
+        "@type": "Person",
+        name: d.author || "Chiesa di Cristo Italia",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Chiesa di Cristo Italia",
+        url: SITE_URL,
+      },
+    };
     return {
       meta: [
         { title },
@@ -41,6 +59,12 @@ export const Route = createFileRoute("/devozionale/$slug")({
         { property: "og:url", content: canonical },
       ],
       links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(jsonLd),
+        },
+      ],
     };
   },
   component: DevotionalDetail,
