@@ -143,8 +143,11 @@ function MilanoHome() {
       {/* Welcome */}
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <div>
-          <p className="eyebrow mb-5">Benvenuti</p>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight">Siamo contenti che siate qui.</h2>
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="h-px w-8 bg-primary/40" />
+            <p className="eyebrow !mb-0">Benvenuti</p>
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight text-balance">Siamo contenti che siate qui.</h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
             La Chiesa di Cristo di Milano arde nel far conoscere Dio e nel diffondere una luce intorno a sé, seguendo
             l'esempio di Gesù nel fare il bene. Ci incontriamo la domenica per la funzione e durante la settimana in
@@ -166,6 +169,15 @@ function MilanoHome() {
           className="rounded-3xl object-cover object-right aspect-[4/5] w-full"
         />
       </section>
+
+      {/* Video — prominent click-through */}
+      <VideoFeature
+        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
+        eyebrow="Conoscici"
+        title="Due minuti per scoprire la Chiesa di Cristo di Milano."
+        description="Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città."
+      />
+
 
       {/* Three pillars */}
       <section className="container-prose py-16 md:py-24">
