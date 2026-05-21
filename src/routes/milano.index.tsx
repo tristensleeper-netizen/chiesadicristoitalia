@@ -211,17 +211,29 @@ function MilanoHome() {
       </section>
 
       {/* Bible study image band */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-primary/70" />
+      <section className="relative h-[60vh] min-h-[480px] overflow-hidden">
+        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/85" />
+        <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_55%)]" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
-          <h2 className="font-display text-4xl md:text-6xl max-w-3xl mx-auto leading-tight">
-            "Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo."
+          <span aria-hidden className="pointer-events-none mx-auto mb-2 font-display text-[6rem] md:text-[8rem] leading-none text-white/15 select-none">“</span>
+          <div className="inline-flex items-center justify-center gap-3 mb-5">
+            <span className="h-px w-8 bg-white/40" />
+            <p className="eyebrow text-white/85 !mb-0">Una promessa</p>
+            <span className="h-px w-8 bg-white/40" />
+          </div>
+          <h2 className="font-display italic text-3xl md:text-5xl lg:text-[3.5rem] max-w-3xl mx-auto leading-[1.2] text-balance font-normal">
+            Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo.
           </h2>
-          <p className="mt-6 text-white/80">— Matteo 11:28</p>
+          <p className="mt-8 inline-flex items-center justify-center gap-3 text-xs uppercase tracking-[0.3em] text-white/75 mx-auto">
+            <span className="h-px w-6 bg-white/40" />
+            Matteo 11:28
+            <span className="h-px w-6 bg-white/40" />
+          </p>
         </div>
       </section>
+
+
 
       {/* Lettura Devozionale */}
       <section className="container-prose py-16 md:py-24">
