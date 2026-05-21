@@ -125,10 +125,22 @@ function MilanoHome() {
       {/* Video — prominent click-through, placed high for visibility */}
       <div className="mt-8 md:mt-12">
         <VideoFeature
-          videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
           eyebrow="Conoscici"
           title="Due minuti per scoprire la Chiesa di Cristo di Milano."
           description="Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città."
+          videos={[
+            {
+              videoUrl: "https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA",
+              title: "Due minuti per scoprire la Chiesa di Cristo di Milano.",
+              description: "Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città.",
+            },
+            // Aggiungi altri video qui — ne verrà mostrato uno diverso ogni settimana.
+            // {
+            //   videoUrl: "https://youtu.be/...",
+            //   title: "Titolo del secondo video",
+            //   description: "Breve descrizione.",
+            // },
+          ]}
         />
       </div>
 
