@@ -122,8 +122,18 @@ function MilanoHome() {
       {/* Floating bottom-right popup */}
       <EventsPopup events={events} cityHref="/milano/eventi" cityName="Milano" />
 
+      {/* Video — prominent click-through, placed high for visibility */}
+      <div className="mt-8 md:mt-12">
+        <VideoFeature
+          videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
+          eyebrow="Conoscici"
+          title="Due minuti per scoprire la Chiesa di Cristo di Milano."
+          description="Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città."
+        />
+      </div>
+
       {/* Weekly calendar */}
-      <section className="container-prose pt-4 md:pt-8">
+      <section className="container-prose pt-12 md:pt-16">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow mb-2">Cosa succede</p>
@@ -170,13 +180,6 @@ function MilanoHome() {
         />
       </section>
 
-      {/* Video — prominent click-through */}
-      <VideoFeature
-        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
-        eyebrow="Conoscici"
-        title="Due minuti per scoprire la Chiesa di Cristo di Milano."
-        description="Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città."
-      />
 
 
       {/* Three pillars */}
