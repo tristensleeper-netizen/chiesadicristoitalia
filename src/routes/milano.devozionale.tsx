@@ -2,26 +2,54 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import daysData from "@/lib/isaia-days.json";
 
+const SITE_URL = "https://chiesadicristoitalia.it";
+
 export const Route = createFileRoute("/milano/devozionale")({
-  head: () => ({
-    meta: [
-      { title: "Devozionale Isaia — Chiesa di Cristo di Milano" },
-      {
-        name: "description",
-        content:
-          "Studiare Isaia insieme: 66 giorni, 66 capitoli. Contesto, domande sul testo, domande per noi e note per ogni capitolo.",
+  head: () => {
+    const canonical = `${SITE_URL}/milano/devozionale`;
+    const title = "Devozionale Isaia — Chiesa di Cristo di Milano";
+    const description =
+      "Studiare Isaia insieme: 66 giorni, 66 capitoli. Contesto, domande sul testo, domande per noi e note per ogni capitolo.";
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      description,
+      inLanguage: "it",
+      url: canonical,
+      datePublished: "2026-05-11",
+      author: {
+        "@type": "Organization",
+        name: "Chiesa di Cristo di Milano",
       },
-      { property: "og:title", content: "Devozionale Isaia — Milano" },
-      {
-        property: "og:description",
-        content:
-          "66 giorni in Isaia con la Chiesa di Cristo di Milano: contesto, domande e note per ogni capitolo.",
+      publisher: {
+        "@type": "Organization",
+        name: "Chiesa di Cristo Italia",
+        url: SITE_URL,
       },
-      { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://chiesadicristoitalia.it/milano/devozionale" },
-    ],
-    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano/devozionale" }],
-  }),
+    };
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: "Devozionale Isaia — Milano" },
+        {
+          property: "og:description",
+          content:
+            "66 giorni in Isaia con la Chiesa di Cristo di Milano: contesto, domande e note per ogni capitolo.",
+        },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: canonical },
+      ],
+      links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(jsonLd),
+        },
+      ],
+    };
+  },
   component: DevozionalePage,
 });
 
