@@ -1,4 +1,4 @@
-import { Clock, MapPin, Mail, Play, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Clock, MapPin, Mail, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 interface CityInfoProps {
@@ -8,15 +8,8 @@ interface CityInfoProps {
   serviceTime: string;
   email?: string;
   mapsUrl: string;
-  videoUrl?: string;
-  videoThumb?: string;
   visitPath?: string;
   contactPath?: string;
-}
-
-function getYouTubeId(url: string) {
-  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
-  return m ? m[1] : null;
 }
 
 export function CityInfoBlock({
@@ -26,7 +19,6 @@ export function CityInfoBlock({
   serviceTime,
   email,
   mapsUrl,
-  videoUrl = "https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA",
   visitPath,
   contactPath,
 }: CityInfoProps) {
@@ -34,8 +26,6 @@ export function CityInfoBlock({
   const mailto = `mailto:${emailAddr}`;
   const visitTo = visitPath ?? `/${city.toLowerCase()}/visita`;
   const contactTo = contactPath ?? `/${city.toLowerCase()}/contatti`;
-  const ytId = getYouTubeId(videoUrl);
-  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
 
   return (
     <section className="relative overflow-hidden">
@@ -46,7 +36,8 @@ export function CityInfoBlock({
       </div>
 
       <div className="container-prose relative py-10 md:py-14">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-3">
+
           {/* 1. Funzione domenicale — deep filled */}
           <Link
             to={visitTo}
