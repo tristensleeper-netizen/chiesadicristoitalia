@@ -112,7 +112,7 @@ export function VideoFeature({
               YouTube
             </span>
             <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
-              {duration}
+              {activeDuration}
             </span>
           </div>
 
