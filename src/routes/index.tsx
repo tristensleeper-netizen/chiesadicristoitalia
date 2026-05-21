@@ -103,8 +103,12 @@ function HomePage() {
         <div className="container-prose py-24 md:py-32">
           {/* Welcome */}
           <div className="max-w-3xl mx-auto text-center">
-            <p className="eyebrow mb-6">Benvenuti</p>
-            <h2 className="font-display text-foreground leading-[1.15] text-3xl md:text-4xl lg:text-[2.75rem] font-normal">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-primary/40" />
+              <p className="eyebrow !mb-0">Benvenuti</p>
+              <span className="h-px w-8 bg-primary/40" />
+            </div>
+            <h2 className="font-display text-foreground leading-[1.15] text-3xl md:text-4xl lg:text-[2.75rem] font-normal text-balance">
               Gesù, un uomo semplice con un piano semplice:{" "}
               <em className="italic text-primary">far conoscere Dio e il suo amore.</em>
             </h2>
@@ -148,21 +152,27 @@ function HomePage() {
 
           {/* Delicate divider */}
           <div className="mx-auto my-20 md:my-24 flex items-center justify-center gap-4 max-w-xs">
-            <span className="h-px flex-1 bg-primary/25" />
-            <span className="h-1.5 w-1.5 rounded-full bg-primary/50" />
-            <span className="h-px flex-1 bg-primary/25" />
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/40" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary/60 shadow-[0_0_12px_2px_color-mix(in_oklab,var(--primary)_40%,transparent)]" />
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/40" />
           </div>
 
           {/* Scripture — editorial pull-quote */}
-          <figure className="max-w-3xl mx-auto text-center">
-            <p className="eyebrow mb-6">Una promessa</p>
-            <blockquote className="font-display italic text-foreground leading-[1.25] text-2xl md:text-3xl lg:text-[2.25rem] font-normal">
-              <span className="text-primary/40 mr-1">«</span>
+          <figure className="relative max-w-3xl mx-auto text-center">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 font-display text-[7rem] md:text-[9rem] leading-none text-primary/10 select-none"
+            >
+              “
+            </span>
+            <p className="eyebrow mb-6 relative">Una promessa</p>
+            <blockquote className="font-display italic text-foreground leading-[1.25] text-2xl md:text-3xl lg:text-[2.25rem] font-normal text-balance relative">
               E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.
-              <span className="text-primary/40 ml-1">»</span>
             </blockquote>
-            <figcaption className="mt-8 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            <figcaption className="mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              <span className="h-px w-6 bg-muted-foreground/40" />
               Vangelo secondo Giovanni · 17:26
+              <span className="h-px w-6 bg-muted-foreground/40" />
             </figcaption>
           </figure>
         </div>
