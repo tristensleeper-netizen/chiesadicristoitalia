@@ -119,6 +119,8 @@ export function PageHero({
         <img
           src={resolvedImage}
           alt=""
+          fetchPriority="high"
+          decoding="async"
           className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
           width={1920}
           height={1280}
