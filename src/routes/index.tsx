@@ -269,14 +269,12 @@ function HomePage() {
                     "radial-gradient(ellipse at top left, color-mix(in oklab, var(--primary-soft) 70%, transparent), var(--card) 65%)",
                 }}
               >
-                {/* Left vertical accent line */}
-                <div className="pointer-events-none absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-primary/70" />
-
                 {/* Top decorative hairline */}
-                <div className="pointer-events-none absolute left-10 right-10 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                <div className="pointer-events-none absolute left-10 right-10 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
                 {/* Animated gradient orb on hover */}
                 <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
 
                 <div className="relative">
                   <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-[rgba(107,76,53,0.18)] bg-[#f7ede2] shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
@@ -383,27 +381,29 @@ function CityCard({
   return (
     <Link
       to={to}
-      className="group relative block overflow-hidden rounded-3xl aspect-[4/5] md:aspect-[5/6]"
+      className="group relative block overflow-hidden rounded-3xl aspect-[4/5] md:aspect-[5/6] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)] hover:-translate-y-1"
     >
       <img
         src={image}
         alt={name}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl pointer-events-none" />
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
-        <p className="text-xs uppercase tracking-[0.3em] text-white/70 mb-3">{tagline}</p>
-        <h3 className="font-display text-5xl md:text-6xl">{name}</h3>
-        <p className="mt-4 max-w-md text-white/85 leading-relaxed">{description}</p>
-        <span className="mt-6 inline-flex items-center text-sm font-medium">
+        <p className="text-xs uppercase tracking-[0.3em] text-white/75 mb-3">{tagline}</p>
+        <h3 className="font-display text-5xl md:text-6xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]">{name}</h3>
+        <p className="mt-4 max-w-md text-white/90 leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]">{description}</p>
+        <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-4 py-2 text-sm font-medium transition-all group-hover:bg-white group-hover:text-primary group-hover:border-white">
           Visita la chiesa di {name}
-          <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+          <span className="transition-transform group-hover:translate-x-1">→</span>
         </span>
       </div>
     </Link>
   );
 }
+
 
 function SmallCityCard({
   to,
