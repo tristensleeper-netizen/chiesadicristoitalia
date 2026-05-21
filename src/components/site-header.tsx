@@ -175,7 +175,7 @@ export function SiteHeader() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container-prose flex flex-col py-4">
-            {[...(inCity ? cityNav : cities), ...sharedLinks].map((item) => (
+            {[...(inCity ? cityNav : cities), ...sharedLinks.filter((l) => !inCity || l.to !== "/chi-siamo")].map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
