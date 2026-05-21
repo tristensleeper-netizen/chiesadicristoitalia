@@ -57,7 +57,10 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/" },
     ],
-    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/" }],
+    links: [
+      { rel: "canonical", href: "https://chiesadicristoitalia.it/" },
+      { rel: "preload", as: "image", href: heroItalia, fetchpriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
