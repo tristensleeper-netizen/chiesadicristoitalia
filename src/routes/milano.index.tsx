@@ -6,8 +6,10 @@ import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsPopup } from "@/components/events-popup";
 import { EventsWeekCalendar } from "@/components/events-week-calendar";
+import { VideoFeature } from "@/components/video-feature";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
+
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
