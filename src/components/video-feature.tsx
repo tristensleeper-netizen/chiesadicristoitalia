@@ -151,7 +151,7 @@ export function VideoFeature({
                   Premi play
                 </p>
                 <p className="mt-1 font-display text-lg md:text-2xl leading-tight max-w-xl text-balance">
-                  {title}
+                  {activeTitle}
                 </p>
               </div>
               <span className="hidden md:inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary shadow-lg transition-all duration-300 group-hover:bg-red-600 group-hover:text-white">
