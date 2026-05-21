@@ -1,4 +1,4 @@
-import { Clock, MapPin, Mail, Play, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Clock, MapPin, Mail, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 interface CityInfoProps {
@@ -8,15 +8,8 @@ interface CityInfoProps {
   serviceTime: string;
   email?: string;
   mapsUrl: string;
-  videoUrl?: string;
-  videoThumb?: string;
   visitPath?: string;
   contactPath?: string;
-}
-
-function getYouTubeId(url: string) {
-  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
-  return m ? m[1] : null;
 }
 
 export function CityInfoBlock({
@@ -26,7 +19,6 @@ export function CityInfoBlock({
   serviceTime,
   email,
   mapsUrl,
-  videoUrl = "https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA",
   visitPath,
   contactPath,
 }: CityInfoProps) {
@@ -34,8 +26,6 @@ export function CityInfoBlock({
   const mailto = `mailto:${emailAddr}`;
   const visitTo = visitPath ?? `/${city.toLowerCase()}/visita`;
   const contactTo = contactPath ?? `/${city.toLowerCase()}/contatti`;
-  const ytId = getYouTubeId(videoUrl);
-  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
 
   return (
     <section className="relative overflow-hidden">
@@ -46,7 +36,8 @@ export function CityInfoBlock({
       </div>
 
       <div className="container-prose relative py-10 md:py-14">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-3">
+
           {/* 1. Funzione domenicale — deep filled */}
           <Link
             to={visitTo}
@@ -152,49 +143,6 @@ export function CityInfoBlock({
             </div>
           </Link>
 
-          {/* 4. YouTube — cinematic */}
-          <a
-            href={videoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex min-h-[240px] flex-col overflow-hidden rounded-3xl bg-primary shadow-xl transition-all duration-500 hover:-translate-y-1.5"
-          >
-            {thumb && (
-              <img
-                src={thumb}
-                alt="Anteprima video"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-1000 group-hover:scale-110"
-              />
-            )}
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-primary/10" />
-            <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_60%,rgba(220,38,38,0.25),transparent_60%)]" />
-
-            <div className="relative z-10 flex h-full flex-col justify-between p-5 text-white">
-              <div className="flex items-start justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600/95 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.2em]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                  YouTube
-                </span>
-                <ArrowUpRight className="h-4 w-4 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
-              </div>
-
-              <div className="flex flex-col items-start">
-                <div className="relative mb-3">
-                  <div aria-hidden className="absolute inset-0 rounded-full bg-accent/30 blur-xl transition-all duration-500 group-hover:bg-accent/60 group-hover:scale-125" />
-                  <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md ring-1 ring-white/30 transition-all duration-500 group-hover:bg-accent group-hover:ring-accent group-hover:scale-110">
-                    <Play className="h-5 w-5 translate-x-0.5 fill-white text-white transition-colors duration-500 group-hover:fill-primary group-hover:text-primary" strokeWidth={0} />
-                  </div>
-                </div>
-                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">
-                  Conoscici in 2 minuti
-                </p>
-                <h3 className="font-display text-lg leading-tight">
-                  Guarda il video di {city}
-                </h3>
-              </div>
-            </div>
-          </a>
         </div>
       </div>
     </section>

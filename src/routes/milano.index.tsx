@@ -6,8 +6,10 @@ import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsPopup } from "@/components/events-popup";
 import { EventsWeekCalendar } from "@/components/events-week-calendar";
+import { VideoFeature } from "@/components/video-feature";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
+
 import heroMilano from "@/assets/hero-milano.jpg";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
@@ -141,8 +143,11 @@ function MilanoHome() {
       {/* Welcome */}
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
         <div>
-          <p className="eyebrow mb-5">Benvenuti</p>
-          <h2 className="font-display text-4xl md:text-5xl leading-tight">Siamo contenti che siate qui.</h2>
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="h-px w-8 bg-primary/40" />
+            <p className="eyebrow !mb-0">Benvenuti</p>
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl leading-tight text-balance">Siamo contenti che siate qui.</h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
             La Chiesa di Cristo di Milano arde nel far conoscere Dio e nel diffondere una luce intorno a sé, seguendo
             l'esempio di Gesù nel fare il bene. Ci incontriamo la domenica per la funzione e durante la settimana in
@@ -164,6 +169,15 @@ function MilanoHome() {
           className="rounded-3xl object-cover object-right aspect-[4/5] w-full"
         />
       </section>
+
+      {/* Video — prominent click-through */}
+      <VideoFeature
+        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
+        eyebrow="Conoscici"
+        title="Due minuti per scoprire la Chiesa di Cristo di Milano."
+        description="Volti, parole e momenti di una comunità che si ritrova ogni domenica nel cuore della città."
+      />
+
 
       {/* Three pillars */}
       <section className="container-prose py-16 md:py-24">
@@ -197,17 +211,29 @@ function MilanoHome() {
       </section>
 
       {/* Bible study image band */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-primary/70" />
+      <section className="relative h-[60vh] min-h-[480px] overflow-hidden">
+        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/85" />
+        <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_55%)]" />
         <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-          <p className="eyebrow text-white/80 mb-4">Una promessa</p>
-          <h2 className="font-display text-4xl md:text-6xl max-w-3xl mx-auto leading-tight">
-            "Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo."
+          <span aria-hidden className="pointer-events-none mx-auto mb-2 font-display text-[6rem] md:text-[8rem] leading-none text-white/15 select-none">“</span>
+          <div className="inline-flex items-center justify-center gap-3 mb-5">
+            <span className="h-px w-8 bg-white/40" />
+            <p className="eyebrow text-white/85 !mb-0">Una promessa</p>
+            <span className="h-px w-8 bg-white/40" />
+          </div>
+          <h2 className="font-display italic text-3xl md:text-5xl lg:text-[3.5rem] max-w-3xl mx-auto leading-[1.2] text-balance font-normal">
+            Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo.
           </h2>
-          <p className="mt-6 text-white/80">— Matteo 11:28</p>
+          <p className="mt-8 inline-flex items-center justify-center gap-3 text-xs uppercase tracking-[0.3em] text-white/75 mx-auto">
+            <span className="h-px w-6 bg-white/40" />
+            Matteo 11:28
+            <span className="h-px w-6 bg-white/40" />
+          </p>
         </div>
       </section>
+
+
 
       {/* Lettura Devozionale */}
       <section className="container-prose py-16 md:py-24">
