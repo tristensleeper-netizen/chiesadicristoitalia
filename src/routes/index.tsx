@@ -90,6 +90,12 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
+      <VideoPopup
+        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
+        title="Due minuti per scoprire la Chiesa di Cristo in Italia."
+        eyebrow="Video in evidenza"
+      />
+
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
       <section className="relative overflow-hidden">
         <div
