@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { X, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 interface Props {
   videoUrl: string;
@@ -10,6 +11,8 @@ interface Props {
   delayMs?: number;
   /** Storage key for session-level dismissal */
   storageKey?: string;
+  /** Slug of the resource page to link to via "Guarda ora" */
+  slug?: string;
 }
 
 function getYouTubeId(url: string) {
@@ -26,6 +29,7 @@ export function VideoPopup({
   duration = "2 min",
   delayMs = 2200,
   storageKey = "video-popup-dismissed",
+  slug,
 }: Props) {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(true);
@@ -96,6 +100,7 @@ export function VideoPopup({
               <X className="h-3.5 w-3.5" />
             </button>
 
+            {/* Thumbnail opens lightbox */}
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -140,19 +145,35 @@ export function VideoPopup({
                   {duration}
                 </span>
               </div>
-
-              <div className="px-4 py-3">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/55">
-                  {eyebrow}
-                </p>
-                <p className="mt-1 font-display text-sm leading-snug text-foreground line-clamp-2">
-                  {title}
-                </p>
-                <p className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                  Guarda ora <span aria-hidden>→</span>
-                </p>
-              </div>
             </button>
+
+            {/* Text + CTA */}
+            <div className="px-4 py-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/55">
+                {eyebrow}
+              </p>
+              <p className="mt-1 font-display text-sm leading-snug text-foreground line-clamp-2">
+                {title}
+              </p>
+              {slug ? (
+                <Link
+                  to="/risorse/$slug"
+                  params={{ slug }}
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                  onClick={closePopup}
+                >
+                  Guarda ora <span aria-hidden>→</span>
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary"
+                >
+                  Guarda ora <span aria-hidden>→</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

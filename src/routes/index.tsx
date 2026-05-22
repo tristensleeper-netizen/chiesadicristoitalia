@@ -94,6 +94,7 @@ function HomePage() {
         videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
         title="Due minuti per scoprire la Chiesa di Cristo in Italia."
         eyebrow="Video in evidenza"
+        slug="su-cosa-stai-costruendo-la-tua-vita"
       />
 
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
