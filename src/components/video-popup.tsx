@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { X, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 interface Props {
   videoUrl: string;
@@ -10,6 +11,8 @@ interface Props {
   delayMs?: number;
   /** Storage key for session-level dismissal */
   storageKey?: string;
+  /** Slug of the resource page to link to via "Guarda ora" */
+  slug?: string;
 }
 
 function getYouTubeId(url: string) {
