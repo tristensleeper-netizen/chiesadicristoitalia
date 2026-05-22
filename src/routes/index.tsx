@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { VideoPopup } from "@/components/video-popup";
 import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
