@@ -26,7 +26,7 @@ export function VideoPopup({
   videoUrl,
   title,
   eyebrow = "Guardaci",
-  duration = "2 min",
+  duration = "Sermone",
   delayMs = 2200,
   storageKey = "video-popup-dismissed",
   slug,
