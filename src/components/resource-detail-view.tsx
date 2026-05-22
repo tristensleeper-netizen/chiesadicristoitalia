@@ -59,21 +59,36 @@ export function ResourceDetailView({
         )}
 
         {isEmbeddable && (
-          <div
-            className={
-              "mt-10 overflow-hidden rounded-2xl border border-border " +
-              (isSpotifyUrl(embedUrl) ? "" : "aspect-video")
-            }
-          >
-            <iframe
-              src={embedUrl}
-              title={r.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-              style={isSpotifyUrl(embedUrl) ? { height: 232 } : undefined}
-            />
-          </div>
+          <>
+            <div
+              className={
+                "mt-10 overflow-hidden rounded-2xl border border-border " +
+                (isSpotifyUrl(embedUrl) ? "" : "aspect-video")
+              }
+            >
+              <iframe
+                src={embedUrl}
+                title={r.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+                style={isSpotifyUrl(embedUrl) ? { height: 232 } : undefined}
+              />
+            </div>
+            {r.media_url && (isYouTubeUrl(r.media_url) || isVimeoUrl(r.media_url)) && (
+              <div className="mt-4 flex justify-end">
+                <a
+                  href={r.media_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
+                >
+                  {isYouTubeUrl(r.media_url) ? "Guarda su YouTube" : "Guarda su Vimeo"}
+                  <span aria-hidden>↗</span>
+                </a>
+              </div>
+            )}
+          </>
         )}
 
         {isPdf && (
