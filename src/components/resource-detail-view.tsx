@@ -79,7 +79,6 @@ export function ResourceDetailView({
               <div className="mt-4 flex justify-end">
                 <a
                   href={r.media_url}
-                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
                 >
