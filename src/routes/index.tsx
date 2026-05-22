@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { VideoPopup } from "@/components/video-popup";
 import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
@@ -87,6 +88,12 @@ function HomePage() {
         subtitle="Comunità di persone che cercano insieme di vivere come Gesù — una famiglia che ti aspetta."
         primaryCta={{ to: "/milano", label: "Trova la chiesa di Milano" }}
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
+      />
+
+      <VideoPopup
+        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
+        title="Due minuti per scoprire la Chiesa di Cristo in Italia."
+        eyebrow="Video in evidenza"
       />
 
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
