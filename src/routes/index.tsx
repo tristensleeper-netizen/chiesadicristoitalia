@@ -87,11 +87,11 @@ function HomePage() {
       />
 
       <VideoPopup
-        videoUrl="https://youtu.be/bOobMSS-DuI?si=wZL0h5VQa0gHzEsA"
-        title="Su cosa stai costruendo la tua vita?"
+        videoUrl="https://youtu.be/36FDh_7AYkk"
+        title="La presenza e la potenza dello Spirito Santo"
         eyebrow="Sermone in evidenza"
         duration="Sermone"
-        slug="su-cosa-stai-costruendo-la-tua-vita"
+        slug="presenza-potenza-spirito-santo"
       />
 
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
