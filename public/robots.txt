@@ -4,4 +4,20 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://chiesadicristoitalia.it/sitemap.xml
+Sitemap: https://chiesadicristoitalia.it/video-sitemap.xml

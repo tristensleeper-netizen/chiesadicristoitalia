@@ -157,28 +157,55 @@ export function buildResourceHead({
     meta.push({ name: "twitter:image", content: thumb });
   }
 
-  const jsonLd: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": r.type === "video" || r.type === "sermon" ? "VideoObject" : "Article",
-    name: r.title,
-    headline: r.title,
-    description: desc,
-    inLanguage: "it",
-    url: canonical,
-    datePublished: r.published_at,
-    author: { "@type": "Person", name: r.speaker_or_author ?? "Chiesa di Cristo" },
-    publisher: {
-      "@type": "Organization",
-      name: "Chiesa di Cristo Italia",
-      url: siteUrl,
-    },
-  };
-  if (thumb) jsonLd.thumbnailUrl = thumb;
-  if (r.media_url) {
-    jsonLd.contentUrl = r.media_url;
-    if (ytId) jsonLd.embedUrl = `https://www.youtube.com/embed/${ytId}`;
-    jsonLd.uploadDate = r.published_at;
-  }
+  const isVideo = r.type === "video" || r.type === "sermon";
+  const jsonLd: Record<string, unknown> = isVideo
+    ? {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: r.title,
+        description: desc,
+        thumbnailUrl: ytId
+          ? [`https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`]
+          : undefined,
+        uploadDate: r.published_at,
+        contentUrl: ytId
+          ? `https://www.youtube.com/watch?v=${ytId}`
+          : r.media_url ?? undefined,
+        embedUrl: ytId ? `https://www.youtube.com/embed/${ytId}` : undefined,
+        inLanguage: "it",
+        isFamilyFriendly: true,
+        publisher: {
+          "@type": "Organization",
+          name: "Chiesa di Cristo in Italia",
+          url: siteUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}/og-image.jpg`,
+            width: 600,
+            height: 60,
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonical,
+        },
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: r.title,
+        description: desc,
+        inLanguage: "it",
+        url: canonical,
+        datePublished: r.published_at,
+        author: { "@type": "Person", name: r.speaker_or_author ?? "Chiesa di Cristo" },
+        publisher: {
+          "@type": "Organization",
+          name: "Chiesa di Cristo Italia",
+          url: siteUrl,
+        },
+      };
+  if (!isVideo && thumb) jsonLd.thumbnailUrl = thumb;
 
   return {
     meta,

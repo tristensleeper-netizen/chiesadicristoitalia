@@ -9,8 +9,14 @@ import {
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 
+const JUNK_SLUGS = new Set(["performance", "avengers", "followers"]);
+
 export const Route = createFileRoute("/risorse/$slug")({
   loader: async ({ params }) => {
+    // Junk URLs accidentally indexed in the past — 301 back to the archive.
+    if (JUNK_SLUGS.has(params.slug)) {
+      throw redirect({ to: "/risorse", statusCode: 301 });
+    }
     const { data } = await supabase
       .from("resources")
       .select("*")
