@@ -37,7 +37,6 @@ export function SiteHeader() {
   }, [path]);
 
   const cityBase = (isMilano ? "/milano" : "/bologna") as "/milano" | "/bologna";
-  const cityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
   const logoTo = isMilano ? "/milano" : isBologna ? "/bologna" : "/";
   const logoCityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
 
