@@ -7,8 +7,6 @@ import logoBologna from "@/assets/bologna-icon.svg";
 const cities = [
   { to: "/milano", label: "Milano" },
   { to: "/bologna", label: "Bologna" },
-  { to: "/napoli", label: "Napoli" },
-  { to: "/sicilia", label: "Palermo" },
 ] as const;
 
 const sharedLinks = [
@@ -38,28 +36,10 @@ export function SiteHeader() {
     setOpen(false);
   }, [path]);
 
-  const isNapoli = path.startsWith("/napoli");
-  const isSicilia = path.startsWith("/sicilia");
   const cityBase = (isMilano ? "/milano" : "/bologna") as "/milano" | "/bologna";
   const cityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
-  const logoTo = isMilano
-    ? "/milano"
-    : isBologna
-      ? "/bologna"
-      : isNapoli
-        ? "/napoli"
-        : isSicilia
-          ? "/sicilia"
-          : "/";
-  const logoCityLabel = isMilano
-    ? "Milano"
-    : isBologna
-      ? "Bologna"
-      : isNapoli
-        ? "Napoli"
-        : isSicilia
-          ? "Palermo"
-          : "";
+  const logoTo = isMilano ? "/milano" : isBologna ? "/bologna" : "/";
+  const logoCityLabel = isMilano ? "Milano" : isBologna ? "Bologna" : "";
 
   const cityNav = inCity
     ? [

@@ -29,7 +29,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Una famiglia spirituale in Italia. Trovaci a Milano, Bologna, Napoli e Palermo. Funzioni domenicali e una comunità che ti aspetta.",
+          "Una famiglia spirituale in Italia. Trovaci a Milano e Bologna. Funzioni domenicali e una comunità che ti aspetta.",
       },
       { name: "author", content: "Chiesa di Cristo in Italia" },
       { name: "google-site-verification", content: "mXa-ofm-K8zg9sreLtyes-M5YWdpQllGEc9i_6xBYCQ" },

@@ -5,8 +5,6 @@ import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
-import heroNapoli from "@/assets/hero-napoli.jpg";
-import heroSicilia from "@/assets/hero-sicilia.jpg";
 import sunsetItalia from "@/assets/sunset-italia.jpg";
 
 const churchJsonLd = {
@@ -76,8 +74,6 @@ function HomePage() {
   const homeHero = useSlotImage("home.hero", heroItalia);
   const milanoImg = useSlotImage("home.milano", heroMilano);
   const bolognaImg = useSlotImage("home.bologna", heroBologna);
-  const napoliImg = useSlotImage("home.napoli", heroNapoli);
-  const siciliaImg = useSlotImage("home.sicilia", heroSicilia);
   return (
     <>
       <PageHero
@@ -217,20 +213,6 @@ function HomePage() {
           />
         </div>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <SmallCityCard
-            to="/napoli"
-            image={napoliImg}
-            name="Napoli"
-            description="Una piccola comunità che si incontra in casa. Scrivici per visitarci."
-          />
-          <SmallCityCard
-            to="/sicilia"
-            image={siciliaImg}
-            name="Palermo"
-            description="Una piccola comunità in casa. Saremmo felici di conoscerti."
-          />
-        </div>
       </section>
 
       {/* Beliefs — interactive pillars */}
@@ -424,38 +406,4 @@ function CityCard({
 }
 
 
-function SmallCityCard({
-  to,
-  image,
-  name,
-  description,
-}: {
-  to: "/napoli" | "/sicilia";
-  image: string;
-  name: string;
-  description: string;
-}) {
-  return (
-    <Link
-      to={to}
-      className="group relative block overflow-hidden rounded-2xl aspect-[16/8] md:aspect-[16/7] shadow-[0_14px_40px_-22px_rgba(0,0,0,0.4)] transition-all duration-500 hover:shadow-[0_22px_50px_-22px_rgba(0,0,0,0.5)] hover:-translate-y-0.5"
-    >
-      <img
-        src={image}
-        alt={name}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent" />
-      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none" />
-      <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8 text-white">
-        <h3 className="font-display text-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">{name}</h3>
-        <p className="mt-1 max-w-xs text-sm text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">{description}</p>
-        <span className="mt-3 inline-flex items-center text-xs font-medium text-white/85 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          Scopri di più <span className="ml-1.5 transition-transform group-hover:translate-x-1">→</span>
-        </span>
-      </div>
-    </Link>
-  );
-}
 

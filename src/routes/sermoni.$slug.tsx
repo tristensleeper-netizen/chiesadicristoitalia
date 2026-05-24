@@ -18,9 +18,9 @@ export const Route = createFileRoute("/sermoni/$slug")({
       .eq("published", true)
       .maybeSingle();
     const resource = (data as Resource | null) ?? null;
-    // /sermoni/$slug is only for sermon-type resources. If something else
-    // shares the slug, redirect to the canonical /risorse/$slug location.
-    if (resource && resource.type !== "sermon") {
+    // /sermoni/$slug serves both sermon and video resources. Anything else
+    // (article, pdf, etc.) redirects to its canonical /risorse/$slug location.
+    if (resource && resource.type !== "sermon" && resource.type !== "video") {
       throw redirect({
         to: "/risorse/$slug",
         params: { slug: params.slug },

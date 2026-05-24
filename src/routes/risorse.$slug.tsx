@@ -24,9 +24,10 @@ export const Route = createFileRoute("/risorse/$slug")({
       .eq("published", true)
       .maybeSingle();
     const resource = (data as Resource | null) ?? null;
-    // Sermons live at /sermoni/$slug for SEO. 301 redirect anyone hitting the
-    // old /risorse/ URL so link equity transfers to the new canonical.
-    if (resource && resource.type === "sermon") {
+    // All video content (sermons + videos) lives at /sermoni/$slug for SEO.
+    // 301 redirect anyone hitting the old /risorse/ URL so link equity
+    // transfers to the new canonical.
+    if (resource && (resource.type === "sermon" || resource.type === "video")) {
       throw redirect({
         to: "/sermoni/$slug",
         params: { slug: params.slug },
