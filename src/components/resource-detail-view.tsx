@@ -177,10 +177,10 @@ export function buildResourceHead({
         publisher: {
           "@type": "Organization",
           name: "Chiesa di Cristo in Italia",
-          url: SITE_URL_CONST,
+          url: siteUrl,
           logo: {
             "@type": "ImageObject",
-            url: `${SITE_URL_CONST}/og-image.jpg`,
+            url: `${siteUrl}/og-image.jpg`,
             width: 600,
             height: 60,
           },
@@ -202,7 +202,7 @@ export function buildResourceHead({
         publisher: {
           "@type": "Organization",
           name: "Chiesa di Cristo Italia",
-          url: SITE_URL_CONST,
+          url: siteUrl,
         },
       };
   if (!isVideo && thumb) jsonLd.thumbnailUrl = thumb;
