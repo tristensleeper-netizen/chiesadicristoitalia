@@ -41,7 +41,6 @@ type FilterType = ResourceType | "devotional" | "all";
 const TYPE_FILTERS: Array<{ value: FilterType; label: string }> = [
   { value: "all", label: "Tutti" },
   { value: "article", label: "Articoli" },
-  { value: "video", label: "Video" },
   { value: "devotional", label: "Devozionali" },
   { value: "pdf", label: "PDF" },
 ];
@@ -50,8 +49,6 @@ const CITY_FILTERS: Array<{ value: CityTag | "all"; label: string }> = [
   { value: "all", label: "Tutte le città" },
   { value: "milano", label: "Milano" },
   { value: "bologna", label: "Bologna" },
-  { value: "napoli", label: "Napoli" },
-  { value: "sicilia", label: "Palermo" },
   { value: "national", label: "Nazionale" },
 ];
 
@@ -77,7 +74,7 @@ function ResourcesIndex() {
           .from("resources")
           .select("*")
           .eq("published", true)
-          .neq("type", "sermon")
+          .not("type", "in", "(sermon,video)")
           .order("published_at", { ascending: false }),
         supabase
           .from("devotionals")

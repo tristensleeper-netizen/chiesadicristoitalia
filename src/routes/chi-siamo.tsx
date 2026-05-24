@@ -3,8 +3,6 @@ import { PageHero } from "@/components/page-hero";
 import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
-import heroNapoli from "@/assets/hero-napoli.jpg";
-import heroSicilia from "@/assets/hero-sicilia.jpg";
 
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
@@ -54,10 +52,9 @@ function ChiSiamoPage() {
             quotidianità.
           </p>
           <p>
-            Oggi siamo presenti con comunità a Milano e Bologna, e con piccoli gruppi a
-            Napoli e a Palermo. Se sei in Italia e cerchi una famiglia spirituale, una
-            chiesa dove sentirti a casa, la porta è aperta: vieni a trovarci una domenica
-            o scrivici quando vuoi.
+            Oggi siamo presenti con comunità a Milano e Bologna. Se sei in Italia e
+            cerchi una famiglia spirituale, una chiesa dove sentirti a casa, la porta è
+            aperta: vieni a trovarci una domenica o scrivici quando vuoi.
           </p>
         </div>
       </section>
@@ -137,11 +134,9 @@ function ChiSiamoPage() {
           <h2 className="font-display text-center text-3xl md:text-4xl mb-12">
             Dove ci troviamo.
           </h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2">
             <CityTile to="/milano" name="Milano" image={heroMilano} subtitle="Chiesa di Cristo di Milano" />
             <CityTile to="/bologna" name="Bologna" image={heroBologna} subtitle="In fondazione · Settembre 2026" />
-            <CityTile to="/napoli" name="Napoli" image={heroNapoli} subtitle="Piccola comunità in casa" />
-            <CityTile to="/sicilia" name="Palermo" image={heroSicilia} subtitle="Piccola comunità in casa" />
           </div>
         </div>
       </section>
@@ -190,7 +185,7 @@ function CityTile({
   subtitle,
   image,
 }: {
-  to: "/milano" | "/bologna" | "/napoli" | "/sicilia";
+  to: "/milano" | "/bologna";
   name: string;
   subtitle: string;
   image: string;

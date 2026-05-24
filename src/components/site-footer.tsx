@@ -22,8 +22,8 @@ export function SiteFooter() {
             <span className="font-display text-xl">Chiesa di Cristo in Italia</span>
           </div>
           <p className="mt-5 max-w-md text-sm text-primary-foreground/75 leading-relaxed">
-            Una famiglia spirituale che si incontra a Milano, Bologna, Napoli e in
-            Palermo. Cerchiamo di vivere il Vangelo con umiltà e di amare il
+            Una famiglia spirituale che si incontra a Milano e Bologna.
+            Cerchiamo di vivere il Vangelo con umiltà e di amare il
             prossimo come Gesù ci ha amati.
           </p>
         </div>
@@ -35,8 +35,6 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/milano" className="hover:underline">Milano</Link></li>
             <li><Link to="/bologna" className="hover:underline">Bologna</Link></li>
-            <li><Link to="/napoli" className="hover:underline">Napoli</Link></li>
-            <li><Link to="/sicilia" className="hover:underline">Palermo</Link></li>
           </ul>
         </div>
 

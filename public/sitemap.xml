@@ -70,17 +70,6 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Napoli & Sicilia -->
-  <url>
-    <loc>https://chiesadicristoitalia.it/napoli</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://chiesadicristoitalia.it/sicilia</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <!-- Chi siamo (national) -->
   <url>

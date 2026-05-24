@@ -10,8 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SuDiNoiRouteImport } from './routes/su-di-noi'
-import { Route as SiciliaRouteImport } from './routes/sicilia'
-import { Route as NapoliRouteImport } from './routes/napoli'
 import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
 import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -50,16 +48,6 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 const SuDiNoiRoute = SuDiNoiRouteImport.update({
   id: '/su-di-noi',
   path: '/su-di-noi',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SiciliaRoute = SiciliaRouteImport.update({
-  id: '/sicilia',
-  path: '/sicilia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NapoliRoute = NapoliRouteImport.update({
-  id: '/napoli',
-  path: '/napoli',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChiesaDiCristoDiBolognaRecruitmentPageRoute =
@@ -240,8 +228,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
-  '/napoli': typeof NapoliRoute
-  '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -278,8 +264,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
-  '/napoli': typeof NapoliRoute
-  '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -318,8 +302,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/chi-siamo': typeof ChiSiamoRoute
   '/chiesa-di-cristo-di-bologna-recruitment-page': typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
-  '/napoli': typeof NapoliRoute
-  '/sicilia': typeof SiciliaRoute
   '/su-di-noi': typeof SuDiNoiRoute
   '/admin/admins': typeof AdminAdminsRoute
   '/admin/eventi': typeof AdminEventiRoute
@@ -359,8 +341,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
-    | '/napoli'
-    | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
     | '/admin/eventi'
@@ -397,8 +377,6 @@ export interface FileRouteTypes {
     | '/'
     | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
-    | '/napoli'
-    | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
     | '/admin/eventi'
@@ -436,8 +414,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/chi-siamo'
     | '/chiesa-di-cristo-di-bologna-recruitment-page'
-    | '/napoli'
-    | '/sicilia'
     | '/su-di-noi'
     | '/admin/admins'
     | '/admin/eventi'
@@ -476,8 +452,6 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   ChiSiamoRoute: typeof ChiSiamoRoute
   ChiesaDiCristoDiBolognaRecruitmentPageRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRoute
-  NapoliRoute: typeof NapoliRoute
-  SiciliaRoute: typeof SiciliaRoute
   SuDiNoiRoute: typeof SuDiNoiRoute
   BolognaChiSiamoRoute: typeof BolognaChiSiamoRoute
   BolognaContattiRoute: typeof BolognaContattiRoute
@@ -508,20 +482,6 @@ declare module '@tanstack/react-router' {
       path: '/su-di-noi'
       fullPath: '/su-di-noi'
       preLoaderRoute: typeof SuDiNoiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sicilia': {
-      id: '/sicilia'
-      path: '/sicilia'
-      fullPath: '/sicilia'
-      preLoaderRoute: typeof SiciliaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/napoli': {
-      id: '/napoli'
-      path: '/napoli'
-      fullPath: '/napoli'
-      preLoaderRoute: typeof NapoliRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chiesa-di-cristo-di-bologna-recruitment-page': {
@@ -799,8 +759,6 @@ const rootRouteChildren: RootRouteChildren = {
   ChiSiamoRoute: ChiSiamoRoute,
   ChiesaDiCristoDiBolognaRecruitmentPageRoute:
     ChiesaDiCristoDiBolognaRecruitmentPageRoute,
-  NapoliRoute: NapoliRoute,
-  SiciliaRoute: SiciliaRoute,
   SuDiNoiRoute: SuDiNoiRoute,
   BolognaChiSiamoRoute: BolognaChiSiamoRoute,
   BolognaContattiRoute: BolognaContattiRoute,

@@ -1,12 +1,10 @@
 # Chiesa di Cristo in Italia
 
-> Una chiesa cristiana basata sulla Bibbia con comunità a Milano, Bologna, Napoli e Palermo. Non denominazionale, indipendente, fondata sull'esempio della chiesa primitiva del Nuovo Testamento.
+ > Una chiesa cristiana basata sulla Bibbia con comunità a Milano e Bologna. Non denominazionale, indipendente, fondata sull'esempio della chiesa primitiva del Nuovo Testamento.
 
 ## Le nostre comunità
 - Milano: https://chiesadicristoitalia.it/milano
 - Bologna: https://chiesadicristoitalia.it/bologna
-- Napoli: https://chiesadicristoitalia.it/napoli
-- Palermo / Sicilia: https://chiesadicristoitalia.it/sicilia
 
 ## Risorse principali
 - Chi siamo: https://chiesadicristoitalia.it/chi-siamo

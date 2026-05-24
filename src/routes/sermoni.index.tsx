@@ -35,8 +35,6 @@ const CITY_FILTERS: Array<{ value: CityTag | "all"; label: string }> = [
   { value: "all", label: "Tutte le città" },
   { value: "milano", label: "Milano" },
   { value: "bologna", label: "Bologna" },
-  { value: "napoli", label: "Napoli" },
-  { value: "sicilia", label: "Palermo" },
   { value: "national", label: "Nazionale" },
 ];
 
@@ -55,7 +53,7 @@ function SermoniIndex() {
         .from("resources")
         .select("*")
         .eq("published", true)
-        .eq("type", "sermon")
+        .in("type", ["sermon", "video"])
         .order("published_at", { ascending: false });
       if (!active) return;
       if (error) console.error(error);
