@@ -5,12 +5,15 @@
  * published rows are returned, which is exactly what we want indexed.
  *
  * Runs at build time via the `prebuild` npm script. If Supabase env vars
- * are missing (e.g. local dev), the script writes an empty but valid
- * sitemap and exits 0 so the build never fails.
+ * are missing (e.g. local dev), the script preserves an existing sitemap
+ * or writes an empty but valid sitemap and exits 0 so the build never fails.
  */
-import { writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 const OUT_PATH = resolve(
