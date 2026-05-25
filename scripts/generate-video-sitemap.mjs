@@ -5,12 +5,15 @@
  * published rows are returned, which is exactly what we want indexed.
  *
  * Runs at build time via the `prebuild` npm script. If Supabase env vars
- * are missing (e.g. local dev), the script writes an empty but valid
- * sitemap and exits 0 so the build never fails.
+ * are missing (e.g. local dev), the script preserves an existing sitemap
+ * or writes an empty but valid sitemap and exits 0 so the build never fails.
  */
-import { writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 const OUT_PATH = resolve(
@@ -43,7 +46,32 @@ function getYouTubeId(url) {
   return m ? m[1] : null;
 }
 
+function sanitizeSlug(slug) {
+  // Remove backticks and control characters that break URLs / XML
+  return String(slug)
+    .replace(/`/g, "")
+    .replace(/[\x00-\x1f\x7f]/g, "");
+}
+
+function hasExistingUrls() {
+  if (!existsSync(OUT_PATH)) return false;
+  try {
+    const content = readFileSync(OUT_PATH, "utf8");
+    return content.includes("<url>");
+  } catch {
+    return false;
+  }
+}
+
 function writeSitemap(entries) {
+  if (entries.length === 0) {
+    if (hasExistingUrls()) {
+      console.log("⚠ No video entries found — preserving existing video-sitemap.xml");
+      return;
+    }
+    console.warn("⚠ No video entries found — writing empty video-sitemap.xml");
+  }
+
   const urls = entries
     .map((e) => {
       const pageUrl = `${SITE_URL}/${e.basePath}/${e.slug}`;
@@ -81,9 +109,7 @@ ${urls}
 
 async function main() {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    console.warn(
-      "⚠ Supabase env not set — writing empty video-sitemap.xml so build continues.",
-    );
+    console.warn("⚠ Supabase env not set");
     writeSitemap([]);
     return;
   }
@@ -106,7 +132,7 @@ async function main() {
     const id = getYouTubeId(r.media_url);
     if (!id) continue;
     entries.push({
-      slug: r.slug,
+      slug: sanitizeSlug(r.slug),
       title: r.title,
       description: r.description,
       videoId: id,

@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
+    <loc>https://chiesadicristoitalia.it/sermoni/presenza-potenza-spirito-santo</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/36FDh_7AYkk/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>La presenza e la potenza dello Spirito Santo</video:title>
+      <video:description>Cosa significa vivere guidati dallo Spirito Santo? La storia di Stefano in Atti 6 e 7 ci mostra una fede animata dalla presenza di Dio in noi: una connessione potente e insostituibile che trasforma tutta la vita.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/36FDh_7AYkk</video:player_loc>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-05-24T12:00:00+00:00</video:publication_date>
+    </video:video>
+  </url>
+  <url>
     <loc>https://chiesadicristoitalia.it/risorse/finalmente-libero</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/g4XASEsg6C4/maxresdefault.jpg</video:thumbnail_loc>
@@ -98,7 +110,7 @@
     </video:video>
   </url>
   <url>
-    <loc>https://chiesadicristoitalia.it/sermoni/‎la-potenza-del-vangelo-quando-gesu-guarisce`</loc>
+    <loc>https://chiesadicristoitalia.it/sermoni/‎la-potenza-del-vangelo-quando-gesu-guarisce</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/evTO3kNH4z0/maxresdefault.jpg</video:thumbnail_loc>
       <video:title>La Potenza del Vangelo | Quando Gesù Guarisce </video:title>
