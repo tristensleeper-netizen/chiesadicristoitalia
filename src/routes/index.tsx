@@ -42,7 +42,7 @@ const churchJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo in Italia — Milano e Bologna" },
+      { title: "Chiesa di Cristo in Italia | Milano e Bologna" },
       {
         name: "description",
         content:
