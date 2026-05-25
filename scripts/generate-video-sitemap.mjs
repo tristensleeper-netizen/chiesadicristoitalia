@@ -64,7 +64,7 @@ function hasExistingUrls() {
 }
 
 function writeSitemap(entries) {
-  if (entries.length === 1) {
+  if (entries.length === 0) {
     if (hasExistingUrls()) {
       console.log("⚠ No video entries found — preserving existing video-sitemap.xml");
       return;
