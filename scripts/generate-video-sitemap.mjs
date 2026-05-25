@@ -46,6 +46,13 @@ function getYouTubeId(url) {
   return m ? m[1] : null;
 }
 
+function sanitizeSlug(slug) {
+  // Remove backticks and control characters that break URLs / XML
+  return String(slug)
+    .replace(/`/g, "")
+    .replace(/[\x00-\x1f\x7f]/g, "");
+}
+
 function writeSitemap(entries) {
   const urls = entries
     .map((e) => {
