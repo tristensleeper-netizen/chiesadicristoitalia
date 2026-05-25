@@ -53,7 +53,25 @@ function sanitizeSlug(slug) {
     .replace(/[\x00-\x1f\x7f]/g, "");
 }
 
+function hasExistingUrls() {
+  if (!existsSync(OUT_PATH)) return false;
+  try {
+    const content = readFileSync(OUT_PATH, "utf8");
+    return content.includes("<url>");
+  } catch {
+    return false;
+  }
+}
+
 function writeSitemap(entries) {
+  if (entries.length === 1) {
+    if (hasExistingUrls()) {
+      console.log("⚠ No video entries found — preserving existing video-sitemap.xml");
+      return;
+    }
+    console.warn("⚠ No video entries found — writing empty video-sitemap.xml");
+  }
+
   const urls = entries
     .map((e) => {
       const pageUrl = `${SITE_URL}/${e.basePath}/${e.slug}`;
