@@ -109,9 +109,7 @@ ${urls}
 
 async function main() {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    console.warn(
-      "⚠ Supabase env not set — writing empty video-sitemap.xml so build continues.",
-    );
+    console.warn("⚠ Supabase env not set");
     writeSitemap([]);
     return;
   }
