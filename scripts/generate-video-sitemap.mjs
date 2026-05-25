@@ -132,7 +132,7 @@ async function main() {
     const id = getYouTubeId(r.media_url);
     if (!id) continue;
     entries.push({
-      slug: r.slug,
+      slug: sanitizeSlug(r.slug),
       title: r.title,
       description: r.description,
       videoId: id,
