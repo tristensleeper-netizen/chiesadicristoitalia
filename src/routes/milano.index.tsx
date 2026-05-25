@@ -53,6 +53,47 @@ const MILANO_PHOTOS = [
   { src: heroItalia, alt: "Comunità italiana" },
 ];
 
+const milanoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Church",
+  "name": "Chiesa di Cristo di Milano",
+  "alternateName": "Church of Christ Milan",
+  "url": "https://chiesadicristoitalia.it/milano",
+  "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 in Corso di Porta Vigentina 15a. Non denominazionale, autonoma, fondata esclusivamente sulle Scritture.",
+  "image": "https://chiesadicristoitalia.it/og-milano.jpg",
+  "email": "info@chiesadicristoitalia.it",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Corso di Porta Vigentina 15a",
+    "addressLocality": "Milano",
+    "postalCode": "20122",
+    "addressRegion": "MI",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 45.4528,
+    "longitude": 9.1909
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "10:30",
+      "closes": "12:30"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/chiesadicristodimilano",
+    "https://www.youtube.com/@ChiesadiCristoMilano"
+  ],
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Chiesa di Cristo in Italia",
+    "url": "https://chiesadicristoitalia.it"
+  }
+};
+
 export const Route = createFileRoute("/milano/")({
   head: () => ({
     meta: [
@@ -72,6 +113,12 @@ export const Route = createFileRoute("/milano/")({
       { name: "twitter:image", content: heroMilano },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(milanoJsonLd),
+      },
+    ],
   }),
   component: MilanoHome,
 });

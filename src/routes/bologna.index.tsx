@@ -12,6 +12,32 @@ import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 import heroItalia from "@/assets/hero-italia.jpg";
 
+const bolognaJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Church",
+  "name": "Chiesa di Cristo di Bologna",
+  "alternateName": "Church of Christ Bologna",
+  "url": "https://chiesadicristoitalia.it/bologna",
+  "description": "Una chiesa cristiana basata sulla Bibbia in fondazione a Bologna. Lancio previsto settembre 2026. Studi biblici e gruppo fondatore attivi da subito.",
+  "email": "info@chiesadicristoitalia.it",
+  "areaServed": {
+    "@type": "City",
+    "name": "Bologna",
+    "containedInPlace": {
+      "@type": "State",
+      "name": "Emilia-Romagna"
+    }
+  },
+  "sameAs": [
+    "https://www.instagram.com/chiesadicristodibologna"
+  ],
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Chiesa di Cristo in Italia",
+    "url": "https://chiesadicristoitalia.it"
+  }
+};
+
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
@@ -32,6 +58,12 @@ export const Route = createFileRoute("/bologna/")({
       { name: "twitter:image", content: heroBologna },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(bolognaJsonLd),
+      },
+    ],
   }),
   component: BolognaHome,
 });
