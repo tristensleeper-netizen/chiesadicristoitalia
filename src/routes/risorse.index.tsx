@@ -319,35 +319,35 @@ function DevotionalCard({ d }: { d: Devotional }) {
     <Link
       to="/devozionale/$slug"
       params={{ slug: d.slug }}
-      className="group rounded-2xl border border-border bg-card overflow-hidden transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+      className="group relative rounded-2xl overflow-hidden border border-[rgba(107,76,53,0.2)] bg-[linear-gradient(135deg,#f7ede2_0%,#ead9c2_60%,#d9c19f_100%)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
     >
-      <div className="relative aspect-video bg-[linear-gradient(135deg,#1f3a55_0%,#2a4a6e_50%,#3a5f8a_100%)] flex items-center justify-center">
-        <div className="text-center text-white/90 px-6">
-          {d.scripture_ref && (
-            <p className="font-display italic text-base md:text-lg">
-              {d.scripture_ref}
-            </p>
-          )}
-        </div>
-      </div>
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
+      <div className="p-7 md:p-8 min-h-[260px] flex flex-col">
+        <div className="flex items-start justify-between gap-3 mb-5">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5.5A1.5 1.5 0 015.5 4H19v15H5.5A1.5 1.5 0 014 17.5v-12z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 17.5A1.5 1.5 0 015.5 16H19v3H5.5A1.5 1.5 0 014 17.5z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6M9 11h6" />
+            </svg>
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2.5 py-1 rounded-full bg-white/60 border border-[rgba(107,76,53,0.15)]">
             Devozionale
           </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            Settimanale
-          </span>
         </div>
-        <h3 className="font-display text-xl text-foreground leading-tight group-hover:text-primary transition-colors">
+        <h3 className="font-display text-2xl text-foreground leading-tight group-hover:text-primary transition-colors">
           {d.title}
         </h3>
+        {d.scripture_ref && (
+          <p className="mt-2 font-display italic text-primary/80 text-sm">
+            {d.scripture_ref}
+          </p>
+        )}
         {d.body && (
-          <p className="mt-2 text-sm text-muted-foreground line-clamp-2 whitespace-pre-line">
+          <p className="mt-3 text-sm text-foreground/70 line-clamp-2 whitespace-pre-line">
             {d.body}
           </p>
         )}
-        <p className="mt-4 text-xs text-muted-foreground">
+        <p className="mt-auto pt-5 text-xs text-foreground/60">
           Settimana del {formatItalianDate(d.week_of)}
           {d.author && ` · ${d.author}`}
         </p>
@@ -355,3 +355,4 @@ function DevotionalCard({ d }: { d: Devotional }) {
     </Link>
   );
 }
+
