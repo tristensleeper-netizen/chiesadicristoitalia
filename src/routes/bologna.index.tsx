@@ -87,10 +87,6 @@ function BolognaHome() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(bolognaJsonLd) }}
-      />
       <PageHero
         slot="bologna.hero"
         image={heroImage}

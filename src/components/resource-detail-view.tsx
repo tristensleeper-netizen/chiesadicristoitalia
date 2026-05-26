@@ -37,12 +37,6 @@ export function ResourceDetailView({
   return (
     <article className="pt-32 pb-20">
       <div className="container-narrow">
-        {jsonLd && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-        )}
         <Link
           to={back.to}
           className="inline-block mb-8 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
