@@ -169,6 +169,38 @@ export function buildResourceHead({
     meta.push({ name: "twitter:image", content: thumb });
   }
 
+  const jsonLd = buildResourceJsonLd({ resource: r, slug, basePath, siteUrl });
+
+  return {
+    meta,
+    links: [{ rel: "canonical", href: canonical }],
+    scripts: jsonLd
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(jsonLd),
+          },
+        ]
+      : [],
+  };
+}
+
+export function buildResourceJsonLd({
+  resource,
+  slug,
+  basePath,
+  siteUrl,
+}: {
+  resource: Resource;
+  slug: string;
+  basePath: "/risorse" | "/sermoni";
+  siteUrl: string;
+}): Record<string, unknown> {
+  const r = resource;
+  const canonical = `${siteUrl}${basePath}/${slug}`;
+  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
+  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
+  const desc = r.description ?? `${r.title} — risorsa cristiana dalla Chiesa di Cristo Italia.`;
   const isVideo = r.type === "video" || r.type === "sermon";
   const jsonLd: Record<string, unknown> = isVideo
     ? {
@@ -218,15 +250,6 @@ export function buildResourceHead({
         },
       };
   if (!isVideo && thumb) jsonLd.thumbnailUrl = thumb;
-
-  return {
-    meta,
-    links: [{ rel: "canonical", href: canonical }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(jsonLd),
-      },
-    ],
-  };
+  return jsonLd;
 }
+
