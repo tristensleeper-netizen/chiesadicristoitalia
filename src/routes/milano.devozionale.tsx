@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import daysData from "@/lib/isaia-days.json";
+import { CourseShell, type CourseDay } from "@/components/course-shell";
+
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 
@@ -177,211 +178,97 @@ function SectionCard({
   );
 }
 
-function IntroAccordion() {
-  const [open, setOpen] = useState<number | null>(null);
+function IntroContent() {
   return (
-    <div className="mb-12">
-      <p className="eyebrow mb-4">Prima di iniziare</p>
-      <div className="flex flex-wrap gap-2">
-        {INTRO_SECTIONS.map((s, i) => {
-          const isOpen = open === i;
-          return (
-            <div key={i} className="w-full">
-              <button
-                onClick={() => setOpen(isOpen ? null : i)}
-                aria-expanded={isOpen}
-                className={[
-                  "w-full flex items-center justify-between gap-3 px-5 py-3 rounded-xl border text-left transition-all",
-                  isOpen
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-card border-border text-foreground hover:border-primary/40 hover:bg-[#f7ede2]",
-                ].join(" ")}
-              >
-                <span className="font-medium text-sm md:text-base">{s.title}</span>
-                <span
-                  className={[
-                    "text-lg leading-none transition-transform duration-200",
-                    isOpen ? "rotate-45" : "",
-                  ].join(" ")}
-                  aria-hidden
-                >
-                  +
-                </span>
-              </button>
-              <div
-                className={[
-                  "grid transition-all duration-300 ease-out",
-                  isOpen ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0",
-                ].join(" ")}
-              >
-                <div className="overflow-hidden">
-                  <div className="rounded-2xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-6 md:p-7">
-                    <Paragraphs text={s.body} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+    <div className="space-y-6">
+      {INTRO_SECTIONS.map((s, i) => (
+        <section
+          key={i}
+          className="rounded-2xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-6 md:p-8"
+        >
+          <h2 className="font-display text-2xl md:text-3xl text-primary mb-4">{s.title}</h2>
+          <Paragraphs text={s.body} />
+        </section>
+      ))}
     </div>
   );
 }
 
-function DevozionalePage() {
-  const [selected, setSelected] = useState(0);
-  const day = DAYS[selected];
-
-  const openDay = (idx: number) => {
-    setSelected(idx);
-    if (typeof window !== "undefined") {
-      requestAnimationFrame(() => {
-        document
-          .getElementById("devozionale-contenuto")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
-  };
-
+function ChapterContent({ day }: { day: Day }) {
   return (
     <>
-      {/* Breadcrumb */}
-      <div className="border-b border-border bg-background">
-        <div className="container-prose py-4 flex items-center gap-2 text-sm text-muted-foreground">
-          <Link to="/milano/" className="hover:text-primary transition">
-            Milano
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">Lettura Devozionale</span>
-        </div>
-      </div>
-
-      <div className="container-prose py-12 md:py-20">
-        {/* HEADER */}
-        <div className="mb-12 max-w-2xl">
-          <p className="eyebrow mb-3">Serie devozionale</p>
-          <h1 className="font-display text-5xl md:text-6xl leading-tight">
-            Studiare Isaia insieme.
-          </h1>
-          <p className="mt-5 text-foreground/70 leading-relaxed text-lg">
-            Un percorso attraverso il libro del profeta Isaia: 66 giorni, 66 capitoli — un capitolo
-            per giorno. Lo scopo è quello di aiutarti a leggere, comprendere e applicare la Bibbia
-            alla tua vita, attraverso una serie di brevi studi quotidiani sul libro del profeta
-            Isaia.
-          </p>
-          <div className="mt-6 rounded-2xl bg-[#f7ede2] border border-[rgba(107,76,53,0.15)] p-6">
-            <p className="text-sm font-medium text-primary mb-1">Come usare questa serie</p>
-            <p className="text-foreground/70 text-sm leading-relaxed">
-              Scegli un capitolo qui sotto, leggi l'intero passaggio nella tua Bibbia e poi torna
-              qui per esplorare le domande e le note di studio.
-            </p>
-          </div>
-        </div>
-
-        {/* INTRO ACCORDION */}
-        <IntroAccordion />
-
-        {/* GRIGLIA 66 CAPITOLI */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-            <p className="eyebrow">66 capitoli</p>
-            <p className="text-xs text-muted-foreground">Selezionato: Isaia {day.chapter}</p>
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {DAYS.map((d, i) => {
-              const isSel = i === selected;
-              return (
-                <button
-                  key={i}
-                  onClick={() => openDay(i)}
-                  aria-label={`Isaia ${d.chapter}`}
-                  className={[
-                    "min-w-[44px] h-9 px-2 rounded-md border text-xs font-medium transition-all select-none",
-                    "hover:scale-105 active:scale-95 cursor-pointer",
-                    isSel
-                      ? "bg-primary text-primary-foreground border-primary shadow"
-                      : "bg-card border-border text-foreground hover:border-primary/40 hover:bg-[#f7ede2]",
-                  ].join(" ")}
-                >
-                  Is {d.chapter}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* CONTENUTO */}
-        <div id="devozionale-contenuto" className="space-y-8 scroll-mt-24">
-          {/* Intestazione capitolo */}
-          <div className="rounded-3xl bg-primary p-8 md:p-12 text-white">
-            <p className="text-xs uppercase tracking-widest text-white/60 mb-3">{day.ref_label}</p>
-            <h2 className="font-display text-3xl md:text-5xl leading-tight">{day.title}</h2>
-          </div>
-
-          {day.contesto && (
-            <SectionCard title="Contesto">
-              <Paragraphs text={day.contesto} />
-            </SectionCard>
-          )}
-
-          {day.domande_testo.length > 0 && (
-            <SectionCard title="Domande sul testo">
-              <ul className="space-y-4">
-                {day.domande_testo.map((q, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="shrink-0 mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                      {i + 1}
-                    </span>
-                    <p className="text-foreground/80 leading-relaxed">{q}</p>
-                  </li>
-                ))}
-              </ul>
-            </SectionCard>
-          )}
-
-          {day.domande_noi.length > 0 && (
-            <SectionCard title="Domande per noi">
-              <ul className="space-y-4">
-                {day.domande_noi.map((q, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="shrink-0 mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-primary text-xs font-semibold">
-                      {i + 1}
-                    </span>
-                    <p className="text-foreground/80 leading-relaxed">{q}</p>
-                  </li>
-                ))}
-              </ul>
-            </SectionCard>
-          )}
-
-          {day.note && (
-            <SectionCard title="Ulteriori note">
-              <Paragraphs text={day.note} />
-            </SectionCard>
-          )}
-
-          {/* Navigazione */}
-          <div className="flex items-center justify-between pt-4 border-t border-border">
-            <button
-              onClick={() => openDay(Math.max(0, selected - 1))}
-              disabled={selected === 0}
-              className="inline-flex items-center gap-2 text-sm text-primary hover:underline disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              ← Capitolo precedente
-            </button>
-            <span className="text-xs text-muted-foreground">
-              Isaia {day.chapter} · {selected + 1} / {DAYS.length}
-            </span>
-            <button
-              onClick={() => openDay(Math.min(DAYS.length - 1, selected + 1))}
-              disabled={selected === DAYS.length - 1}
-              className="inline-flex items-center gap-2 text-sm text-primary hover:underline disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Capitolo successivo →
-            </button>
-          </div>
-        </div>
-      </div>
+      {day.contesto && (
+        <SectionCard title="Contesto">
+          <Paragraphs text={day.contesto} />
+        </SectionCard>
+      )}
+      {day.domande_testo.length > 0 && (
+        <SectionCard title="Domande sul testo">
+          <ul className="space-y-4">
+            {day.domande_testo.map((q, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="shrink-0 mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                  {i + 1}
+                </span>
+                <p className="text-foreground/80 leading-relaxed">{q}</p>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
+      {day.domande_noi.length > 0 && (
+        <SectionCard title="Domande per noi">
+          <ul className="space-y-4">
+            {day.domande_noi.map((q, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="shrink-0 mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-primary text-xs font-semibold">
+                  {i + 1}
+                </span>
+                <p className="text-foreground/80 leading-relaxed">{q}</p>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      )}
+      {day.note && (
+        <SectionCard title="Ulteriori note">
+          <Paragraphs text={day.note} />
+        </SectionCard>
+      )}
     </>
   );
 }
+
+function DevozionalePage() {
+  const courseDays: CourseDay[] = [
+    {
+      dayNumber: 0,
+      label: "Introduzione",
+      title: "Introduzione a Isaia",
+      refLabel: "Prima di iniziare",
+      content: <IntroContent />,
+    },
+    ...DAYS.map((d) => ({
+      dayNumber: d.chapter,
+      label: `Isaia ${d.chapter}`,
+      title: d.title,
+      refLabel: d.ref_label,
+      content: <ChapterContent day={d} />,
+    })),
+  ];
+
+  return (
+    <CourseShell
+      courseId="isaia"
+      courseTitle="Studiare Isaia insieme"
+      courseSubtitle="Un percorso attraverso il libro del profeta Isaia: 67 giorni — un'introduzione e 66 capitoli, uno per giorno. Leggi, comprendi e applica la Parola alla tua vita."
+      breadcrumb={[
+        { label: "Milano", to: "/milano/" },
+        { label: "Devozionale Isaia" },
+      ]}
+      readMinutes={5}
+      days={courseDays}
+    />
+  );
+}
+
