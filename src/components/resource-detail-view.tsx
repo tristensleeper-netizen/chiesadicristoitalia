@@ -27,10 +27,22 @@ export function ResourceDetailView({
   const isEmbeddable =
     embedUrl && (isYouTubeUrl(embedUrl) || isVimeoUrl(embedUrl) || isSpotifyUrl(embedUrl));
   const isPdf = r.type === "pdf" && r.media_url;
+  const jsonLd = buildResourceJsonLd({
+    resource: r,
+    slug: r.slug,
+    basePath: back.to,
+    siteUrl: "https://chiesadicristoitalia.it",
+  });
 
   return (
     <article className="pt-32 pb-20">
       <div className="container-narrow">
+        {jsonLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        )}
         <Link
           to={back.to}
           className="inline-block mb-8 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
@@ -157,6 +169,38 @@ export function buildResourceHead({
     meta.push({ name: "twitter:image", content: thumb });
   }
 
+  const jsonLd = buildResourceJsonLd({ resource: r, slug, basePath, siteUrl });
+
+  return {
+    meta,
+    links: [{ rel: "canonical", href: canonical }],
+    scripts: jsonLd
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(jsonLd),
+          },
+        ]
+      : [],
+  };
+}
+
+export function buildResourceJsonLd({
+  resource,
+  slug,
+  basePath,
+  siteUrl,
+}: {
+  resource: Resource;
+  slug: string;
+  basePath: "/risorse" | "/sermoni";
+  siteUrl: string;
+}): Record<string, unknown> {
+  const r = resource;
+  const canonical = `${siteUrl}${basePath}/${slug}`;
+  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
+  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : undefined;
+  const desc = r.description ?? `${r.title} — risorsa cristiana dalla Chiesa di Cristo Italia.`;
   const isVideo = r.type === "video" || r.type === "sermon";
   const jsonLd: Record<string, unknown> = isVideo
     ? {
@@ -206,15 +250,6 @@ export function buildResourceHead({
         },
       };
   if (!isVideo && thumb) jsonLd.thumbnailUrl = thumb;
-
-  return {
-    meta,
-    links: [{ rel: "canonical", href: canonical }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(jsonLd),
-      },
-    ],
-  };
+  return jsonLd;
 }
+
