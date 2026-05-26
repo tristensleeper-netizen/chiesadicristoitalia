@@ -58,11 +58,69 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
+const SCHEMAS: Record<string, object> = {
+  "/": {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Chiesa di Cristo in Italia",
+    "alternateName": "Church of Christ Italy",
+    "url": "https://chiesadicristoitalia.it",
+    "description": "Una chiesa cristiana basata sulla Bibbia, del movimento di restaurazione, con comunità a Milano e Bologna.",
+    "sameAs": ["https://www.instagram.com/chiesadicristodimilano"],
+  },
+  "/milano": {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Chiesa di Cristo di Milano",
+    "alternateName": "Church of Christ Milan",
+    "url": "https://chiesadicristoitalia.it/milano",
+    "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 in Corso di Porta Vigentina 15a.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Corso di Porta Vigentina 15a",
+      "addressLocality": "Milano",
+      "postalCode": "20122",
+      "addressRegion": "MI",
+      "addressCountry": "IT",
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 45.4528, "longitude": 9.1909 },
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:30", "closes": "12:30" }],
+    "email": "info@chiesadicristoitalia.it",
+    "sameAs": ["https://www.instagram.com/chiesadicristodimilano", "https://www.youtube.com/@ChiesadiCristoMilano"],
+    "parentOrganization": { "@type": "Organization", "name": "Chiesa di Cristo in Italia", "url": "https://chiesadicristoitalia.it" },
+  },
+  "/bologna": {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Chiesa di Cristo di Bologna",
+    "alternateName": "Church of Christ Bologna",
+    "url": "https://chiesadicristoitalia.it/bologna",
+    "description": "Una chiesa cristiana basata sulla Bibbia in fondazione a Bologna. Lancio previsto settembre 2026.",
+    "email": "info@chiesadicristoitalia.it",
+    "areaServed": { "@type": "City", "name": "Bologna" },
+    "sameAs": ["https://www.instagram.com/chiesadicristodibologna"],
+    "parentOrganization": { "@type": "Organization", "name": "Chiesa di Cristo in Italia", "url": "https://chiesadicristoitalia.it" },
+  },
+};
+
+function getJsonLd(pathname: string): object {
+  const key = Object.keys(SCHEMAS)
+    .filter((k) => pathname === k || pathname.startsWith(k + "/"))
+    .sort((a, b) => b.length - a.length)[0] ?? "/";
+  return SCHEMAS[key];
+}
+
 function RootShell({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const jsonLd = getJsonLd(location.pathname);
   return (
     <html lang="it">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {children}
@@ -71,6 +129,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
 
 function RootComponent() {
   const location = useLocation();
