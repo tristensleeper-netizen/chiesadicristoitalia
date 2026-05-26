@@ -111,19 +111,25 @@ function getJsonLd(pathname: string): object {
   return SCHEMAS[key];
 }
 
+function JsonLdInjector() {
+  const pathname = useLocation().pathname;
+  React.useEffect(() => {
+    const existing = document.querySelector('script[data-jsonld="route"]');
+    if (existing) existing.remove();
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.setAttribute("data-jsonld", "route");
+    el.textContent = JSON.stringify(getJsonLd(pathname));
+    document.head.appendChild(el);
+  }, [pathname]);
+  return null;
+}
+
 function RootShell({ children }: { children: React.ReactNode }) {
-  // useRouterState works in SSR context unlike useLocation
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const jsonLd = getJsonLd(pathname);
   return (
-    <html lang="it" suppressHydrationWarning>
+    <html lang="it">
       <head>
         <HeadContent />
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
       </head>
       <body>
         {children}
