@@ -151,6 +151,7 @@ function RootComponent() {
 
   return (
     <div className={themeClass + " min-h-screen flex flex-col bg-background text-foreground"}>
+      <JsonLdInjector />
       <SiteHeader />
       <main className="flex-1">
         <Outlet />
