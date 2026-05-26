@@ -14,6 +14,7 @@ import {
 import { PageHero } from "@/components/page-hero";
 import { useSlotImage } from "@/lib/use-slot-image";
 import bibleStudy from "@/assets/bible-study.jpg";
+import { useCourseProgress } from "@/components/course-shell";
 
 export const Route = createFileRoute("/risorse/")({
   head: () => ({
@@ -120,6 +121,8 @@ function ResourcesIndex() {
 
   const heroImg = useSlotImage("risorse.hero", bibleStudy);
 
+  const showIsaiahCard = (typeFilter === "all" || typeFilter === "devotional") && (cityFilter === "all" || cityFilter === "national");
+
   return (
     <>
       <PageHero
@@ -223,6 +226,7 @@ function ResourcesIndex() {
           </p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {showIsaiahCard && <IsaiahCourseCard />}
             {filtered.map((item) =>
               item.kind === "resource" ? (
                 <ResourceCard key={`r-${item.r.id}`} r={item.r} />
@@ -351,6 +355,56 @@ function DevotionalCard({ d }: { d: Devotional }) {
           Settimana del {formatItalianDate(d.week_of)}
           {d.author && ` · ${d.author}`}
         </p>
+      </div>
+    </Link>
+  );
+}
+
+function IsaiahCourseCard() {
+  const { pct, completed, total } = useCourseProgress("isaia", 67);
+  const hasStarted = completed > 0;
+  return (
+    <Link
+      to="/milano/devozionale"
+      className="group relative rounded-2xl overflow-hidden border border-[rgba(107,76,53,0.2)] bg-[linear-gradient(135deg,#f7ede2_0%,#ead9c2_60%,#d9c19f_100%)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+    >
+      <div className="p-7 md:p-8 min-h-[260px] flex flex-col">
+        <div className="flex items-start justify-between gap-3 mb-5">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5.5A1.5 1.5 0 015.5 4H19v15H5.5A1.5 1.5 0 014 17.5v-12z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 17.5A1.5 1.5 0 015.5 16H19v3H5.5A1.5 1.5 0 014 17.5z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6M9 11h6" />
+            </svg>
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2.5 py-1 rounded-full bg-white/60 border border-[rgba(107,76,53,0.15)]">
+            Corso · 67 giorni
+          </span>
+        </div>
+        <h3 className="font-display text-2xl text-foreground leading-tight group-hover:text-primary transition-colors">
+          Isaia — Il Signore è salvezza
+        </h3>
+        <p className="mt-2 font-display italic text-primary/80 text-sm">
+          «Non temere, perché io sono con te» — Isaia 41:10
+        </p>
+        <p className="mt-3 text-sm text-foreground/70 line-clamp-2">
+          66 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
+        </p>
+        {hasStarted ? (
+          <div className="mt-auto pt-5">
+            <div className="flex items-center justify-between mb-1.5">
+              <p className="text-xs text-foreground/60">{completed} / {total} giorni completati</p>
+              <p className="text-xs text-primary font-medium">{pct}%</p>
+            </div>
+            <div className="h-1.5 rounded-full bg-black/10 overflow-hidden">
+              <div className="h-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        ) : (
+          <p className="mt-auto pt-5 text-xs font-medium text-primary">
+            Inizia da Giorno 0 · Introduzione →
+          </p>
+        )}
       </div>
     </Link>
   );
