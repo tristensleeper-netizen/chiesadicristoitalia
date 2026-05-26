@@ -220,11 +220,7 @@ function ResourcesIndex() {
 
         {loading ? (
           <p className="text-center py-20 text-muted-foreground">Caricamento risorse…</p>
-        ) : filtered.length === 0 ? (
-          <p className="text-center py-20 text-muted-foreground">
-            Nessuna risorsa trovata con questi filtri.
-          </p>
-        ) : (
+        ) : (showIsaiahCard || filtered.length > 0) ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {showIsaiahCard && <IsaiahCourseCard />}
             {filtered.map((item) =>
@@ -235,6 +231,10 @@ function ResourcesIndex() {
               ),
             )}
           </div>
+        ) : (
+          <p className="text-center py-20 text-muted-foreground">
+            Nessuna risorsa trovata con questi filtri.
+          </p>
         )}
       </section>
     </>
