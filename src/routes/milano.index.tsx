@@ -147,10 +147,6 @@ function MilanoHome() {
   ];
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(milanoJsonLd) }}
-      />
       <PageHero
         slot="milano.hero"
         image={heroImage}
