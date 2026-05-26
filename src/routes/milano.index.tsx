@@ -116,7 +116,7 @@ export const Route = createFileRoute("/milano/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(milanoJsonLd),
+        innerHTML: JSON.stringify(milanoJsonLd),
       },
     ],
   }),
