@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import daysData from "@/lib/isaia-days.json";
+import { CourseShell, type CourseDay } from "@/components/course-shell";
+
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 
