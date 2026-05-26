@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation, useRouterState } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -111,8 +111,9 @@ function getJsonLd(pathname: string): object {
 }
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
-  const jsonLd = getJsonLd(location.pathname);
+  // useRouterState works in SSR context unlike useLocation
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const jsonLd = getJsonLd(pathname);
   return (
     <html lang="it">
       <head>
