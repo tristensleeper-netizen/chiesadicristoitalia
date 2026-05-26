@@ -61,7 +61,7 @@ export const Route = createFileRoute("/bologna/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(bolognaJsonLd),
+        innerHTML: JSON.stringify(bolognaJsonLd),
       },
     ],
   }),
