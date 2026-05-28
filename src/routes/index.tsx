@@ -86,6 +86,15 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
+      {/* Contextual intro for the featured sermon popup */}
+      <section className="container-prose pt-10 md:pt-14 text-center">
+        <p className="eyebrow mb-3">Sermone in evidenza</p>
+        <p className="text-foreground/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          Ogni settimana condividiamo una predicazione dalla nostra comunità —
+          un momento per fermarsi, ascoltare e lasciarsi parlare dalla Parola.
+        </p>
+      </section>
+
       <VideoPopup
         videoUrl="https://youtu.be/36FDh_7AYkk"
         title="La presenza e la potenza dello Spirito Santo"
@@ -93,6 +102,7 @@ function HomePage() {
         duration="Sermone"
         slug="presenza-potenza-spirito-santo"
       />
+
 
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
       <section className="relative overflow-hidden">
