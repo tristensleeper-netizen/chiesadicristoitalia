@@ -352,7 +352,7 @@ function CityCard({
   return (
     <Link
       to={to}
-      className="group relative block overflow-hidden rounded-3xl aspect-[4/5] md:aspect-[5/6] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)] hover:-translate-y-1"
+      className="group relative block overflow-hidden rounded-3xl aspect-[3/2] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)] hover:-translate-y-1"
     >
       <img
         src={image}
