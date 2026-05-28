@@ -272,114 +272,53 @@ function HomePage() {
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <ul className="mx-auto max-w-4xl divide-y border-y border-primary/10">
             {[
               {
                 t: "Bibbia",
-                d: "La Parola di Dio guida ogni cosa che facciamo.",
-                icon: "book",
+                d: "La Parola di Dio guida ogni cosa che facciamo — la leggiamo insieme, la mettiamo in pratica, ci lasciamo correggere e consolare.",
                 verse: "«La tua parola è una lampada al mio piede e una luce sul mio cammino.» — Salmo 119:105",
               },
               {
                 t: "Comunità",
-                d: "Amicizie profonde, sincere e quotidiane.",
-                icon: "people",
+                d: "Amicizie profonde, sincere e quotidiane — non un evento la domenica, ma una famiglia spirituale che cammina insieme.",
                 verse: "«Dove due o tre sono riuniti nel mio nome, lì sono io in mezzo a loro.» — Matteo 18:20",
               },
               {
                 t: "Missione",
-                d: "Portare speranza a chi ancora non l'ha trovata.",
-                icon: "mission",
+                d: "Portare speranza a chi ancora non l'ha trovata — nelle nostre città, nei nostri quartieri, con le persone che incontriamo ogni giorno.",
                 verse: "«Andate dunque e fate discepoli di tutte le nazioni.» — Matteo 28:19",
               },
             ].map((item, i) => (
-              <div
+              <li
                 key={item.t}
-                className="group relative overflow-hidden rounded-3xl p-10 md:p-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-primary/10 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.08)]"
-                style={{
-                  animationDelay: `${i * 120}ms`,
-                  background:
-                    "radial-gradient(ellipse at top left, color-mix(in oklab, var(--primary-soft) 70%, transparent), var(--card) 65%)",
-                }}
+                className="group grid grid-cols-[auto_1fr] gap-6 md:gap-12 items-start py-10 md:py-14"
               >
-                {/* Top decorative hairline */}
-                <div className="pointer-events-none absolute left-10 right-10 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-                {/* Animated gradient orb on hover */}
-                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-
-
-                <div className="relative">
-                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-[rgba(107,76,53,0.18)] bg-[#f7ede2] shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    {item.icon === "book" ? (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
-                        <line x1="12" y1="7" x2="12" y2="14" />
-                        <line x1="9" y1="10" x2="15" y2="10" />
-                      </svg>
-                    ) : item.icon === "people" ? (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                      </svg>
-                    ) : (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M7 20h10" />
-                        <path d="M10 20c5.5-2.5.8-6.4 3-10" />
-                        <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
-                        <path d="M14.1 6a7 7 0 0 1 1.1 4.1c-.8 0-1.6-.2-2.2-.7L14.1 6z" />
-                        <path d="M14.1 6c.8-1.3 2-2.5 4-3.5-.1 1.8-.9 3.3-2 4.3L14.1 6z" />
-                      </svg>
-                    )}
-                  </div>
-                  <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
-                  <p className="text-foreground/75 leading-relaxed">{item.d}</p>
-
-                  {/* Decorative separator */}
-                  <div className="h-px w-8 bg-primary/30 my-5" />
-
-                  {/* Scripture — always visible, editorial italic serif */}
+                <span
+                  aria-hidden="true"
+                  className="font-display text-6xl md:text-8xl leading-none text-primary/25 tabular-nums select-none transition-colors duration-500 group-hover:text-primary/45"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="font-display text-3xl md:text-4xl text-foreground mb-3">
+                    {item.t}
+                  </h3>
+                  <p className="text-foreground/75 leading-relaxed text-base md:text-lg max-w-2xl">
+                    {item.d}
+                  </p>
                   <p
-                    className="text-sm leading-relaxed text-foreground/60"
+                    className="mt-5 text-sm md:text-base leading-relaxed text-foreground/55 max-w-2xl"
                     style={{ fontStyle: "italic", fontFamily: 'Georgia, "Times New Roman", serif' }}
                   >
                     {item.verse}
                   </p>
-
-                  {/* Animated underline accent */}
-                  <div className="mt-6 h-0.5 w-10 bg-primary transition-all duration-500 group-hover:w-full" />
+                  <div className="mt-6 h-px w-10 bg-primary/60 transition-all duration-500 group-hover:w-24" />
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+
 
           {/* CTA strip */}
           <div className="mt-16 text-center">
