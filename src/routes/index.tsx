@@ -46,13 +46,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
+          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti. Vieni questa domenica.",
       },
       { property: "og:title", content: "Chiesa di Cristo in Italia" },
       {
         property: "og:description",
         content:
-          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
+          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/" },
     ],
@@ -86,6 +86,15 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
+      {/* Contextual intro for the featured sermon popup */}
+      <section className="container-prose pt-10 md:pt-14 text-center">
+        <p className="eyebrow mb-3">Sermone in evidenza</p>
+        <p className="text-foreground/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          Ogni settimana condividiamo una predicazione dalla nostra comunità —
+          un momento per fermarsi, ascoltare e lasciarsi parlare dalla Parola.
+        </p>
+      </section>
+
       <VideoPopup
         videoUrl="https://youtu.be/36FDh_7AYkk"
         title="La presenza e la potenza dello Spirito Santo"
@@ -93,6 +102,7 @@ function HomePage() {
         duration="Sermone"
         slug="presenza-potenza-spirito-santo"
       />
+
 
       {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
       <section className="relative overflow-hidden">
@@ -119,17 +129,23 @@ function HomePage() {
             </h2>
             <div className="mt-10 space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg text-left md:text-center">
               <p>
-                Siamo una <strong>chiesa cristiana</strong>: persone
-                semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e
-                vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
-                comunità locale è autonoma — quello che ci tiene insieme è la fede in
-                Gesù e l'amore reciproco.
+                Siamo una <strong>chiesa cristiana</strong> ed <strong>evangelica</strong>:
+                persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia
+                e vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
+                comunità locale è autonoma — quello che ci tiene insieme è la fede in Gesù,
+                l'amore reciproco e il desiderio di tornare alla semplicità della chiesa
+                del Nuovo Testamento. Che tu stia cercando una <strong>chiesa cristiana a
+                Milano</strong>, una <strong>chiesa cristiana a Bologna</strong>, o
+                semplicemente un luogo dove fare domande sincere su Dio, qui sei a casa.
               </p>
               <p>
-                La nostra fede si fonda esclusivamente sulla Bibbia. Crediamo nella
-                potenza della preghiera, nelle amicizie sincere che ci avvicinano a Dio
-                e in una comunità che accoglie chiunque, senza condizioni. Se vuoi
-                approfondire,{" "}
+                La nostra fede si fonda esclusivamente sulla <strong>Bibbia</strong>:
+                nessun credo umano, nessuna tradizione aggiunta, solo la Parola di Dio
+                come unica regola di fede e di vita. Crediamo nella potenza della
+                preghiera, nelle amicizie sincere che ci avvicinano a Dio e in una
+                comunità che accoglie chiunque, senza condizioni — qualunque sia la tua
+                storia, il tuo passato o il punto in cui ti trovi nel tuo cammino
+                spirituale. Se vuoi approfondire,{" "}
                 <Link to="/chi-siamo" className="text-primary underline-offset-4 hover:underline">
                   scopri chi siamo
                 </Link>
@@ -144,8 +160,24 @@ function HomePage() {
                 .
               </p>
               <p>
+                La <strong>Chiesa di Cristo</strong> nasce dal cosiddetto{" "}
+                <em>movimento di restaurazione</em>: un'aspirazione antica e sempre nuova
+                a essere semplicemente cristiani — come lo erano i discepoli nel primo
+                secolo, prima di etichette e divisioni. Per questo non ci chiamiamo con
+                il nome di un fondatore umano, non abbiamo una gerarchia centrale e non
+                seguiamo un manuale denominazionale: ogni domenica ci ritroviamo per
+                spezzare il pane insieme nella <strong>Cena del Signore</strong>,
+                pratichiamo il <strong>battesimo per immersione</strong> dei credenti
+                come risposta alla fede in Cristo, e cerchiamo di vivere il Vangelo nella
+                vita quotidiana, nel lavoro, nelle relazioni e nel servizio agli altri.
+              </p>
+              <p>
                 Se sei in Italia e stai cercando una famiglia spirituale, un posto dove
                 sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
+                Vieni così come sei: con le tue domande, i tuoi dubbi, le tue speranze.
+                Non devi vestirti in un certo modo, conoscere la Bibbia a memoria o aver
+                già capito tutto — basta il desiderio di incontrare Dio e di camminare
+                con altre persone che stanno facendo lo stesso percorso.
                 <br />
                 <span className="text-foreground/60 text-sm md:text-base italic">
                   English speakers are welcome — Sunday services are in Italian, with
@@ -240,114 +272,53 @@ function HomePage() {
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <ul className="mx-auto max-w-4xl divide-y border-y border-primary/10">
             {[
               {
                 t: "Bibbia",
-                d: "La Parola di Dio guida ogni cosa che facciamo.",
-                icon: "book",
+                d: "La Parola di Dio guida ogni cosa che facciamo — la leggiamo insieme, la mettiamo in pratica, ci lasciamo correggere e consolare.",
                 verse: "«La tua parola è una lampada al mio piede e una luce sul mio cammino.» — Salmo 119:105",
               },
               {
                 t: "Comunità",
-                d: "Amicizie profonde, sincere e quotidiane.",
-                icon: "people",
+                d: "Amicizie profonde, sincere e quotidiane — non un evento la domenica, ma una famiglia spirituale che cammina insieme.",
                 verse: "«Dove due o tre sono riuniti nel mio nome, lì sono io in mezzo a loro.» — Matteo 18:20",
               },
               {
                 t: "Missione",
-                d: "Portare speranza a chi ancora non l'ha trovata.",
-                icon: "mission",
+                d: "Portare speranza a chi ancora non l'ha trovata — nelle nostre città, nei nostri quartieri, con le persone che incontriamo ogni giorno.",
                 verse: "«Andate dunque e fate discepoli di tutte le nazioni.» — Matteo 28:19",
               },
             ].map((item, i) => (
-              <div
+              <li
                 key={item.t}
-                className="group relative overflow-hidden rounded-3xl p-10 md:p-12 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-default border border-primary/10 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.08)]"
-                style={{
-                  animationDelay: `${i * 120}ms`,
-                  background:
-                    "radial-gradient(ellipse at top left, color-mix(in oklab, var(--primary-soft) 70%, transparent), var(--card) 65%)",
-                }}
+                className="group grid grid-cols-[auto_1fr] gap-6 md:gap-12 items-start py-10 md:py-14"
               >
-                {/* Top decorative hairline */}
-                <div className="pointer-events-none absolute left-10 right-10 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-                {/* Animated gradient orb on hover */}
-                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-
-
-                <div className="relative">
-                  <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-[rgba(107,76,53,0.18)] bg-[#f7ede2] shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    {item.icon === "book" ? (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
-                        <line x1="12" y1="7" x2="12" y2="14" />
-                        <line x1="9" y1="10" x2="15" y2="10" />
-                      </svg>
-                    ) : item.icon === "people" ? (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                      </svg>
-                    ) : (
-                      <svg
-                        aria-hidden="true"
-                        className="h-8 w-8"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#a0623a"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M7 20h10" />
-                        <path d="M10 20c5.5-2.5.8-6.4 3-10" />
-                        <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
-                        <path d="M14.1 6a7 7 0 0 1 1.1 4.1c-.8 0-1.6-.2-2.2-.7L14.1 6z" />
-                        <path d="M14.1 6c.8-1.3 2-2.5 4-3.5-.1 1.8-.9 3.3-2 4.3L14.1 6z" />
-                      </svg>
-                    )}
-                  </div>
-                  <h3 className="font-display text-4xl text-primary mb-3">{item.t}</h3>
-                  <p className="text-foreground/75 leading-relaxed">{item.d}</p>
-
-                  {/* Decorative separator */}
-                  <div className="h-px w-8 bg-primary/30 my-5" />
-
-                  {/* Scripture — always visible, editorial italic serif */}
+                <span
+                  aria-hidden="true"
+                  className="font-display text-6xl md:text-8xl leading-none text-primary/25 tabular-nums select-none transition-colors duration-500 group-hover:text-primary/45"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="font-display text-3xl md:text-4xl text-foreground mb-3">
+                    {item.t}
+                  </h3>
+                  <p className="text-foreground/75 leading-relaxed text-base md:text-lg max-w-2xl">
+                    {item.d}
+                  </p>
                   <p
-                    className="text-sm leading-relaxed text-foreground/60"
+                    className="mt-5 text-sm md:text-base leading-relaxed text-foreground/55 max-w-2xl"
                     style={{ fontStyle: "italic", fontFamily: 'Georgia, "Times New Roman", serif' }}
                   >
                     {item.verse}
                   </p>
-
-                  {/* Animated underline accent */}
-                  <div className="mt-6 h-0.5 w-10 bg-primary transition-all duration-500 group-hover:w-full" />
+                  <div className="mt-6 h-px w-10 bg-primary/60 transition-all duration-500 group-hover:w-24" />
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+
 
           {/* CTA strip */}
           <div className="mt-16 text-center">
