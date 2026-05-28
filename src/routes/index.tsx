@@ -127,25 +127,32 @@ function HomePage() {
         secondaryCta={{ to: "/bologna", label: "Trova la chiesa di Bologna" }}
       />
 
-      {/* Contextual intro for the featured sermon popup */}
-      <section className="container-prose pt-10 md:pt-14 text-center">
-        <p className="eyebrow mb-3">Sermone in evidenza</p>
-        <p className="text-foreground/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          Ogni settimana condividiamo una predicazione dalla nostra comunità —
-          un momento per fermarsi, ascoltare e lasciarsi parlare dalla Parola.
-        </p>
+      {/* City selector — moved up, full-width, immediately after hero */}
+      <section className="relative container-prose pt-12 md:pt-16 pb-8 md:pb-12">
+        <p className="eyebrow text-center mb-3">Dove vuoi incontrarci?</p>
+        <h2 className="font-display text-center text-3xl md:text-4xl mb-10">Le nostre comunità</h2>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <CityCard
+            to="/milano"
+            image={milanoImg}
+            name="Milano"
+            tagline="Chiesa di Cristo di Milano"
+            description="Ci troviamo nel cuore di Milano. Funzione la domenica alle 10:30."
+            accent="from-emerald-900/40 to-emerald-950/80"
+          />
+          <CityCard
+            to="/bologna"
+            image={bolognaImg}
+            name="Bologna"
+            tagline="Chiesa di Cristo di Bologna"
+            description="Chiesa in fondazione. Lancio previsto per settembre 2026."
+            accent="from-red-900/40 to-red-950/80"
+          />
+        </div>
       </section>
 
-      <VideoPopup
-        videoUrl="https://youtu.be/36FDh_7AYkk"
-        title="La presenza e la potenza dello Spirito Santo"
-        eyebrow="Sermone in evidenza"
-        duration="Sermone"
-        slug="presenza-potenza-spirito-santo"
-      />
-
-
-      {/* Welcome + Scripture — one continuous editorial flow on a cream wash */}
+      {/* Welcome — split layout */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
@@ -157,27 +164,27 @@ function HomePage() {
         />
 
         <div className="container-prose py-24 md:py-32">
-          {/* Welcome */}
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <span className="h-px w-8 bg-primary/40" />
-              <p className="eyebrow !mb-0">Benvenuti</p>
-              <span className="h-px w-8 bg-primary/40" />
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-16 md:gap-24 items-start">
+            {/* Left — heading */}
+            <div>
+              <p className="eyebrow mb-6">Benvenuti</p>
+              <h2 className="font-display text-foreground leading-[1.1] text-4xl md:text-5xl lg:text-6xl font-normal text-balance">
+                Gesù, un uomo semplice con un piano semplice:{" "}
+                <em className="italic text-primary">far conoscere Dio e il suo amore.</em>
+              </h2>
             </div>
-            <h2 className="font-display text-foreground leading-[1.15] text-3xl md:text-4xl lg:text-[2.75rem] font-normal text-balance">
-              Gesù, un uomo semplice con un piano semplice:{" "}
-              <em className="italic text-primary">far conoscere Dio e il suo amore.</em>
-            </h2>
-            <div className="mt-10 space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg text-left md:text-center">
+
+            {/* Right — body */}
+            <div className="space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg">
               <p>
-                Siamo una <strong>chiesa cristiana</strong> ed <strong>evangelica</strong>:
-                persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia
-                e vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
-                comunità locale è autonoma — quello che ci tiene insieme è la fede in Gesù,
-                l'amore reciproco e il desiderio di tornare alla semplicità della chiesa
-                del Nuovo Testamento. Che tu stia cercando una <strong>chiesa cristiana a
-                Milano</strong>, una <strong>chiesa cristiana a Bologna</strong>, o
-                semplicemente un luogo dove fare domande sincere su Dio, qui sei a casa.
+                Siamo una <strong>chiesa cristiana</strong>: persone semplici che vogliono
+                seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno.
+                Non apparteniamo ad alcuna denominazione e ogni comunità locale è autonoma —
+                quello che ci tiene insieme è la fede in Gesù, l'amore reciproco e il
+                desiderio di tornare alla semplicità della chiesa del Nuovo Testamento.
+                Che tu stia cercando una <strong>chiesa cristiana a Milano</strong>, una{" "}
+                <strong>chiesa cristiana a Bologna</strong>, o semplicemente un luogo dove
+                fare domande sincere su Dio, qui sei a casa.
               </p>
               <p>
                 La nostra fede si fonda esclusivamente sulla <strong>Bibbia</strong>:
@@ -228,84 +235,21 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Delicate divider */}
-          <div className="mx-auto my-20 md:my-24 flex items-center justify-center gap-4 max-w-xs">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/40" />
-            <span className="h-1.5 w-1.5 rounded-full bg-primary/60 shadow-[0_0_12px_2px_color-mix(in_oklab,var(--primary)_40%,transparent)]" />
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/40" />
-          </div>
-
-          {/* Scripture — editorial pull-quote */}
-          <figure className="relative max-w-3xl mx-auto text-center">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 font-display text-[7rem] md:text-[9rem] leading-none text-primary/10 select-none"
-            >
-              “
-            </span>
-            <p className="eyebrow mb-6 relative">Una promessa</p>
-            <blockquote className="font-display italic text-foreground leading-[1.25] text-2xl md:text-3xl lg:text-[2.25rem] font-normal text-balance relative">
+          {/* Scripture — left-aligned pull-quote */}
+          <figure className="mt-24 md:mt-32 max-w-4xl pl-8 md:pl-16 border-l-2 border-primary/30">
+            <blockquote className="font-display italic text-foreground leading-[1.2] text-3xl md:text-4xl lg:text-5xl font-normal text-balance">
               E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.
             </blockquote>
-            <figcaption className="mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              <span className="h-px w-6 bg-muted-foreground/40" />
+            <figcaption className="mt-8 text-xs uppercase tracking-[0.3em] text-muted-foreground">
               Vangelo secondo Giovanni · 17:26
-              <span className="h-px w-6 bg-muted-foreground/40" />
             </figcaption>
           </figure>
         </div>
       </section>
 
-
-      {/* City selector */}
-      <section className="relative container-prose pb-20">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-72 w-[120%] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
-          style={{ background: "linear-gradient(90deg, oklch(0.85 0.16 35), oklch(0.84 0.14 200), oklch(0.85 0.15 320))" }}
-        />
-        <p className="eyebrow text-center mb-3">Dove vuoi incontrarci?</p>
-        <h2 className="font-display text-center text-3xl md:text-4xl mb-12">Le nostre comunità</h2>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <CityCard
-            to="/milano"
-            image={milanoImg}
-            name="Milano"
-            tagline="Chiesa di Cristo di Milano"
-            description="Ci troviamo nel cuore di Milano. Funzione la domenica alle 10:30."
-            accent="from-emerald-900/40 to-emerald-950/80"
-          />
-          <CityCard
-            to="/bologna"
-            image={bolognaImg}
-            name="Bologna"
-            tagline="Chiesa di Cristo di Bologna"
-            description="Chiesa in fondazione. Lancio previsto per settembre 2026."
-            accent="from-red-900/40 to-red-950/80"
-          />
-        </div>
-
-      </section>
-
-      {/* Beliefs — interactive pillars */}
-      <section className="relative mt-16 overflow-hidden bg-primary-soft">
-        {/* Floating scripture marquee */}
-        <div className="marquee-mask overflow-hidden border-y border-primary/10 bg-primary/5 py-4">
-          <div className="animate-marquee flex gap-12 whitespace-nowrap font-display text-2xl md:text-3xl text-primary/70">
-            {Array.from({ length: 2 }).map((_, k) => (
-              <div key={k} className="flex gap-12">
-                <span>· Amati così come sei ·</span>
-                <span>· Una famiglia in Cristo ·</span>
-                <span>· La Parola che trasforma ·</span>
-                <span>· Speranza per ogni città ·</span>
-                <span>· Vieni come sei ·</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="container-prose py-24 md:py-28">
+      {/* Beliefs — editorial pillars on cream background */}
+      <section className="relative">
+        <div className="container-prose py-20 md:py-28">
           <div className="text-center mb-16">
             <p className="eyebrow mb-4">Tre pilastri</p>
             <h2 className="font-display text-4xl md:text-5xl text-foreground">
@@ -360,22 +304,36 @@ function HomePage() {
             ))}
           </ul>
 
-
-          {/* CTA strip */}
+          {/* CTA */}
           <div className="mt-16 text-center">
-            <Link
-              to="/milano"
-              className="inline-flex items-center gap-2 font-display text-xl md:text-2xl text-primary hover:gap-4 transition-all"
-            >
+            <Link to="/milano" className="btn-primary inline-flex items-center gap-2">
               Vieni a trovarci questa domenica
-              <span className="inline-block animate-float">→</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Featured sermon — near the bottom */}
+      <section className="container-prose pt-8 md:pt-12 text-center">
+        <p className="eyebrow mb-3">Sermone in evidenza</p>
+        <p className="text-foreground/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          Ogni settimana condividiamo una predicazione dalla nostra comunità —
+          un momento per fermarsi, ascoltare e lasciarsi parlare dalla Parola.
+        </p>
+      </section>
+
+      <VideoPopup
+        videoUrl="https://youtu.be/36FDh_7AYkk"
+        title="La presenza e la potenza dello Spirito Santo"
+        eyebrow="Sermone in evidenza"
+        duration="Sermone"
+        slug="presenza-potenza-spirito-santo"
+      />
     </>
   );
 }
+
 
 function CityCard({
   to,
@@ -394,7 +352,7 @@ function CityCard({
   return (
     <Link
       to={to}
-      className="group relative block overflow-hidden rounded-3xl aspect-[4/5] md:aspect-[5/6] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)] hover:-translate-y-1"
+      className="group relative block overflow-hidden rounded-3xl aspect-[3/2] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)] hover:-translate-y-1"
     >
       <img
         src={image}
