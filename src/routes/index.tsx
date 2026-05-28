@@ -46,13 +46,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Vieni a trovarci questa domenica.",
+          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti. Vieni questa domenica.",
       },
       { property: "og:title", content: "Chiesa di Cristo in Italia" },
       {
         property: "og:description",
         content:
-          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
+          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/" },
     ],
