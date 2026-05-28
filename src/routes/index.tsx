@@ -65,6 +65,47 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify(churchJsonLd),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Dove si trova la Chiesa di Cristo in Italia?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano (Corso di Porta Vigentina 15a), Bologna, Napoli e Sicilia. Ogni comunità è autonoma e si riunisce la domenica mattina.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Cos'è la Chiesa di Cristo?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "La Chiesa di Cristo è un movimento cristiano del Restaurazione nato nel XIX secolo che si basa esclusivamente sulla Bibbia come unica regola di fede. Non appartiene a nessuna denominazione, pratica il battesimo per immersione dei credenti e celebra la Cena del Signore ogni domenica.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Quando si riunisce la chiesa?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Le riunioni domenicali a Milano si tengono alle 10:30. La comunità di Bologna è in fase di fondazione con lancio previsto per settembre 2026. Per orari aggiornati visita la pagina della tua città.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "È necessario essere già cristiani per venire?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "No. Tutti sono benvenuti, qualunque sia la loro storia o il loro punto di partenza. Chi è curioso, chi ha dubbi, chi viene da una tradizione diversa — la porta è aperta.",
+              },
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: HomePage,
