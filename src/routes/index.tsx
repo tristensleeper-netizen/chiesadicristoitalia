@@ -6,6 +6,7 @@ import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import sunsetItalia from "@/assets/sunset-italia.jpg";
+import worshipImg from "@/assets/worship.jpg";
 
 const churchJsonLd = {
   "@context": "https://schema.org",
@@ -128,7 +129,7 @@ function HomePage() {
       />
 
       {/* City selector — moved up, full-width, immediately after hero */}
-      <section className="relative container-prose pt-12 md:pt-16 pb-8 md:pb-12">
+      <section className="relative container-prose pt-8 md:pt-10 pb-6 md:pb-8">
         <p className="eyebrow text-center mb-3">Dove vuoi incontrarci?</p>
         <h2 className="font-display text-center text-3xl md:text-4xl mb-10">Le nostre comunità</h2>
 
@@ -163,7 +164,7 @@ function HomePage() {
           }}
         />
 
-        <div className="container-prose py-24 md:py-32">
+        <div className="container-prose py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-16 md:gap-24 items-start">
             {/* Left — heading */}
             <div>
@@ -235,8 +236,19 @@ function HomePage() {
             </div>
           </div>
 
+          {/* Community photo — full-width editorial break */}
+          <div className="mt-12 md:mt-16 w-full overflow-hidden rounded-2xl aspect-[21/9] relative">
+            <img
+              src={worshipImg}
+              alt="La comunità in preghiera insieme"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+          </div>
+
           {/* Scripture — left-aligned pull-quote */}
-          <figure className="mt-24 md:mt-32 max-w-4xl pl-8 md:pl-16 border-l-2 border-primary/30">
+          <figure className="mt-16 md:mt-20 max-w-4xl pl-8 md:pl-16 border-l-2 border-primary/30">
             <blockquote className="font-display italic text-foreground leading-[1.2] text-3xl md:text-4xl lg:text-5xl font-normal text-balance">
               E io ho fatto loro conoscere il tuo nome e lo farò conoscere ancora, affinché l'amore, del quale tu mi hai amato, sia in loro e io in loro.
             </blockquote>
@@ -249,7 +261,7 @@ function HomePage() {
 
       {/* Beliefs — editorial pillars on cream background */}
       <section className="relative">
-        <div className="container-prose py-20 md:py-28">
+        <div className="container-prose py-16 md:py-20">
           <div className="text-center mb-16">
             <p className="eyebrow mb-4">Tre pilastri</p>
             <h2 className="font-display text-4xl md:text-5xl text-foreground">
