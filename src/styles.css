@@ -37,7 +37,7 @@
   --color-ring-offset-background: var(--background);
 
   --font-display: "Cormorant Garamond", "Fraunces", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Geist", "Outfit", system-ui, -apple-system, sans-serif;
 }
 
 /* Default = National — bright, sunny, joyful */
