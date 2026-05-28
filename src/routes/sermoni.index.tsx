@@ -27,6 +27,41 @@ export const Route = createFileRoute("/sermoni/")({
       { property: "og:image", content: bibleStudy },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/sermoni" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Dove posso ascoltare sermoni cristiani in italiano?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Trovi sermoni cristiani in italiano su questo sito. Le Chiese di Cristo di Milano e Bologna pubblicano ogni settimana prediche bibliche in audio e video, liberamente accessibili.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Di cosa parlano i sermoni della Chiesa di Cristo?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "I sermoni si basano esclusivamente sulla Bibbia e trattano temi come la fede, il perdono, la vita cristiana quotidiana, la famiglia, la speranza e il significato della vita. Ogni predica nasce da un testo biblico e viene applicata alla vita di tutti i giorni.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Posso scaricare o riascoltare i sermoni?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Sì. Tutti i sermoni sono disponibili gratuitamente in streaming. Puoi filtrarli per città (Milano o Bologna) e ordinarli per data per trovare le predicazioni più recenti.",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: SermoniIndex,
 });
