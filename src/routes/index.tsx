@@ -129,17 +129,23 @@ function HomePage() {
             </h2>
             <div className="mt-10 space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg text-left md:text-center">
               <p>
-                Siamo una <strong>chiesa cristiana</strong>: persone
-                semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia e
-                vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
-                comunità locale è autonoma — quello che ci tiene insieme è la fede in
-                Gesù e l'amore reciproco.
+                Siamo una <strong>chiesa cristiana</strong> ed <strong>evangelica</strong>:
+                persone semplici che vogliono seguire le orme di Cristo, leggendo la Bibbia
+                e vivendola ogni giorno. Non apparteniamo ad alcuna denominazione e ogni
+                comunità locale è autonoma — quello che ci tiene insieme è la fede in Gesù,
+                l'amore reciproco e il desiderio di tornare alla semplicità della chiesa
+                del Nuovo Testamento. Che tu stia cercando una <strong>chiesa cristiana a
+                Milano</strong>, una <strong>chiesa cristiana a Bologna</strong>, o
+                semplicemente un luogo dove fare domande sincere su Dio, qui sei a casa.
               </p>
               <p>
-                La nostra fede si fonda esclusivamente sulla Bibbia. Crediamo nella
-                potenza della preghiera, nelle amicizie sincere che ci avvicinano a Dio
-                e in una comunità che accoglie chiunque, senza condizioni. Se vuoi
-                approfondire,{" "}
+                La nostra fede si fonda esclusivamente sulla <strong>Bibbia</strong>:
+                nessun credo umano, nessuna tradizione aggiunta, solo la Parola di Dio
+                come unica regola di fede e di vita. Crediamo nella potenza della
+                preghiera, nelle amicizie sincere che ci avvicinano a Dio e in una
+                comunità che accoglie chiunque, senza condizioni — qualunque sia la tua
+                storia, il tuo passato o il punto in cui ti trovi nel tuo cammino
+                spirituale. Se vuoi approfondire,{" "}
                 <Link to="/chi-siamo" className="text-primary underline-offset-4 hover:underline">
                   scopri chi siamo
                 </Link>
@@ -154,8 +160,24 @@ function HomePage() {
                 .
               </p>
               <p>
+                La <strong>Chiesa di Cristo</strong> nasce dal cosiddetto{" "}
+                <em>movimento di restaurazione</em>: un'aspirazione antica e sempre nuova
+                a essere semplicemente cristiani — come lo erano i discepoli nel primo
+                secolo, prima di etichette e divisioni. Per questo non ci chiamiamo con
+                il nome di un fondatore umano, non abbiamo una gerarchia centrale e non
+                seguiamo un manuale denominazionale: ogni domenica ci ritroviamo per
+                spezzare il pane insieme nella <strong>Cena del Signore</strong>,
+                pratichiamo il <strong>battesimo per immersione</strong> dei credenti
+                come risposta alla fede in Cristo, e cerchiamo di vivere il Vangelo nella
+                vita quotidiana, nel lavoro, nelle relazioni e nel servizio agli altri.
+              </p>
+              <p>
                 Se sei in Italia e stai cercando una famiglia spirituale, un posto dove
                 sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
+                Vieni così come sei: con le tue domande, i tuoi dubbi, le tue speranze.
+                Non devi vestirti in un certo modo, conoscere la Bibbia a memoria o aver
+                già capito tutto — basta il desiderio di incontrare Dio e di camminare
+                con altre persone che stanno facendo lo stesso percorso.
                 <br />
                 <span className="text-foreground/60 text-sm md:text-base italic">
                   English speakers are welcome — Sunday services are in Italian, with
