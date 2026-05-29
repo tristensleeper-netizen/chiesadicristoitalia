@@ -6,7 +6,7 @@ import heroItalia from "@/assets/hero-italia.jpg";
 import heroMilano from "@/assets/hero-milano.jpg";
 import heroBologna from "@/assets/hero-bologna.jpg";
 import sunsetItalia from "@/assets/sunset-italia.jpg";
-import worshipImg from "@/assets/worship.jpg";
+import worshipImg from "@/assets/community-worship.jpg";
 
 const churchJsonLd = {
   "@context": "https://schema.org",
