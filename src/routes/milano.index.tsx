@@ -246,7 +246,7 @@ function MilanoHome() {
         <div className="grid gap-8 md:grid-cols-3">
           <Pillar
             title="Funzione domenicale"
-            text="Ogni domenica alle 10:30 ci ritroviamo per adorare insieme, prendere la comunione e ascoltare un messaggio dalla Bibbia."
+            text="Ogni domenica alle 10:30 ci ritroviamo a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto per adorare insieme, prendere la comunione e ascoltare un messaggio dalla Bibbia."
             cta={{ to: "/milano/visita", label: "Cosa aspettarsi" }}
           />
           <Pillar
