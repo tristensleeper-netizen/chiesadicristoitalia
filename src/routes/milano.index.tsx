@@ -160,10 +160,10 @@ function MilanoHome() {
 
       <CityInfoBlock
         city="Milano"
-        address="Corso di Porta Vigentina 15a"
-        cap="20122"
+        address="Piazza S. Matteo, 24"
+        cap="20093 Cologno Monzese"
         serviceTime="Domenica · 10:30"
-        mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
+        mapsUrl="https://www.google.com/maps/search/?api=1&query=Piazza+S.+Matteo,+24,+20093+Cologno+Monzese+MI"
       />
 
       {/* Floating bottom-right popup */}
