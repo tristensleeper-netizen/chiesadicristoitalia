@@ -59,21 +59,21 @@ const milanoJsonLd = {
   "name": "Chiesa di Cristo di Milano",
   "alternateName": "Church of Christ Milan",
   "url": "https://chiesadicristoitalia.it/milano",
-  "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 in Corso di Porta Vigentina 15a. Non denominazionale, autonoma, fondata esclusivamente sulle Scritture.",
+  "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torniamo in Corso di Porta Vigentina 15a. Non denominazionale, autonoma, fondata esclusivamente sulle Scritture.",
   "image": "https://chiesadicristoitalia.it/og-milano.jpg",
   "email": "info@chiesadicristoitalia.it",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Corso di Porta Vigentina 15a",
-    "addressLocality": "Milano",
-    "postalCode": "20122",
+    "streetAddress": "Piazza S. Matteo, 24",
+    "addressLocality": "Cologno Monzese",
+    "postalCode": "20093",
     "addressRegion": "MI",
     "addressCountry": "IT"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 45.4528,
-    "longitude": 9.1909
+    "latitude": 45.5289,
+    "longitude": 9.2784
   },
   "openingHoursSpecification": [
     {
