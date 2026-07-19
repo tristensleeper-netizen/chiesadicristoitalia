@@ -139,7 +139,7 @@ function HomePage() {
             image={milanoImg}
             name="Milano"
             tagline="Chiesa di Cristo di Milano"
-            description="Ci troviamo nel cuore di Milano. Funzione la domenica alle 10:30."
+            description="Funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto; poi torniamo nel cuore di Milano."
             accent="from-emerald-900/40 to-emerald-950/80"
           />
           <CityCard
