@@ -22,9 +22,9 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Milano",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Corso di Porta Vigentina 15a",
-        postalCode: "20122",
-        addressLocality: "Milano",
+        streetAddress: "Piazza S. Matteo, 24",
+        postalCode: "20093",
+        addressLocality: "Cologno Monzese",
         addressCountry: "IT",
       },
     },
