@@ -55,8 +55,9 @@ export function SiteFooter() {
           </p>
           <ul className="space-y-2 text-sm text-primary-foreground/85">
             <li>info@chiesadicristoitalia.it</li>
-            <li>Corso di Porta Vigentina 15a</li>
-            <li>20122 Milano, MI</li>
+            <li>Piazza S. Matteo, 24</li>
+            <li>20093 Cologno Monzese, MI</li>
+            <li className="text-xs text-primary-foreground/60 italic">Fino ad agosto 2026; poi Corso di Porta Vigentina 15a, Milano</li>
           </ul>
         </div>
       </div>
