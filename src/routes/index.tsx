@@ -77,7 +77,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano (Corso di Porta Vigentina 15a), Bologna, Napoli e Sicilia. Ogni comunità è autonoma e si riunisce la domenica mattina.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. La comunità di Milano si riunisce ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torna in Corso di Porta Vigentina 15a. Ogni comunità è autonoma.",
               },
             },
             {
