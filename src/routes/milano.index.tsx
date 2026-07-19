@@ -101,12 +101,12 @@ export const Route = createFileRoute("/milano/")({
       {
         name: "description",
         content:
-          "Chiesa di Cristo di Milano: comunità nel cuore della città. Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a.",
+          "Chiesa di Cristo di Milano: funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torniamo in Corso di Porta Vigentina 15a.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
-        content: "Comunità cristiana nel cuore di Milano. Domenica 10:30, Corso di Porta Vigentina 15a.",
+        content: "Funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre in Corso di Porta Vigentina 15a.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/milano" },
       { property: "og:image", content: heroMilano },
