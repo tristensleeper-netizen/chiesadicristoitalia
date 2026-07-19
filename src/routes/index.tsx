@@ -22,9 +22,9 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Milano",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Corso di Porta Vigentina 15a",
-        postalCode: "20122",
-        addressLocality: "Milano",
+        streetAddress: "Piazza S. Matteo, 24",
+        postalCode: "20093",
+        addressLocality: "Cologno Monzese",
         addressCountry: "IT",
       },
     },
@@ -47,13 +47,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti. Vieni questa domenica.",
+          "Chiesa cristiana basata sulla Bibbia, con comunità a Milano e Bologna. Tutti sono benvenuti. Vieni questa domenica.",
       },
       { property: "og:title", content: "Chiesa di Cristo in Italia" },
       {
         property: "og:description",
         content:
-          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano, Bologna, Napoli e Sicilia. Tutti sono benvenuti.",
+          "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/" },
     ],
@@ -77,7 +77,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano (Corso di Porta Vigentina 15a), Bologna, Napoli e Sicilia. Ogni comunità è autonoma e si riunisce la domenica mattina.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. La comunità di Milano si riunisce ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torna in Corso di Porta Vigentina 15a. Ogni comunità è autonoma.",
               },
             },
             {
@@ -139,7 +139,7 @@ function HomePage() {
             image={milanoImg}
             name="Milano"
             tagline="Chiesa di Cristo di Milano"
-            description="Ci troviamo nel cuore di Milano. Funzione la domenica alle 10:30."
+            description="Funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto; poi torniamo nel cuore di Milano."
             accent="from-emerald-900/40 to-emerald-950/80"
           />
           <CityCard

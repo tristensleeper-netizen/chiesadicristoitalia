@@ -59,21 +59,21 @@ const milanoJsonLd = {
   "name": "Chiesa di Cristo di Milano",
   "alternateName": "Church of Christ Milan",
   "url": "https://chiesadicristoitalia.it/milano",
-  "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 in Corso di Porta Vigentina 15a. Non denominazionale, autonoma, fondata esclusivamente sulle Scritture.",
+  "description": "Una chiesa cristiana basata sulla Bibbia nel cuore di Milano. Ci incontriamo ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torniamo in Corso di Porta Vigentina 15a. Non denominazionale, autonoma, fondata esclusivamente sulle Scritture.",
   "image": "https://chiesadicristoitalia.it/og-milano.jpg",
   "email": "info@chiesadicristoitalia.it",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Corso di Porta Vigentina 15a",
-    "addressLocality": "Milano",
-    "postalCode": "20122",
+    "streetAddress": "Piazza S. Matteo, 24",
+    "addressLocality": "Cologno Monzese",
+    "postalCode": "20093",
     "addressRegion": "MI",
     "addressCountry": "IT"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 45.4528,
-    "longitude": 9.1909
+    "latitude": 45.5289,
+    "longitude": 9.2784
   },
   "openingHoursSpecification": [
     {
@@ -101,12 +101,12 @@ export const Route = createFileRoute("/milano/")({
       {
         name: "description",
         content:
-          "Chiesa di Cristo di Milano: comunità nel cuore della città. Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a.",
+          "Chiesa di Cristo di Milano: funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torniamo in Corso di Porta Vigentina 15a.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
-        content: "Comunità cristiana nel cuore di Milano. Domenica 10:30, Corso di Porta Vigentina 15a.",
+        content: "Funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre in Corso di Porta Vigentina 15a.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/milano" },
       { property: "og:image", content: heroMilano },
@@ -160,10 +160,10 @@ function MilanoHome() {
 
       <CityInfoBlock
         city="Milano"
-        address="Corso di Porta Vigentina 15a"
-        cap="20122"
+        address="Piazza S. Matteo, 24"
+        cap="20093 Cologno Monzese"
         serviceTime="Domenica · 10:30"
-        mapsUrl="https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"
+        mapsUrl="https://www.google.com/maps/search/?api=1&query=Piazza+S.+Matteo,+24,+20093+Cologno+Monzese+MI"
       />
 
       {/* Floating bottom-right popup */}
@@ -246,7 +246,7 @@ function MilanoHome() {
         <div className="grid gap-8 md:grid-cols-3">
           <Pillar
             title="Funzione domenicale"
-            text="Ogni domenica alle 10:30 ci ritroviamo per adorare insieme, prendere la comunione e ascoltare un messaggio dalla Bibbia."
+            text="Ogni domenica alle 10:30 ci ritroviamo a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto per adorare insieme, prendere la comunione e ascoltare un messaggio dalla Bibbia."
             cta={{ to: "/milano/visita", label: "Cosa aspettarsi" }}
           />
           <Pillar
