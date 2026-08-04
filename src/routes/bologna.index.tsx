@@ -18,7 +18,7 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una chiesa cristiana basata sulla Bibbia in fondazione a Bologna. Lancio previsto settembre 2026. Studi biblici e gruppo fondatore attivi da subito.",
+  "description": "Un nuovo gruppo della Chiesa di Cristo a Bologna: preghiera e studio biblico attivi da subito, con incontri regolari previsti da settembre 2026.",
   "email": "info@chiesadicristoitalia.it",
   "areaServed": {
     "@type": "City",
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/bologna/")({
       {
         name: "description",
         content:
-          "Chiesa di Cristo di Bologna: chiesa in fondazione, lancio settembre 2026. Unisciti in preghiera, in uno studio biblico o nel gruppo fondatore.",
+          "Un nuovo gruppo della Chiesa di Cristo a Bologna: preghiera, studio biblico e incontri comunitari, con l'obiettivo di funzioni regolari da settembre 2026.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Bologna — In arrivo settembre 2026" },
       {
@@ -91,8 +91,8 @@ function BolognaHome() {
         slot="bologna.hero"
         image={heroImage}
         eyebrow={`Chiesa in fondazione · Lancio ${LAUNCH_LABEL}`}
-        title={<>Bologna,<br />sta per nascere.</>}
-        subtitle="Stiamo preparando una nuova Chiesa di Cristo nel cuore della dotta. Non abbiamo ancora una sede né funzioni regolari — ma stiamo pregando, studiando la Bibbia insieme e cercando chi vuole camminare con noi da subito."
+        title={<>Un nuovo<br />cammino a Bologna.</>}
+        subtitle="Il nostro gruppo è agli inizi: non abbiamo ancora una sede stabile né un calendario regolare di incontri — ma preghiamo, studiamo la Bibbia insieme e accogliamo chi desidera unirsi fin da ora."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
         secondaryCta={{ to: "/milano", label: "Visita Milano" }}
         align="left"
@@ -106,14 +106,11 @@ function BolognaHome() {
             <p className="eyebrow text-primary">A che punto siamo</p>
           </div>
           <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">
-            Una chiesa in fondazione, non una chiesa già aperta.
+            I nostri primi passi a Bologna.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
-            Vogliamo essere onesti: a Bologna oggi non c'è ancora una funzione
-            domenicale, una sede stabile o un calendario di eventi della Chiesa
-            di Cristo. Quello che c'è è un piccolo gruppo che prega, sogna e si
-            prepara per il lancio previsto per <strong>{LAUNCH_LABEL}</strong>.
-            Se ti senti chiamato a far parte di questo inizio, c'è posto per te.
+            Il nostro gruppo si sta preparando: un piccolo numero di persone che prega, studia la Bibbia insieme e si prepara per gli incontri regolari previsti per <strong>{LAUNCH_LABEL}</strong>.
+            Se ti senti chiamato a farne parte, c'è posto per te.
           </p>
         </div>
       </section>
