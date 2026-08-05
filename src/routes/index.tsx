@@ -336,11 +336,11 @@ function HomePage() {
       </section>
 
       <VideoPopup
-        videoUrl="https://youtu.be/36FDh_7AYkk"
-        title="La presenza e la potenza dello Spirito Santo"
+        videoUrl="https://www.youtube.com/live/N0YYIsWJQPA"
+        title="Gli Atti dello Spirito"
         eyebrow="Sermone in evidenza"
         duration="Sermone"
-        slug="presenza-potenza-spirito-santo"
+        slug="gli-atti-dello-spirito"
       />
     </>
   );
