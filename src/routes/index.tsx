@@ -341,7 +341,9 @@ function HomePage() {
         eyebrow="Sermone in evidenza"
         duration="Sermone"
         slug="gli-atti-dello-spirito"
+        linkTo="/sermoni/$slug"
       />
+
     </>
   );
 }
