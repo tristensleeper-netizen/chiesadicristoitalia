@@ -13,7 +13,10 @@ interface Props {
   storageKey?: string;
   /** Slug of the resource page to link to via "Guarda ora" */
   slug?: string;
+  /** Route path to the resource page (default: /risorse/$slug) */
+  linkTo?: "/risorse/$slug" | "/sermoni/$slug";
 }
+
 
 function getYouTubeId(url: string) {
   const m = url.match(
