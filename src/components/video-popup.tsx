@@ -33,7 +33,9 @@ export function VideoPopup({
   delayMs = 2200,
   storageKey = "video-popup-dismissed",
   slug,
+  linkTo = "/risorse/$slug",
 }: Props) {
+
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(true);
   const [open, setOpen] = useState(false);
