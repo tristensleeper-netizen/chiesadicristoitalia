@@ -41,7 +41,7 @@ function escapeXml(s) {
 function getYouTubeId(url) {
   if (!url) return null;
   const m = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/,
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/,
   );
   return m ? m[1] : null;
 }

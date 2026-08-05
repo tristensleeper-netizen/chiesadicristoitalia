@@ -43,8 +43,8 @@ export function isSpotifyUrl(url: string): boolean {
 }
 
 export function toEmbedUrl(url: string): string {
-  // YouTube
-  const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+  // YouTube (watch, embed, shorts, live)
+  const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
   if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
   // Vimeo
   const vm = url.match(/vimeo\.com\/(\d+)/);
@@ -57,7 +57,7 @@ export function toEmbedUrl(url: string): string {
 }
 
 export function getYouTubeId(url: string): string | null {
-  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
   return m ? m[1] : null;
 }
 

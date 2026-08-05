@@ -13,11 +13,14 @@ interface Props {
   storageKey?: string;
   /** Slug of the resource page to link to via "Guarda ora" */
   slug?: string;
+  /** Route path to the resource page (default: /risorse/$slug) */
+  linkTo?: "/risorse/$slug" | "/sermoni/$slug";
 }
+
 
 function getYouTubeId(url: string) {
   const m = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/,
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/,
   );
   return m ? m[1] : null;
 }
@@ -30,7 +33,9 @@ export function VideoPopup({
   delayMs = 2200,
   storageKey = "video-popup-dismissed",
   slug,
+  linkTo = "/risorse/$slug",
 }: Props) {
+
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(true);
   const [open, setOpen] = useState(false);
@@ -157,7 +162,7 @@ export function VideoPopup({
               </p>
               {slug ? (
                 <Link
-                  to="/risorse/$slug"
+                  to={linkTo}
                   params={{ slug }}
                   className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                   onClick={closePopup}
@@ -165,6 +170,7 @@ export function VideoPopup({
                   Guarda ora <span aria-hidden>→</span>
                 </Link>
               ) : (
+
                 <button
                   type="button"
                   onClick={() => setOpen(true)}
