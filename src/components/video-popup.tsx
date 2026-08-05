@@ -162,7 +162,7 @@ export function VideoPopup({
               </p>
               {slug ? (
                 <Link
-                  to="/risorse/$slug"
+                  to={linkTo}
                   params={{ slug }}
                   className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                   onClick={closePopup}
@@ -170,6 +170,7 @@ export function VideoPopup({
                   Guarda ora <span aria-hidden>→</span>
                 </Link>
               ) : (
+
                 <button
                   type="button"
                   onClick={() => setOpen(true)}
