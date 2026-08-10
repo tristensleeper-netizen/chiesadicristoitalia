@@ -14,6 +14,18 @@
     </video:video>
   </url>
   <url>
+    <loc>https://chiesadicristoitalia.it/sermoni/la-presenza-e-la-potenza-dello-spirito-santo-stefano</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/BVP18nc0vQ0/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>La presenza e la potenza dello Spirito Santo</video:title>
+      <video:description>In questo messaggio, esploriamo la figura di Stefano, il primo martire cristiano, e il suo potente discorso davanti al Sinedrio. Attraverso il racconto di Atti 6 e 7, scopriamo come la presenza di Dio si sia spostata dai templi fatti di pietra al cuore dei credenti.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/BVP18nc0vQ0</video:player_loc>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-07-19T08:30:00+00:00</video:publication_date>
+    </video:video>
+  </url>
+  <url>
     <loc>https://chiesadicristoitalia.it/sermoni/presenza-potenza-spirito-santo</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/36FDh_7AYkk/maxresdefault.jpg</video:thumbnail_loc>
