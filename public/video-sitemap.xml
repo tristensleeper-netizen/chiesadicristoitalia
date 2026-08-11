@@ -2,18 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
-    <loc>https://chiesadicristoitalia.it/sermoni/alla-prossima</loc>
-    <video:video>
-      <video:thumbnail_loc>https://i.ytimg.com/vi/fZxOBT6sAr4/maxresdefault.jpg</video:thumbnail_loc>
-      <video:title>Alla Prossima</video:title>
-      <video:description>In questo messaggio, riflettiamo sulle ultime parole di Paolo agli anziani di Efeso (Atti 20:17–35) e sul suo invito a vegliare sul gregge con amore e responsabilità. Parliamo del pericolo dei “lupi”, non solo dall’esterno ma anche dall’interno della chiesa, e della necessità di custodire la verità del vangelo. C’è anche un forte incoraggiamento: prendersi cura dei deboli, perché “c’è più gioia nel dare che nel ricevere”. Questa predicazione è anche un momento personale di saluto e passaggio, con uno sguardo al futuro e alla chiamata di Dio. Una sfida per tutti noi: vivere una vita degna del vangelo, con umiltà, unità e amore concreto.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/fZxOBT6sAr4</video:player_loc>
-      <video:family_friendly>yes</video:family_friendly>
-      <video:live>no</video:live>
-      <video:publication_date>2026-08-09T08:30:00+00:00</video:publication_date>
-    </video:video>
-  </url>
-  <url>
     <loc>https://chiesadicristoitalia.it/sermoni/gli-atti-dello-spirito</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/N0YYIsWJQPA/maxresdefault.jpg</video:thumbnail_loc>
@@ -23,6 +11,18 @@
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
       <video:publication_date>2026-08-02T12:00:00+00:00</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://chiesadicristoitalia.it/sermoni/alla-prossima</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/fZxOBT6sAr4/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Alla Prossima</video:title>
+      <video:description>In questo messaggio, riflettiamo sulle ultime parole di Paolo agli anziani di Efeso (Atti 20:17–35) e sul suo invito a vegliare sul gregge con amore e responsabilità. Parliamo del pericolo dei “lupi”, non solo dall’esterno ma anche dall’interno della chiesa, e della necessità di custodire la verità del vangelo. C’è anche un forte incoraggiamento: prendersi cura dei deboli, perché “c’è più gioia nel dare che nel ricevere”. Questa predicazione è anche un momento personale di saluto e passaggio, con uno sguardo al futuro e alla chiamata di Dio. Una sfida per tutti noi: vivere una vita degna del vangelo, con umiltà, unità e amore concreto.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/fZxOBT6sAr4</video:player_loc>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:publication_date>2026-07-26T08:30:00+00:00</video:publication_date>
     </video:video>
   </url>
   <url>
