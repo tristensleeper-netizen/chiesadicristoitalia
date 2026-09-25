@@ -59,7 +59,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
               </p>
               <p>
                 {city.venueName
-                  ? `Abbiamo una casa: ci ritroveremo da ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30, a partire dal ${city.launchLabel ?? "prossimamente"}.`
+                  ? `Abbiamo una casa: ci ritroveremo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30, a partire dal ${city.launchLabel ?? "prossimamente"}.`
                   : "Per ora non abbiamo una sede stabile né funzioni regolari."}{" "}
                 Quello che possiamo offrire oggi è ascolto, preghiera, studi
                 biblici personali e l'invito a camminare con noi mentre Dio
@@ -164,7 +164,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
           title={<>Apriamo<br />il {city.launchLabel ?? "breve"}.</>}
           subtitle={
             city.venueName
-              ? `La Chiesa di Cristo di ${city.name} inaugura le sue funzioni domenicali il ${city.launchLabel ?? "prossimamente"}: ci ritroveremo da ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
+              ? `La Chiesa di Cristo di ${city.name} inaugura le sue funzioni domenicali il ${city.launchLabel ?? "prossimamente"}: ci ritroveremo presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
               : `La Chiesa di Cristo di ${city.name} è in preparazione. Non abbiamo ancora una sede stabile né funzioni domenicali, ma ci piacerebbe restare in contatto con te.`
           }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
