@@ -179,11 +179,11 @@ function BolognaHome() {
             Preparare il terreno, un passo alla volta.
           </h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
-            Mentre aspettiamo {LAUNCH_LABEL}, ci stiamo dedicando a tre cose:
-            pregare per Bologna e per chi la abita, costruire un gruppo
-            fondatore di persone che vogliono fondare la chiesa insieme, e
+            In vista dell'inaugurazione di {LAUNCH_LABEL}, ci stiamo dedicando a
+            tre cose: pregare per Bologna e per chi la abita, costruire un
+            gruppo fondatore di persone che vogliono fondare la chiesa insieme, e
             offrire studi biblici personali a chi è interessato a conoscere
-            Gesù — anche prima del lancio.
+            Gesù — anche prima della prima funzione.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/bologna/contatti" className="btn-primary">Inizia uno studio biblico</Link>
