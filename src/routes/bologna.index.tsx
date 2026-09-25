@@ -18,7 +18,7 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una nuova comunità cristiana nel cuore di Bologna: inaugurazione domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode contemporanea; libero a tutti, con traduzione in inglese.",
+  "description": "Una nuova comunità cristiana nel cuore di Bologna: inaugurazione domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode; aperto a tutti, con traduzione in inglese.",
   "email": "info@chiesadicristoitalia.it",
   "address": {
     "@type": "PostalAddress",
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/bologna/")({
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna inaugura le sue funzioni domenicali domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode contemporanea. Libero a tutti, con traduzione in inglese.",
+          "La Chiesa di Cristo di Bologna inaugura le sue funzioni domenicali domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode. Aperto a tutti, con traduzione in inglese.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
       {
@@ -132,7 +132,7 @@ function BolognaHome() {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/75">
-            <span>Preghiera, riflessione dalla Bibbia e lode contemporanea</span>
+            <span>Preghiera, riflessione dalla Bibbia e lode</span>
             <span>Atmosfera amichevole e informale</span>
             <span>Libero a tutti</span>
             <span>In italiano, con traduzione in inglese</span>
