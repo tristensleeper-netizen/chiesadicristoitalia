@@ -18,8 +18,15 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Un nuovo gruppo della Chiesa di Cristo a Bologna: preghiera e studio biblico attivi da subito, con incontri regolari previsti da settembre 2026.",
+  "description": "Una nuova comunità cristiana nel cuore di Bologna: inaugurazione domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode contemporanea; libero a tutti, con traduzione in inglese.",
   "email": "info@chiesadicristoitalia.it",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Cesare Boldrini, 11",
+    "addressLocality": "Bologna",
+    "postalCode": "40121",
+    "addressCountry": "IT"
+  },
   "areaServed": {
     "@type": "City",
     "name": "Bologna",
