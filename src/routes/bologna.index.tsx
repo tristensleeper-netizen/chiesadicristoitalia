@@ -48,17 +48,17 @@ const bolognaJsonLd = {
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — apertura settembre 2026" },
+      { title: "Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
       {
         name: "description",
         content:
-          "Un nuovo gruppo della Chiesa di Cristo a Bologna: preghiera, studio biblico e incontri comunitari, con l'obiettivo di funzioni regolari da settembre 2026.",
+          "La Chiesa di Cristo di Bologna inaugura le sue funzioni domenicali domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode contemporanea. Libero a tutti, con traduzione in inglese.",
       },
-      { property: "og:title", content: "Chiesa di Cristo di Bologna — In arrivo settembre 2026" },
+      { property: "og:title", content: "Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
       {
         property: "og:description",
         content:
-          "Stiamo piantando una nuova chiesa a Bologna. Resta aggiornato e cammina con noi.",
+          "Ci ritroveremo all'Hotel Europa – Sala Madrid (Via Cesare Boldrini 11), ogni domenica alle 10:30, a partire da domenica 4 ottobre 2026. Sei invitato.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/bologna" },
       { property: "og:image", content: heroBologna },
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/bologna/")({
   component: BolognaHome,
 });
 
-const LAUNCH_LABEL = "Settembre 2026";
+const LAUNCH_LABEL = "4 Ottobre 2026";
 
 function BolognaHome() {
   const heroImage = useActiveHero("bologna", heroBologna);
