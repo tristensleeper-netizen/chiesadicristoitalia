@@ -15,12 +15,14 @@ export const milanoConfig: CityConfig = {
 export const bolognaConfig: CityConfig = {
   name: "Bologna",
   hero: heroBologna,
-  // Chiesa in fondazione — apertura settembre 2026. No physical location yet.
-  address: "Sede in via di definizione",
-  cap: "",
-  serviceTime: "Lancio previsto · Settembre 2026",
-  mapsUrl: "https://maps.google.com/?q=Bologna+Italy",
+  address: "Via Cesare Boldrini, 11",
+  cap: "40121",
+  serviceTime: "Domenica · 10:30",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Via+Cesare+Boldrini+11,+40121+Bologna",
   basePath: "/bologna",
+  // Chiesa in fondazione — inaugurazione domenica 4 ottobre 2026.
   isPlant: true,
-  launchLabel: "Settembre 2026",
+  launchLabel: "4 Ottobre 2026",
+  venueName: "Hotel Europa – Sala Madrid",
+  venueNote: "a 3 minuti dalla Stazione Centrale",
 };

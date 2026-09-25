@@ -19,8 +19,12 @@ export interface CityConfig {
   basePath: "/milano" | "/bologna";
   /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
   isPlant?: boolean;
-  /** When isPlant is true, a human-readable launch label like "Settembre 2026". */
+  /** When isPlant is true, a human-readable launch label like "4 Ottobre 2026". */
   launchLabel?: string;
+  /** Name of the meeting place, when announced (e.g. "Hotel Europa – Sala Madrid"). */
+  venueName?: string;
+  /** Short note about the venue, e.g. "a 3 minuti dalla Stazione Centrale". */
+  venueNote?: string;
 }
 
 export function AboutSection({ city }: { city: CityConfig }) {
@@ -54,7 +58,9 @@ export function AboutSection({ city }: { city: CityConfig }) {
                 nuova nel {city.launchLabel ?? "prossimo futuro"}.
               </p>
               <p>
-                Per ora non abbiamo una sede stabile né funzioni regolari.
+                {city.venueName
+                  ? `Abbiamo una casa: ci ritroveremo da ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30, a partire dal ${city.launchLabel ?? "prossimamente"}.`
+                  : "Per ora non abbiamo una sede stabile né funzioni regolari."}{" "}
                 Quello che possiamo offrire oggi è ascolto, preghiera, studi
                 biblici personali e l'invito a camminare con noi mentre Dio
                 apre la strada.
