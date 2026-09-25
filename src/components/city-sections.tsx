@@ -19,8 +19,12 @@ export interface CityConfig {
   basePath: "/milano" | "/bologna";
   /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
   isPlant?: boolean;
-  /** When isPlant is true, a human-readable launch label like "Settembre 2026". */
+  /** When isPlant is true, a human-readable launch label like "4 Ottobre 2026". */
   launchLabel?: string;
+  /** Name of the meeting place, when announced (e.g. "Hotel Europa – Sala Madrid"). */
+  venueName?: string;
+  /** Short note about the venue, e.g. "a 3 minuti dalla Stazione Centrale". */
+  venueNote?: string;
 }
 
 export function AboutSection({ city }: { city: CityConfig }) {
@@ -54,7 +58,9 @@ export function AboutSection({ city }: { city: CityConfig }) {
                 nuova nel {city.launchLabel ?? "prossimo futuro"}.
               </p>
               <p>
-                Per ora non abbiamo una sede stabile né funzioni regolari.
+                {city.venueName
+                  ? `Abbiamo una casa: ci ritroveremo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30, a partire dal ${city.launchLabel ?? "prossimamente"}.`
+                  : "Per ora non abbiamo una sede stabile né funzioni regolari."}{" "}
                 Quello che possiamo offrire oggi è ascolto, preghiera, studi
                 biblici personali e l'invito a camminare con noi mentre Dio
                 apre la strada.
@@ -155,20 +161,49 @@ export function VisitSection({ city }: { city: CityConfig }) {
           slot={`${city.name.toLowerCase()}.hero` as never}
           image={heroImage}
           eyebrow={`Visita · ${city.name}`}
-          title={<>Apriamo<br />a {city.launchLabel ?? "breve"}.</>}
-          subtitle={`La Chiesa di Cristo di ${city.name} è in preparazione. Non abbiamo ancora una sede stabile né funzioni domenicali, ma ci piacerebbe restare in contatto con te.`}
+          title={<>Apriamo<br />il {city.launchLabel ?? "breve"}.</>}
+          subtitle={
+            city.venueName
+              ? `La Chiesa di Cristo di ${city.name} inaugura le sue funzioni domenicali il ${city.launchLabel ?? "prossimamente"}: ci ritroveremo presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
+              : `La Chiesa di Cristo di ${city.name} è in preparazione. Non abbiamo ancora una sede stabile né funzioni domenicali, ma ci piacerebbe restare in contatto con te.`
+          }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
           height="medium"
         />
         <section className="container-narrow py-20">
-          <p className="eyebrow mb-4">Cosa c'è oggi</p>
-          <h2 className="font-display text-3xl mb-6">In attesa del lancio</h2>
-          <ul className="space-y-5 text-foreground/80 leading-relaxed">
-            <li><strong className="text-primary">Studi biblici personali.</strong> Possiamo incontrarci di persona o online per leggere insieme la Bibbia.</li>
-            <li><strong className="text-primary">Preghiera.</strong> Stiamo pregando per {city.name} — unisciti a noi.</li>
-            <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere quando, dove e come parteciperemo alle prime funzioni.</li>
-            <li><strong className="text-primary">Funzioni a Milano.</strong> Nel frattempo, sei il benvenuto la domenica alle 10:30 nella chiesa di Milano.</li>
-          </ul>
+          <p className="eyebrow mb-4">L'annuncio</p>
+          <h2 className="font-display text-3xl mb-6">
+            {city.venueName ? "Ecco dove ci ritroveremo." : "In attesa del lancio"}
+          </h2>
+          {city.venueName ? (
+            <div className="rounded-2xl border border-border bg-card p-8 max-w-xl">
+              <p className="eyebrow mb-3">Dove</p>
+              <p className="font-display text-2xl text-foreground">{city.venueName}</p>
+              <p className="text-foreground/70">
+                {city.address}
+                {city.venueNote ? ` · ${city.venueNote}` : ""}
+              </p>
+              <p className="eyebrow mt-8 mb-3">Quando</p>
+              <p className="font-display text-2xl text-foreground">
+                Domenica {city.launchLabel} · 10:30
+              </p>
+              <a
+                href={city.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 btn-outline w-full"
+              >
+                Apri in Google Maps
+              </a>
+            </div>
+          ) : (
+            <ul className="space-y-5 text-foreground/80 leading-relaxed">
+              <li><strong className="text-primary">Studi biblici personali.</strong> Possiamo incontrarci di persona o online per leggere insieme la Bibbia.</li>
+              <li><strong className="text-primary">Preghiera.</strong> Stiamo pregando per {city.name} — unisciti a noi.</li>
+              <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere quando, dove e come parteciperemo alle prime funzioni.</li>
+              <li><strong className="text-primary">Funzioni a Milano.</strong> Nel frattempo, sei il benvenuto la domenica alle 10:30 nella chiesa di Milano.</li>
+            </ul>
+          )}
         </section>
       </>
     );
@@ -300,7 +335,18 @@ export function ContactSection({ city }: { city: CityConfig }) {
           <ul className="space-y-3 text-foreground/85">
             <li><span className="eyebrow block mb-1">Email</span>info@chiesadicristoitalia.it</li>
             {isPlant ? (
-              <li><span className="eyebrow block mb-1">Stato</span>Chiesa in fondazione · {city.launchLabel ?? "in arrivo"}</li>
+              <>
+                <li><span className="eyebrow block mb-1">Inaugurazione</span>{city.launchLabel ?? "in arrivo"}</li>
+                {city.venueName && (
+                  <li>
+                    <span className="eyebrow block mb-1">Dove</span>
+                    {city.venueName}
+                    <br />
+                    {city.address}
+                    {city.venueNote ? ` · ${city.venueNote}` : ""}
+                  </li>
+                )}
+              </>
             ) : (
               <>
                 <li><span className="eyebrow block mb-1">Indirizzo</span>{city.address}<br />{city.cap} {city.name}</li>
