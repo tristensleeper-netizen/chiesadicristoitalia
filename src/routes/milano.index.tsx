@@ -97,17 +97,18 @@ export const Route = createFileRoute("/milano/")({
       { title: "Chiesa di Cristo di Milano — Funzione domenicale" },
       {
         name: "description",
-        content:
-          "Domenica 4 ottobre la comunità di Milano si ritrova a Bologna per una funzione speciale alle 10:30, all'Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione in Corso di Porta Vigentina questa domenica.",
+        content: isBolognaServiceDay()
+          ? "Oggi, 4 ottobre, la comunità di Milano si ritrova a Bologna alle 10:30 all'Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione in Corso di Porta Vigentina."
+          : "Chiesa di Cristo di Milano: funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, 20122 Milano. Sei il benvenuto.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
-        content: "Domenica 4 ottobre: funzione speciale a Bologna alle 10:30, Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione a Milano in Corso di Porta Vigentina.",
+        content: isBolognaServiceDay()
+          ? "Oggi, 4 ottobre: funzione speciale a Bologna alle 10:30, Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione a Milano."
+          : "Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano. Vieni a conoscerci.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/milano" },
-      { property: "og:image", content: heroMilano },
-      { name: "twitter:image", content: heroMilano },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/milano" }],
     scripts: [
