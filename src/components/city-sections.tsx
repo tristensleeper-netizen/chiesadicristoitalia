@@ -266,6 +266,7 @@ export function EventsSection({ city }: { city: CityConfig }) {
   if (city.isPlant) {
     return (
       <>
+        <SpecialServiceNotice context="bologna" />
         <PageHero
           slot={`${cityKey}.hero` as never}
           image={heroImage}
@@ -293,6 +294,7 @@ export function EventsSection({ city }: { city: CityConfig }) {
 
   return (
     <>
+      <SpecialServiceNotice />
       <PageHero
         slot={`${cityKey}.hero` as never}
         image={heroImage}
@@ -316,8 +318,10 @@ export function EventsSection({ city }: { city: CityConfig }) {
 export function ContactSection({ city }: { city: CityConfig }) {
   const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
   const isPlant = city.isPlant === true;
+  const visitingMilanoToday = city.name === "Milano" && isBolognaServiceDay();
   return (
     <>
+      <SpecialServiceNotice context={isPlant ? "bologna" : "milano"} />
       <PageHero
         slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
@@ -356,7 +360,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
               </>
             ) : (
               <>
-                <li><span className="eyebrow block mb-1">Indirizzo</span>{city.address}<br />{city.cap} {city.name}</li>
+                <li><span className="eyebrow block mb-1">{visitingMilanoToday ? "Indirizzo di oggi" : "Indirizzo"}</span>{visitingMilanoToday ? `${BOLOGNA_SERVICE.venue}, ${BOLOGNA_SERVICE.address}` : city.address}<br />{visitingMilanoToday ? BOLOGNA_SERVICE.locality : `${city.cap} ${city.name}`}</li>
                 <li><span className="eyebrow block mb-1">Funzione</span>{city.serviceTime}</li>
               </>
             )}

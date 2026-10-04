@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VisitSection } from "@/components/city-sections";
 import { milanoConfig } from "@/lib/cities";
-import heroMilano from "@/assets/hero-milano.jpg";
 
 export const Route = createFileRoute("/milano/visita")({
   head: () => ({

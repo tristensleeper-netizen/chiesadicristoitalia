@@ -24,9 +24,9 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Milano",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Piazza S. Matteo, 24",
-        postalCode: "20093",
-        addressLocality: "Cologno Monzese",
+        streetAddress: "Corso di Porta Vigentina 15a",
+        postalCode: "20122",
+        addressLocality: "Milano",
         addressCountry: "IT",
       },
     },
@@ -35,6 +35,8 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Bologna",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "Via Cesare Boldrini, 11",
+        postalCode: "40121",
         addressLocality: "Bologna",
         addressCountry: "IT",
       },
@@ -79,7 +81,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. La comunità di Milano si riunisce ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torna in Corso di Porta Vigentina 15a. Ogni comunità è autonoma.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna ci troviamo all'Hotel Europa in Via Cesare Boldrini 11. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
               },
             },
             {
@@ -95,7 +97,7 @@ export const Route = createFileRoute("/")({
               name: "Quando si riunisce la chiesa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Le riunioni domenicali a Milano si tengono alle 10:30. La comunità di Bologna è in fase di fondazione con lancio previsto per settembre 2026. Per orari aggiornati visita la pagina della tua città.",
+                text: "Le funzioni domenicali iniziano alle 10:30. La prima funzione a Bologna si tiene domenica 4 ottobre 2026 all'Hotel Europa. Per eventuali variazioni visita la pagina della tua città.",
               },
             },
             {
