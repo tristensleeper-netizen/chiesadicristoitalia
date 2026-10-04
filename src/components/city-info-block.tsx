@@ -108,8 +108,7 @@ export function CityInfoBlock({
           </a>
 
           {/* 3. Email — soft glass with gold halo */}
-          <Link
-            to={contactTo}
+          <div
             className="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl border border-accent/40 p-5 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_color-mix(in_oklab,var(--accent)_50%,transparent)]"
             style={{
               background:
@@ -119,7 +118,7 @@ export function CityInfoBlock({
             <div aria-hidden className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-accent/40 blur-3xl transition-transform duration-700 group-hover:scale-150" />
             <div aria-hidden className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--accent)_35%,transparent),transparent_60%)]" />
 
-            <div className="relative z-10">
+            <Link to={contactTo} className="relative z-10 block">
               <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-md ring-1 ring-accent/60 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                 <Mail className="h-4 w-4" strokeWidth={2} />
               </div>
@@ -132,21 +131,20 @@ export function CityInfoBlock({
               <p className="mt-1.5 text-xs leading-relaxed text-foreground/65">
                 Rispondiamo entro 24 ore.
               </p>
-            </div>
+            </Link>
 
             <div className="relative z-10 mt-4 flex items-center gap-2">
-              <span className="rounded-full bg-primary px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-primary-foreground transition-colors duration-300 group-hover:bg-foreground">
+              <Link to={contactTo} className="rounded-full bg-primary px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-primary-foreground transition-colors duration-300 group-hover:bg-foreground">
                 Scrivici
-              </span>
+              </Link>
               <a
                 href={mailto}
-                onClick={(e) => e.stopPropagation()}
                 className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground/60 underline decoration-dotted underline-offset-4 hover:text-primary"
               >
                 Mail diretta
               </a>
             </div>
-          </Link>
+          </div>
 
         </div>
       </div>
