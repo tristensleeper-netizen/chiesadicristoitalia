@@ -197,7 +197,7 @@ function MilanoHome() {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow mb-2">Cosa succede</p>
-            <h2 className="font-display text-3xl md:text-4xl">Questa settimana a Milano</h2>
+            <h2 className="font-display text-3xl md:text-4xl">{specialServiceToday ? "Questa settimana · funzione speciale a Bologna" : "Questa settimana a Milano"}</h2>
           </div>
           <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
             Calendario completo →

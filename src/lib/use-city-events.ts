@@ -65,11 +65,18 @@ function formatDateLabel(d: Date) {
   return `${ITALIAN_DAYS[d.getDay()]} ${d.getDate()} ${ITALIAN_MONTHS[d.getMonth()]}`;
 }
 
+/** Church service times are always shown in the venue's local time. */
+export function formatChurchTime(d: Date) {
+  return new Intl.DateTimeFormat("it-IT", {
+    hour: "2-digit", minute: "2-digit", timeZone: "Europe/Rome",
+  }).format(d);
+}
+
 export function rowToRotator(r: CityEventRow): RotatorEvent {
   // Prefer real date if present
   if (r.start_at) {
     const d = new Date(r.start_at);
-    const time = d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+    const time = formatChurchTime(d);
     return {
       date: formatDateLabel(d),
       time,
@@ -90,7 +97,7 @@ export function rowToRotator(r: CityEventRow): RotatorEvent {
 }
 
 export function occurrenceToRotator(occ: EventOccurrence): RotatorEvent {
-  const time = occ.date.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+  const time = formatChurchTime(occ.date);
   return {
     date: formatDateLabel(occ.date),
     time,
