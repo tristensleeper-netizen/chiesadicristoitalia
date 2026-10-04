@@ -329,3 +329,7 @@
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
+
+[aria-label="Avviso sulla funzione di oggi"] + .page-hero-shell {
+  margin-top: 0;
+}

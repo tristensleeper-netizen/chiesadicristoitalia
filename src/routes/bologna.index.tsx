@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { SpecialServiceNotice } from "@/components/special-service-notice";
 
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
@@ -94,6 +95,7 @@ function BolognaHome() {
 
   return (
     <>
+      <SpecialServiceNotice context="bologna" />
       <PageHero
         slot="bologna.hero"
         image={heroImage}
@@ -134,7 +136,7 @@ function BolognaHome() {
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/75">
             <span>Preghiera, riflessione dalla Bibbia e lode</span>
             <span>Atmosfera amichevole e informale</span>
-            <span>Libero a tutti</span>
+            <span>Aperto a tutti</span>
             <span>In italiano, con traduzione in inglese</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">

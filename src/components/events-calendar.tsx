@@ -12,7 +12,7 @@ import {
 } from "date-fns";
 import { it } from "date-fns/locale";
 import { ChevronLeft, ChevronRight, MapPin, Clock } from "lucide-react";
-import { useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
+import { formatChurchTime, useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
 
 interface Props {
   city: "milano" | "bologna";
@@ -132,7 +132,7 @@ export function EventsCalendar({ city }: Props) {
                   {events.slice(0, 2).map((e) => (
                     <div key={e.id} className="min-w-0">
                       <p className="text-[9px] leading-tight font-semibold text-primary truncate">
-                        {format(e.date, "HH:mm")}
+                        {formatChurchTime(e.date)}
                       </p>
                       <p className="text-[9px] leading-tight text-foreground/75 truncate">
                         {e.title}
@@ -180,8 +180,8 @@ export function EventsCalendar({ city }: Props) {
                 <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-1">
                     <Clock className="h-3 w-3" />
-                    {format(e.date, "HH:mm")}
-                    {e.end ? ` – ${format(e.end, "HH:mm")}` : ""}
+                    {formatChurchTime(e.date)}
+                    {e.end ? ` – ${formatChurchTime(e.end)}` : ""}
                   </span>
                   {e.location && (
                     <span className="inline-flex items-center gap-1">
@@ -241,7 +241,7 @@ export function EventsCalendar({ city }: Props) {
                   <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
                     <span className="inline-flex items-center gap-1 capitalize">
                       <Clock className="h-3 w-3" />
-                      {format(e.date, "EEE HH:mm", { locale: it })}
+                      {format(e.date, "EEE", { locale: it })} {formatChurchTime(e.date)}
                     </span>
                     {e.location && (
                       <span className="inline-flex items-center gap-1 truncate">

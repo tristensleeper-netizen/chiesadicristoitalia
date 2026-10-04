@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
+import { SpecialServiceNotice } from "@/components/special-service-notice";
+import { isBolognaServiceDay } from "@/lib/special-service";
 import { VideoPopup } from "@/components/video-popup";
 import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
@@ -22,9 +24,9 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Milano",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Piazza S. Matteo, 24",
-        postalCode: "20093",
-        addressLocality: "Cologno Monzese",
+        streetAddress: "Corso di Porta Vigentina 15a",
+        postalCode: "20122",
+        addressLocality: "Milano",
         addressCountry: "IT",
       },
     },
@@ -33,6 +35,8 @@ const churchJsonLd = {
       name: "Chiesa di Cristo di Bologna",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "Via Cesare Boldrini, 11",
+        postalCode: "40121",
         addressLocality: "Bologna",
         addressCountry: "IT",
       },
@@ -77,7 +81,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. La comunità di Milano si riunisce ogni domenica alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto 2026; dal settembre torna in Corso di Porta Vigentina 15a. Ogni comunità è autonoma.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna ci troviamo all'Hotel Europa in Via Cesare Boldrini 11. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
               },
             },
             {
@@ -93,7 +97,7 @@ export const Route = createFileRoute("/")({
               name: "Quando si riunisce la chiesa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Le riunioni domenicali a Milano si tengono alle 10:30. La comunità di Bologna è in fase di fondazione con lancio previsto per settembre 2026. Per orari aggiornati visita la pagina della tua città.",
+                text: "Le funzioni domenicali iniziano alle 10:30. La prima funzione a Bologna si tiene domenica 4 ottobre 2026 all'Hotel Europa. Per eventuali variazioni visita la pagina della tua città.",
               },
             },
             {
@@ -118,6 +122,7 @@ function HomePage() {
   const bolognaImg = useSlotImage("home.bologna", heroBologna);
   return (
     <>
+      <SpecialServiceNotice context="italia" />
       <PageHero
         slot="home.hero"
         image={homeHero}
@@ -139,7 +144,7 @@ function HomePage() {
             image={milanoImg}
             name="Milano"
             tagline="Chiesa di Cristo di Milano"
-            description="Funzione domenicale alle 10:30 a Cologno Monzese (Piazza S. Matteo, 24) fino ad agosto; poi torniamo nel cuore di Milano."
+            description={isBolognaServiceDay() ? "Oggi, 4 ottobre, la comunità di Milano si ritrova a Bologna all’Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione a Milano." : "Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano."}
             accent="from-emerald-900/40 to-emerald-950/80"
           />
           <CityCard
@@ -147,7 +152,7 @@ function HomePage() {
             image={bolognaImg}
             name="Bologna"
             tagline="Chiesa di Cristo di Bologna"
-            description="Chiesa in fondazione. Lancio previsto per settembre 2026."
+            description="Inaugurazione domenica 4 ottobre 2026 alle 10:30, Hotel Europa – Sala Madrid, Via Cesare Boldrini 11."
             accent="from-red-900/40 to-red-950/80"
           />
         </div>

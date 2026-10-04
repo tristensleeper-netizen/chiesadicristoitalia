@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
+import { formatChurchTime, useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Props {
@@ -241,10 +241,7 @@ export function EventsWeekCalendar({
                 ) : (
                   <ul className="space-y-2.5 flex-1 divide-y divide-border/40">
                     {list.map((occ, idx) => {
-                      const time = occ.date.toLocaleTimeString("it-IT", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      });
+                      const time = formatChurchTime(occ.date);
                       const truncCls = isPressed
                         ? "break-words"
                         : "whitespace-nowrap overflow-hidden text-ellipsis";
