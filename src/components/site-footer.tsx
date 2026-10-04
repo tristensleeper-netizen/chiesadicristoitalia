@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { BOLOGNA_SERVICE, isBolognaServiceDay } from "@/lib/special-service";
 
 export function SiteFooter() {
   return (
@@ -55,9 +56,15 @@ export function SiteFooter() {
           </p>
           <ul className="space-y-2 text-sm text-primary-foreground/85">
             <li>info@chiesadicristoitalia.it</li>
-            <li>Piazza S. Matteo, 24</li>
-            <li>20093 Cologno Monzese, MI</li>
-            <li className="text-xs text-primary-foreground/60 italic">Fino ad agosto 2026; poi Corso di Porta Vigentina 15a, Milano</li>
+            {isBolognaServiceDay() ? (
+              <>
+                <li>Oggi: {BOLOGNA_SERVICE.venue}</li>
+                <li>{BOLOGNA_SERVICE.address}, {BOLOGNA_SERVICE.locality}</li>
+                <li className="text-xs text-primary-foreground/70">Nessuna funzione a Milano oggi</li>
+              </>
+            ) : (
+              <><li>Corso di Porta Vigentina 15a</li><li>20122 Milano</li></>
+            )}
           </ul>
         </div>
       </div>

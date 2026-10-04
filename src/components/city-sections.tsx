@@ -5,6 +5,8 @@ import { Link } from "@tanstack/react-router";
 import { useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
 import { EventsCalendar } from "@/components/events-calendar";
+import { SpecialServiceNotice } from "@/components/special-service-notice";
+import { BOLOGNA_SERVICE, isBolognaServiceDay } from "@/lib/special-service";
 import worship from "@/assets/worship.jpg";
 import bibleStudy from "@/assets/bible-study.jpg";
 import milanoFamily from "@/assets/milano-family.jpg";
@@ -153,10 +155,13 @@ export function BeliefsSection({ city }: { city: CityConfig }) {
 
 export function VisitSection({ city }: { city: CityConfig }) {
   const heroImage = useActiveHero(city.name.toLowerCase() as "milano" | "bologna", city.hero);
+  const specialServiceToday = isBolognaServiceDay();
+  const visitingMilanoToday = city.name === "Milano" && specialServiceToday;
 
   if (city.isPlant) {
     return (
       <>
+        <SpecialServiceNotice context="bologna" />
         <PageHero
           slot={`${city.name.toLowerCase()}.hero` as never}
           image={heroImage}
@@ -211,12 +216,13 @@ export function VisitSection({ city }: { city: CityConfig }) {
 
   return (
     <>
+      <SpecialServiceNotice />
       <PageHero
         slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
         eyebrow={`Visita · ${city.name}`}
-        title={<>Vieni a trovarci<br />questa domenica.</>}
-        subtitle={`${city.serviceTime} · ${city.address}, ${city.cap} ${city.name}`}
+        title={visitingMilanoToday ? <>Oggi ci vediamo<br />a Bologna.</> : <>Vieni a trovarci<br />questa domenica.</>}
+        subtitle={visitingMilanoToday ? `Domenica 4 ottobre · ${BOLOGNA_SERVICE.time} · ${BOLOGNA_SERVICE.venue}, ${BOLOGNA_SERVICE.address}, ${BOLOGNA_SERVICE.locality}. Nessuna funzione in Corso di Porta Vigentina oggi.` : `${city.serviceTime} · ${city.address}, ${city.cap} ${city.name}`}
         primaryCta={{ to: `${city.basePath}/contatti`, label: "Avvisaci che vieni" }}
         height="medium"
       />
@@ -233,13 +239,14 @@ export function VisitSection({ city }: { city: CityConfig }) {
           </ul>
         </div>
         <div className="rounded-2xl overflow-hidden border border-border bg-card p-8">
-          <p className="eyebrow mb-3">Indirizzo</p>
-          <p className="font-display text-2xl text-foreground">{city.address}</p>
-          <p className="text-foreground/70">{city.cap} {city.name}</p>
+          <p className="eyebrow mb-3">{visitingMilanoToday ? "Indirizzo di oggi" : "Indirizzo"}</p>
+          {visitingMilanoToday && <p className="font-display text-xl text-primary">{BOLOGNA_SERVICE.venue}</p>}
+          <p className="font-display text-2xl text-foreground">{visitingMilanoToday ? BOLOGNA_SERVICE.address : city.address}</p>
+          <p className="text-foreground/70">{visitingMilanoToday ? BOLOGNA_SERVICE.locality : `${city.cap} ${city.name}`}</p>
           <p className="eyebrow mt-8 mb-3">Orario</p>
           <p className="font-display text-2xl text-foreground">{city.serviceTime}</p>
           <a
-            href={city.mapsUrl}
+            href={visitingMilanoToday ? BOLOGNA_SERVICE.mapsUrl : city.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 btn-outline w-full"

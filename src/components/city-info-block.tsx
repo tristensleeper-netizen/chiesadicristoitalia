@@ -10,6 +10,8 @@ interface CityInfoProps {
   mapsUrl: string;
   visitPath?: string;
   contactPath?: string;
+  venueLabel?: string;
+  locationLabel?: string;
 }
 
 export function CityInfoBlock({
@@ -21,6 +23,8 @@ export function CityInfoBlock({
   mapsUrl,
   visitPath,
   contactPath,
+  venueLabel,
+  locationLabel,
 }: CityInfoProps) {
   const emailAddr = email ?? "info@chiesadicristoitalia.it";
   const mailto = `mailto:${emailAddr}`;
@@ -84,11 +88,12 @@ export function CityInfoBlock({
                 <MapPin className="h-4 w-4" strokeWidth={1.75} />
               </div>
               <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
-                La nostra sede
+                {locationLabel ?? "La nostra sede"}
               </p>
+              {venueLabel && <p className="text-sm font-medium text-primary mb-1">{venueLabel}</p>}
               <h3 className="font-display text-xl leading-snug text-foreground">{address}</h3>
               <p className="mt-1.5 text-xs text-muted-foreground">
-                {cap} {city}, Italia
+                {locationLabel ? `${cap}, Italia` : `${cap} ${city}, Italia`}
               </p>
             </div>
 
