@@ -9,45 +9,55 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SuDiNoiRouteImport } from './routes/su-di-noi'
-import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
-import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SermoniIndexRouteImport } from './routes/sermoni.index'
-import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
-import { Route as MilanoIndexRouteImport } from './routes/milano.index'
-import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
-import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
+import { Route as ChiesaDiCristoDiBolognaRecruitmentPageRouteImport } from './routes/chiesa-di-cristo-di-bologna-recruitment-page'
+import { Route as SuDiNoiRouteImport } from './routes/su-di-noi'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as SermoniSlugRouteImport } from './routes/sermoni.$slug'
-import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
-import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
-import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
-import { Route as MilanoDevozionaleRouteImport } from './routes/milano.devozionale'
-import { Route as MilanoCosaCrediamoRouteImport } from './routes/milano.cosa-crediamo'
-import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
-import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
-import { Route as DevozionaleSlugRouteImport } from './routes/devozionale.$slug'
-import { Route as BolognaVisitaRouteImport } from './routes/bologna.visita'
-import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
-import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
-import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
-import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
-import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
-import { Route as AdminMediaRouteImport } from './routes/admin.media'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as AdminHeroRouteImport } from './routes/admin.hero'
-import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
 import { Route as AdminAdminsRouteImport } from './routes/admin.admins'
+import { Route as AdminEventiRouteImport } from './routes/admin.eventi'
+import { Route as AdminHeroRouteImport } from './routes/admin.hero'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
+import { Route as AdminMessaggiRouteImport } from './routes/admin.messaggi'
+import { Route as BolognaIndexRouteImport } from './routes/bologna.index'
+import { Route as BolognaChiSiamoRouteImport } from './routes/bologna.chi-siamo'
+import { Route as BolognaContattiRouteImport } from './routes/bologna.contatti'
+import { Route as BolognaCosaCrediamoRouteImport } from './routes/bologna.cosa-crediamo'
+import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
+import { Route as BolognaVisitaRouteImport } from './routes/bologna.visita'
+import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
+import { Route as DevozionaleSlugRouteImport } from './routes/devozionale.$slug'
+import { Route as MilanoIndexRouteImport } from './routes/milano.index'
+import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
+import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
+import { Route as MilanoCosaCrediamoRouteImport } from './routes/milano.cosa-crediamo'
+import { Route as MilanoDevozionaleRouteImport } from './routes/milano.devozionale'
+import { Route as MilanoEventiRouteImport } from './routes/milano.eventi'
+import { Route as MilanoVisitaRouteImport } from './routes/milano.visita'
+import { Route as RisorseIndexRouteImport } from './routes/risorse.index'
+import { Route as RisorseSlugRouteImport } from './routes/risorse.$slug'
+import { Route as SermoniIndexRouteImport } from './routes/sermoni.index'
+import { Route as SermoniSlugRouteImport } from './routes/sermoni.$slug'
 import { Route as AdminDevozionaliIndexRouteImport } from './routes/admin.devozionali.index'
-import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
 import { Route as AdminDevozionaliIdRouteImport } from './routes/admin.devozionali.$id'
+import { Route as AdminRisorseIdRouteImport } from './routes/admin.risorse.$id'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
-const SuDiNoiRoute = SuDiNoiRouteImport.update({
-  id: '/su-di-noi',
-  path: '/su-di-noi',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChiSiamoRoute = ChiSiamoRouteImport.update({
+  id: '/chi-siamo',
+  path: '/chi-siamo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChiesaDiCristoDiBolognaRecruitmentPageRoute =
@@ -56,44 +66,9 @@ const ChiesaDiCristoDiBolognaRecruitmentPageRoute =
     path: '/chiesa-di-cristo-di-bologna-recruitment-page',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ChiSiamoRoute = ChiSiamoRouteImport.update({
-  id: '/chi-siamo',
-  path: '/chi-siamo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SermoniIndexRoute = SermoniIndexRouteImport.update({
-  id: '/sermoni/',
-  path: '/sermoni/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RisorseIndexRoute = RisorseIndexRouteImport.update({
-  id: '/risorse/',
-  path: '/risorse/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoIndexRoute = MilanoIndexRouteImport.update({
-  id: '/milano/',
-  path: '/milano/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevozionaleIndexRoute = DevozionaleIndexRouteImport.update({
-  id: '/devozionale/',
-  path: '/devozionale/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaIndexRoute = BolognaIndexRouteImport.update({
-  id: '/bologna/',
-  path: '/bologna/',
+const SuDiNoiRoute = SuDiNoiRouteImport.update({
+  id: '/su-di-noi',
+  path: '/su-di-noi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -101,94 +76,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const SermoniSlugRoute = SermoniSlugRouteImport.update({
-  id: '/sermoni/$slug',
-  path: '/sermoni/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RisorseSlugRoute = RisorseSlugRouteImport.update({
-  id: '/risorse/$slug',
-  path: '/risorse/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
-  id: '/milano/visita',
-  path: '/milano/visita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoEventiRoute = MilanoEventiRouteImport.update({
-  id: '/milano/eventi',
-  path: '/milano/eventi',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoDevozionaleRoute = MilanoDevozionaleRouteImport.update({
-  id: '/milano/devozionale',
-  path: '/milano/devozionale',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoCosaCrediamoRoute = MilanoCosaCrediamoRouteImport.update({
-  id: '/milano/cosa-crediamo',
-  path: '/milano/cosa-crediamo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoContattiRoute = MilanoContattiRouteImport.update({
-  id: '/milano/contatti',
-  path: '/milano/contatti',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MilanoChiSiamoRoute = MilanoChiSiamoRouteImport.update({
-  id: '/milano/chi-siamo',
-  path: '/milano/chi-siamo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevozionaleSlugRoute = DevozionaleSlugRouteImport.update({
-  id: '/devozionale/$slug',
-  path: '/devozionale/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaVisitaRoute = BolognaVisitaRouteImport.update({
-  id: '/bologna/visita',
-  path: '/bologna/visita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaEventiRoute = BolognaEventiRouteImport.update({
-  id: '/bologna/eventi',
-  path: '/bologna/eventi',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaCosaCrediamoRoute = BolognaCosaCrediamoRouteImport.update({
-  id: '/bologna/cosa-crediamo',
-  path: '/bologna/cosa-crediamo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaContattiRoute = BolognaContattiRouteImport.update({
-  id: '/bologna/contatti',
-  path: '/bologna/contatti',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BolognaChiSiamoRoute = BolognaChiSiamoRouteImport.update({
-  id: '/bologna/chi-siamo',
-  path: '/bologna/chi-siamo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
-  id: '/messaggi',
-  path: '/messaggi',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMediaRoute = AdminMediaRouteImport.update({
-  id: '/media',
-  path: '/media',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminHeroRoute = AdminHeroRouteImport.update({
-  id: '/hero',
-  path: '/hero',
+const AdminAdminsRoute = AdminAdminsRouteImport.update({
+  id: '/admins',
+  path: '/admins',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminEventiRoute = AdminEventiRouteImport.update({
@@ -196,24 +86,134 @@ const AdminEventiRoute = AdminEventiRouteImport.update({
   path: '/eventi',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAdminsRoute = AdminAdminsRouteImport.update({
-  id: '/admins',
-  path: '/admins',
+const AdminHeroRoute = AdminHeroRouteImport.update({
+  id: '/hero',
+  path: '/hero',
   getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessaggiRoute = AdminMessaggiRouteImport.update({
+  id: '/messaggi',
+  path: '/messaggi',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BolognaIndexRoute = BolognaIndexRouteImport.update({
+  id: '/bologna/',
+  path: '/bologna/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolognaChiSiamoRoute = BolognaChiSiamoRouteImport.update({
+  id: '/bologna/chi-siamo',
+  path: '/bologna/chi-siamo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolognaContattiRoute = BolognaContattiRouteImport.update({
+  id: '/bologna/contatti',
+  path: '/bologna/contatti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolognaCosaCrediamoRoute = BolognaCosaCrediamoRouteImport.update({
+  id: '/bologna/cosa-crediamo',
+  path: '/bologna/cosa-crediamo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolognaEventiRoute = BolognaEventiRouteImport.update({
+  id: '/bologna/eventi',
+  path: '/bologna/eventi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolognaVisitaRoute = BolognaVisitaRouteImport.update({
+  id: '/bologna/visita',
+  path: '/bologna/visita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevozionaleIndexRoute = DevozionaleIndexRouteImport.update({
+  id: '/devozionale/',
+  path: '/devozionale/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevozionaleSlugRoute = DevozionaleSlugRouteImport.update({
+  id: '/devozionale/$slug',
+  path: '/devozionale/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoIndexRoute = MilanoIndexRouteImport.update({
+  id: '/milano/',
+  path: '/milano/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoChiSiamoRoute = MilanoChiSiamoRouteImport.update({
+  id: '/milano/chi-siamo',
+  path: '/milano/chi-siamo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoContattiRoute = MilanoContattiRouteImport.update({
+  id: '/milano/contatti',
+  path: '/milano/contatti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoCosaCrediamoRoute = MilanoCosaCrediamoRouteImport.update({
+  id: '/milano/cosa-crediamo',
+  path: '/milano/cosa-crediamo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoDevozionaleRoute = MilanoDevozionaleRouteImport.update({
+  id: '/milano/devozionale',
+  path: '/milano/devozionale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoEventiRoute = MilanoEventiRouteImport.update({
+  id: '/milano/eventi',
+  path: '/milano/eventi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MilanoVisitaRoute = MilanoVisitaRouteImport.update({
+  id: '/milano/visita',
+  path: '/milano/visita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RisorseIndexRoute = RisorseIndexRouteImport.update({
+  id: '/risorse/',
+  path: '/risorse/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RisorseSlugRoute = RisorseSlugRouteImport.update({
+  id: '/risorse/$slug',
+  path: '/risorse/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SermoniIndexRoute = SermoniIndexRouteImport.update({
+  id: '/sermoni/',
+  path: '/sermoni/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SermoniSlugRoute = SermoniSlugRouteImport.update({
+  id: '/sermoni/$slug',
+  path: '/sermoni/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminDevozionaliIndexRoute = AdminDevozionaliIndexRouteImport.update({
   id: '/devozionali/',
   path: '/devozionali/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminRisorseIdRoute = AdminRisorseIdRouteImport.update({
-  id: '/risorse/$id',
-  path: '/risorse/$id',
-  getParentRoute: () => AdminRoute,
-} as any)
 const AdminDevozionaliIdRoute = AdminDevozionaliIdRouteImport.update({
   id: '/devozionali/$id',
   path: '/devozionali/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRisorseIdRoute = AdminRisorseIdRouteImport.update({
+  id: '/risorse/$id',
+  path: '/risorse/$id',
   getParentRoute: () => AdminRoute,
 } as any)
 const LovableEmailQueueProcessRoute =
@@ -477,25 +477,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/su-di-noi': {
-      id: '/su-di-noi'
-      path: '/su-di-noi'
-      fullPath: '/su-di-noi'
-      preLoaderRoute: typeof SuDiNoiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chiesa-di-cristo-di-bologna-recruitment-page': {
-      id: '/chiesa-di-cristo-di-bologna-recruitment-page'
-      path: '/chiesa-di-cristo-di-bologna-recruitment-page'
-      fullPath: '/chiesa-di-cristo-di-bologna-recruitment-page'
-      preLoaderRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chi-siamo': {
-      id: '/chi-siamo'
-      path: '/chi-siamo'
-      fullPath: '/chi-siamo'
-      preLoaderRoute: typeof ChiSiamoRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -505,46 +491,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/chi-siamo': {
+      id: '/chi-siamo'
+      path: '/chi-siamo'
+      fullPath: '/chi-siamo'
+      preLoaderRoute: typeof ChiSiamoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sermoni/': {
-      id: '/sermoni/'
-      path: '/sermoni'
-      fullPath: '/sermoni/'
-      preLoaderRoute: typeof SermoniIndexRouteImport
+    '/chiesa-di-cristo-di-bologna-recruitment-page': {
+      id: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      path: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      fullPath: '/chiesa-di-cristo-di-bologna-recruitment-page'
+      preLoaderRoute: typeof ChiesaDiCristoDiBolognaRecruitmentPageRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/risorse/': {
-      id: '/risorse/'
-      path: '/risorse'
-      fullPath: '/risorse/'
-      preLoaderRoute: typeof RisorseIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/': {
-      id: '/milano/'
-      path: '/milano'
-      fullPath: '/milano/'
-      preLoaderRoute: typeof MilanoIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/devozionale/': {
-      id: '/devozionale/'
-      path: '/devozionale'
-      fullPath: '/devozionale/'
-      preLoaderRoute: typeof DevozionaleIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/': {
-      id: '/bologna/'
-      path: '/bologna'
-      fullPath: '/bologna/'
-      preLoaderRoute: typeof BolognaIndexRouteImport
+    '/su-di-noi': {
+      id: '/su-di-noi'
+      path: '/su-di-noi'
+      fullPath: '/su-di-noi'
+      preLoaderRoute: typeof SuDiNoiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -554,130 +519,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/sermoni/$slug': {
-      id: '/sermoni/$slug'
-      path: '/sermoni/$slug'
-      fullPath: '/sermoni/$slug'
-      preLoaderRoute: typeof SermoniSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/risorse/$slug': {
-      id: '/risorse/$slug'
-      path: '/risorse/$slug'
-      fullPath: '/risorse/$slug'
-      preLoaderRoute: typeof RisorseSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/visita': {
-      id: '/milano/visita'
-      path: '/milano/visita'
-      fullPath: '/milano/visita'
-      preLoaderRoute: typeof MilanoVisitaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/eventi': {
-      id: '/milano/eventi'
-      path: '/milano/eventi'
-      fullPath: '/milano/eventi'
-      preLoaderRoute: typeof MilanoEventiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/devozionale': {
-      id: '/milano/devozionale'
-      path: '/milano/devozionale'
-      fullPath: '/milano/devozionale'
-      preLoaderRoute: typeof MilanoDevozionaleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/cosa-crediamo': {
-      id: '/milano/cosa-crediamo'
-      path: '/milano/cosa-crediamo'
-      fullPath: '/milano/cosa-crediamo'
-      preLoaderRoute: typeof MilanoCosaCrediamoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/contatti': {
-      id: '/milano/contatti'
-      path: '/milano/contatti'
-      fullPath: '/milano/contatti'
-      preLoaderRoute: typeof MilanoContattiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/milano/chi-siamo': {
-      id: '/milano/chi-siamo'
-      path: '/milano/chi-siamo'
-      fullPath: '/milano/chi-siamo'
-      preLoaderRoute: typeof MilanoChiSiamoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/devozionale/$slug': {
-      id: '/devozionale/$slug'
-      path: '/devozionale/$slug'
-      fullPath: '/devozionale/$slug'
-      preLoaderRoute: typeof DevozionaleSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/visita': {
-      id: '/bologna/visita'
-      path: '/bologna/visita'
-      fullPath: '/bologna/visita'
-      preLoaderRoute: typeof BolognaVisitaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/eventi': {
-      id: '/bologna/eventi'
-      path: '/bologna/eventi'
-      fullPath: '/bologna/eventi'
-      preLoaderRoute: typeof BolognaEventiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/cosa-crediamo': {
-      id: '/bologna/cosa-crediamo'
-      path: '/bologna/cosa-crediamo'
-      fullPath: '/bologna/cosa-crediamo'
-      preLoaderRoute: typeof BolognaCosaCrediamoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/contatti': {
-      id: '/bologna/contatti'
-      path: '/bologna/contatti'
-      fullPath: '/bologna/contatti'
-      preLoaderRoute: typeof BolognaContattiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bologna/chi-siamo': {
-      id: '/bologna/chi-siamo'
-      path: '/bologna/chi-siamo'
-      fullPath: '/bologna/chi-siamo'
-      preLoaderRoute: typeof BolognaChiSiamoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/messaggi': {
-      id: '/admin/messaggi'
-      path: '/messaggi'
-      fullPath: '/admin/messaggi'
-      preLoaderRoute: typeof AdminMessaggiRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/media': {
-      id: '/admin/media'
-      path: '/media'
-      fullPath: '/admin/media'
-      preLoaderRoute: typeof AdminMediaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/hero': {
-      id: '/admin/hero'
-      path: '/hero'
-      fullPath: '/admin/hero'
-      preLoaderRoute: typeof AdminHeroRouteImport
+    '/admin/admins': {
+      id: '/admin/admins'
+      path: '/admins'
+      fullPath: '/admin/admins'
+      preLoaderRoute: typeof AdminAdminsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/eventi': {
@@ -687,12 +533,166 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEventiRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/admins': {
-      id: '/admin/admins'
-      path: '/admins'
-      fullPath: '/admin/admins'
-      preLoaderRoute: typeof AdminAdminsRouteImport
+    '/admin/hero': {
+      id: '/admin/hero'
+      path: '/hero'
+      fullPath: '/admin/hero'
+      preLoaderRoute: typeof AdminHeroRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messaggi': {
+      id: '/admin/messaggi'
+      path: '/messaggi'
+      fullPath: '/admin/messaggi'
+      preLoaderRoute: typeof AdminMessaggiRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/bologna/': {
+      id: '/bologna/'
+      path: '/bologna'
+      fullPath: '/bologna/'
+      preLoaderRoute: typeof BolognaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bologna/chi-siamo': {
+      id: '/bologna/chi-siamo'
+      path: '/bologna/chi-siamo'
+      fullPath: '/bologna/chi-siamo'
+      preLoaderRoute: typeof BolognaChiSiamoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bologna/contatti': {
+      id: '/bologna/contatti'
+      path: '/bologna/contatti'
+      fullPath: '/bologna/contatti'
+      preLoaderRoute: typeof BolognaContattiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bologna/cosa-crediamo': {
+      id: '/bologna/cosa-crediamo'
+      path: '/bologna/cosa-crediamo'
+      fullPath: '/bologna/cosa-crediamo'
+      preLoaderRoute: typeof BolognaCosaCrediamoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bologna/eventi': {
+      id: '/bologna/eventi'
+      path: '/bologna/eventi'
+      fullPath: '/bologna/eventi'
+      preLoaderRoute: typeof BolognaEventiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bologna/visita': {
+      id: '/bologna/visita'
+      path: '/bologna/visita'
+      fullPath: '/bologna/visita'
+      preLoaderRoute: typeof BolognaVisitaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devozionale/': {
+      id: '/devozionale/'
+      path: '/devozionale'
+      fullPath: '/devozionale/'
+      preLoaderRoute: typeof DevozionaleIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devozionale/$slug': {
+      id: '/devozionale/$slug'
+      path: '/devozionale/$slug'
+      fullPath: '/devozionale/$slug'
+      preLoaderRoute: typeof DevozionaleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/': {
+      id: '/milano/'
+      path: '/milano'
+      fullPath: '/milano/'
+      preLoaderRoute: typeof MilanoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/chi-siamo': {
+      id: '/milano/chi-siamo'
+      path: '/milano/chi-siamo'
+      fullPath: '/milano/chi-siamo'
+      preLoaderRoute: typeof MilanoChiSiamoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/contatti': {
+      id: '/milano/contatti'
+      path: '/milano/contatti'
+      fullPath: '/milano/contatti'
+      preLoaderRoute: typeof MilanoContattiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/cosa-crediamo': {
+      id: '/milano/cosa-crediamo'
+      path: '/milano/cosa-crediamo'
+      fullPath: '/milano/cosa-crediamo'
+      preLoaderRoute: typeof MilanoCosaCrediamoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/devozionale': {
+      id: '/milano/devozionale'
+      path: '/milano/devozionale'
+      fullPath: '/milano/devozionale'
+      preLoaderRoute: typeof MilanoDevozionaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/eventi': {
+      id: '/milano/eventi'
+      path: '/milano/eventi'
+      fullPath: '/milano/eventi'
+      preLoaderRoute: typeof MilanoEventiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/milano/visita': {
+      id: '/milano/visita'
+      path: '/milano/visita'
+      fullPath: '/milano/visita'
+      preLoaderRoute: typeof MilanoVisitaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risorse/': {
+      id: '/risorse/'
+      path: '/risorse'
+      fullPath: '/risorse/'
+      preLoaderRoute: typeof RisorseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risorse/$slug': {
+      id: '/risorse/$slug'
+      path: '/risorse/$slug'
+      fullPath: '/risorse/$slug'
+      preLoaderRoute: typeof RisorseSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sermoni/': {
+      id: '/sermoni/'
+      path: '/sermoni'
+      fullPath: '/sermoni/'
+      preLoaderRoute: typeof SermoniIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sermoni/$slug': {
+      id: '/sermoni/$slug'
+      path: '/sermoni/$slug'
+      fullPath: '/sermoni/$slug'
+      preLoaderRoute: typeof SermoniSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/devozionali/': {
       id: '/admin/devozionali/'
@@ -701,18 +701,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDevozionaliIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/risorse/$id': {
-      id: '/admin/risorse/$id'
-      path: '/risorse/$id'
-      fullPath: '/admin/risorse/$id'
-      preLoaderRoute: typeof AdminRisorseIdRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/devozionali/$id': {
       id: '/admin/devozionali/$id'
       path: '/devozionali/$id'
       fullPath: '/admin/devozionali/$id'
       preLoaderRoute: typeof AdminDevozionaliIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/risorse/$id': {
+      id: '/admin/risorse/$id'
+      path: '/risorse/$id'
+      fullPath: '/admin/risorse/$id'
+      preLoaderRoute: typeof AdminRisorseIdRouteImport
       parentRoute: typeof AdminRoute
     }
     '/lovable/email/queue/process': {
