@@ -19,15 +19,8 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una nuova comunità cristiana nel cuore di Bologna: ogni domenica alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode; aperto a tutti, con traduzione in inglese.",
+  "description": "Una comunità cristiana a Bologna, senza un edificio di culto. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
   "email": "info@chiesadicristoitalia.it",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Via Cesare Boldrini, 11",
-    "addressLocality": "Bologna",
-    "postalCode": "40121",
-    "addressCountry": "IT"
-  },
   "areaServed": {
     "@type": "City",
     "name": "Bologna",
@@ -49,21 +42,21 @@ const bolognaJsonLd = {
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — Ogni domenica alle 10:30" },
+      { title: "Chiesa di Cristo di Bologna — Camminiamo insieme" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna si ritrova ogni domenica alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode. Aperto a tutti, con traduzione in inglese.",
+          "La Chiesa di Cristo di Bologna: preghiera, Bibbia e lode. Non abbiamo un edificio di culto; il luogo degli incontri è ancora da confermare. Scrivici per partecipare.",
       },
-      { property: "og:title", content: "Chiesa di Cristo di Bologna — Ogni domenica alle 10:30" },
+      { property: "og:title", content: "Chiesa di Cristo di Bologna — Camminiamo insieme" },
       {
         property: "og:description",
         content:
-          "Ci ritroviamo all'Hotel Europa – Sala Madrid (Via Cesare Boldrini 11), ogni domenica alle 10:30. Sei il benvenuto.",
+          "Una famiglia spirituale a Bologna. Il luogo degli incontri è ancora da confermare: scrivici prima di venire.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/bologna" },
-      { property: "og:image", content: heroBologna },
-      { name: "twitter:image", content: heroBologna },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna" }],
     scripts: [
@@ -99,9 +92,9 @@ function BolognaHome() {
       <PageHero
         slot="bologna.hero"
         image={heroImage}
-        eyebrow="Ogni domenica · 10:30"
+        eyebrow="Una comunità cristiana · Bologna"
         title={<>Un nuovo<br />cammino a Bologna.</>}
-        subtitle="La nostra nuova comunità cristiana nel cuore della città: ci ritroviamo ogni domenica all'Hotel Europa – Sala Madrid, in Via Cesare Boldrini 11, a tre minuti dalla Stazione Centrale. Ti aspettiamo alle 10:30."
+        subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo un edificio di culto e il luogo dei nostri incontri è ancora da confermare: scrivici per camminare con noi."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
         secondaryCta={{ to: "/milano", label: "Visita Milano" }}
         align="left"
@@ -112,27 +105,15 @@ function BolognaHome() {
         <div className="rounded-3xl border border-primary/20 bg-primary/5 p-8 md:p-12">
           <div className="flex flex-wrap items-center gap-3 text-primary">
             <CalendarClock className="h-5 w-5" strokeWidth={1.75} />
-            <p className="eyebrow text-primary">La nostra casa a Bologna</p>
+            <p className="eyebrow text-primary">Incontriamoci a Bologna</p>
           </div>
           <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">
-            La funzione domenicale.
+            Il luogo degli incontri è da confermare.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
-            Una nuova comunità cristiana nel cuore della città. Ecco dove e
-            quando ci ritroviamo — e tu sei il benvenuto.
+            Non abbiamo un edificio di culto. Scrivici prima di venire: ti daremo
+            i dettagli del prossimo incontro. Sei il benvenuto.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-6">
-              <p className="eyebrow mb-2">Quando</p>
-              <p className="font-display text-xl text-foreground">Ogni domenica</p>
-              <p className="text-foreground/70">10:30 – 12:15</p>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6">
-              <p className="eyebrow mb-2">Dove</p>
-              <p className="font-display text-xl text-foreground">Hotel Europa – Sala Madrid</p>
-              <p className="text-foreground/70">Via Cesare Boldrini, 11 · a 3 minuti dalla Stazione Centrale</p>
-            </div>
-          </div>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/75">
             <span>Preghiera, riflessione dalla Bibbia e lode</span>
             <span>Atmosfera amichevole e informale</span>
@@ -140,14 +121,6 @@ function BolognaHome() {
             <span>In italiano, con traduzione in inglese</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Via+Cesare+Boldrini+11,+40121+Bologna"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              Apri in Google Maps
-            </a>
             <Link to="/bologna/contatti" className="btn-outline">
               Cammina con noi
             </Link>
@@ -209,8 +182,8 @@ function BolognaHome() {
           <PlantCard
             icon={<Users className="h-6 w-6" strokeWidth={1.75} />}
             title="Vieni a una funzione"
-            text="Ogni domenica alle 10:30 all'Hotel Europa – Sala Madrid: preghiera, Bibbia e lode, in italiano con traduzione in inglese."
-            cta={{ to: "/bologna/visita", label: "Come arrivare" }}
+            text="Preghiera, Bibbia e lode insieme. Il luogo degli incontri è ancora da confermare: scrivici per sapere dove e quando partecipare."
+            cta={{ to: "/bologna/visita", label: "Informazioni sugli incontri" }}
           />
           <PlantCard
             icon={<Sprout className="h-6 w-6" strokeWidth={1.75} />}

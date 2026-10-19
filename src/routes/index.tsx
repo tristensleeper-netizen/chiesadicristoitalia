@@ -33,13 +33,6 @@ const churchJsonLd = {
     {
       "@type": "Place",
       name: "Chiesa di Cristo di Bologna",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Via Cesare Boldrini, 11",
-        postalCode: "40121",
-        addressLocality: "Bologna",
-        addressCountry: "IT",
-      },
     },
   ],
 };
@@ -60,6 +53,8 @@ export const Route = createFileRoute("/")({
           "Una chiesa cristiana basata sulla Bibbia. Comunità a Milano e Bologna. Tutti sono benvenuti.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "canonical", href: "https://chiesadicristoitalia.it/" },
@@ -81,7 +76,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna ci troviamo all'Hotel Europa in Via Cesare Boldrini 11. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna non abbiamo un edificio di culto e il luogo degli incontri è da confermare. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
               },
             },
             {
@@ -97,7 +92,7 @@ export const Route = createFileRoute("/")({
               name: "Quando si riunisce la chiesa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Le funzioni domenicali iniziano alle 10:30. A Bologna ci ritroviamo all'Hotel Europa – Sala Madrid, Via Cesare Boldrini 11. Per eventuali variazioni visita la pagina della tua città.",
+                text: "A Milano ci ritroviamo la domenica alle 10:30. Per Bologna, contattaci per conoscere luogo e dettagli dei prossimi incontri.",
               },
             },
             {
@@ -152,7 +147,7 @@ function HomePage() {
             image={bolognaImg}
             name="Bologna"
             tagline="Chiesa di Cristo di Bologna"
-            description="Ogni domenica alle 10:30, Hotel Europa – Sala Madrid, Via Cesare Boldrini 11."
+            description="Una comunità che cammina insieme nella fede. Il luogo degli incontri è da confermare: scrivici per partecipare."
             accent="from-red-900/40 to-red-950/80"
           />
         </div>
