@@ -9,6 +9,8 @@ export const Route = createFileRoute("/bologna/cosa-crediamo")({
       { name: "description", content: "Cosa crede la Chiesa di Cristo di Bologna: una fede semplice fondata sulla Bibbia, su Gesù e sulla grazia, vissuta in comunità." },
       { property: "og:title", content: "Cosa crediamo — Chiesa di Cristo di Bologna" },
       { property: "og:description", content: "Una fede semplice, biblica e viva." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/cosa-crediamo" }],
   }),

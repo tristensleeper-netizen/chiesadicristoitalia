@@ -136,7 +136,7 @@ function ChiSiamoPage() {
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <CityTile to="/milano" name="Milano" image={heroMilano} subtitle="Chiesa di Cristo di Milano" />
-            <CityTile to="/bologna" name="Bologna" image={heroBologna} subtitle="Domenica · 10:30" />
+            <CityTile to="/bologna" name="Bologna" image={heroBologna} subtitle="Luogo degli incontri da confermare" />
           </div>
         </div>
       </section>

@@ -14,10 +14,10 @@ import milanoFamily from "@/assets/milano-family.jpg";
 export interface CityConfig {
   name: "Milano" | "Bologna";
   hero: string;
-  address: string;
-  cap: string;
+  address?: string;
+  cap?: string;
   serviceTime: string;
-  mapsUrl: string;
+  mapsUrl?: string;
   basePath: "/milano" | "/bologna";
   /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
   isPlant?: boolean;
@@ -61,7 +61,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
               <p>
                 {city.venueName
                   ? `Ci ritroviamo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30.`
-                  : "Per ora non abbiamo una sede stabile né funzioni regolari."}{" "}
+                  : "Non abbiamo un edificio di culto e il luogo dei nostri incontri è ancora da confermare. Scrivici per sapere dove incontrarci."}{" "}
                 Offriamo preghiera, studi biblici personali, lode e l'invito
                 a camminare con noi mentre Dio apre la strada.
               </p>
@@ -163,11 +163,11 @@ export function VisitSection({ city }: { city: CityConfig }) {
           slot={`${city.name.toLowerCase()}.hero` as never}
           image={heroImage}
           eyebrow={`Visita · ${city.name}`}
-          title={<>Ti aspettiamo<br />domenica.</>}
+          title={<>Incontriamoci<br />a Bologna.</>}
           subtitle={
             city.venueName
               ? `La Chiesa di Cristo di ${city.name} si ritrova presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
-              : `La Chiesa di Cristo di ${city.name} è in preparazione. Non abbiamo ancora una sede stabile né funzioni domenicali, ma ci piacerebbe restare in contatto con te.`
+              : `La Chiesa di Cristo di ${city.name} non ha un edificio di culto. Il luogo dei nostri incontri è ancora da confermare: scrivici prima di venire.`
           }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
           height="medium"
@@ -175,7 +175,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
         <section className="container-narrow py-20">
           <p className="eyebrow mb-4">L'annuncio</p>
           <h2 className="font-display text-3xl mb-6">
-            {city.venueName ? "Ecco dove ci ritroviamo." : "In attesa del lancio"}
+            {city.venueName ? "Ecco dove ci ritroviamo." : "Luogo degli incontri da confermare."}
           </h2>
           {city.venueName ? (
             <div className="rounded-2xl border border-border bg-card p-8 max-w-xl">
@@ -202,7 +202,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
             <ul className="space-y-5 text-foreground/80 leading-relaxed">
               <li><strong className="text-primary">Studi biblici personali.</strong> Possiamo incontrarci di persona o online per leggere insieme la Bibbia.</li>
               <li><strong className="text-primary">Preghiera.</strong> Stiamo pregando per {city.name} — unisciti a noi.</li>
-              <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere quando, dove e come parteciperemo alle prime funzioni.</li>
+              <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere dove si terranno i prossimi incontri.</li>
               <li><strong className="text-primary">Funzioni a Milano.</strong> Nel frattempo, sei il benvenuto la domenica alle 10:30 nella chiesa di Milano.</li>
             </ul>
           )}
@@ -269,7 +269,7 @@ export function EventsSection({ city }: { city: CityConfig }) {
           image={heroImage}
           eyebrow={`Eventi · ${city.name}`}
           title={<>La vita della<br />comunità.</>}
-          subtitle={`Ogni domenica alle 10:30 a ${city.name}, all'Hotel Europa – Sala Madrid.`}
+          subtitle={`Preghiera, studi biblici e comunione a ${city.name}. Il luogo degli incontri è ancora da confermare: scrivici per i dettagli.`}
           height="short"
         />
         <section className="container-narrow py-20 text-center">
@@ -344,7 +344,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
             <li><span className="eyebrow block mb-1">Email</span>info@chiesadicristoitalia.it</li>
             {isPlant ? (
               <>
-                <li><span className="eyebrow block mb-1">Funzione</span>Ogni domenica · 10:30</li>
+                <li><span className="eyebrow block mb-1">Luogo degli incontri</span>Da confermare · Scrivici prima di venire.</li>
                 {city.venueName && (
                   <li>
                     <span className="eyebrow block mb-1">Dove</span>

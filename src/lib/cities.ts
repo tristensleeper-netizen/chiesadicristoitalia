@@ -15,14 +15,9 @@ export const milanoConfig: CityConfig = {
 export const bolognaConfig: CityConfig = {
   name: "Bologna",
   hero: heroBologna,
-  address: "Via Cesare Boldrini, 11",
-  cap: "40121",
   serviceTime: "Domenica · 10:30",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Via+Cesare+Boldrini+11,+40121+Bologna",
   basePath: "/bologna",
   // Chiesa in fondazione — inaugurazione domenica 4 ottobre 2026.
   isPlant: true,
   launchLabel: "4 Ottobre 2026",
-  venueName: "Hotel Europa – Sala Madrid",
-  venueNote: "a 3 minuti dalla Stazione Centrale",
 };
