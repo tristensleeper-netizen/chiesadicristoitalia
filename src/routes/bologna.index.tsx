@@ -19,7 +19,7 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una nuova comunità cristiana nel cuore di Bologna: inaugurazione domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode; aperto a tutti, con traduzione in inglese.",
+  "description": "Una nuova comunità cristiana nel cuore di Bologna: ogni domenica alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11. Preghiera, riflessione dalla Bibbia e lode; aperto a tutti, con traduzione in inglese.",
   "email": "info@chiesadicristoitalia.it",
   "address": {
     "@type": "PostalAddress",
@@ -49,17 +49,17 @@ const bolognaJsonLd = {
 export const Route = createFileRoute("/bologna/")({
   head: () => ({
     meta: [
-      { title: "Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
+      { title: "Chiesa di Cristo di Bologna — Ogni domenica alle 10:30" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna inaugura le sue funzioni domenicali domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode. Aperto a tutti, con traduzione in inglese.",
+          "La Chiesa di Cristo di Bologna si ritrova ogni domenica alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Preghiera, riflessione dalla Bibbia e lode. Aperto a tutti, con traduzione in inglese.",
       },
-      { property: "og:title", content: "Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
+      { property: "og:title", content: "Chiesa di Cristo di Bologna — Ogni domenica alle 10:30" },
       {
         property: "og:description",
         content:
-          "Ci ritroveremo all'Hotel Europa – Sala Madrid (Via Cesare Boldrini 11), ogni domenica alle 10:30, a partire da domenica 4 ottobre 2026. Sei invitato.",
+          "Ci ritroviamo all'Hotel Europa – Sala Madrid (Via Cesare Boldrini 11), ogni domenica alle 10:30. Sei il benvenuto.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/bologna" },
       { property: "og:image", content: heroBologna },
@@ -99,9 +99,9 @@ function BolognaHome() {
       <PageHero
         slot="bologna.hero"
         image={heroImage}
-        eyebrow={`Inaugurazione · ${LAUNCH_LABEL}`}
+        eyebrow="Ogni domenica · 10:30"
         title={<>Un nuovo<br />cammino a Bologna.</>}
-        subtitle="La nostra nuova comunità cristiana nasce nel cuore della città: ci ritroveremo all'Hotel Europa – Sala Madrid, in Via Cesare Boldrini 11, a tre minuti dalla Stazione Centrale. La prima funzione è domenica 4 ottobre 2026, alle 10:30."
+        subtitle="La nostra nuova comunità cristiana nel cuore della città: ci ritroviamo ogni domenica all'Hotel Europa – Sala Madrid, in Via Cesare Boldrini 11, a tre minuti dalla Stazione Centrale. Ti aspettiamo alle 10:30."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
         secondaryCta={{ to: "/milano", label: "Visita Milano" }}
         align="left"
@@ -112,19 +112,19 @@ function BolognaHome() {
         <div className="rounded-3xl border border-primary/20 bg-primary/5 p-8 md:p-12">
           <div className="flex flex-wrap items-center gap-3 text-primary">
             <CalendarClock className="h-5 w-5" strokeWidth={1.75} />
-            <p className="eyebrow text-primary">Annuncio · La chiesa avrà una casa</p>
+            <p className="eyebrow text-primary">La nostra casa a Bologna</p>
           </div>
           <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">
-            Inaugurazione della funzione domenicale.
+            La funzione domenicale.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
             Una nuova comunità cristiana nel cuore della città. Ecco dove e
-            quando ci ritroveremo — e tu sei invitato.
+            quando ci ritroviamo — e tu sei il benvenuto.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-6">
               <p className="eyebrow mb-2">Quando</p>
-              <p className="font-display text-xl text-foreground">Domenica 4 ottobre 2026</p>
+              <p className="font-display text-xl text-foreground">Ogni domenica</p>
               <p className="text-foreground/70">10:30 – 12:15</p>
             </div>
             <div className="rounded-2xl border border-border bg-card p-6">
@@ -176,16 +176,15 @@ function BolognaHome() {
           className="rounded-3xl object-cover aspect-[4/5] w-full md:order-last"
         />
         <div>
-          <p className="eyebrow mb-5">Cosa stiamo facendo ora</p>
+          <p className="eyebrow mb-5">La vita della comunità</p>
           <h2 className="font-display text-4xl md:text-5xl leading-tight">
-            Preparare il terreno, un passo alla volta.
+            Crescere insieme, un passo alla volta.
           </h2>
           <p className="mt-6 text-foreground/80 leading-relaxed">
-            In vista dell'inaugurazione di {LAUNCH_LABEL}, ci stiamo dedicando a
-            tre cose: pregare per Bologna e per chi la abita, costruire un
-            gruppo fondatore di persone che vogliono fondare la chiesa insieme, e
-            offrire studi biblici personali a chi è interessato a conoscere
-            Gesù — anche prima della prima funzione.
+            Dalla prima funzione del {LAUNCH_LABEL} ci dedichiamo a tre cose:
+            pregare per Bologna e per chi la abita, costruire insieme una
+            comunità unita dall'amore, e offrire studi biblici personali a chi
+            desidera conoscere Gesù.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/bologna/contatti" className="btn-primary">Inizia uno studio biblico</Link>
@@ -209,14 +208,14 @@ function BolognaHome() {
           />
           <PlantCard
             icon={<Users className="h-6 w-6" strokeWidth={1.75} />}
-            title="Unisciti al gruppo fondatore"
-            text="Vivi a Bologna o nelle vicinanze e senti il chiamato? Stiamo cercando persone che vogliano fondare questa chiesa con noi."
-            cta={{ to: "/bologna/contatti", label: "Voglio esserci" }}
+            title="Vieni a una funzione"
+            text="Ogni domenica alle 10:30 all'Hotel Europa – Sala Madrid: preghiera, Bibbia e lode, in italiano con traduzione in inglese."
+            cta={{ to: "/bologna/visita", label: "Come arrivare" }}
           />
           <PlantCard
             icon={<Sprout className="h-6 w-6" strokeWidth={1.75} />}
             title="Inizia uno studio biblico"
-            text="Anche prima del lancio possiamo incontrarci — di persona o online — per leggere la Bibbia insieme, al tuo ritmo."
+            text="Possiamo incontrarci — di persona o online — per leggere la Bibbia insieme, al tuo ritmo."
             cta={{ to: "/bologna/contatti", label: "Studiamo insieme" }}
           />
         </div>

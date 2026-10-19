@@ -36,11 +36,11 @@ export function AboutSection({ city }: { city: CityConfig }) {
       <PageHero
         slot={`${city.name.toLowerCase()}.hero` as never}
         image={heroImage}
-        eyebrow={city.isPlant ? `Chiesa in fondazione · ${city.name}` : `Chi siamo · ${city.name}`}
-        title={city.isPlant ? <>Una nuova<br />comunità in arrivo.</> : <>Una famiglia<br />spirituale.</>}
+        eyebrow={city.isPlant ? `Una nuova comunità · ${city.name}` : `Chi siamo · ${city.name}`}
+        title={city.isPlant ? <>Una nuova<br />comunità.</> : <>Una famiglia<br />spirituale.</>}
         subtitle={
           city.isPlant
-            ? `Stiamo preparando una nuova Chiesa di Cristo a ${city.name}. Lancio previsto per ${city.launchLabel ?? "presto"}.`
+            ? `Una nuova Chiesa di Cristo a ${city.name}: ci ritroviamo ogni domenica alle 10:30, dal ${city.launchLabel ?? ""}.`
             : `Conosci la Chiesa di Cristo di ${city.name} — chi siamo, cosa ci muove e perché ci ritroviamo ogni domenica.`
         }
         height="medium"
@@ -54,24 +54,21 @@ export function AboutSection({ city }: { city: CityConfig }) {
           {city.isPlant ? (
             <>
               <p>
-                A {city.name} non c'è ancora una Chiesa di Cristo, e questo
-                ci sta a cuore. Stiamo pregando, formando un piccolo gruppo
-                fondatore e preparando il terreno per lanciare una comunità
-                nuova nel {city.launchLabel ?? "prossimo futuro"}.
+                Domenica {city.launchLabel} abbiamo celebrato la prima funzione
+                della Chiesa di Cristo di {city.name}. Rendiamo grazie a Dio per
+                questo nuovo inizio e per ogni persona che cammina con noi.
               </p>
               <p>
                 {city.venueName
-                  ? `Abbiamo una casa: ci ritroveremo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30, a partire dal ${city.launchLabel ?? "prossimamente"}.`
+                  ? `Ci ritroviamo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30.`
                   : "Per ora non abbiamo una sede stabile né funzioni regolari."}{" "}
-                Quello che possiamo offrire oggi è ascolto, preghiera, studi
-                biblici personali e l'invito a camminare con noi mentre Dio
-                apre la strada.
+                Offriamo preghiera, studi biblici personali, lode e l'invito
+                a camminare con noi mentre Dio apre la strada.
               </p>
               <p>
                 Se vivi a {city.name} o nelle vicinanze e ti interessa fare
-                parte di questa avventura — come membro del gruppo fondatore,
-                come amico in preghiera, o semplicemente per restare aggiornato
-                — scrivici. Vogliamo conoscerti.
+                parte di questa comunità — vieni a trovarci una domenica, oppure
+                scrivici. Vogliamo conoscerti.
               </p>
             </>
           ) : (
@@ -166,10 +163,10 @@ export function VisitSection({ city }: { city: CityConfig }) {
           slot={`${city.name.toLowerCase()}.hero` as never}
           image={heroImage}
           eyebrow={`Visita · ${city.name}`}
-          title={<>Apriamo<br />il {city.launchLabel ?? "breve"}.</>}
+          title={<>Ti aspettiamo<br />domenica.</>}
           subtitle={
             city.venueName
-              ? `La Chiesa di Cristo di ${city.name} inaugura le sue funzioni domenicali il ${city.launchLabel ?? "prossimamente"}: ci ritroveremo presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
+              ? `La Chiesa di Cristo di ${city.name} si ritrova presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
               : `La Chiesa di Cristo di ${city.name} è in preparazione. Non abbiamo ancora una sede stabile né funzioni domenicali, ma ci piacerebbe restare in contatto con te.`
           }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
@@ -178,7 +175,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
         <section className="container-narrow py-20">
           <p className="eyebrow mb-4">L'annuncio</p>
           <h2 className="font-display text-3xl mb-6">
-            {city.venueName ? "Ecco dove ci ritroveremo." : "In attesa del lancio"}
+            {city.venueName ? "Ecco dove ci ritroviamo." : "In attesa del lancio"}
           </h2>
           {city.venueName ? (
             <div className="rounded-2xl border border-border bg-card p-8 max-w-xl">
@@ -190,7 +187,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
               </p>
               <p className="eyebrow mt-8 mb-3">Quando</p>
               <p className="font-display text-2xl text-foreground">
-                Domenica {city.launchLabel} · 10:30
+                Ogni domenica · 10:30 – 12:15
               </p>
               <a
                 href={city.mapsUrl}
@@ -271,8 +268,8 @@ export function EventsSection({ city }: { city: CityConfig }) {
           slot={`${cityKey}.hero` as never}
           image={heroImage}
           eyebrow={`Eventi · ${city.name}`}
-          title={<>La comunità<br />sta nascendo.</>}
-          subtitle={`Non abbiamo ancora un calendario di eventi a ${city.name}. Lancio previsto per ${city.launchLabel ?? "presto"}.`}
+          title={<>La vita della<br />comunità.</>}
+          subtitle={`Ogni domenica alle 10:30 a ${city.name}, all'Hotel Europa – Sala Madrid.`}
           height="short"
         />
         <section className="container-narrow py-20 text-center">
@@ -280,7 +277,7 @@ export function EventsSection({ city }: { city: CityConfig }) {
           <h2 className="font-display text-3xl mb-6">Vuoi essere coinvolto?</h2>
           <p className="text-foreground/75 mb-8 max-w-xl mx-auto">
             Scrivici per sapere di più su incontri di preghiera, studi biblici
-            e — quando arriverà il momento — la prima funzione domenicale a {city.name}.
+            e sulla vita della comunità a {city.name}.
           </p>
           <div className="mt-2">
             <Link to={`${city.basePath}/contatti`} className="btn-primary">
@@ -329,7 +326,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
         title={isPlant ? <>Camminiamo<br />insieme.</> : <>Facci sapere<br />se verrai.</>}
         subtitle={
           isPlant
-            ? `Vivi a ${city.name} e vuoi far parte di questo nuovo inizio? Scrivici.`
+            ? `Vivi a ${city.name} e vuoi camminare con noi? Scrivici.`
             : "Compila il modulo. Non vediamo l'ora di conoscerti."
         }
         height="short"
@@ -340,14 +337,14 @@ export function ContactSection({ city }: { city: CityConfig }) {
           <h2 className="font-display text-3xl mb-6">Siamo qui per te.</h2>
           <p className="text-foreground/75 leading-relaxed mb-8">
             {isPlant
-              ? `La Chiesa di Cristo di ${city.name} è in preparazione (lancio ${city.launchLabel ?? "prossimamente"}). Scrivici per uno studio biblico, per pregare insieme, o per unirti al gruppo fondatore.`
+              ? `La Chiesa di Cristo di ${city.name} si ritrova ogni domenica alle 10:30. Scrivici per visitarci, per uno studio biblico o per pregare insieme.`
               : "Vuoi visitarci, iniziare uno studio biblico, o semplicemente scambiare due parole? Compila il modulo o scrivici una email. Risponderemo entro 24 ore."}
           </p>
           <ul className="space-y-3 text-foreground/85">
             <li><span className="eyebrow block mb-1">Email</span>info@chiesadicristoitalia.it</li>
             {isPlant ? (
               <>
-                <li><span className="eyebrow block mb-1">Inaugurazione</span>{city.launchLabel ?? "in arrivo"}</li>
+                <li><span className="eyebrow block mb-1">Funzione</span>Ogni domenica · 10:30</li>
                 {city.venueName && (
                   <li>
                     <span className="eyebrow block mb-1">Dove</span>
