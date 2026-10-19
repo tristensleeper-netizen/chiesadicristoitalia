@@ -7,9 +7,9 @@ export const Route = createFileRoute("/bologna/chi-siamo")({
   head: () => ({
     meta: [
       { title: "Chi siamo — Chiesa di Cristo di Bologna" },
-      { name: "description", content: "Conosci la Chiesa di Cristo di Bologna: una chiesa in fondazione, lancio previsto per settembre 2026." },
+      { name: "description", content: "Conosci la Chiesa di Cristo di Bologna: una nuova comunità cristiana che si ritrova ogni domenica alle 10:30 all'Hotel Europa, Via Cesare Boldrini 11." },
       { property: "og:title", content: "Chi siamo — Chiesa di Cristo di Bologna" },
-      { property: "og:description", content: "Una nuova comunità in arrivo a Bologna, settembre 2026." },
+      { property: "og:description", content: "Una nuova comunità cristiana a Bologna. Ti aspettiamo la domenica." },
       { property: "og:image", content: heroBologna },
     ],
     links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/bologna/chi-siamo" }],

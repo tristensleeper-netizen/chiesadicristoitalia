@@ -6,17 +6,17 @@ import heroBologna from "@/assets/hero-bologna.jpg";
 export const Route = createFileRoute("/bologna/visita")({
   head: () => ({
     meta: [
-      { title: "Visita la Chiesa di Cristo di Bologna — Inaugurazione 4 ottobre 2026" },
+      { title: "Visita la Chiesa di Cristo di Bologna — Domenica 10:30" },
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna inaugura le sue funzioni domenicali domenica 4 ottobre 2026 alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Tutti sono benvenuti.",
+          "La Chiesa di Cristo di Bologna si ritrova ogni domenica alle 10:30 — Hotel Europa, Sala Madrid, Via Cesare Boldrini 11 (a 3 minuti dalla Stazione Centrale). Tutti sono benvenuti.",
       },
       { property: "og:title", content: "Visita la Chiesa di Cristo di Bologna" },
       {
         property: "og:description",
         content:
-          "Inaugurazione domenica 4 ottobre 2026, 10:30 · Hotel Europa – Sala Madrid, Via Cesare Boldrini 11, Bologna.",
+          "Ogni domenica alle 10:30 · Hotel Europa – Sala Madrid, Via Cesare Boldrini 11, Bologna.",
       },
       { property: "og:image", content: heroBologna },
     ],

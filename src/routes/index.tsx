@@ -97,7 +97,7 @@ export const Route = createFileRoute("/")({
               name: "Quando si riunisce la chiesa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Le funzioni domenicali iniziano alle 10:30. La prima funzione a Bologna si tiene domenica 4 ottobre 2026 all'Hotel Europa. Per eventuali variazioni visita la pagina della tua città.",
+                text: "Le funzioni domenicali iniziano alle 10:30. A Bologna ci ritroviamo all'Hotel Europa – Sala Madrid, Via Cesare Boldrini 11. Per eventuali variazioni visita la pagina della tua città.",
               },
             },
             {
@@ -152,7 +152,7 @@ function HomePage() {
             image={bolognaImg}
             name="Bologna"
             tagline="Chiesa di Cristo di Bologna"
-            description="Inaugurazione domenica 4 ottobre 2026 alle 10:30, Hotel Europa – Sala Madrid, Via Cesare Boldrini 11."
+            description="Ogni domenica alle 10:30, Hotel Europa – Sala Madrid, Via Cesare Boldrini 11."
             accent="from-red-900/40 to-red-950/80"
           />
         </div>
