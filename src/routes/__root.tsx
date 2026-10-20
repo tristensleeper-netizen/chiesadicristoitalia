@@ -93,7 +93,7 @@ const SCHEMAS: Record<string, object> = {
     "name": "Chiesa di Cristo di Bologna",
     "alternateName": "Church of Christ Bologna",
     "url": "https://chiesadicristoitalia.it/bologna",
-    "description": "La Chiesa di Cristo di Bologna non ha un edificio di culto. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
+    "description": "La Chiesa di Cristo di Bologna non ha una sede. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
     "email": "info@chiesadicristoitalia.it",
     "areaServed": { "@type": "City", "name": "Bologna" },
     "sameAs": ["https://www.instagram.com/chiesadicristodibologna"],

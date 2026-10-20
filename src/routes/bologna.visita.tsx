@@ -9,7 +9,7 @@ export const Route = createFileRoute("/bologna/visita")({
       {
         name: "description",
         content:
-          "Vuoi incontrare la Chiesa di Cristo di Bologna? Non abbiamo un edificio di culto; il luogo degli incontri è da confermare. Scrivici prima di venire.",
+          "Vuoi incontrare la Chiesa di Cristo di Bologna? Non abbiamo una sede; il luogo degli incontri è da confermare. Scrivici prima di venire.",
       },
       { property: "og:title", content: "Visita la Chiesa di Cristo di Bologna" },
       {

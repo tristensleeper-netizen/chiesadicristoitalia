@@ -76,7 +76,7 @@ export const Route = createFileRoute("/")({
               name: "Dove si trova la Chiesa di Cristo in Italia?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna non abbiamo un edificio di culto e il luogo degli incontri è da confermare. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
+                text: "La Chiesa di Cristo in Italia ha comunità a Milano e Bologna. A Milano la sede ordinaria è in Corso di Porta Vigentina 15a; a Bologna non abbiamo una sede e il luogo degli incontri è da confermare. Verifica gli avvisi per eventuali variazioni della funzione domenicale.",
               },
             },
             {

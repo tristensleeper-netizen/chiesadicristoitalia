@@ -61,7 +61,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
               <p>
                 {city.venueName
                   ? `Ci ritroviamo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30.`
-                  : "Non abbiamo un edificio di culto e il luogo dei nostri incontri è ancora da confermare. Scrivici per sapere dove incontrarci."}{" "}
+                  : "Non abbiamo una sede e il luogo dei nostri incontri è ancora da confermare. Scrivici per sapere dove incontrarci."}{" "}
                 Offriamo preghiera, studi biblici personali, lode e l'invito
                 a camminare con noi mentre Dio apre la strada.
               </p>
@@ -167,7 +167,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
           subtitle={
             city.venueName
               ? `La Chiesa di Cristo di ${city.name} si ritrova presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
-              : `La Chiesa di Cristo di ${city.name} non ha un edificio di culto. Il luogo dei nostri incontri è ancora da confermare: scrivici prima di venire.`
+              : `La Chiesa di Cristo di ${city.name} non ha una sede. Il luogo dei nostri incontri è ancora da confermare: scrivici prima di venire.`
           }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
           height="medium"
