@@ -19,7 +19,7 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una comunità cristiana a Bologna, senza un edificio di culto. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
+  "description": "Una comunità cristiana a Bologna, senza una sede. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
   "email": "info@chiesadicristoitalia.it",
   "areaServed": {
     "@type": "City",
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/bologna/")({
       {
         name: "description",
         content:
-          "La Chiesa di Cristo di Bologna: preghiera, Bibbia e lode. Non abbiamo un edificio di culto; il luogo degli incontri è ancora da confermare. Scrivici per partecipare.",
+          "La Chiesa di Cristo di Bologna: preghiera, Bibbia e lode. Non abbiamo una sede; il luogo degli incontri è ancora da confermare. Scrivici per partecipare.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Bologna — Camminiamo insieme" },
       {
@@ -94,7 +94,7 @@ function BolognaHome() {
         image={heroImage}
         eyebrow="Una comunità cristiana · Bologna"
         title={<>Un nuovo<br />cammino a Bologna.</>}
-        subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo un edificio di culto e il luogo dei nostri incontri è ancora da confermare: scrivici per camminare con noi."
+        subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo una sede e il luogo dei nostri incontri è ancora da confermare: scrivici per camminare con noi."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
         secondaryCta={{ to: "/milano", label: "Visita Milano" }}
         align="left"
@@ -111,7 +111,7 @@ function BolognaHome() {
             Il luogo degli incontri è da confermare.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
-            Non abbiamo un edificio di culto. Scrivici prima di venire: ti daremo
+            Non abbiamo una sede. Scrivici prima di venire: ti daremo
             i dettagli del prossimo incontro. Sei il benvenuto.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/75">
