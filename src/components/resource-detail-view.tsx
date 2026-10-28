@@ -60,7 +60,7 @@ export function ResourceDetailView({
           {r.scripture_ref && ` · ${r.scripture_ref}`}
         </p>
 
-        {r.description && (
+        {r.description && r.type !== "article" && (
           <p className="mt-8 text-lg text-foreground/80 leading-relaxed">{r.description}</p>
         )}
 
