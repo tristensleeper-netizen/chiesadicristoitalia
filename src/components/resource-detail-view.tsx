@@ -126,7 +126,7 @@ export function ResourceDetailView({
             <p className="mt-3 text-xs text-muted-foreground">
               Questo articolo è stato pubblicato nella newsletter{" "}
               <a
-                href="https://nelfarodelsignore.beehiiv.com/"
+                href="https://nellalucedelfaro.beehiiv.com/"
                 target="_blank"
                 rel="noopener"
                 className="underline underline-offset-2 hover:text-foreground transition-colors"
