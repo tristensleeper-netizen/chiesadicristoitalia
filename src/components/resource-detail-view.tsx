@@ -112,6 +112,30 @@ export function ResourceDetailView({
             {r.body}
           </div>
         )}
+
+        {r.type === "article" && r.media_url && (
+          <div className="mt-10">
+            <a
+              href={r.media_url}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-2 btn-primary"
+            >
+              Leggi l'articolo completo ↗
+            </a>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Questo articolo è stato pubblicato nella newsletter{" "}
+              <a
+                href="https://nelfarodelsignore.beehiiv.com/"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-2 hover:text-foreground transition-colors"
+              >
+                Nella Luce del Faro
+              </a>
+            </p>
+          </div>
+        )}
       </div>
     </article>
   );
