@@ -20,4 +20,5 @@ export const bolognaConfig: CityConfig = {
   // Chiesa in fondazione — inaugurazione domenica 4 ottobre 2026.
   isPlant: true,
   launchLabel: "4 Ottobre 2026",
+  email: "infobo@chiesadicristoitalia.it",
 };

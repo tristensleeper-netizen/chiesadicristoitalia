@@ -27,6 +27,8 @@ export interface CityConfig {
   venueName?: string;
   /** Short note about the venue, e.g. "a 3 minuti dalla Stazione Centrale". */
   venueNote?: string;
+  /** Contact email for the city; defaults to the national address. */
+  email?: string;
 }
 
 export function AboutSection({ city }: { city: CityConfig }) {
@@ -341,7 +343,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
               : "Vuoi visitarci, iniziare uno studio biblico, o semplicemente scambiare due parole? Compila il modulo o scrivici una email. Risponderemo entro 24 ore."}
           </p>
           <ul className="space-y-3 text-foreground/85">
-            <li><span className="eyebrow block mb-1">Email</span>info@chiesadicristoitalia.it</li>
+            <li><span className="eyebrow block mb-1">Email</span>{city.email ?? "info@chiesadicristoitalia.it"}</li>
             {isPlant ? (
               <>
                 <li><span className="eyebrow block mb-1">Luogo degli incontri</span>Da confermare · Scrivici prima di venire.</li>
