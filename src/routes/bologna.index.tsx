@@ -20,7 +20,7 @@ const bolognaJsonLd = {
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
   "description": "Una comunità cristiana a Bologna, senza una sede. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
-  "email": "info@chiesadicristoitalia.it",
+  "email": "infobo@chiesadicristoitalia.it",
   "areaServed": {
     "@type": "City",
     "name": "Bologna",
