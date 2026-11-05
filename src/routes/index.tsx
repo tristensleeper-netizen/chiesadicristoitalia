@@ -237,7 +237,7 @@ function HomePage() {
           </div>
 
           {/* Community photo — full-width editorial break */}
-          <div className="mt-12 md:mt-16 w-full overflow-hidden rounded-2xl aspect-[21/9] relative">
+          <div className="mt-12 md:mt-16 mx-auto w-full max-w-2xl overflow-hidden rounded-2xl aspect-[3/2] relative">
             <img
               src={worshipImg}
               alt="La comunità in preghiera insieme"
