@@ -29,6 +29,7 @@ import { Route as BolognaEventiRouteImport } from './routes/bologna.eventi'
 import { Route as BolognaVisitaRouteImport } from './routes/bologna.visita'
 import { Route as DevozionaleIndexRouteImport } from './routes/devozionale.index'
 import { Route as DevozionaleSlugRouteImport } from './routes/devozionale.$slug'
+import { Route as DevozionaleIsaiaRouteImport } from './routes/devozionale.isaia'
 import { Route as MilanoIndexRouteImport } from './routes/milano.index'
 import { Route as MilanoChiSiamoRouteImport } from './routes/milano.chi-siamo'
 import { Route as MilanoContattiRouteImport } from './routes/milano.contatti'
@@ -146,6 +147,11 @@ const DevozionaleSlugRoute = DevozionaleSlugRouteImport.update({
   path: '/devozionale/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevozionaleIsaiaRoute = DevozionaleIsaiaRouteImport.update({
+  id: '/devozionale/isaia',
+  path: '/devozionale/isaia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MilanoIndexRoute = MilanoIndexRouteImport.update({
   id: '/milano/',
   path: '/milano/',
@@ -241,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/devozionale/$slug': typeof DevozionaleSlugRoute
+  '/devozionale/isaia': typeof DevozionaleIsaiaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -277,6 +284,7 @@ export interface FileRoutesByTo {
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/devozionale/$slug': typeof DevozionaleSlugRoute
+  '/devozionale/isaia': typeof DevozionaleIsaiaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -315,6 +323,7 @@ export interface FileRoutesById {
   '/bologna/eventi': typeof BolognaEventiRoute
   '/bologna/visita': typeof BolognaVisitaRoute
   '/devozionale/$slug': typeof DevozionaleSlugRoute
+  '/devozionale/isaia': typeof DevozionaleIsaiaRoute
   '/milano/chi-siamo': typeof MilanoChiSiamoRoute
   '/milano/contatti': typeof MilanoContattiRoute
   '/milano/cosa-crediamo': typeof MilanoCosaCrediamoRoute
@@ -354,6 +363,7 @@ export interface FileRouteTypes {
     | '/bologna/eventi'
     | '/bologna/visita'
     | '/devozionale/$slug'
+    | '/devozionale/isaia'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -390,6 +400,7 @@ export interface FileRouteTypes {
     | '/bologna/eventi'
     | '/bologna/visita'
     | '/devozionale/$slug'
+    | '/devozionale/isaia'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -427,6 +438,7 @@ export interface FileRouteTypes {
     | '/bologna/eventi'
     | '/bologna/visita'
     | '/devozionale/$slug'
+    | '/devozionale/isaia'
     | '/milano/chi-siamo'
     | '/milano/contatti'
     | '/milano/cosa-crediamo'
@@ -459,6 +471,7 @@ export interface RootRouteChildren {
   BolognaEventiRoute: typeof BolognaEventiRoute
   BolognaVisitaRoute: typeof BolognaVisitaRoute
   DevozionaleSlugRoute: typeof DevozionaleSlugRoute
+  DevozionaleIsaiaRoute: typeof DevozionaleIsaiaRoute
   MilanoChiSiamoRoute: typeof MilanoChiSiamoRoute
   MilanoContattiRoute: typeof MilanoContattiRoute
   MilanoCosaCrediamoRoute: typeof MilanoCosaCrediamoRoute
@@ -617,6 +630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevozionaleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/devozionale/isaia': {
+      id: '/devozionale/isaia'
+      path: '/devozionale/isaia'
+      fullPath: '/devozionale/isaia'
+      preLoaderRoute: typeof DevozionaleIsaiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/milano/': {
       id: '/milano/'
       path: '/milano'
@@ -766,6 +786,7 @@ const rootRouteChildren: RootRouteChildren = {
   BolognaEventiRoute: BolognaEventiRoute,
   BolognaVisitaRoute: BolognaVisitaRoute,
   DevozionaleSlugRoute: DevozionaleSlugRoute,
+  DevozionaleIsaiaRoute: DevozionaleIsaiaRoute,
   MilanoChiSiamoRoute: MilanoChiSiamoRoute,
   MilanoContattiRoute: MilanoContattiRoute,
   MilanoCosaCrediamoRoute: MilanoCosaCrediamoRoute,
