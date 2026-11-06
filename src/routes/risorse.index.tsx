@@ -11,8 +11,6 @@ import {
   type ResourceType,
   getYouTubeId,
 } from "@/lib/resource-helpers";
-import { PageHero } from "@/components/page-hero";
-import { useSlotImage } from "@/lib/use-slot-image";
 import bibleStudy from "@/assets/bible-study.jpg";
 import { useCourseProgress } from "@/components/course-shell";
 
@@ -40,7 +38,7 @@ export const Route = createFileRoute("/risorse/")({
 type FilterType = ResourceType | "devotional" | "all";
 
 const TYPE_FILTERS: Array<{ value: FilterType; label: string }> = [
-  { value: "all", label: "Tutti" },
+  { value: "all", label: "Tutto" },
   { value: "article", label: "Articoli" },
   { value: "devotional", label: "Devozionali" },
   { value: "pdf", label: "PDF" },
@@ -119,138 +117,185 @@ function ResourcesIndex() {
     });
   }, [resources, devotionals, typeFilter, cityFilter, sortOrder]);
 
-  const heroImg = useSlotImage("risorse.hero", bibleStudy);
+  const noFilters = typeFilter === "all" && cityFilter === "all";
+  const devotionalScope = cityFilter === "all" || cityFilter === "national";
+  const showIsaiahInDevotionals = typeFilter === "devotional" && devotionalScope;
+  const gridItems = filtered.filter((i): i is Extract<ListItem, { kind: "resource" }> => i.kind === "resource");
+  const devItems = filtered.filter((i): i is Extract<ListItem, { kind: "devotional" }> => i.kind === "devotional");
+  const nothing = gridItems.length === 0 && devItems.length === 0 && !noFilters && !showIsaiahInDevotionals;
 
-  const showIsaiahCard = (typeFilter === "all" || typeFilter === "devotional") && (cityFilter === "all" || cityFilter === "national");
+  const chipBase =
+    "inline-flex min-h-11 items-center rounded-full px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background md:min-h-9";
+  const selectBase =
+    "min-h-11 md:min-h-9 rounded-full border border-border bg-background px-4 pr-8 text-sm text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
   return (
     <>
-      <PageHero
-        slot="risorse.hero"
-        image={heroImg}
-        eyebrow="Risorse"
-        title={<>Articoli, video<br />e studi biblici.</>}
-        subtitle="Risorse cristiane dalle Chiese di Cristo di Milano e Bologna per crescere nella fede e nella conoscenza della Bibbia."
-        height="medium"
-      />
-
-      <section className="container-prose py-16 md:py-20">
-        <div className="mb-8 rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6">
-          <p className="text-sm md:text-base text-foreground/80">
+      <header className="container-prose pt-12 pb-8 md:pt-20 md:pb-10">
+        <h1 className="font-display text-5xl md:text-7xl text-foreground leading-none">Risorse</h1>
+        <div className="mt-5 flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between md:gap-8">
+          <p className="text-base md:text-lg text-foreground/75">
+            Articoli, studi biblici e materiali per crescere nella fede e nella conoscenza della Bibbia.
+          </p>
+          <p className="shrink-0 text-sm text-foreground/70">
             <span className="font-medium text-primary">Cerchi i sermoni?</span>{" "}
-            Trovi tutte le prediche bibliche delle nostre comunità nella sezione dedicata{" "}
-            <Link to="/sermoni" className="text-primary underline-offset-4 underline hover:opacity-80">
+            <Link to="/sermoni" className="text-primary underline underline-offset-4 hover:opacity-80">
               Sermoni →
             </Link>
           </p>
         </div>
+      </header>
 
-        <div className="mb-12 max-w-3xl">
-          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4">
-            Articoli, video e risorse cristiane
-          </h2>
-          <p className="text-foreground/75 leading-relaxed">
-            Una raccolta di articoli, video e materiali di studio prodotti dalle nostre
-            comunità. Trovi approfondimenti biblici, riflessioni sulla vita cristiana,
-            video di insegnamento e PDF scaricabili. Filtra per tipo di contenuto o
-            per città per scoprire ciò che ti interessa di più.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-6 mb-12" aria-label="Filtri risorse">
-
-          <div>
-            <p className="eyebrow mb-3">Filtra per tipo</p>
-            <div className="flex flex-wrap gap-2">
-              {TYPE_FILTERS.map((f) => (
-                <button
-                  key={f.value}
-                  onClick={() => setTypeFilter(f.value)}
-                  className={
-                    "rounded-full px-4 py-2 text-sm transition-all " +
-                    (typeFilter === f.value
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-border text-foreground/70 hover:border-primary hover:text-primary")
-                  }
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+      <section className="container-prose pb-16 md:pb-20">
+        <div
+          className="mb-10 flex flex-col gap-3 border-y border-border py-4 md:flex-row md:items-center md:justify-between"
+          aria-label="Filtri risorse"
+          role="group"
+        >
+          <div className="flex flex-wrap gap-2">
+            {TYPE_FILTERS.map((f) => (
+              <button
+                key={f.value}
+                type="button"
+                aria-pressed={typeFilter === f.value}
+                onClick={() => setTypeFilter(f.value)}
+                className={
+                  chipBase +
+                  " " +
+                  (typeFilter === f.value
+                    ? "bg-primary text-primary-foreground"
+                    : "border border-border text-foreground/70 hover:border-primary hover:text-primary")
+                }
+              >
+                {f.label}
+              </button>
+            ))}
           </div>
-          <div>
-            <p className="eyebrow mb-3">Filtra per città</p>
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
+            <label className="sr-only" htmlFor="risorse-citta">Città</label>
+            <select
+              id="risorse-citta"
+              value={cityFilter}
+              onChange={(e) => setCityFilter(e.target.value as CityTag | "all")}
+              className={selectBase}
+            >
               {CITY_FILTERS.map((f) => (
-                <button
-                  key={f.value}
-                  onClick={() => setCityFilter(f.value)}
-                  className={
-                    "rounded-full px-4 py-2 text-sm transition-all " +
-                    (cityFilter === f.value
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-border text-foreground/70 hover:border-primary hover:text-primary")
-                  }
-                >
-                  {f.label}
-                </button>
+                <option key={f.value} value={f.value}>{f.label}</option>
               ))}
-            </div>
-          </div>
-          <div>
-            <p className="eyebrow mb-3">Ordina per data</p>
-            <div className="flex flex-wrap gap-2">
-              {(["newest", "oldest"] as const).map((o) => (
-                <button
-                  key={o}
-                  onClick={() => setSortOrder(o)}
-                  className={
-                    "rounded-full px-4 py-2 text-sm transition-all " +
-                    (sortOrder === o
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-border text-foreground/70 hover:border-primary hover:text-primary")
-                  }
-                >
-                  {o === "newest" ? "Più recenti" : "Meno recenti"}
-                </button>
-              ))}
-            </div>
+            </select>
+            <label className="sr-only" htmlFor="risorse-ordine">Ordina per data</label>
+            <select
+              id="risorse-ordine"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value as SortOrder)}
+              className={selectBase}
+            >
+              <option value="newest">Più recenti</option>
+              <option value="oldest">Meno recenti</option>
+            </select>
           </div>
         </div>
+
+        {noFilters && (
+          <>
+            <IsaiahLeadCard />
+            <ScriptureDivider />
+          </>
+        )}
 
         {loading ? (
           <p className="text-center py-20 text-muted-foreground">Caricamento risorse…</p>
-        ) : (showIsaiahCard || filtered.length > 0) ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {showIsaiahCard && <IsaiahCourseCard />}
-            {filtered.map((item) =>
-              item.kind === "resource" ? (
-                <ResourceCard key={`r-${item.r.id}`} r={item.r} />
-              ) : (
-                <DevotionalCard key={`d-${item.d.id}`} d={item.d} />
-              ),
-            )}
-          </div>
-        ) : (
+        ) : nothing ? (
           <p className="text-center py-20 text-muted-foreground">
             Nessuna risorsa trovata con questi filtri.
           </p>
+        ) : (
+          <>
+            {gridItems.length > 0 && (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {gridItems.map((item) => (
+                  <ResourceCard key={`r-${item.r.id}`} r={item.r} />
+                ))}
+              </div>
+            )}
+            {(devItems.length > 0 || showIsaiahInDevotionals) && (
+              <section className={gridItems.length > 0 ? "mt-16" : ""} aria-labelledby="devozionali-title">
+                <h2 id="devozionali-title" className="font-display text-3xl text-foreground mb-6">Devozionali</h2>
+                {showIsaiahInDevotionals && <div className="mb-8"><IsaiahLeadCard /></div>}
+                <ul className="divide-y divide-border">
+                  {devItems.map((item) => (
+                    <li key={`d-${item.d.id}`}>
+                      <DevotionalRow d={item.d} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </>
         )}
       </section>
     </>
   );
 }
 
+function ScriptureDivider() {
+  return (
+    <figure className="my-14 md:my-20 mx-auto max-w-3xl text-center">
+      <div className="mx-auto h-px w-24 bg-border" aria-hidden="true" />
+      <blockquote className="my-8 font-display italic text-2xl md:text-4xl leading-snug text-foreground text-balance">
+        «La tua parola è una lampada al mio piede e una luce sul mio cammino.»
+      </blockquote>
+      <figcaption className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Salmo 119:105</figcaption>
+      <div className="mx-auto mt-8 h-px w-24 bg-border" aria-hidden="true" />
+    </figure>
+  );
+}
+
 export function ResourceCard({ r }: { r: Resource }) {
   const isPlayable = r.type === "video" || r.type === "sermon";
   const isSermon = r.type === "sermon";
+  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
+  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null;
+  const linkProps = {
+    to: isSermon ? ("/sermoni/$slug" as const) : ("/risorse/$slug" as const),
+    params: { slug: r.slug },
+  };
+  if (!thumb) {
+    return (
+      <Link
+        {...linkProps}
+        className="group flex min-h-[240px] flex-col rounded-2xl border border-primary/15 bg-primary/5 p-7 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        <p className="text-[10px] uppercase tracking-[0.2em] text-primary">
+          <span className="font-medium">{RESOURCE_TYPE_LABELS[r.type]}</span>
+          <span className="text-muted-foreground"> · {formatItalianDate(r.published_at)}</span>
+        </p>
+        <h3 className="mt-5 font-display text-3xl leading-[1.1] text-foreground text-balance group-hover:text-primary transition-colors">
+          {r.title}
+        </h3>
+        {r.speaker_or_author && (
+          <p className="mt-auto pt-6 text-sm text-foreground/70">{r.speaker_or_author}</p>
+        )}
+      </Link>
+    );
+  }
   return (
     <Link
-      to={isSermon ? "/sermoni/$slug" : "/risorse/$slug"}
-      params={{ slug: r.slug }}
+      {...linkProps}
       className="group rounded-2xl border border-border bg-card overflow-hidden transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
     >
-      <ResourceCardPreview r={r} showPlay={isPlayable} />
+      <div className="relative aspect-video bg-foreground">
+        <img src={thumb} alt={r.title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        {isPlayable && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-background/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
@@ -275,138 +320,61 @@ export function ResourceCard({ r }: { r: Resource }) {
   );
 }
 
-// Rich, varied gradient palettes inspired by the original video thumbnails
-const GRADIENT_PALETTES = [
-  "bg-[linear-gradient(135deg,#1e2a3a_0%,#2a3a4f_50%,#3a4a60_100%)]", // deep navy
-  "bg-[linear-gradient(135deg,#3d2817_0%,#5a3a1f_50%,#7a4f2a_100%)]", // warm brown
-  "bg-[linear-gradient(135deg,#1a2e1f_0%,#234030_50%,#2f5540_100%)]", // forest green
-  "bg-[linear-gradient(135deg,#2a1e2e_0%,#3f2a45_50%,#553a5c_100%)]", // plum
-  "bg-[linear-gradient(135deg,#2e2418_0%,#453620_50%,#5e4a2e_100%)]", // bronze
-  "bg-[linear-gradient(135deg,#1a2a3d_0%,#1f3a55_50%,#2a4a6e_100%)]", // ocean blue
-];
-
-function hashToIndex(s: string, mod: number) {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return Math.abs(h) % mod;
-}
-
-function ResourceCardPreview({ r, showPlay }: { r: Resource; showPlay: boolean }) {
-  const ytId = r.media_url ? getYouTubeId(r.media_url) : null;
-  const thumb = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null;
-  const palette = GRADIENT_PALETTES[hashToIndex(r.id ?? r.slug ?? r.title, GRADIENT_PALETTES.length)];
-  return (
-    <div className={`relative aspect-video ${thumb ? "bg-black" : palette}`}>
-      {thumb && (
-        <img
-          src={thumb}
-          alt={r.title}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-      {showPlay && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-14 w-14 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-lg transition group-hover:scale-110">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 ml-0.5">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DevotionalCard({ d }: { d: Devotional }) {
+function DevotionalRow({ d }: { d: Devotional }) {
   return (
     <Link
       to="/devozionale/$slug"
       params={{ slug: d.slug }}
-      className="group relative rounded-2xl overflow-hidden border border-[rgba(107,76,53,0.2)] bg-[linear-gradient(135deg,#f7ede2_0%,#ead9c2_60%,#d9c19f_100%)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+      className="group block border-l-2 border-primary/60 my-4 pl-5 py-2 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
-      <div className="p-7 md:p-8 min-h-[260px] flex flex-col">
-        <div className="flex items-start justify-between gap-3 mb-5">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5.5A1.5 1.5 0 015.5 4H19v15H5.5A1.5 1.5 0 014 17.5v-12z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 17.5A1.5 1.5 0 015.5 16H19v3H5.5A1.5 1.5 0 014 17.5z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6M9 11h6" />
-            </svg>
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2.5 py-1 rounded-full bg-white/60 border border-[rgba(107,76,53,0.15)]">
-            Devozionale
-          </span>
-        </div>
-        <h3 className="font-display text-2xl text-foreground leading-tight group-hover:text-primary transition-colors">
-          {d.title}
-        </h3>
-        {d.scripture_ref && (
-          <p className="mt-2 font-display italic text-primary/80 text-sm">
-            {d.scripture_ref}
-          </p>
-        )}
-        {d.body && (
-          <p className="mt-3 text-sm text-foreground/70 line-clamp-2 whitespace-pre-line">
-            {d.body}
-          </p>
-        )}
-        <p className="mt-auto pt-5 text-xs text-foreground/60">
-          Settimana del {formatItalianDate(d.week_of)}
-          {d.author && ` · ${d.author}`}
-        </p>
-      </div>
+      <h3 className="font-display text-2xl text-foreground leading-tight group-hover:text-primary transition-colors">
+        {d.title}
+      </h3>
+      {d.scripture_ref && <p className="mt-1 font-display italic text-primary/80">{d.scripture_ref}</p>}
+      <p className="mt-2 text-xs text-muted-foreground">
+        Settimana del {formatItalianDate(d.week_of)}
+        {d.author && ` · ${d.author}`}
+      </p>
     </Link>
   );
 }
 
-function IsaiahCourseCard() {
+function IsaiahLeadCard() {
   const { pct, completed, total } = useCourseProgress("isaia", 67);
   const hasStarted = completed > 0;
   return (
     <Link
       to="/milano/devozionale"
-      className="group relative rounded-2xl overflow-hidden border border-[rgba(107,76,53,0.2)] bg-[linear-gradient(135deg,#f7ede2_0%,#ead9c2_60%,#d9c19f_100%)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+      className="group grid overflow-hidden rounded-2xl border border-border bg-card transition hover:shadow-[var(--shadow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
     >
-      <div className="p-7 md:p-8 min-h-[260px] flex flex-col">
-        <div className="flex items-start justify-between gap-3 mb-5">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5.5A1.5 1.5 0 015.5 4H19v15H5.5A1.5 1.5 0 014 17.5v-12z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 17.5A1.5 1.5 0 015.5 16H19v3H5.5A1.5 1.5 0 014 17.5z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6M9 11h6" />
-            </svg>
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2.5 py-1 rounded-full bg-white/60 border border-[rgba(107,76,53,0.15)]">
-            Corso · 67 giorni
-          </span>
-        </div>
-        <h3 className="font-display text-2xl text-foreground leading-tight group-hover:text-primary transition-colors">
+      <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[320px]">
+        <img src={bibleStudy} alt="Bibbia aperta durante uno studio" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+      <div className="flex min-w-0 flex-col p-7 md:p-10">
+        <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary">Corso · 67 giorni</p>
+        <h2 className="mt-4 font-display text-3xl md:text-4xl text-foreground leading-tight group-hover:text-primary transition-colors">
           Isaia — Il Signore è salvezza
-        </h3>
-        <p className="mt-2 font-display italic text-primary/80 text-sm">
+        </h2>
+        <p className="mt-3 font-display italic text-primary/80">
           «Non temere, perché io sono con te» — Isaia 41:10
         </p>
-        <p className="mt-3 text-sm text-foreground/70 line-clamp-2">
+        <p className="mt-4 text-sm text-foreground/70">
           66 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
         </p>
         {hasStarted ? (
-          <div className="mt-auto pt-5">
+          <div className="mt-auto pt-8">
             <div className="flex items-center justify-between mb-1.5">
               <p className="text-xs text-foreground/60">{completed} / {total} giorni completati</p>
               <p className="text-xs text-primary font-medium">{pct}%</p>
             </div>
-            <div className="h-1.5 rounded-full bg-black/10 overflow-hidden">
+            <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
               <div className="h-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
             </div>
           </div>
         ) : (
-          <p className="mt-auto pt-5 text-xs font-medium text-primary">
-            Inizia da Giorno 0 · Introduzione →
-          </p>
+          <p className="mt-auto pt-8 text-sm font-medium text-primary">Inizia da Giorno 0 · Introduzione →</p>
         )}
       </div>
     </Link>
   );
 }
-

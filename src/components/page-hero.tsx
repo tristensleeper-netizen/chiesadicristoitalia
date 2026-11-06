@@ -127,8 +127,6 @@ export function PageHero({
         />
       ) : null}
       <div className={`${vivid ? "hero-home-vivid" : "hero-cinematic-overlay"} absolute inset-0 ${align === "left" && !vivid ? "hero-cinematic-overlay-left" : ""}`} />
-      <div className="hero-film-grain absolute inset-0" aria-hidden="true" />
-      <div className="hero-bottom-glow absolute inset-x-0 bottom-0 h-40" aria-hidden="true" />
       <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 md:pb-18 ${alignClass}`}>
         {eyebrow && (
           <p className="hero-eyebrow mb-5 animate-fade-up">{eyebrow}</p>
