@@ -184,6 +184,10 @@
     scroll-behavior: smooth;
   }
 
+  html,
+  body {
+    overflow-x: clip;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -220,16 +224,12 @@
     @apply inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-7 py-3 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white hover:text-primary;
   }
   .hero-cinematic-overlay {
-    background:
-      radial-gradient(circle at 50% 30%, color-mix(in oklab, var(--accent) 14%, transparent) 0%, transparent 38%),
-      linear-gradient(180deg, color-mix(in oklab, var(--foreground) 8%, transparent) 0%, color-mix(in oklab, var(--foreground) 36%, transparent) 58%, color-mix(in oklab, var(--foreground) 68%, transparent) 100%),
-      linear-gradient(90deg, color-mix(in oklab, var(--foreground) 36%, transparent) 0%, transparent 48%, color-mix(in oklab, var(--primary) 18%, transparent) 100%);
+    background: linear-gradient(0deg, color-mix(in oklab, var(--foreground) 82%, transparent) 0%, color-mix(in oklab, var(--foreground) 58%, transparent) 32%, transparent 58%);
   }
   .hero-cinematic-overlay-left {
     background:
-      radial-gradient(circle at 18% 40%, color-mix(in oklab, var(--accent) 14%, transparent) 0%, transparent 34%),
-      linear-gradient(90deg, color-mix(in oklab, var(--foreground) 58%, transparent) 0%, color-mix(in oklab, var(--foreground) 28%, transparent) 48%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--foreground) 58%, transparent) 100%);
+      linear-gradient(0deg, color-mix(in oklab, var(--foreground) 82%, transparent) 0%, color-mix(in oklab, var(--foreground) 58%, transparent) 32%, transparent 58%),
+      linear-gradient(90deg, color-mix(in oklab, var(--foreground) 55%, transparent) 0%, transparent 50%);
   }
 
   /* Home (Italia) — pushes the video to the background with a vivid, sunny color wash */
@@ -244,15 +244,6 @@
   .hero-home-video {
     filter: saturate(1.1) brightness(0.85);
   }
-  .hero-film-grain {
-    opacity: 0.14;
-    background-image: radial-gradient(color-mix(in oklab, var(--background) 65%, transparent) 0.7px, transparent 0.7px);
-    background-size: 3px 3px;
-    mix-blend-mode: soft-light;
-  }
-  .hero-bottom-glow {
-    background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--background) 18%, transparent));
-  }
   .hero-eyebrow {
     @apply text-xs uppercase tracking-[0.32em] font-medium;
     color: color-mix(in oklab, var(--background) 84%, transparent);
@@ -264,8 +255,8 @@
     text-shadow: 0 4px 34px color-mix(in oklab, var(--foreground) 78%, transparent);
   }
   .hero-subtitle {
-    color: color-mix(in oklab, var(--background) 88%, transparent);
-    text-shadow: 0 2px 20px color-mix(in oklab, var(--foreground) 72%, transparent);
+    color: var(--background);
+    text-shadow: 0 1px 2px color-mix(in oklab, var(--foreground) 85%, transparent), 0 2px 20px color-mix(in oklab, var(--foreground) 72%, transparent);
   }
   .hero-primary-cta {
     background: color-mix(in oklab, var(--background) 94%, transparent);
