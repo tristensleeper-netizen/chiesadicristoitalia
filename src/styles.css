@@ -240,15 +240,6 @@
   .hero-home-video {
     filter: saturate(1.1) brightness(0.85);
   }
-  .hero-film-grain {
-    opacity: 0.14;
-    background-image: radial-gradient(color-mix(in oklab, var(--background) 65%, transparent) 0.7px, transparent 0.7px);
-    background-size: 3px 3px;
-    mix-blend-mode: soft-light;
-  }
-  .hero-bottom-glow {
-    background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--background) 18%, transparent));
-  }
   .hero-eyebrow {
     @apply text-xs uppercase tracking-[0.32em] font-medium;
     color: color-mix(in oklab, var(--background) 84%, transparent);
@@ -260,8 +251,8 @@
     text-shadow: 0 4px 34px color-mix(in oklab, var(--foreground) 78%, transparent);
   }
   .hero-subtitle {
-    color: color-mix(in oklab, var(--background) 88%, transparent);
-    text-shadow: 0 2px 20px color-mix(in oklab, var(--foreground) 72%, transparent);
+    color: var(--background);
+    text-shadow: 0 1px 2px color-mix(in oklab, var(--foreground) 85%, transparent), 0 2px 20px color-mix(in oklab, var(--foreground) 72%, transparent);
   }
   .hero-primary-cta {
     background: color-mix(in oklab, var(--background) 94%, transparent);
