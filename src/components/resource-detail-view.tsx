@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import bibleStudy from "@/assets/bible-study.jpg";
 import {
   CITY_TAG_LABELS,
   RESOURCE_TYPE_LABELS,
@@ -35,22 +38,17 @@ export function ResourceDetailView({
   });
 
   return (
-    <article className="pt-32 pb-20">
+    <article className="pt-24 md:pt-28 pb-20">
       <div className="container-narrow">
         <Link
           to={back.to}
-          className="inline-block mb-8 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
+          className="inline-block mb-6 text-sm text-muted-foreground hover:text-primary transition-colors"
         >
-          ← {back.label}
+          ← {back.to === "/risorse" ? "Tutte le risorse" : back.label}
         </Link>
-        <div className="flex items-center gap-2 mb-5">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
-            {RESOURCE_TYPE_LABELS[r.type]}
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            {CITY_TAG_LABELS[r.city_tag]}
-          </span>
-        </div>
+        <p className="mb-4 text-sm text-primary">
+          {sentenceCase(RESOURCE_TYPE_LABELS[r.type])} · {sentenceCase(CITY_TAG_LABELS[r.city_tag])}
+        </p>
         <h1 className="font-display text-4xl md:text-6xl leading-tight text-foreground">
           {r.title}
         </h1>
@@ -107,19 +105,15 @@ export function ResourceDetailView({
           </a>
         )}
 
-        {r.body && (
-          <div className="prose-content mt-12 text-foreground/85 leading-relaxed whitespace-pre-line">
-            {r.body}
-          </div>
-        )}
+        {r.body && <ArticleBody body={r.body} />}
 
         {r.type === "article" && r.media_url && (
-          <div className="mt-10">
+          <div className="mt-8 max-w-[65ch]">
             <a
               href={r.media_url}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2 btn-primary"
+              className="text-base font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
             >
               Leggi l'articolo completo ↗
             </a>
@@ -136,8 +130,110 @@ export function ResourceDetailView({
             </p>
           </div>
         )}
+
+        {r.type === "article" && <ArticleFooter resource={r} />}
       </div>
     </article>
+  );
+}
+
+function sentenceCase(s: string) {
+  if (!s) return s;
+  const lower = s.toLocaleLowerCase("it-IT");
+  return lower.charAt(0).toLocaleUpperCase("it-IT") + lower.slice(1);
+}
+
+// A paragraph is styled as a quote only when it is clearly one: fully wrapped in
+// «», "" or “”, or starting with a Bible reference such as "Giovanni 3:16" or "1 Pietro 2:9".
+const BIBLE_REF_START = /^(?:[123]\s?)?[A-ZÀ-Ý][a-zà-ÿ]{1,14}\.?\s\d{1,3}[:,]\d{1,3}/;
+function isQuote(p: string) {
+  const t = p.trim();
+  if (/^«[\s\S]+»[.,;]?$/.test(t)) return true;
+  if (/^"[\s\S]+"[.,;]?$/.test(t)) return true;
+  if (/^“[\s\S]+”[.,;]?$/.test(t)) return true;
+  return BIBLE_REF_START.test(t);
+}
+
+function ArticleBody({ body }: { body: string }) {
+  const paras = body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  return (
+    <div className="mt-12 max-w-[65ch] text-[1.125rem] leading-[1.75] text-foreground/85">
+      {paras.map((p, i) =>
+        isQuote(p) ? (
+          <blockquote
+            key={i}
+            className="my-8 border-l-2 border-primary/50 pl-5 font-display italic text-foreground/90 whitespace-pre-line"
+          >
+            {p}
+          </blockquote>
+        ) : (
+          <p key={i} className="mb-6 last:mb-0 whitespace-pre-line">
+            {p}
+          </p>
+        ),
+      )}
+    </div>
+  );
+}
+
+type RelatedRow = { id: string; slug: string; title: string; published_at: string };
+
+function ArticleFooter({ resource }: { resource: Resource }) {
+  const [related, setRelated] = useState<RelatedRow[]>([]);
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("resources")
+      .select("id, slug, title, published_at")
+      .eq("published", true)
+      .eq("type", resource.type)
+      .neq("id", resource.id)
+      .order("published_at", { ascending: false })
+      .limit(3)
+      .then(({ data }) => {
+        if (active && data) setRelated(data as RelatedRow[]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [resource.id, resource.type]);
+
+  return (
+    <div className="mt-16 max-w-[65ch] border-t border-border pt-10">
+      <p className="text-lg text-foreground/85 leading-relaxed">
+        Se queste parole ti hanno toccato, vieni a conoscerci di persona: la porta è aperta.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-base">
+        <Link to="/milano/visita" className="text-primary underline underline-offset-4 hover:opacity-80">
+          Vieni a una funzione a Milano
+        </Link>
+        <Link to="/bologna/visita" className="text-primary underline underline-offset-4 hover:opacity-80">
+          Camminiamo insieme a Bologna
+        </Link>
+      </div>
+
+      {related.length > 0 && (
+        <div className="mt-12">
+          <h2 className="font-display text-2xl text-foreground">Continua a leggere</h2>
+          <ul className="mt-4 divide-y divide-border">
+            {related.map((x) => (
+              <li key={x.id}>
+                <Link
+                  to="/risorse/$slug"
+                  params={{ slug: x.slug }}
+                  className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 hover:text-primary transition-colors"
+                >
+                  <span className="text-foreground">{x.title}</span>
+                  <span className="shrink-0 text-sm text-muted-foreground">
+                    {formatItalianDate(x.published_at)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -178,13 +274,17 @@ export function buildResourceHead({
     { property: "og:url", content: canonical },
     { property: "og:locale", content: "it_IT" },
     { property: "og:site_name", content: "Chiesa di Cristo Italia" },
-    { name: "twitter:card", content: thumb ? "summary_large_image" : "summary" },
+    { name: "twitter:card", content: thumb || r.type === "article" ? "summary_large_image" : "summary" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: desc },
   ];
   if (thumb) {
     meta.push({ property: "og:image", content: thumb });
     meta.push({ name: "twitter:image", content: thumb });
+  } else if (r.type === "article") {
+    const fallback = bibleStudy.startsWith("http") ? bibleStudy : `${siteUrl}${bibleStudy}`;
+    meta.push({ property: "og:image", content: fallback });
+    meta.push({ name: "twitter:image", content: fallback });
   }
 
   const jsonLd = buildResourceJsonLd({ resource: r, slug, basePath, siteUrl });

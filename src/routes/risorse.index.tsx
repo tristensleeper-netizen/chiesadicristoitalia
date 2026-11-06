@@ -344,7 +344,7 @@ function IsaiahLeadCard() {
   const hasStarted = completed > 0;
   return (
     <Link
-      to="/milano/devozionale"
+      to="/devozionale/isaia"
       className="group grid overflow-hidden rounded-2xl border border-border bg-card transition hover:shadow-[var(--shadow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
     >
       <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[320px]">

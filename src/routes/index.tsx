@@ -236,6 +236,23 @@ function HomePage() {
             </div>
           </div>
 
+          {/* Isaiah course — quiet link */}
+          <div className="mt-12 md:mt-16 mx-auto w-full max-w-2xl">
+            <Link
+              to="/devozionale/isaia"
+              className="group block rounded-2xl border border-border bg-card p-6 md:p-7 transition hover:shadow-[var(--shadow-soft)]"
+            >
+              <p className="text-xs font-medium text-primary">Devozionale · 67 giorni</p>
+              <p className="mt-2 font-display text-2xl text-foreground group-hover:text-primary transition-colors">
+                Studiare Isaia insieme
+              </p>
+              <p className="mt-2 text-sm text-foreground/70">
+                Un capitolo al giorno nel libro del profeta Isaia: contesto, domande sul testo e domande per la vita.{" "}
+                <span className="text-primary">Inizia lo studio →</span>
+              </p>
+            </Link>
+          </div>
+
           {/* Community photo — full-width editorial break */}
           <div className="mt-12 md:mt-16 mx-auto w-full max-w-2xl overflow-hidden rounded-2xl aspect-[3/2] relative">
             <img

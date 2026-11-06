@@ -332,7 +332,7 @@ function MilanoHome() {
                 <p className="text-sm text-muted-foreground mt-2">— Isaia 41:10</p>
               </div>
               <div className="pt-2">
-                <Link to="/milano/devozionale" className="btn-primary inline-flex items-center gap-2">
+                <Link to="/devozionale/isaia" className="btn-primary inline-flex items-center gap-2">
                   Apri lo studio <span aria-hidden>→</span>
                 </Link>
               </div>
