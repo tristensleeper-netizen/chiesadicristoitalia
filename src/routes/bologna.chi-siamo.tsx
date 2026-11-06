@@ -8,7 +8,7 @@ export const Route = createFileRoute("/bologna/chi-siamo")({
       { title: "Chi siamo — Chiesa di Cristo di Bologna" },
       { name: "description", content: "Conosci la Chiesa di Cristo di Bologna: una nuova comunità cristiana senza una sede. Il luogo degli incontri è da confermare." },
       { property: "og:title", content: "Chi siamo — Chiesa di Cristo di Bologna" },
-      { property: "og:description", content: "Una nuova comunità cristiana a Bologna. Ti aspettiamo la domenica." },
+      { property: "og:description", content: "Una nuova comunità cristiana a Bologna, senza una sede né una funzione domenicale regolare. Scrivici prima di venire per conoscere i dettagli del prossimo incontro." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
