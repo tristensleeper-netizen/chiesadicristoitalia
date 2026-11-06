@@ -98,7 +98,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
         {city.isPlant && (
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to={`${city.basePath}/contatti`} className="btn-primary">Voglio camminare con voi</Link>
-            <Link to="/milano" className="btn-outline">Visita la chiesa di Milano</Link>
+            <Link to={`${city.basePath}/cosa-crediamo`} className="btn-outline">Cosa crediamo</Link>
           </div>
         )}
       </section>
