@@ -96,7 +96,7 @@ function BolognaHome() {
         title={<>Un nuovo<br />cammino a Bologna.</>}
         subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo una sede e il luogo dei nostri incontri è ancora da confermare: scrivici per camminare con noi."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
-        secondaryCta={{ to: "/milano", label: "Visita Milano" }}
+        secondaryCta={{ to: "/bologna/visita", label: "Come partecipare" }}
         align="left"
       />
 
