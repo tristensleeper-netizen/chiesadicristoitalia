@@ -16,7 +16,7 @@ export interface CityConfig {
   hero: string;
   address?: string;
   cap?: string;
-  serviceTime: string;
+  serviceTime?: string;
   mapsUrl?: string;
   basePath: "/milano" | "/bologna";
   /** True when the city is a "chiesa in fondazione" — no physical location/services yet. */
@@ -42,7 +42,7 @@ export function AboutSection({ city }: { city: CityConfig }) {
         title={city.isPlant ? <>Una nuova<br />comunità.</> : <>Una famiglia<br />spirituale.</>}
         subtitle={
           city.isPlant
-            ? `Una nuova Chiesa di Cristo a ${city.name}: ci ritroviamo ogni domenica alle 10:30, dal ${city.launchLabel ?? ""}.`
+            ? `Una nuova Chiesa di Cristo a ${city.name}: non abbiamo una sede né una funzione domenicale regolare. Scrivici prima di venire.`
             : `Conosci la Chiesa di Cristo di ${city.name} — chi siamo, cosa ci muove e perché ci ritroviamo ogni domenica.`
         }
         height="medium"
@@ -57,20 +57,18 @@ export function AboutSection({ city }: { city: CityConfig }) {
             <>
               <p>
                 Domenica {city.launchLabel} abbiamo celebrato la prima funzione
-                della Chiesa di Cristo di {city.name}. Rendiamo grazie a Dio per
+                della Chiesa di Cristo di {city.name} all'Hotel Europa, in Via Cesare Boldrini 11: un incontro unico, non una funzione domenicale regolare. Rendiamo grazie a Dio per
                 questo nuovo inizio e per ogni persona che cammina con noi.
               </p>
               <p>
-                {city.venueName
-                  ? `Ci ritroviamo presso ${city.venueName} (${city.address}${city.venueNote ? `, ${city.venueNote}` : ""}) ogni domenica alle 10:30.`
-                  : "Non abbiamo una sede e il luogo dei nostri incontri è ancora da confermare. Scrivici per sapere dove incontrarci."}{" "}
+                Non abbiamo ancora un luogo di ritrovo regolare. Scrivici a infobo@chiesadicristoitalia.it o su WhatsApp per conoscere i dettagli del prossimo incontro.{" "}
                 Offriamo preghiera, studi biblici personali, lode e l'invito
                 a camminare con noi mentre Dio apre la strada.
               </p>
               <p>
                 Se vivi a {city.name} o nelle vicinanze e ti interessa fare
-                parte di questa comunità — vieni a trovarci una domenica, oppure
-                scrivici. Vogliamo conoscerti.
+                parte di questa comunità — scrivici prima di venire.
+                Ti condivideremo i dettagli del prossimo incontro. Vogliamo conoscerti.
               </p>
             </>
           ) : (
@@ -167,9 +165,7 @@ export function VisitSection({ city }: { city: CityConfig }) {
           eyebrow={`Visita · ${city.name}`}
           title={<>Incontriamoci<br />a Bologna.</>}
           subtitle={
-            city.venueName
-              ? `La Chiesa di Cristo di ${city.name} si ritrova presso ${city.venueName}, ${city.address}${city.venueNote ? ` (${city.venueNote})` : ""}, ogni domenica alle 10:30.`
-              : `La Chiesa di Cristo di ${city.name} non ha una sede. Il luogo dei nostri incontri è ancora da confermare: scrivici prima di venire.`
+            `La Chiesa di Cristo di ${city.name} non ha una sede né una funzione domenicale regolare. Scrivici prima di venire: ti condivideremo i dettagli del prossimo incontro.`
           }
           primaryCta={{ to: `${city.basePath}/contatti`, label: "Scrivici" }}
           height="medium"
@@ -177,37 +173,17 @@ export function VisitSection({ city }: { city: CityConfig }) {
         <section className="container-narrow py-20">
           <p className="eyebrow mb-4">L'annuncio</p>
           <h2 className="font-display text-3xl mb-6">
-            {city.venueName ? "Ecco dove ci ritroviamo." : "Luogo degli incontri da confermare."}
+            Luogo degli incontri da confermare.
           </h2>
-          {city.venueName ? (
-            <div className="rounded-2xl border border-border bg-card p-8 max-w-xl">
-              <p className="eyebrow mb-3">Dove</p>
-              <p className="font-display text-2xl text-foreground">{city.venueName}</p>
-              <p className="text-foreground/70">
-                {city.address}
-                {city.venueNote ? ` · ${city.venueNote}` : ""}
-              </p>
-              <p className="eyebrow mt-8 mb-3">Quando</p>
-              <p className="font-display text-2xl text-foreground">
-                Ogni domenica · 10:30 – 12:15
-              </p>
-              <a
-                href={city.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 btn-outline w-full"
-              >
-                Apri in Google Maps
-              </a>
-            </div>
-          ) : (
+          <p className="text-foreground/80 leading-relaxed mb-8">
+            Il primo incontro si è tenuto domenica 4 ottobre 2026 all'Hotel Europa, in Via Cesare Boldrini 11. Non abbiamo ancora un luogo di ritrovo regolare. Scrivici a infobo@chiesadicristoitalia.it o su WhatsApp per il prossimo incontro.
+          </p>
             <ul className="space-y-5 text-foreground/80 leading-relaxed">
               <li><strong className="text-primary">Studi biblici personali.</strong> Possiamo incontrarci di persona o online per leggere insieme la Bibbia.</li>
               <li><strong className="text-primary">Preghiera.</strong> Stiamo pregando per {city.name} — unisciti a noi.</li>
-              <li><strong className="text-primary">Aggiornamenti.</strong> Iscriviti per sapere dove si terranno i prossimi incontri.</li>
+              <li><strong className="text-primary">Aggiornamenti.</strong> Scrivici per sapere dove e quando si terrà il prossimo incontro.</li>
               <li><strong className="text-primary">Funzioni a Milano.</strong> Nel frattempo, sei il benvenuto la domenica alle 10:30 nella chiesa di Milano.</li>
             </ul>
-          )}
         </section>
       </>
     );
@@ -271,15 +247,14 @@ export function EventsSection({ city }: { city: CityConfig }) {
           image={heroImage}
           eyebrow={`Eventi · ${city.name}`}
           title={<>La vita della<br />comunità.</>}
-          subtitle={`Preghiera, studi biblici e comunione a ${city.name}. Il luogo degli incontri è ancora da confermare: scrivici per i dettagli.`}
+          subtitle={`La comunità di ${city.name} non ha una sede né una funzione domenicale regolare. Scrivici prima di venire.`}
           height="short"
         />
         <section className="container-narrow py-20 text-center">
           <p className="eyebrow mb-4">Resta in contatto</p>
           <h2 className="font-display text-3xl mb-6">Vuoi essere coinvolto?</h2>
           <p className="text-foreground/75 mb-8 max-w-xl mx-auto">
-            Scrivici per sapere di più su incontri di preghiera, studi biblici
-            e sulla vita della comunità a {city.name}.
+            Il primo incontro si è tenuto domenica 4 ottobre 2026 all'Hotel Europa, in Via Cesare Boldrini 11. Scrivici a infobo@chiesadicristoitalia.it o su WhatsApp per conoscere i dettagli del prossimo incontro a {city.name}.
           </p>
           <div className="mt-2">
             <Link to={`${city.basePath}/contatti`} className="btn-primary">
@@ -339,7 +314,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
           <h2 className="font-display text-3xl mb-6">Siamo qui per te.</h2>
           <p className="text-foreground/75 leading-relaxed mb-8">
             {isPlant
-              ? `La Chiesa di Cristo di ${city.name} si ritrova ogni domenica alle 10:30. Scrivici per visitarci, per uno studio biblico o per pregare insieme.`
+              ? `La Chiesa di Cristo di ${city.name} non ha una sede né una funzione domenicale regolare. Il primo incontro si è tenuto domenica 4 ottobre 2026 all'Hotel Europa, in Via Cesare Boldrini 11. Scrivici a infobo@chiesadicristoitalia.it o su WhatsApp per conoscere i dettagli del prossimo incontro.`
               : "Vuoi visitarci, iniziare uno studio biblico, o semplicemente scambiare due parole? Compila il modulo o scrivici una email. Risponderemo entro 24 ore."}
           </p>
           <ul className="space-y-3 text-foreground/85">
@@ -347,15 +322,7 @@ export function ContactSection({ city }: { city: CityConfig }) {
             {isPlant ? (
               <>
                 <li><span className="eyebrow block mb-1">Luogo degli incontri</span>Da confermare · Scrivici prima di venire.</li>
-                {city.venueName && (
-                  <li>
-                    <span className="eyebrow block mb-1">Dove</span>
-                    {city.venueName}
-                    <br />
-                    {city.address}
-                    {city.venueNote ? ` · ${city.venueNote}` : ""}
-                  </li>
-                )}
+                <li><span className="eyebrow block mb-1">WhatsApp</span><a href="https://wa.me/393477519426" target="_blank" rel="noopener noreferrer" className="hover:text-primary">+39 347 751 9426</a></li>
               </>
             ) : (
               <>

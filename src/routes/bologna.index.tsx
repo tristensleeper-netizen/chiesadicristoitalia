@@ -19,7 +19,7 @@ const bolognaJsonLd = {
   "name": "Chiesa di Cristo di Bologna",
   "alternateName": "Church of Christ Bologna",
   "url": "https://chiesadicristoitalia.it/bologna",
-  "description": "Una comunità cristiana a Bologna, senza una sede. Il luogo degli incontri è ancora da confermare: contattaci per partecipare.",
+  "description": "Una comunità cristiana a Bologna, senza una sede né una funzione domenicale regolare. Il primo incontro si è tenuto il 4 ottobre 2026 all'Hotel Europa, Via Cesare Boldrini 11. Scrivi a infobo@chiesadicristoitalia.it o su WhatsApp per il prossimo incontro.",
   "email": "infobo@chiesadicristoitalia.it",
   "areaServed": {
     "@type": "City",
@@ -69,7 +69,7 @@ export const Route = createFileRoute("/bologna/")({
   component: BolognaHome,
 });
 
-const LAUNCH_LABEL = "4 Ottobre 2026";
+const LAUNCH_LABEL = "4 ottobre 2026";
 
 function BolognaHome() {
   const heroImage = useActiveHero("bologna", heroBologna);
@@ -94,7 +94,7 @@ function BolognaHome() {
         image={heroImage}
         eyebrow="Una comunità cristiana · Bologna"
         title={<>Un nuovo<br />cammino a Bologna.</>}
-        subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo una sede e il luogo dei nostri incontri è ancora da confermare: scrivici per camminare con noi."
+        subtitle="Una famiglia spirituale che cresce nella fede e nell’amore. Non abbiamo una sede né una funzione domenicale regolare: scrivici prima di venire per conoscere i dettagli del prossimo incontro."
         primaryCta={{ to: "/bologna/contatti", label: "Cammina con noi" }}
         secondaryCta={{ to: "/bologna/visita", label: "Come partecipare" }}
         align="left"
@@ -111,8 +111,8 @@ function BolognaHome() {
             Il luogo degli incontri è da confermare.
           </h2>
           <p className="mt-5 text-foreground/80 leading-relaxed max-w-2xl">
-            Non abbiamo una sede. Scrivici prima di venire: ti daremo
-            i dettagli del prossimo incontro. Sei il benvenuto.
+            Non abbiamo una sede né una funzione domenicale regolare. Il primo incontro si è tenuto domenica 4 ottobre 2026 all'Hotel Europa, in Via Cesare Boldrini 11.
+            Scrivici prima di venire, a infobo@chiesadicristoitalia.it o su WhatsApp: ti daremo i dettagli del prossimo incontro. Sei il benvenuto.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/75">
             <span>Preghiera, riflessione dalla Bibbia e lode</span>

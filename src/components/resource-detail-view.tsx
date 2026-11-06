@@ -113,7 +113,7 @@ export function ResourceDetailView({
               href={r.media_url}
               target="_blank"
               rel="noopener"
-              className="text-base font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
+              className="btn-primary"
             >
               Leggi l'articolo completo ↗
             </a>

@@ -15,10 +15,9 @@ export const milanoConfig: CityConfig = {
 export const bolognaConfig: CityConfig = {
   name: "Bologna",
   hero: heroBologna,
-  serviceTime: "Domenica · 10:30",
   basePath: "/bologna",
   // Chiesa in fondazione — inaugurazione domenica 4 ottobre 2026.
   isPlant: true,
-  launchLabel: "4 Ottobre 2026",
+  launchLabel: "4 ottobre 2026",
   email: "infobo@chiesadicristoitalia.it",
 };

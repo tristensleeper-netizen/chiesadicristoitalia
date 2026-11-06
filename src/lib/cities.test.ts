@@ -11,4 +11,10 @@ describe("Bologna meeting location", () => {
   test("does not offer directions to an unconfirmed venue", () => {
     strictEqual(bolognaConfig.mapsUrl, undefined);
   });
+  test("has no regular Sunday service time", () => {
+    strictEqual(bolognaConfig.serviceTime, undefined);
+  });
+  test("uses the Bologna email for next gathering details", () => {
+    strictEqual(bolognaConfig.email, "infobo@chiesadicristoitalia.it");
+  });
 });
