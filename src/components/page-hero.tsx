@@ -33,7 +33,7 @@ export function PageHero({
 }: PageHeroProps) {
   const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
   const useSlot = slot != null && slotMedia != null;
-  const [videoReady, setVideoReady] = useState(false);
+  const [readyVideo, setReadyVideo] = useState<string>();
   const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
     ? slotMedia.height > slotMedia.width
     : false;
@@ -102,8 +102,20 @@ export function PageHero({
           )}
         </>
       )}
-      {resolvedVideo ? (
+      <img
+        key={resolvedVideo ? videoPoster : resolvedImage}
+        src={resolvedVideo ? videoPoster : resolvedImage}
+        alt=""
+        onLoad={(event) => event.currentTarget.classList.replace("opacity-0", "opacity-100")}
+        fetchPriority="high"
+        decoding="async"
+        className={`absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
+        width={1920}
+        height={1280}
+      />
+      {resolvedVideo && (
         <video
+          key={resolvedVideo}
           src={resolvedVideo}
           poster={videoPoster}
           autoPlay
@@ -111,21 +123,9 @@ export function PageHero({
           loop
           playsInline
           preload="auto"
-          onCanPlay={() => setVideoReady(true)}
-          onLoadedData={() => setVideoReady(true)}
-          className={`absolute inset-0 h-full w-full transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""} ${videoReady ? "opacity-100" : "opacity-0"}`}
-        />
-      ) : (
-        <img
-          key={resolvedImage}
-          src={resolvedImage}
-          alt=""
-          onLoad={(event) => event.currentTarget.classList.replace("opacity-0", "opacity-100")}
-          fetchPriority="high"
-          decoding="async"
-          className={`absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
-          width={1920}
-          height={1280}
+          onCanPlay={() => setReadyVideo(resolvedVideo)}
+          onLoadedData={() => setReadyVideo(resolvedVideo)}
+          className={`absolute inset-0 h-full w-full transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""} ${readyVideo === resolvedVideo ? "opacity-100" : "opacity-0"}`}
         />
       )}
       <div className={`${vivid ? "hero-home-vivid" : "hero-cinematic-overlay"} absolute inset-0 ${align === "left" && !vivid ? "hero-cinematic-overlay-left" : ""}`} />
