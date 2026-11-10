@@ -33,9 +33,6 @@ export function PageHero({
 }: PageHeroProps) {
   const slotMedia = useSlotMedia(slot ?? ("home.hero" as SlotKey));
   const useSlot = slot != null && slotMedia != null;
-  // While a slot is specified but not yet loaded, suppress the fallback image
-  // to avoid a flash of the default hero before the video appears.
-  const slotPending = slot != null && slotMedia == null;
   const [videoReady, setVideoReady] = useState(false);
   const hasVerticalMedia = useSlot && slotMedia.width && slotMedia.height
     ? slotMedia.height > slotMedia.width
@@ -58,11 +55,6 @@ export function PageHero({
     useSlot && slotMedia.kind === "video" && slotMedia.thumbnail_url
       ? slotMedia.thumbnail_url
       : image;
-  // Only render the still image layer when there's no video AND the slot isn't pending.
-  const showImageLayer = !resolvedVideo && !slotPending;
-  // When the slot has a video, never render the fallback image at all (prevents flash).
-  const slotHasVideo = useSlot && slotMedia.kind === "video";
-
   const heightClass =
     height === "tall"
       ? "min-h-[88vh]"
@@ -76,6 +68,14 @@ export function PageHero({
       className={`page-hero-shell relative -mt-[72px] flex ${heightClass} w-full overflow-hidden bg-foreground`}
       style={resolvedVideo ? { backgroundImage: `url(${videoPoster})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
     >
+      <img
+        src={image}
+        alt=""
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover"
+        width={1920}
+        height={1280}
+      />
       {hasVerticalMedia && (
         <>
           {resolvedVideo ? (
@@ -113,19 +113,21 @@ export function PageHero({
           preload="auto"
           onCanPlay={() => setVideoReady(true)}
           onLoadedData={() => setVideoReady(true)}
-          className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""} ${videoReady ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 h-full w-full transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""} ${videoReady ? "opacity-100" : "opacity-0"}`}
         />
-      ) : showImageLayer && !slotHasVideo ? (
+      ) : (
         <img
+          key={resolvedImage}
           src={resolvedImage}
           alt=""
+          onLoad={(event) => event.currentTarget.classList.replace("opacity-0", "opacity-100")}
           fetchPriority="high"
           decoding="async"
-          className={`absolute inset-0 h-full w-full ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
+          className={`absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 motion-reduce:transition-none ${hasVerticalMedia ? "object-contain" : "object-cover"} ${vivid ? "hero-home-video scale-105" : ""}`}
           width={1920}
           height={1280}
         />
-      ) : null}
+      )}
       <div className={`${vivid ? "hero-home-vivid" : "hero-cinematic-overlay"} absolute inset-0 ${align === "left" && !vivid ? "hero-cinematic-overlay-left" : ""}`} />
       <div className={`relative z-10 container-prose flex w-full flex-col justify-end pb-14 pt-32 md:pb-18 ${alignClass}`}>
         {eyebrow && (

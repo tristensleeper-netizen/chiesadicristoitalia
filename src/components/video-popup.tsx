@@ -48,8 +48,19 @@ export function VideoPopup({
       // ignore
     }
     setDismissed(false);
-    const t = setTimeout(() => setVisible(true), delayMs);
-    return () => clearTimeout(t);
+    const reveal = () => {
+      if (window.innerWidth >= 768 || window.scrollY >= window.innerHeight) {
+        setVisible(true);
+      }
+    };
+    const t = setTimeout(reveal, delayMs);
+    window.addEventListener("scroll", reveal, { passive: true });
+    window.addEventListener("resize", reveal);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("scroll", reveal);
+      window.removeEventListener("resize", reveal);
+    };
   }, [delayMs, storageKey]);
 
   // Lock body scroll while lightbox is open + close on Esc
