@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { SpecialServiceNotice } from "@/components/special-service-notice";
-import { isBolognaServiceDay } from "@/lib/special-service";
 import { VideoPopup } from "@/components/video-popup";
 import { useSlotImage } from "@/lib/use-slot-image";
 import heroItalia from "@/assets/hero-italia.jpg";
@@ -117,7 +115,7 @@ function HomePage() {
   const bolognaImg = useSlotImage("home.bologna", heroBologna);
   return (
     <>
-      <SpecialServiceNotice context="italia" />
+
       <PageHero
         slot="home.hero"
         image={homeHero}
@@ -139,7 +137,7 @@ function HomePage() {
             image={milanoImg}
             name="Milano"
             tagline="Chiesa di Cristo di Milano"
-            description={isBolognaServiceDay() ? "Oggi, 4 ottobre, la comunità di Milano si ritrova a Bologna all’Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione a Milano." : "Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano."}
+            description={"Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano."}
             accent="from-emerald-900/40 to-emerald-950/80"
           />
           <CityCard

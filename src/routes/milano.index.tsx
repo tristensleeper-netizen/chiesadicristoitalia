@@ -7,8 +7,6 @@ import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsPopup } from "@/components/events-popup";
 import { EventsWeekCalendar } from "@/components/events-week-calendar";
 import { VideoFeature } from "@/components/video-feature";
-import { SpecialServiceNotice } from "@/components/special-service-notice";
-import { BOLOGNA_SERVICE, isBolognaServiceDay } from "@/lib/special-service";
 import { useCityEvents, useActiveHero } from "@/lib/use-city-events";
 import { useSlotImage } from "@/lib/use-slot-image";
 
@@ -97,16 +95,12 @@ export const Route = createFileRoute("/milano/")({
       { title: "Chiesa di Cristo di Milano — Funzione domenicale" },
       {
         name: "description",
-        content: isBolognaServiceDay()
-          ? "Oggi, 4 ottobre, la comunità di Milano si ritrova a Bologna alle 10:30 all'Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione in Corso di Porta Vigentina."
-          : "Chiesa di Cristo di Milano: funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, 20122 Milano. Sei il benvenuto.",
+        content: "Chiesa di Cristo di Milano: funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, 20122 Milano. Sei il benvenuto.",
       },
       { property: "og:title", content: "Chiesa di Cristo di Milano" },
       {
         property: "og:description",
-        content: isBolognaServiceDay()
-          ? "Oggi, 4 ottobre: funzione speciale a Bologna alle 10:30, Hotel Europa, Via Cesare Boldrini 11. Nessuna funzione a Milano."
-          : "Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano. Vieni a conoscerci.",
+        content: "Funzione domenicale alle 10:30 in Corso di Porta Vigentina 15a, Milano. Vieni a conoscerci.",
       },
       { property: "og:url", content: "https://chiesadicristoitalia.it/milano" },
     ],
@@ -122,7 +116,6 @@ export const Route = createFileRoute("/milano/")({
 });
 
 function MilanoHome() {
-  const specialServiceToday = isBolognaServiceDay();
   const events = useCityEvents("milano", MILANO_EVENTS);
   const heroImage = useActiveHero("milano", heroMilano);
   const welcomeImg = useSlotImage("milano.welcome", worship);
@@ -146,7 +139,7 @@ function MilanoHome() {
   ];
   return (
     <>
-      <SpecialServiceNotice />
+
       <PageHero
         slot="milano.hero"
         image={heroImage}
@@ -160,12 +153,12 @@ function MilanoHome() {
 
       <CityInfoBlock
         city="Milano"
-        address={specialServiceToday ? BOLOGNA_SERVICE.address : "Corso di Porta Vigentina 15a"}
-        cap={specialServiceToday ? BOLOGNA_SERVICE.locality : "20122"}
+        address={"Corso di Porta Vigentina 15a"}
+        cap={"20122"}
         serviceTime="Domenica · 10:30"
-        mapsUrl={specialServiceToday ? BOLOGNA_SERVICE.mapsUrl : "https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"}
-        venueLabel={specialServiceToday ? BOLOGNA_SERVICE.venue : undefined}
-        locationLabel={specialServiceToday ? "Funzione di oggi · Bologna" : undefined}
+        mapsUrl={"https://maps.app.goo.gl/VvkjBp6rWkm9A4aa9"}
+
+
       />
 
       {/* Floating bottom-right popup */}
@@ -198,7 +191,7 @@ function MilanoHome() {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow mb-2">Cosa succede</p>
-            <h2 className="font-display text-3xl md:text-4xl">{specialServiceToday ? "Questa settimana · funzione speciale a Bologna" : "Questa settimana a Milano"}</h2>
+            <h2 className="font-display text-3xl md:text-4xl">{"Questa settimana a Milano"}</h2>
           </div>
           <Link to="/milano/eventi" className="hidden md:inline text-sm font-medium text-primary hover:underline">
             Calendario completo →
@@ -248,7 +241,7 @@ function MilanoHome() {
         <div className="grid gap-8 md:grid-cols-3">
           <Pillar
             title="Funzione domenicale"
-            text={specialServiceToday ? "Questa domenica la comunità di Milano si riunisce a Bologna, all’Hotel Europa in Via Cesare Boldrini 11, alle 10:30. Non ci sarà funzione in Corso di Porta Vigentina." : "Ogni domenica alle 10:30 ci ritroviamo in Corso di Porta Vigentina 15a per adorare insieme, condividere la comunione e ascoltare un messaggio dalla Bibbia."}
+            text={"Ogni domenica alle 10:30 ci ritroviamo in Corso di Porta Vigentina 15a per adorare insieme, condividere la comunione e ascoltare un messaggio dalla Bibbia."}
             cta={{ to: "/milano/visita", label: "Cosa aspettarsi" }}
           />
           <Pillar
