@@ -12,6 +12,7 @@ import worship from "@/assets/worship.jpg";
 export const Route = createFileRoute("/chiesa-di-cristo-di-bologna-recruitment-page")({
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex,nofollow" },
       { title: "Join the Mission — Chiesa di Cristo di Bologna · September 2026" },
       {
         name: "description",
@@ -26,7 +27,6 @@ export const Route = createFileRoute("/chiesa-di-cristo-di-bologna-recruitment-p
       { property: "og:image", content: heroBologna },
       { name: "twitter:image", content: heroBologna },
     ],
-    links: [{ rel: "canonical", href: "https://chiesadicristoitalia.it/chiesa-di-cristo-di-bologna-recruitment-page" }],
   }),
   component: RecruitmentPage,
 });
@@ -53,7 +53,6 @@ function RecruitmentPage() {
         eyebrow="Recruitment · Launching September 2026"
         title={<>Join the<br />mission.</>}
         subtitle="The first ICOC church planting in Italy in 30 years. We're looking for people willing to move to Bologna to plant a new Chiesa di Cristo together."
-        primaryCta={{ to: "/chiesa-di-cristo-di-bologna-recruitment-page", label: "Fill out the form" }}
         secondaryCta={{ to: "/bologna", label: "Discover Bologna" }}
         align="left"
       />

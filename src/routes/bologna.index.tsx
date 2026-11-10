@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { SpecialServiceNotice } from "@/components/special-service-notice";
 
 import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
@@ -88,7 +87,7 @@ function BolognaHome() {
 
   return (
     <>
-      <SpecialServiceNotice context="bologna" />
+
       <PageHero
         slot="bologna.hero"
         image={heroImage}

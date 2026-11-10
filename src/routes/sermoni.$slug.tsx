@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
+import { createFileRoute, Link, redirect, notFound } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 import { type Resource } from "@/lib/resource-helpers";
 import {
   ResourceDetailView,
@@ -9,15 +10,33 @@ import {
 
 const SITE_URL = "https://chiesadicristoitalia.it";
 
+const getPublishedResource = createServerFn({ method: "GET" })
+  .inputValidator((slug: string) => slug)
+  .handler(async ({ data: slug }) => {
+    const url = process.env["SUPABASE_URL"];
+    const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
+    if (!url || !key) throw new Error("Risorse temporaneamente non disponibili.");
+    const client = createClient<Database>(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: {
+        fetch: (input, init) => {
+          const headers = new Headers(init?.headers);
+          headers.set("apikey", key);
+          if (key.startsWith("sb_")) headers.delete("Authorization");
+          return fetch(input, { ...init, headers });
+        },
+      },
+    });
+    const { data, error } = await client.from("resources").select("*")
+      .eq("slug", slug).eq("published", true).maybeSingle();
+    if (error) throw new Error("Risorse temporaneamente non disponibili.");
+    return data as Resource | null;
+  });
+
 export const Route = createFileRoute("/sermoni/$slug")({
   loader: async ({ params }) => {
-    const { data } = await supabase
-      .from("resources")
-      .select("*")
-      .eq("slug", params.slug)
-      .eq("published", true)
-      .maybeSingle();
-    const resource = (data as Resource | null) ?? null;
+    const resource = await getPublishedResource({ data: params.slug });
+    if (!resource) throw notFound();
     // /sermoni/$slug serves both sermon and video resources. Anything else
     // (article, pdf, etc.) redirects to its canonical /risorse/$slug location.
     if (resource && resource.type !== "sermon" && resource.type !== "video") {
@@ -36,59 +55,19 @@ export const Route = createFileRoute("/sermoni/$slug")({
       basePath: "/sermoni",
       siteUrl: SITE_URL,
     }),
+  errorComponent: () => <div role="alert" className="container-prose py-32 text-center">Risorse temporaneamente non disponibili.</div>,
+  notFoundComponent: () => (
+    <div className="container-prose py-32 text-center">
+      <p className="eyebrow mb-4">404</p>
+      <h1 className="font-display text-4xl mb-6">Sermone non trovato</h1>
+      <Link to="/sermoni" className="btn-primary">Tutti i sermoni</Link>
+    </div>
+  ),
   component: SermonDetail,
 });
 
 function SermonDetail() {
-  const { slug } = Route.useParams();
-  const initial = Route.useLoaderData().resource;
-  const [resource, setResource] = useState<Resource | null>(initial);
-  const [loading, setLoading] = useState(initial === null);
-  const [notFoundState, setNotFoundState] = useState(initial === null);
-
-  useEffect(() => {
-    if (initial) return;
-    let active = true;
-    (async () => {
-      const { data, error } = await supabase
-        .from("resources")
-        .select("*")
-        .eq("slug", slug)
-        .eq("published", true)
-        .maybeSingle();
-      if (!active) return;
-      if (error) console.error(error);
-      if (!data) setNotFoundState(true);
-      else {
-        setResource(data as Resource);
-        setNotFoundState(false);
-      }
-      setLoading(false);
-    })();
-    return () => {
-      active = false;
-    };
-  }, [slug, initial]);
-
-  if (loading) {
-    return (
-      <div className="container-prose py-32 text-center text-muted-foreground">
-        Caricamento…
-      </div>
-    );
-  }
-
-  if (notFoundState || !resource) {
-    return (
-      <div className="container-prose py-32 text-center">
-        <p className="eyebrow mb-4">404</p>
-        <h1 className="font-display text-4xl mb-6">Sermone non trovato</h1>
-        <Link to="/sermoni" className="btn-primary">
-          Tutti i sermoni
-        </Link>
-      </div>
-    );
-  }
+  const { resource } = Route.useLoaderData();
 
   return (
     <ResourceDetailView
