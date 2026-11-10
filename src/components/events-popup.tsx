@@ -16,12 +16,16 @@ export function EventsPopup({ events, cityHref, cityName }: Props) {
 
   // Slide in after a short delay
   useEffect(() => {
+    let delayElapsed = false;
     const reveal = () => {
-      if (window.innerWidth >= 768 || window.scrollY >= window.innerHeight) {
+      if (window.innerWidth < 768 ? window.scrollY >= window.innerHeight : delayElapsed) {
         setVisible(true);
       }
     };
-    const t = setTimeout(reveal, 900);
+    const t = setTimeout(() => {
+      delayElapsed = true;
+      reveal();
+    }, 900);
     window.addEventListener("scroll", reveal, { passive: true });
     window.addEventListener("resize", reveal);
     return () => {

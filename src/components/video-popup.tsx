@@ -48,12 +48,16 @@ export function VideoPopup({
       // ignore
     }
     setDismissed(false);
+    let delayElapsed = false;
     const reveal = () => {
-      if (window.innerWidth >= 768 || window.scrollY >= window.innerHeight) {
+      if (window.innerWidth < 768 ? window.scrollY >= window.innerHeight : delayElapsed) {
         setVisible(true);
       }
     };
-    const t = setTimeout(reveal, delayMs);
+    const t = setTimeout(() => {
+      delayElapsed = true;
+      reveal();
+    }, delayMs);
     window.addEventListener("scroll", reveal, { passive: true });
     window.addEventListener("resize", reveal);
     return () => {
