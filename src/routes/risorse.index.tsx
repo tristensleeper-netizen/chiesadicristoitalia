@@ -359,7 +359,7 @@ function IsaiahLeadCard() {
           «Non temere, perché io sono con te» — Isaia 41:10
         </p>
         <p className="mt-4 text-sm text-foreground/70">
-          66 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
+          67 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
         </p>
         {hasStarted ? (
           <div className="mt-auto pt-8">

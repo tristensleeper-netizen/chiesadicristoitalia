@@ -118,7 +118,6 @@ function MilanoHome() {
   const events = useCityEvents("milano", MILANO_EVENTS);
   const heroImage = useActiveHero("milano", heroMilano);
   const welcomeImg = useSlotImage("milano.welcome", worship);
-  const bibleBandImg = useSlotImage("milano.bibleband", bibleStudy);
   const photo1 = useSlotImage("milano.photo1", worship);
   const photo2 = useSlotImage("milano.photo2", bibleStudy);
   const photo3 = useSlotImage("milano.photo3", heroMilano);
