@@ -93,7 +93,7 @@ export function EventsCalendar({ city }: Props) {
           {weekdayLabels.map((d) => (
             <div
               key={d}
-              className="text-[11px] uppercase tracking-wider text-muted-foreground text-center font-medium py-2"
+              className="text-xs uppercase tracking-wider text-muted-foreground text-center font-medium py-2"
             >
               {d}
             </div>
@@ -121,7 +121,7 @@ export function EventsCalendar({ city }: Props) {
               >
                 <span
                   className={[
-                    "inline-grid place-items-center h-6 w-6 rounded-full text-[11px] font-medium mb-1 shrink-0",
+                    "inline-grid place-items-center h-6 w-6 rounded-full text-xs font-medium mb-1 shrink-0",
                     isToday ? "bg-primary text-primary-foreground font-semibold" : "text-foreground/80",
                   ].join(" ")}
                 >
@@ -131,21 +131,21 @@ export function EventsCalendar({ city }: Props) {
                 <div className="flex flex-col gap-0.5 flex-1 overflow-hidden">
                   {events.slice(0, 2).map((e) => (
                     <div key={e.id} className="min-w-0">
-                      <p className="text-[9px] leading-tight font-semibold text-primary truncate">
+                      <p className="text-xs leading-tight font-semibold text-primary truncate">
                         {formatChurchTime(e.date)}
                       </p>
-                      <p className="text-[9px] leading-tight text-foreground/75 truncate">
+                      <p className="text-xs leading-tight text-foreground/75 truncate">
                         {e.title}
                       </p>
                       {e.location && (
-                        <p className="text-[8px] leading-tight text-muted-foreground truncate">
+                        <p className="text-xs leading-tight text-muted-foreground truncate">
                           {e.location}
                         </p>
                       )}
                     </div>
                   ))}
                   {events.length > 2 && (
-                    <p className="text-[8px] text-muted-foreground">+{events.length - 2}</p>
+                    <p className="text-xs text-muted-foreground">+{events.length - 2}</p>
                   )}
                 </div>
               </button>
@@ -172,7 +172,7 @@ export function EventsCalendar({ city }: Props) {
             {selectedEvents.map((e) => (
               <li key={e.id} className="border-l-2 border-primary pl-4">
                 {e.tag && (
-                  <span className="inline-block px-2 py-0.5 mb-1 text-[10px] uppercase tracking-[0.2em] rounded-full bg-primary/10 text-primary">
+                  <span className="inline-block px-2 py-0.5 mb-1 text-xs uppercase tracking-[0.2em] rounded-full bg-primary/10 text-primary">
                     {e.tag}
                   </span>
                 )}
@@ -227,13 +227,13 @@ export function EventsCalendar({ city }: Props) {
                   <p className="font-display text-3xl leading-none text-primary">
                     {format(e.date, "d")}
                   </p>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1">
                     {format(e.date, "LLL", { locale: it })}
                   </p>
                 </div>
                 <div className="min-w-0 flex-1">
                   {e.tag && (
-                    <span className="inline-block px-2 py-0.5 mb-1.5 text-[10px] uppercase tracking-[0.2em] rounded-full bg-primary/10 text-primary">
+                    <span className="inline-block px-2 py-0.5 mb-1.5 text-xs uppercase tracking-[0.2em] rounded-full bg-primary/10 text-primary">
                       {e.tag}
                     </span>
                   )}

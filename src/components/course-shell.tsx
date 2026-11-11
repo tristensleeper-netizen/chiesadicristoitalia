@@ -221,7 +221,7 @@ export function CourseShell({
                       >
                         <span
                           className={[
-                            "shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-semibold border",
+                            "shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold border",
                             isDone
                               ? "bg-primary text-primary-foreground border-primary"
                               : isCurrent

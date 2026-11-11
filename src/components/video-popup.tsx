@@ -141,7 +141,7 @@ export function VideoPopup({
                   className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/30"
                 />
 
-                <span className="absolute left-2.5 top-2.5 inline-flex items-center gap-1.5 rounded-full bg-red-600 px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.2em] text-white shadow-md">
+                <span className="absolute left-2.5 top-2.5 inline-flex items-center gap-1.5 rounded-full bg-red-600 px-2 py-0.5 text-xs font-black uppercase tracking-[0.2em] text-white shadow-md">
                   <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
                   YouTube
                 </span>
@@ -161,7 +161,7 @@ export function VideoPopup({
                   </div>
                 </div>
 
-                <span className="absolute bottom-2 right-2 rounded-full bg-black/55 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
+                <span className="absolute bottom-2 right-2 rounded-full bg-black/55 px-2 py-0.5 text-xs font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
                   {duration}
                 </span>
               </div>
@@ -169,7 +169,7 @@ export function VideoPopup({
 
             {/* Text + CTA */}
             <div className="px-4 py-3">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/55">
+              <p className="text-xs uppercase tracking-[0.22em] text-foreground/55">
                 {eyebrow}
               </p>
               <p className="mt-1 font-display text-sm leading-snug text-foreground line-clamp-2">

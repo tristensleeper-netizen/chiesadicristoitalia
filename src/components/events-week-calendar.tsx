@@ -152,7 +152,7 @@ export function EventsWeekCalendar({
           <ChevronLeft className="h-5 w-5" />
         </button>
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/60">{periodLabel}</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-foreground/60">{periodLabel}</p>
           <p className="font-display text-lg md:text-xl text-foreground mt-0.5">{rangeLabel}</p>
         </div>
         <button
@@ -215,7 +215,7 @@ export function EventsWeekCalendar({
                 <div className="flex items-baseline justify-between mb-3">
                   <p
                     className={
-                      "text-[11px] uppercase tracking-[0.22em] " +
+                      "text-xs uppercase tracking-[0.22em] " +
                       (isPast ? "text-foreground/40" : "text-foreground/60")
                     }
                   >
@@ -261,14 +261,14 @@ export function EventsWeekCalendar({
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className={"text-[10px] font-semibold text-primary tracking-wide " + truncCls}>
+                          <p className={"text-xs font-semibold text-primary tracking-wide " + truncCls}>
                             {time}
                           </p>
-                          <p className={"text-[10px] font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
+                          <p className={"text-xs font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-[9px] text-foreground/65 leading-snug " + locTruncCls}>
+                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-xs text-foreground/65 leading-snug " + locTruncCls}>
                               <MapPin className="h-2.5 w-2.5 mt-0.5 shrink-0" />
                               <span className={innerLocCls}>{occ.location}</span>
                             </p>

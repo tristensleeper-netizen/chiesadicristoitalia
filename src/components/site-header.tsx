@@ -69,7 +69,7 @@ export function SiteHeader() {
           className="h-16 w-16 -my-2 object-contain"
           />
           {logoCityLabel && (
-            <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
+            <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
               {logoCityLabel}
             </span>
           )}

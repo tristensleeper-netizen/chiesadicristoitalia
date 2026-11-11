@@ -181,7 +181,7 @@ function CitySection({
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-sm font-medium truncate">{r.label || "Senza etichetta"}</p>
                   {r.is_active && (
-                    <span className="text-[10px] uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-full">Attiva</span>
+                    <span className="text-xs uppercase tracking-wider bg-primary text-primary-foreground px-2 py-0.5 rounded-full">Attiva</span>
                   )}
                 </div>
                 <div className="mt-3 flex gap-2">

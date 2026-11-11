@@ -236,7 +236,7 @@ function AdminMedia() {
                               className="w-full h-full object-cover"
                             />
                             {asset.kind === "video" && (
-                              <span className="absolute top-2 right-2 text-[10px] uppercase tracking-wider bg-black/70 text-white px-2 py-0.5 rounded-full">
+                              <span className="absolute top-2 right-2 text-xs uppercase tracking-wider bg-black/70 text-white px-2 py-0.5 rounded-full">
                                 ▶ Video
                               </span>
                             )}
@@ -289,7 +289,7 @@ function AdminMedia() {
                         className="w-full h-full object-cover"
                       />
                       {a.kind === "video" && (
-                        <span className="absolute top-2 right-2 text-[10px] uppercase tracking-wider bg-black/70 text-white px-2 py-0.5 rounded-full">
+                        <span className="absolute top-2 right-2 text-xs uppercase tracking-wider bg-black/70 text-white px-2 py-0.5 rounded-full">
                           ▶
                         </span>
                       )}
@@ -338,7 +338,7 @@ function AdminMedia() {
                       <div className="aspect-square bg-muted relative">
                         <img src={a.thumbnail_url || a.public_url} alt={a.label ?? ""} className="w-full h-full object-cover group-hover:scale-105 transition" />
                         {a.kind === "video" && (
-                          <span className="absolute top-1.5 right-1.5 text-[10px] bg-black/70 text-white px-1.5 py-0.5 rounded-full">▶</span>
+                          <span className="absolute top-1.5 right-1.5 text-xs bg-black/70 text-white px-1.5 py-0.5 rounded-full">▶</span>
                         )}
                       </div>
                       <div className="p-2">

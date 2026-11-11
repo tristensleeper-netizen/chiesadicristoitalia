@@ -203,7 +203,7 @@ function CityTile({
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
-        <p className="text-[10px] uppercase tracking-[0.25em] text-white/75 mb-1">{subtitle}</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-white/75 mb-1">{subtitle}</p>
         <h3 className="font-display text-2xl">{name}</h3>
       </div>
     </Link>

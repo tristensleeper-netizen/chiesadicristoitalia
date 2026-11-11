@@ -46,7 +46,7 @@ export function EventsRotator({ events, cityHref, ctaLabel = "Tutti gli eventi" 
 
         <div key={index} className="animate-fade-up">
           {current.tag && (
-            <span className="inline-block px-3 py-1 mb-3 text-[10px] uppercase tracking-[0.25em] rounded-full bg-primary/10 text-primary">
+            <span className="inline-block px-3 py-1 mb-3 text-xs uppercase tracking-[0.25em] rounded-full bg-primary/10 text-primary">
               {current.tag}
             </span>
           )}
