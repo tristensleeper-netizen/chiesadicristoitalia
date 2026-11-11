@@ -76,7 +76,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav aria-label="Principale" className="hidden lg:flex items-center gap-1">
           {inCity ? (
             <>
               {cityNav.map((item) => (
@@ -153,7 +153,7 @@ export function SiteHeader() {
       {/* Mobile drawer */}
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
-          <nav className="container-prose flex flex-col py-4">
+          <nav aria-label="Principale (mobile)" className="container-prose flex flex-col py-4">
             {[...(inCity ? cityNav : cities), ...sharedLinks.filter((l) => !inCity || l.to !== "/chi-siamo")].map((item) => (
               <Link
                 key={item.to}

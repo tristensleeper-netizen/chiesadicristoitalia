@@ -193,15 +193,15 @@ function HomePage() {
                 comunità che accoglie chiunque, senza condizioni — qualunque sia la tua
                 storia, il tuo passato o il punto in cui ti trovi nel tuo cammino
                 spirituale. Se vuoi approfondire,{" "}
-                <Link to="/chi-siamo" className="text-primary underline-offset-4 hover:underline">
+                <Link to="/chi-siamo" className="text-primary underline underline-offset-4">
                   scopri chi siamo
                 </Link>
                 ,{" "}
-                <Link to="/sermoni" className="text-primary underline-offset-4 hover:underline">
+                <Link to="/sermoni" className="text-primary underline underline-offset-4">
                   ascolta i nostri sermoni
                 </Link>{" "}
                 o{" "}
-                <Link to="/risorse" className="text-primary underline-offset-4 hover:underline">
+                <Link to="/risorse" className="text-primary underline underline-offset-4">
                   leggi articoli e guarda video
                 </Link>
                 .

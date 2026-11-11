@@ -120,7 +120,7 @@ function ChiSiamoPage() {
         </div>
         <p className="mt-8 text-sm text-muted-foreground">
           Vuoi approfondire? Leggi la nostra pagina{" "}
-          <Link to="/milano/cosa-crediamo" className="text-primary underline-offset-4 hover:underline">
+          <Link to="/milano/cosa-crediamo" className="text-primary underline underline-offset-4">
             cosa crediamo
           </Link>
           .
@@ -161,9 +161,9 @@ function ChiSiamoPage() {
           </h2>
           <p className="text-foreground/75 leading-relaxed mb-8 max-w-xl mx-auto">
             Ascolta i nostri{" "}
-            <Link to="/sermoni" className="text-primary underline-offset-4 hover:underline">sermoni</Link>
+            <Link to="/sermoni" className="text-primary underline underline-offset-4">sermoni</Link>
             , esplora le nostre{" "}
-            <Link to="/risorse" className="text-primary underline-offset-4 hover:underline">risorse</Link>
+            <Link to="/risorse" className="text-primary underline underline-offset-4">risorse</Link>
             , o vieni a trovarci una domenica.
           </p>
           <Link

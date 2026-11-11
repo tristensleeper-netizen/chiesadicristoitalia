@@ -132,7 +132,7 @@ function SermoniIndex() {
             e per aiutarci a seguire Gesù da vicino. Trovi qui l'archivio completo dei
             sermoni: filtra per città o ordina per data per ascoltare le predicazioni
             più recenti. Se cerchi articoli, video di approfondimento o altre risorse,
-            visita la pagina <a href="/risorse" className="text-primary underline-offset-4 hover:underline">Risorse</a>.
+            visita la pagina <a href="/risorse" className="text-primary underline underline-offset-4">Risorse</a>.
           </p>
         </div>
 
@@ -144,6 +144,7 @@ function SermoniIndex() {
                 <button
                   key={f.value}
                   onClick={() => setCityFilter(f.value)}
+                  aria-pressed={cityFilter === f.value}
                   className={
                     "rounded-full px-4 py-2 text-sm transition-all " +
                     (cityFilter === f.value
@@ -163,6 +164,7 @@ function SermoniIndex() {
                 <button
                   key={o}
                   onClick={() => setSortOrder(o)}
+                  aria-pressed={sortOrder === o}
                   className={
                     "rounded-full px-4 py-2 text-sm transition-all " +
                     (sortOrder === o

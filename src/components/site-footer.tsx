@@ -28,6 +28,7 @@ export function SiteFooter() {
           </p>
         </div>
 
+        <nav aria-label="Piè di pagina" className="contents">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60 mb-4">
             Le nostre chiese
@@ -48,6 +49,8 @@ export function SiteFooter() {
             <li><Link to="/risorse" className="hover:underline">Risorse</Link></li>
           </ul>
         </div>
+
+        </nav>
 
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60 mb-4">
