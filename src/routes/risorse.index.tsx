@@ -266,7 +266,7 @@ export function ResourceCard({ r }: { r: Resource }) {
         {...linkProps}
         className="group flex min-h-[240px] flex-col rounded-2xl border border-primary/15 bg-primary/5 p-7 transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        <p className="text-[10px] uppercase tracking-[0.2em] text-primary">
+        <p className="text-xs uppercase tracking-[0.2em] text-primary">
           <span className="font-medium">{RESOURCE_TYPE_LABELS[r.type]}</span>
           <span className="text-muted-foreground"> · {formatItalianDate(r.published_at)}</span>
         </p>
@@ -298,10 +298,10 @@ export function ResourceCard({ r }: { r: Resource }) {
       </div>
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
+          <span className="text-xs uppercase tracking-[0.2em] font-medium text-primary px-2 py-1 rounded-full bg-primary/10">
             {RESOURCE_TYPE_LABELS[r.type]}
           </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {CITY_TAG_LABELS[r.city_tag]}
           </span>
         </div>
@@ -351,7 +351,7 @@ function IsaiahLeadCard() {
         <img src={bibleStudy} alt="Bibbia aperta durante uno studio" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
       </div>
       <div className="flex min-w-0 flex-col p-7 md:p-10">
-        <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary">Corso · 67 giorni</p>
+        <p className="text-xs uppercase tracking-[0.2em] font-medium text-primary">Corso · 67 giorni</p>
         <h2 className="mt-4 font-display text-3xl md:text-4xl text-foreground leading-tight group-hover:text-primary transition-colors">
           Isaia — Il Signore è salvezza
         </h2>
@@ -359,7 +359,7 @@ function IsaiahLeadCard() {
           «Non temere, perché io sono con te» — Isaia 41:10
         </p>
         <p className="mt-4 text-sm text-foreground/70">
-          66 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
+          67 giorni attraverso il libro di Isaia: contesto storico, domande sul testo e domande per la vita.
         </p>
         {hasStarted ? (
           <div className="mt-auto pt-8">

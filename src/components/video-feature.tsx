@@ -107,11 +107,11 @@ export function VideoFeature({
 
           {/* Top-left badge */}
           <div className="absolute left-5 top-5 md:left-7 md:top-7 z-10 flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-md">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-2.5 py-1 text-xs font-black uppercase tracking-[0.2em] text-white shadow-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
               YouTube
             </span>
-            <span className="rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
+            <span className="rounded-full bg-black/40 px-2.5 py-1 text-xs font-semibold uppercase tracking-widest text-white/90 backdrop-blur-md ring-1 ring-white/15">
               {activeDuration}
             </span>
           </div>
@@ -147,7 +147,7 @@ export function VideoFeature({
           <div className="absolute inset-x-0 bottom-0 z-10 p-5 md:p-7">
             <div className="flex items-end justify-between gap-4">
               <div className="text-white">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/70">
                   Premi play
                 </p>
                 <p className="mt-1 font-display text-lg md:text-2xl leading-tight max-w-xl text-balance">

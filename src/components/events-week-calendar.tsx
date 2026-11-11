@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { formatChurchTime, useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
@@ -59,6 +59,25 @@ export function EventsWeekCalendar({
   }, [today, maxWeeksAhead, maxWeeksBack]);
 
   const { occurrences } = useEventOccurrences(city, from, to);
+
+  // Open on the week holding the next event (this week if it has one still to come), once.
+  const autoOpened = useRef(false);
+  useEffect(() => {
+    if (autoOpened.current || occurrences.length === 0) return;
+    const now = new Date();
+    const next = occurrences
+      .filter((o) => (o.end ?? o.date) >= now)
+      .sort((a, b) => a.date.getTime() - b.date.getTime())[0];
+    if (!next) return;
+    autoOpened.current = true;
+    const monday = (d: Date) => {
+      const x = startOfDay(d);
+      x.setDate(x.getDate() - ((x.getDay() + 6) % 7));
+      return x;
+    };
+    const diff = Math.round((monday(next.date).getTime() - monday(today).getTime()) / (7 * 86400000));
+    if (diff > 0 && diff <= maxWeeksAhead) setWeekOffset(diff);
+  }, [occurrences, today, maxWeeksAhead]);
 
   // Days for the currently visible week.
   const days = useMemo(() => {
@@ -152,7 +171,7 @@ export function EventsWeekCalendar({
           <ChevronLeft className="h-5 w-5" />
         </button>
         <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/60">{periodLabel}</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-foreground/60">{periodLabel}</p>
           <p className="font-display text-lg md:text-xl text-foreground mt-0.5">{rangeLabel}</p>
         </div>
         <button
@@ -215,7 +234,7 @@ export function EventsWeekCalendar({
                 <div className="flex items-baseline justify-between mb-3">
                   <p
                     className={
-                      "text-[11px] uppercase tracking-[0.22em] " +
+                      "text-xs uppercase tracking-[0.22em] " +
                       (isPast ? "text-foreground/40" : "text-foreground/60")
                     }
                   >
@@ -251,7 +270,7 @@ export function EventsWeekCalendar({
                       const innerLocCls = isPressed
                         ? "min-w-0 break-words"
                         : "min-w-0 overflow-hidden text-ellipsis";
-                      const tagCls = "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[7px] uppercase tracking-[0.12em] text-foreground/55";
+                      const tagCls = "mt-1 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-xs uppercase tracking-[0.12em] text-foreground/55";
                       return (
                         <li
                           key={occ.id}
@@ -261,14 +280,14 @@ export function EventsWeekCalendar({
                             (isPast ? "opacity-70" : "")
                           }
                         >
-                          <p className={"text-[10px] font-semibold text-primary tracking-wide " + truncCls}>
+                          <p className={"text-xs font-semibold text-primary tracking-wide " + truncCls}>
                             {time}
                           </p>
-                          <p className={"text-[10px] font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
+                          <p className={"text-xs font-medium text-foreground leading-snug mt-0.5 " + truncCls}>
                             {occ.title}
                           </p>
                           {occ.location && (
-                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-[9px] text-foreground/65 leading-snug " + locTruncCls}>
+                            <p className={"mt-1 flex min-w-0 items-start gap-1 text-xs text-foreground/65 leading-snug " + locTruncCls}>
                               <MapPin className="h-2.5 w-2.5 mt-0.5 shrink-0" />
                               <span className={innerLocCls}>{occ.location}</span>
                             </p>

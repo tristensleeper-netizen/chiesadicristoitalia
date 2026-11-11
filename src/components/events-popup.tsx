@@ -70,7 +70,7 @@ export function EventsPopup({ events, cityHref, cityName }: Props) {
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Calendar className="h-3.5 w-3.5" strokeWidth={2} />
             </span>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-foreground/60">
+            <p className="text-xs uppercase tracking-[0.22em] text-foreground/60">
               Cosa succede · {cityName}
             </p>
           </div>

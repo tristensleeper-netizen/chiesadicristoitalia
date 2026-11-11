@@ -105,7 +105,7 @@ function AdminLayout() {
               ⚙
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">
                 Centro amministrazione
               </p>
               <h1 className="font-display text-xl leading-tight">Gestione contenuti</h1>

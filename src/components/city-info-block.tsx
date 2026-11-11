@@ -56,7 +56,7 @@ export function CityInfoBlock({
               <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-primary shadow-md ring-1 ring-accent/40 transition-transform duration-500 group-hover:rotate-12">
                 <Clock className="h-4 w-4" strokeWidth={1.75} />
               </div>
-              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-accent">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-accent">
                 Domenica
               </p>
               <h3 className="font-display text-2xl leading-tight">
@@ -67,7 +67,7 @@ export function CityInfoBlock({
               </p>
             </div>
 
-            <div className="relative z-10 mt-4 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-accent">
+            <div className="relative z-10 mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
               <span>Cosa aspettarsi</span>
               <ArrowRight className="h-3 w-3 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
             </div>
@@ -87,7 +87,7 @@ export function CityInfoBlock({
               <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-muted text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110">
                 <MapPin className="h-4 w-4" strokeWidth={1.75} />
               </div>
-              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">
                 {locationLabel ?? "La nostra sede"}
               </p>
               {venueLabel && <p className="text-sm font-medium text-primary mb-1">{venueLabel}</p>}
@@ -98,7 +98,7 @@ export function CityInfoBlock({
             </div>
 
             <div className="relative z-10 mt-4 flex items-center justify-between border-t border-border/60 pt-3">
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">
                 Google Maps
               </span>
               <div className="flex h-6 w-6 items-center justify-center rounded-full border border-border transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
@@ -122,7 +122,7 @@ export function CityInfoBlock({
               <div className="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-md ring-1 ring-accent/60 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                 <Mail className="h-4 w-4" strokeWidth={2} />
               </div>
-              <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">
                 Mettiti in contatto
               </p>
               <h3 className="font-display text-base leading-tight text-foreground break-words">
@@ -134,12 +134,12 @@ export function CityInfoBlock({
             </Link>
 
             <div className="relative z-10 mt-4 flex items-center gap-2">
-              <Link to={contactTo} className="rounded-full bg-primary px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-primary-foreground transition-colors duration-300 group-hover:bg-foreground">
+              <Link to={contactTo} className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-colors duration-300 group-hover:bg-foreground">
                 Scrivici
               </Link>
               <a
                 href={mailto}
-                className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground/60 underline decoration-dotted underline-offset-4 hover:text-primary"
+                className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/60 underline decoration-dotted underline-offset-4 hover:text-primary"
               >
                 Mail diretta
               </a>

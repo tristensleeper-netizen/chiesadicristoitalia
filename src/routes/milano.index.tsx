@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { CityInfoBlock } from "@/components/city-info-block";
 import { CityLatest } from "@/components/city-latest";
-import { ScriptureMarquee } from "@/components/scripture-marquee";
 import { PhotoMarquee } from "@/components/photo-marquee";
 import { EventsPopup } from "@/components/events-popup";
 import { EventsWeekCalendar } from "@/components/events-week-calendar";
@@ -119,7 +118,6 @@ function MilanoHome() {
   const events = useCityEvents("milano", MILANO_EVENTS);
   const heroImage = useActiveHero("milano", heroMilano);
   const welcomeImg = useSlotImage("milano.welcome", worship);
-  const bibleBandImg = useSlotImage("milano.bibleband", bibleStudy);
   const photo1 = useSlotImage("milano.photo1", worship);
   const photo2 = useSlotImage("milano.photo2", bibleStudy);
   const photo3 = useSlotImage("milano.photo3", heroMilano);
@@ -200,9 +198,6 @@ function MilanoHome() {
         <EventsWeekCalendar city="milano" cityHref="/milano/eventi" />
       </section>
 
-      <div className="mt-16">
-        <ScriptureMarquee />
-      </div>
 
       {/* Welcome */}
       <section className="container-prose py-16 md:py-24 grid gap-12 md:grid-cols-2 items-center">
@@ -264,33 +259,7 @@ function MilanoHome() {
           <h2 className="font-display text-3xl md:text-4xl">Volti, momenti, vita insieme.</h2>
         </div>
         <PhotoMarquee images={cityPhotos} />
-        <PhotoMarquee images={[...cityPhotos].reverse()} reverse speed="slow" />
       </section>
-
-      {/* Bible study image band */}
-      <section className="relative h-[60vh] min-h-[480px] overflow-hidden">
-        <img src={bibleBandImg} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/85" />
-        <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_55%)]" />
-        <div className="container-prose relative z-10 h-full flex flex-col justify-center text-center text-white">
-          <span aria-hidden className="pointer-events-none mx-auto mb-2 font-display text-[6rem] md:text-[8rem] leading-none text-white/15 select-none">“</span>
-          <div className="inline-flex items-center justify-center gap-3 mb-5">
-            <span className="h-px w-8 bg-white/40" />
-            <p className="eyebrow text-white/85 !mb-0">Una promessa</p>
-            <span className="h-px w-8 bg-white/40" />
-          </div>
-          <h2 className="font-display italic text-3xl md:text-5xl lg:text-[3.5rem] max-w-3xl mx-auto leading-[1.2] text-balance font-normal">
-            Venite a me, voi tutti che siete affaticati e oppressi, e io vi darò riposo.
-          </h2>
-          <p className="mt-8 inline-flex items-center justify-center gap-3 text-xs uppercase tracking-[0.3em] text-white/75 mx-auto">
-            <span className="h-px w-6 bg-white/40" />
-            Matteo 11:28
-            <span className="h-px w-6 bg-white/40" />
-          </p>
-        </div>
-      </section>
-
-
 
       {/* Lettura Devozionale */}
       <section className="container-prose py-16 md:py-24">
@@ -314,7 +283,7 @@ function MilanoHome() {
               </div>
               <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">Isaia — Il Signore è salvezza</h3>
               <p className="text-foreground/75 leading-relaxed text-sm md:text-base">
-                Un percorso devozionale attraverso i 66 capitoli di Isaia: 66 giorni, un capitolo al giorno. Contesto, domande sul testo, domande per noi e ulteriori note per ogni capitolo.
+                Un percorso devozionale attraverso i 66 capitoli di Isaia: 67 giorni, un'introduzione e poi un capitolo al giorno. Contesto, domande sul testo, domande per noi e ulteriori note per ogni capitolo.
               </p>
               <div className="h-px w-full bg-[rgba(107,76,53,0.15)]" />
               <div>

@@ -69,14 +69,14 @@ export function SiteHeader() {
           className="h-16 w-16 -my-2 object-contain"
           />
           {logoCityLabel && (
-            <span className="text-[10px] uppercase tracking-[0.25em] text-primary/80">
+            <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
               {logoCityLabel}
             </span>
           )}
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav aria-label="Principale" className="hidden lg:flex items-center gap-1">
           {inCity ? (
             <>
               {cityNav.map((item) => (
@@ -153,7 +153,7 @@ export function SiteHeader() {
       {/* Mobile drawer */}
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
-          <nav className="container-prose flex flex-col py-4">
+          <nav aria-label="Principale (mobile)" className="container-prose flex flex-col py-4">
             {[...(inCity ? cityNav : cities), ...sharedLinks.filter((l) => !inCity || l.to !== "/chi-siamo")].map((item) => (
               <Link
                 key={item.to}
