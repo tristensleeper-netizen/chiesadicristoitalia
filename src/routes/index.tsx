@@ -82,7 +82,7 @@ export const Route = createFileRoute("/")({
               name: "Cos'è la Chiesa di Cristo?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "La Chiesa di Cristo è un movimento cristiano del Restaurazione nato nel XIX secolo che si basa esclusivamente sulla Bibbia come unica regola di fede. Non appartiene a nessuna denominazione, pratica il battesimo per immersione dei credenti e celebra la Cena del Signore ogni domenica.",
+                text: "La Chiesa di Cristo è un movimento cristiano di restaurazione nato nel XIX secolo che si basa esclusivamente sulla Bibbia come unica regola di fede. Non appartiene a nessuna denominazione, pratica il battesimo per immersione dei credenti e celebra la Cena del Signore ogni domenica.",
               },
             },
             {
@@ -174,62 +174,37 @@ function HomePage() {
             </div>
 
             {/* Right — body */}
-            <div className="space-y-5 text-foreground/75 leading-relaxed text-base md:text-lg">
+            <div className="space-y-6 text-foreground/75 leading-relaxed text-base md:text-lg">
               <p>
-                Siamo una <strong>chiesa cristiana</strong>: persone semplici che vogliono
-                seguire le orme di Cristo, leggendo la Bibbia e vivendola ogni giorno.
-                Non apparteniamo ad alcuna denominazione e ogni comunità locale è autonoma —
-                quello che ci tiene insieme è la fede in Gesù, l'amore reciproco e il
-                desiderio di tornare alla semplicità della chiesa del Nuovo Testamento.
-                Che tu stia cercando una <strong>chiesa cristiana a Milano</strong>, una{" "}
-                <strong>chiesa cristiana a Bologna</strong>, o semplicemente un luogo dove
-                fare domande sincere su Dio, qui sei a casa.
+                Siamo una chiesa cristiana: persone semplici che vogliono seguire le orme di
+                Cristo, leggendo la Bibbia e vivendola ogni giorno. Non apparteniamo ad alcuna
+                denominazione e ogni comunità locale è autonoma. Vieni così come sei: con le tue
+                domande, i tuoi dubbi, le tue speranze.
               </p>
-              <p>
-                La nostra fede si fonda esclusivamente sulla <strong>Bibbia</strong>:
-                nessun credo umano, nessuna tradizione aggiunta, solo la Parola di Dio
-                come unica regola di fede e di vita. Crediamo nella potenza della
-                preghiera, nelle amicizie sincere che ci avvicinano a Dio e in una
-                comunità che accoglie chiunque, senza condizioni — qualunque sia la tua
-                storia, il tuo passato o il punto in cui ti trovi nel tuo cammino
-                spirituale. Se vuoi approfondire,{" "}
-                <Link to="/chi-siamo" className="text-primary underline underline-offset-4">
-                  scopri chi siamo
-                </Link>
-                ,{" "}
-                <Link to="/sermoni" className="text-primary underline underline-offset-4">
-                  ascolta i nostri sermoni
-                </Link>{" "}
-                o{" "}
-                <Link to="/risorse" className="text-primary underline underline-offset-4">
-                  leggi articoli e guarda video
-                </Link>
-                .
-              </p>
-              <p>
-                La <strong>Chiesa di Cristo</strong> nasce dal cosiddetto{" "}
-                <em>movimento di restaurazione</em>: un'aspirazione antica e sempre nuova
-                a essere semplicemente cristiani — come lo erano i discepoli nel primo
-                secolo, prima di etichette e divisioni. Per questo non ci chiamiamo con
-                il nome di un fondatore umano, non abbiamo una gerarchia centrale e non
-                seguiamo un manuale denominazionale: ogni domenica ci ritroviamo per
-                spezzare il pane insieme nella <strong>Cena del Signore</strong>,
-                pratichiamo il <strong>battesimo per immersione</strong> dei credenti
-                come risposta alla fede in Cristo, e cerchiamo di vivere il Vangelo nella
-                vita quotidiana, nel lavoro, nelle relazioni e nel servizio agli altri.
-              </p>
-              <p>
-                Se sei in Italia e stai cercando una famiglia spirituale, un posto dove
-                sentirti a casa, la porta è aperta questa domenica oppure quando vuoi tu.
-                Vieni così come sei: con le tue domande, i tuoi dubbi, le tue speranze.
-                Non devi vestirti in un certo modo, conoscere la Bibbia a memoria o aver
-                già capito tutto — basta il desiderio di incontrare Dio e di camminare
-                con altre persone che stanno facendo lo stesso percorso.
-                <br />
-                <span className="text-foreground/60 text-sm md:text-base italic">
-                  English speakers are welcome — Sunday services are in Italian, with
-                  translation available.
-                </span>
+              <ul className="space-y-2">
+                <li>
+                  <strong className="text-foreground">Quando</strong> — Milano: ogni domenica alle 10:30, Corso di Porta Vigentina 15a.
+                </li>
+                <li>
+                  <strong className="text-foreground">Bologna</strong> — Nessun incontro regolare per ora: scrivici per il prossimo.
+                </li>
+                <li>
+                  <strong className="text-foreground">Cosa crediamo</strong> — La Bibbia è la nostra unica guida; la Cena del Signore ogni domenica e il battesimo per immersione dei credenti.
+                </li>
+              </ul>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/chi-siamo" className="text-primary underline underline-offset-4">Scopri chi siamo</Link>
+                </li>
+                <li>
+                  <Link to="/sermoni" className="text-primary underline underline-offset-4">Ascolta i nostri sermoni</Link>
+                </li>
+                <li>
+                  <Link to="/risorse" className="text-primary underline underline-offset-4">Leggi articoli e guarda video</Link>
+                </li>
+              </ul>
+              <p lang="en">
+                English speakers are welcome — Sunday services are in Italian, with translation available.
               </p>
             </div>
           </div>
@@ -339,15 +314,6 @@ function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
-
-      {/* Featured sermon — near the bottom */}
-      <section className="container-prose pt-8 md:pt-12 text-center">
-        <p className="eyebrow mb-3">Sermone in evidenza</p>
-        <p className="text-foreground/70 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          Ogni settimana condividiamo una predicazione dalla nostra comunità —
-          un momento per fermarsi, ascoltare e lasciarsi parlare dalla Parola.
-        </p>
       </section>
 
       <VideoPopup
