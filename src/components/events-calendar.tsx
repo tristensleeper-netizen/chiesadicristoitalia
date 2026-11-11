@@ -82,7 +82,7 @@ export function EventsCalendar({ city }: Props) {
       <div className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-[var(--shadow-soft)]">
         <header className="flex items-center justify-between mb-6">
           <button
-            onClick={() => setCursor((c) => addMonths(c, -1))}
+            onClick={() => { userPicked.current = true; setCursor((c) => addMonths(c, -1)); }}
             className="h-10 w-10 grid place-items-center rounded-full border border-border hover:bg-muted transition"
             aria-label="Mese precedente"
           >
@@ -92,7 +92,7 @@ export function EventsCalendar({ city }: Props) {
             {format(cursor, "LLLL yyyy", { locale: it })}
           </h3>
           <button
-            onClick={() => setCursor((c) => addMonths(c, 1))}
+            onClick={() => { userPicked.current = true; setCursor((c) => addMonths(c, 1)); }}
             className="h-10 w-10 grid place-items-center rounded-full border border-border hover:bg-muted transition"
             aria-label="Mese successivo"
           >
@@ -121,7 +121,7 @@ export function EventsCalendar({ city }: Props) {
             return (
               <button
                 key={key}
-                onClick={() => setSelected(d)}
+                onClick={() => { userPicked.current = true; setSelected(d); }}
                 className={[
                   "rounded-xl p-1.5 text-left transition border flex flex-col min-h-[80px]",
                   inMonth ? "" : "opacity-35",
@@ -229,6 +229,7 @@ export function EventsCalendar({ city }: Props) {
               key={e.id}
               className="group rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)] cursor-pointer"
               onClick={() => {
+                userPicked.current = true;
                 setCursor(startOfMonth(e.date));
                 setSelected(e.date);
               }}

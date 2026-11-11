@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { formatChurchTime, useEventOccurrences, type EventOccurrence } from "@/lib/use-city-events";
@@ -59,6 +59,25 @@ export function EventsWeekCalendar({
   }, [today, maxWeeksAhead, maxWeeksBack]);
 
   const { occurrences } = useEventOccurrences(city, from, to);
+
+  // Open on the week holding the next event (this week if it has one still to come), once.
+  const autoOpened = useRef(false);
+  useEffect(() => {
+    if (autoOpened.current || occurrences.length === 0) return;
+    const now = new Date();
+    const next = occurrences
+      .filter((o) => (o.end ?? o.date) >= now)
+      .sort((a, b) => a.date.getTime() - b.date.getTime())[0];
+    if (!next) return;
+    autoOpened.current = true;
+    const monday = (d: Date) => {
+      const x = startOfDay(d);
+      x.setDate(x.getDate() - ((x.getDay() + 6) % 7));
+      return x;
+    };
+    const diff = Math.round((monday(next.date).getTime() - monday(today).getTime()) / (7 * 86400000));
+    if (diff > 0 && diff <= maxWeeksAhead) setWeekOffset(diff);
+  }, [occurrences, today, maxWeeksAhead]);
 
   // Days for the currently visible week.
   const days = useMemo(() => {
