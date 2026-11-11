@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   addMonths,
   endOfMonth,
@@ -36,6 +36,17 @@ export function EventsCalendar({ city }: Props) {
     () => upcoming.filter((o) => isAfter(o.end ?? o.date, new Date())).slice(0, 8),
     [upcoming],
   );
+
+  // Open on the next date that has an event (today if any), once, unless the visitor already picked a day.
+  const userPicked = useRef(false);
+  const autoOpened = useRef(false);
+  useEffect(() => {
+    if (autoOpened.current || userPicked.current || upcomingList.length === 0) return;
+    autoOpened.current = true;
+    const next = upcomingList[0].date;
+    setSelected(next);
+    setCursor(startOfMonth(next));
+  }, [upcomingList]);
 
   const byDay = useMemo(() => {
     const m = new Map<string, EventOccurrence[]>();
